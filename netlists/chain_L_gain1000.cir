@@ -1,0 +1,151 @@
+* Complete chain of the low-noise differential preamplifier note, front end L200, total gain 1005 (a3 0.5, a4 0.1, a5 0.2), filters off.
+* S2 LM7171, S3/S4 THS4021, F1/F2 THS4031 followers (bypassed), S5 THS3091.  Section 4.5.
+.options reltol=1e-4 abstol=1e-15 vntol=1e-9 gmin=1e-14 itl1=500 itl4=200
+.options rshunt=1e12
+.include "../sim/models/_lib/jfets.lib"
+.include "../sim/models/_lib/opamps.lib"
+.include "../sim/models/_lib/bjts.lib"
+.model rnl r(noisy=0)
+VIN ina 0 DC 0 AC 1
+RIA ina ga 1m rnl
+RIB 0 gb 1m rnl
+* ===== front end L200: 12 x JFE150 per side at 5 mA, R_F 249, R_G 2.49, gain 201
+VP vp 0 DC 15
+VM vm 0 DC -15
+VREF vref0 0 DC 9
+RREF vref0 vref 1k rnl
+CREF vref 0 10u
+BERR nerr 0 V=(V(oa)+V(ob)-V(sa)-V(sb))/2
+GINT 0 nint nerr 0 1e-6
+CINT nint 0 1u
+RINT nint 0 1e12 rnl
+BSNK vsink0 0 V=max(min(-8.34-V(nint), -6), -14)
+RSNK vsink0 vsink 1k rnl
+CSNK vsink 0 10u
+* --- side a
+XJa1 da1 ga sa JFE150
+XCa1 ca ba da1 LSBF862
+XJa2 da2 ga sa JFE150
+XCa2 ca ba da2 LSBF862
+XJa3 da3 ga sa JFE150
+XCa3 ca ba da3 LSBF862
+XJa4 da4 ga sa JFE150
+XCa4 ca ba da4 LSBF862
+XJa5 da5 ga sa JFE150
+XCa5 ca ba da5 LSBF862
+XJa6 da6 ga sa JFE150
+XCa6 ca ba da6 LSBF862
+XJa7 da7 ga sa JFE150
+XCa7 ca ba da7 LSBF862
+XJa8 da8 ga sa JFE150
+XCa8 ca ba da8 LSBF862
+XJa9 da9 ga sa JFE150
+XCa9 ca ba da9 LSBF862
+XJa10 da10 ga sa JFE150
+XCa10 ca ba da10 LSBF862
+XJa11 da11 ga sa JFE150
+XCa11 ca ba da11 LSBF862
+XJa12 da12 ga sa JFE150
+XCa12 ca ba da12 LSBF862
+RBSa ba sa 3500
+CBSa ba sa 1e-06
+RUPa vp ba 10900
+RDa vp ca 100
+CIa oa ca 2.2e-11
+CXa ob ca 8e-12
+CNa ca 0 4.7e-10
+XUa vref ca oa vp vm OA_THS4021
+RFa oa sa 249
+QTa sa vsink ea PZT3904
+RTa ea vm 98.3607
+* --- side b
+XJb1 db1 gb sb JFE150
+XCb1 cb bb db1 LSBF862
+XJb2 db2 gb sb JFE150
+XCb2 cb bb db2 LSBF862
+XJb3 db3 gb sb JFE150
+XCb3 cb bb db3 LSBF862
+XJb4 db4 gb sb JFE150
+XCb4 cb bb db4 LSBF862
+XJb5 db5 gb sb JFE150
+XCb5 cb bb db5 LSBF862
+XJb6 db6 gb sb JFE150
+XCb6 cb bb db6 LSBF862
+XJb7 db7 gb sb JFE150
+XCb7 cb bb db7 LSBF862
+XJb8 db8 gb sb JFE150
+XCb8 cb bb db8 LSBF862
+XJb9 db9 gb sb JFE150
+XCb9 cb bb db9 LSBF862
+XJb10 db10 gb sb JFE150
+XCb10 cb bb db10 LSBF862
+XJb11 db11 gb sb JFE150
+XCb11 cb bb db11 LSBF862
+XJb12 db12 gb sb JFE150
+XCb12 cb bb db12 LSBF862
+RBSb bb sb 3500
+CBSb bb sb 1e-06
+RUPb vp bb 10900
+RDb vp cb 100
+CIb ob cb 2.2e-11
+CXb oa cb 8e-12
+CNb cb 0 4.7e-10
+XUb vref cb ob vp vm OA_THS4021
+RFb ob sb 249
+QTb sb vsink eb PZT3904
+RTb eb vm 98.3607
+RG sa sb 2.49
+* input network (L)
+CPA ga 0 3e-11
+CPB gb 0 3e-11
+RZA ga za 47
+CZA za 0 2.2e-10
+RZB gb zb 47
+CZB zb 0 2.2e-10
+RBA ga 0 1e+07
+RBB gb 0 1e+07
+* S2 difference amplifier (LM7171, gain 1)
+RD1 ob dn 499
+RD2 dn da 499
+RD3 oa dp 499
+RD4 dp 0 499
+XS2 dp dn da vp vm OA_LM7171
+* F1
+RF1W da f1 1m rnl
+* S3
+RS3T f1 S3t 124.5
+RS3B S3t 0 124.5
+RS3S S3t S3i 1
+XS3 S3i S3n s3 vp vm OA_THS4021
+RS3F s3 S3n 220
+RS3G S3n 0 24.4
+* F2
+RF2W s3 f2 1m rnl
+* S4
+RS4T f2 S4t 224.1
+RS4B S4t 0 24.9
+RS4S S4t S4i 1
+XS4 S4i S4n s4 vp vm OA_THS4021
+RS4F s4 S4n 220
+RS4G S4n 0 24.4
+* S5 attenuator and output driver (THS3091, gain 5)
+RS5T s4 s5t 199.2
+RS5B s5t 0 49.8
+RS5S s5t s5i 1
+XS5 s5i s5n s5 vp vm OA_THS3091
+RS5F s5 s5n 1k
+RS5G s5n 0 250
+RO50 s5 out 49.9
+RLOAD out 0 1e+06
+.control
+set wr_singlescale
+set wr_vecnames
+op
+print v(out)
+ac dec 40 1 300meg
+wrdata ac.txt v(out)
+noise v(out) VIN dec 20 1 100meg
+setplot noise2
+print onoise_total
+.endc
+.end

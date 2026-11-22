@@ -1,0 +1,24 @@
+H100  nominal                      DM PM  59.9 GM  19.0 mod 0.89 | CM PM  56.8 GM   8.4 mod 0.61
+H100  C_node x0.7                  DM PM  64.4 GM  16.3 mod 0.84 | CM PM  57.8 GM   5.7 mod 0.47
+H100  C_node x1.3                  DM PM  55.7 GM  21.1 mod 0.89 | CM PM  54.7 GM  10.5 mod 0.69
+H100  C_I x1.1, C_X x0.9           DM PM  69.4 GM  16.5 mod 0.85 | CM PM  57.5 GM   8.2 mod 0.60
+H100  C_I x0.9, C_X x1.1           DM PM  42.7 GM  23.1 mod 0.72 | CM PM  56.3 GM   8.6 mod 0.62
+H100  10 pF at each op-amp output  DM PM  58.7 GM  19.6 mod 0.89 | CM PM  52.8 GM   9.2 mod 0.63
+H100  R_iso 10 ohm                 DM PM  58.2 GM  19.9 mod 0.89 | CM PM  54.2 GM   9.3 mod 0.64
+H100  R_iso 33 ohm                 DM PM  56.4 GM  21.7 mod 0.88 | CM PM  48.6 GM  11.1 mod 0.70
+H10   nominal                      DM PM  62.0 GM   9.8 mod 0.66 | CM PM  56.8 GM   8.4 mod 0.61
+H10   C_node x0.7                  DM PM  62.7 GM   7.0 mod 0.54 | CM PM  57.8 GM   5.7 mod 0.47
+H10   C_node x1.3                  DM PM  59.8 GM  11.9 mod 0.73 | CM PM  54.7 GM  10.5 mod 0.69
+H10   C_I x1.1, C_X x0.9           DM PM  63.7 GM   8.7 mod 0.63 | CM PM  58.5 GM   7.6 mod 0.58
+H10   C_I x0.9, C_X x1.1           DM PM  59.1 GM  10.7 mod 0.70 | CM PM  54.7 GM   9.0 mod 0.64
+H10   10 pF at each op-amp output  DM PM  58.6 GM  10.5 mod 0.67 | CM PM  52.8 GM   9.2 mod 0.63
+H10   R_iso 10 ohm                 DM PM  59.7 GM  10.6 mod 0.69 | CM PM  54.2 GM   9.3 mod 0.64
+H10   R_iso 33 ohm                 DM PM  54.9 GM  12.4 mod 0.73 | CM PM  48.6 GM  11.1 mod 0.70
+L200  nominal                      DM PM  63.0 GM  16.6 mod 0.83 | CM PM  51.5 GM  10.2 mod 0.66
+L200  C_node x0.7                  DM PM  66.0 GM  14.0 mod 0.78 | CM PM  49.5 GM   7.6 mod 0.54
+L200  C_node x1.3                  DM PM  59.9 GM  18.6 mod 0.86 | CM PM  50.6 GM  12.1 mod 0.72
+L200  C_I x1.1, C_X x0.9           DM PM  67.4 GM  15.1 mod 0.79 | CM PM  51.9 GM   9.9 mod 0.64
+L200  C_I x0.9, C_X x1.1           DM PM  55.5 GM  18.6 mod 0.87 | CM PM  50.9 GM  10.8 mod 0.67
+L200  10 pF at each op-amp output  DM PM  61.4 GM  17.0 mod 0.82 | CM PM  47.9 GM  10.6 mod 0.64
+L200  R_iso 10 ohm                 DM PM  60.7 GM  18.2 mod 0.84 | CM PM  47.0 GM  11.7 mod 0.66
+L200  R_iso 33 ohm                 DM PM  55.7 GM  20.2 mod 0.80 | CM PM  39.0 GM  13.8 mod 0.60

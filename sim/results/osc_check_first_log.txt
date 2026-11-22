@@ -1,0 +1,24 @@
+H10_first: C_I 9.19 pF, C_X 1.42 pF, C_node 0 pF, sink MMBT3904 at 2 V; 50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12
+  v(oa)    1005.4071 mV pk-pk, dominant  292.83 MHz
+  v(ob)    1005.4071 mV pk-pk, dominant  292.83 MHz
+  v(ca)     539.3084 mV pk-pk, dominant  292.83 MHz
+  v(sa)     313.1590 mV pk-pk, dominant  292.83 MHz
+  cm_out   1005.4071 mV pk-pk, dominant  292.83 MHz
+  dm_out      0.0000 mV pk-pk, dominant   15.71 MHz
+  (frequency resolution 1.43 MHz)
+H100_first: C_I 6.19 pF, C_X 4.42 pF, C_node 0 pF, sink MMBT3904 at 2 V; 50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12
+  v(oa)    1005.3621 mV pk-pk, dominant  292.83 MHz
+  v(ob)    1005.3621 mV pk-pk, dominant  292.83 MHz
+  v(ca)     539.3084 mV pk-pk, dominant  292.83 MHz
+  v(sa)     313.1368 mV pk-pk, dominant  292.83 MHz
+  cm_out   1005.3621 mV pk-pk, dominant  292.83 MHz
+  dm_out      0.0000 mV pk-pk, dominant   15.71 MHz
+  (frequency resolution 1.43 MHz)
+L200_first: C_I 13.4 pF, C_X 7.8 pF, C_node 0 pF, sink MMBT3904 at 2 V; 50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12
+  v(oa)     782.5457 mV pk-pk, dominant  275.69 MHz
+  v(ob)     782.5457 mV pk-pk, dominant  275.69 MHz
+  v(ca)     326.6848 mV pk-pk, dominant  275.69 MHz
+  v(sa)     236.4306 mV pk-pk, dominant  275.69 MHz
+  cm_out    782.5457 mV pk-pk, dominant  275.69 MHz
+  dm_out      0.0000 mV pk-pk, dominant   15.71 MHz
+  (frequency resolution 1.43 MHz)

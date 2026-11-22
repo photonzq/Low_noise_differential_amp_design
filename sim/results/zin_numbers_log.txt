@@ -1,0 +1,28 @@
+H100: C_P + C_Z = 20 pF, f_Z = 1/(2 pi R_Z C_Z) = 7.23 MHz
+  bare_archived dm: C_eff 1000: 0.05729 pF, 100000: 0.05008 pF, 300000: 0.05526 pF, 1e+06: 0.1142 pF; min Re Z -6.165e+07 ohm at 0.02 MHz; R_par min -1049.3 ohm at 12.59 MHz (interpolated -1042.3 ohm at 13.29 MHz) (Re Y < 0 from 0.01 to 56.2 MHz)
+  bare_archived cm: C_eff 1000: 0.1122 pF, 100000: 0.09652 pF, 300000: 0.09687 pF, 1e+06: 0.1008 pF; min Re Z -4.398e+06 ohm at 0.1 MHz; R_par min -126.9 ohm at 158.49 MHz (interpolated -126.9 ohm at 157.63 MHz) (Re Y < 0 from 0.0316 to 251 MHz)
+  bare          dm: C_eff 1000: 0.05729 pF, 100000: 0.05008 pF, 300000: 0.05526 pF, 1e+06: 0.1142 pF; min Re Z -6.165e+07 ohm at 0.02 MHz; R_par min -1049.3 ohm at 12.59 MHz (interpolated -1042.3 ohm at 13.29 MHz) (Re Y < 0 from 0.01 to 56.2 MHz)
+  bare          cm: C_eff 1000: 0.1122 pF, 100000: 0.09652 pF, 300000: 0.09687 pF, 1e+06: 0.1008 pF; min Re Z -4.398e+06 ohm at 0.1 MHz; R_par min -126.9 ohm at 158.49 MHz (interpolated -126.9 ohm at 157.63 MHz) (Re Y < 0 from 0.0316 to 251 MHz)
+  network       dm: C_eff 1000: 20.06 pF, 100000: 20.05 pF, 300000: 20.04 pF, 1e+06: 19.93 pF; min Re Z -298.2 ohm at 7.08 MHz; R_par min -1637.4 ohm at 12.59 MHz (interpolated -1635.9 ohm at 12.80 MHz) (Re Y < 0 from 0.141 to 25.1 MHz)
+  network       cm: C_eff 1000: 40.11 pF, 100000: 40.09 pF, 300000: 40.06 pF, 1e+06: 39.73 pF; min Re Z -24.89 ohm at 35.5 MHz; R_par min -143.5 ohm at 158.49 MHz (interpolated -143.5 ohm at 157.78 MHz) (Re Y < 0 from 22.4 to 251 MHz)
+  source bare_50ohm      : peak 0.52 dB at 7.94 MHz; 100 kHz +0.01 dB, 1 MHz +0.02 dB
+  source bare_1k         : peak 8.62 dB at 6.61 MHz; 100 kHz +0.01 dB, 1 MHz +0.17 dB
+  source bare_1Meg       : peak 21.26 dB at 0.24 MHz; 100 kHz +1.66 dB, 1 MHz -24.37 dB
+  source network_50ohm   : peak 0.40 dB at 7.59 MHz; 100 kHz +0.01 dB, 1 MHz +0.02 dB; single pole -0.0 / -0.0 dB
+  source network_1k      : peak 0.57 dB at 5.01 MHz; 100 kHz +0.01 dB, 1 MHz +0.03 dB; single pole -0.0 / -0.1 dB
+  source network_1Meg    : peak 0.00 dB at 5.25e-05 MHz; 100 kHz -21.93 dB, 1 MHz -41.90 dB; single pole -22.0 / -42.0 dB
+  largest peak with the network: 0.57 dB
+L200: C_P + C_Z = 250 pF, f_Z = 1/(2 pi R_Z C_Z) = 15.39 MHz
+  bare_archived dm: C_eff 1000: 0.377 pF, 100000: 0.3338 pF, 300000: 0.3875 pF, 1e+06: 0.9929 pF; min Re Z -1.109e+07 ohm at 0.0178 MHz; R_par min -109.8 ohm at 15.85 MHz (interpolated -109.2 ohm at 16.73 MHz) (Re Y < 0 from 0.00891 to 39.8 MHz)
+  bare_archived cm: C_eff 1000: 0.7199 pF, 100000: 0.6204 pF, 300000: 0.6213 pF, 1e+06: 0.6314 pF; min Re Z -4.527e+05 ohm at 0.141 MHz; R_par min -21.8 ohm at 199.53 MHz (interpolated -21.7 ohm at 191.10 MHz) (Re Y < 0 from 0.0398 to 282 MHz)
+  bare          dm: C_eff 1000: 0.377 pF, 100000: 0.3338 pF, 300000: 0.3875 pF, 1e+06: 0.993 pF; min Re Z -1.108e+07 ohm at 0.0178 MHz; R_par min -109.8 ohm at 15.85 MHz (interpolated -109.2 ohm at 16.73 MHz) (Re Y < 0 from 0.00891 to 39.8 MHz)
+  bare          cm: C_eff 1000: 0.7199 pF, 100000: 0.6204 pF, 300000: 0.6213 pF, 1e+06: 0.6316 pF; min Re Z -4.523e+05 ohm at 0.141 MHz; R_par min -21.7 ohm at 199.53 MHz (interpolated -21.5 ohm at 191.55 MHz) (Re Y < 0 from 0.0398 to 282 MHz)
+  network       dm: C_eff 1000: 250.4 pF, 100000: 250.3 pF, 300000: 250.3 pF, 1e+06: 250.1 pF; min Re Z 1.218 ohm at 1e+03 MHz; Re Y > 0 everywhere
+  network       cm: C_eff 1000: 500.7 pF, 100000: 500.6 pF, 300000: 500.5 pF, 1e+06: 498.8 pF; min Re Z -0.1017 ohm at 178 MHz; R_par min -259.9 ohm at 199.53 MHz (interpolated -239.3 ohm at 191.42 MHz) (Re Y < 0 from 158 to 200 MHz)
+  source bare_50ohm      : peak 4.03 dB at 9.12 MHz; 100 kHz +0.01 dB, 1 MHz +0.07 dB
+  source bare_1k         : peak 15.98 dB at 2.63 MHz; 100 kHz +0.02 dB, 1 MHz +1.38 dB
+  source bare_1Meg       : peak 14.80 dB at 0.0832 MHz; 100 kHz +5.94 dB, 1 MHz -43.22 dB
+  source network_50ohm   : peak 0.01 dB at 0.00759 MHz; 100 kHz +0.01 dB, 1 MHz -0.00 dB; single pole -0.0 / -0.0 dB
+  source network_1k      : peak 0.01 dB at 0.00132 MHz; 100 kHz -0.09 dB, 1 MHz -5.28 dB; single pole -0.1 / -5.4 dB
+  source network_1Meg    : peak 0.00 dB at 1e-05 MHz; 100 kHz -43.84 dB, 1 MHz -63.86 dB; single pole -43.9 / -63.9 dB
+  largest peak with the network: 0.01 dB

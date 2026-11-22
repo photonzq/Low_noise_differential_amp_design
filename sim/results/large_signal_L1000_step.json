@@ -1,0 +1,22 @@
+[
+ {
+  "vstep": 1.0,
+  "dv": 1.001319517672838,
+  "rise_ns": 33.8,
+  "overshoot": 0.04652132707679413,
+  "settle_ns_0p1": 162.75049999999996,
+  "settle_ns_1": 105.62550000000006,
+  "slew_v_us": 28.397069999997907,
+  "bench": "50 ohm sources and input network"
+ },
+ {
+  "vstep": 10.0,
+  "dv": 10.013119302352566,
+  "rise_ns": 33.8,
+  "overshoot": 0.046683127416383696,
+  "settle_ns_0p1": 162.8109000000001,
+  "settle_ns_1": 105.63590000000009,
+  "slew_v_us": 274.9979000002705,
+  "bench": "50 ohm sources and input network"
+ }
+]

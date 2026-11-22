@@ -1,0 +1,20 @@
+H100 THD     1000 Hz   1 Vpp: 0.0001 %  (H2 -125 dBc, H3 -130 dBc, fundamental 1.002 Vpp)
+H100 THD     1000 Hz  10 Vpp: 0.0002 %  (H2 -117 dBc, H3 -121 dBc, fundamental 10.017 Vpp)
+H100 THD   100000 Hz   1 Vpp: 0.0001 %  (H2 -136 dBc, H3 -121 dBc, fundamental 1.002 Vpp)
+H100 THD   100000 Hz  10 Vpp: 0.0026 %  (H2 -115 dBc, H3 -94 dBc, fundamental 10.017 Vpp)
+H100 THD    1e+06 Hz   1 Vpp: 0.0009 %  (H2 -121 dBc, H3 -101 dBc, fundamental 1.003 Vpp)
+H100 THD    1e+06 Hz  10 Vpp: 0.0249 %  (H2 -97 dBc, H3 -75 dBc, fundamental 10.027 Vpp)
+H100 THD    1e+07 Hz   1 Vpp: 0.0119 %  (H2 -90 dBc, H3 -79 dBc, fundamental 0.961 Vpp)
+H100 step 1 V: rise 23.0 ns, overshoot 7.7 %, settle 1 % 83 ns, 0.1 % 129 ns, slew 41 V/us
+H100 step 10 V: rise 27.2 ns, overshoot 9.3 %, settle 1 % 84 ns, 0.1 % 131 ns, slew 312 V/us
+H100 PSRR (input-referred, dB): {'VP': {'100': -101.28017867213774, '1000.0': -101.27990587564682, '10000.0': -101.22944130932552, '100000.0': -97.90364509496186, '1000000.0': -80.56662549354516, '10000000.0': -60.69564343212577}, 'VM': {'100': -100.68775535916245, '1000.0': -100.68807435972431, '10000.0': -100.67581978557597, '100000.0': -99.59726060433006, '1000000.0': -86.02149007503306, '10000000.0': -65.95172841211236}}
+L1000 THD     1000 Hz   1 Vpp: 0.0001 %  (H2 -126 dBc, H3 -131 dBc, fundamental 1.001 Vpp)
+  (L1000_thd_1000_10: ran with '.options abstol=1e-12 method=gear itl4=1000 reltol=2e-4')
+L1000 THD     1000 Hz  10 Vpp: 0.0002 %  (H2 -118 dBc, H3 -121 dBc, fundamental 10.013 Vpp)
+  (L1000_thd_100000_1: ran with '.options abstol=1e-12 method=gear itl4=1000 reltol=2e-4')
+L1000 THD   100000 Hz   1 Vpp: 0.0001 %  (H2 -139 dBc, H3 -121 dBc, fundamental 1.001 Vpp)
+L1000 THD   100000 Hz  10 Vpp: 0.0025 %  (H2 -115 dBc, H3 -95 dBc, fundamental 10.013 Vpp)
+L1000 THD    1e+06 Hz   1 Vpp: 0.0009 %  (H2 -119 dBc, H3 -102 dBc, fundamental 1.001 Vpp)
+L1000 THD    1e+06 Hz  10 Vpp: 0.0235 %  (H2 -98 dBc, H3 -76 dBc, fundamental 10.007 Vpp)
+L1000 THD    1e+07 Hz   1 Vpp: 0.0100 %  (H2 -96 dBc, H3 -81 dBc, fundamental 0.916 Vpp)
+L1000 step 1 V failed: stderr Error: memory required (66249600 Bytes)

@@ -1,0 +1,573 @@
+{
+ "method": "Pixel reading of 400-dpi PyMuPDF renders, frame and grid lines found in the pixels.  Axis calibrations: 'frame' = uniform scale through the two frame lines at the printed limits; 'fit' = uniform scale fitted to the frame and grid lines; 'local' = interpolation between neighbouring frame or grid lines.  Values: median of the curve centre over 13 columns around the abscissa; at the noise plots' frame edges, straight-line (log-log) extrapolation of the centres in 15 columns.  See the docstring of scripts/ti_plot_check.py.",
+ "figures": {
+  "JFE150 Fig. 6-12": {
+   "pdf": "refs/datasheets/jfet/TI/TI_JFE150_datasheet_SLPS732B.pdf",
+   "caption": "Figure 6-12. Input, Output, and Reverse Transfer Capacitance",
+   "page": {
+    "index_from_0": 6,
+    "printed": 7
+   },
+   "dpi": 400,
+   "search_box_pt": [
+    330,
+    518,
+    535,
+    668
+   ],
+   "frame_pt": {
+    "left": 349.47,
+    "right": 524.88,
+    "top": 525.69,
+    "bottom": 649.89
+   },
+   "axes": {
+    "x": {
+     "scale": "log",
+     "limits_on_frame": [
+      0.5,
+      50.0
+     ],
+     "n_grid_lines": 17,
+     "px_per_decade": {
+      "frame": 487.25,
+      "fit": 487.26
+     },
+     "grid_max_offset_from_frame_scale_px": 0.82,
+     "grid_max_offset_from_frame_scale_decade": 0.0017,
+     "fit_max_residual_px": 0.74,
+     "fit_max_residual_decade": 0.0015
+    },
+    "y": {
+     "scale": "lin",
+     "limits_on_frame": [
+      0.0,
+      50.0
+     ],
+     "n_grid_lines": 4,
+     "px_per_unit": {
+      "frame": -13.8,
+      "fit": -13.81
+     },
+     "grid_max_offset_from_frame_scale_px": 1.5,
+     "grid_max_offset_from_frame_scale_unit": 0.1087,
+     "fit_max_residual_px": 0.89,
+     "fit_max_residual_unit": 0.0645
+    }
+   },
+   "readings": {
+    "V_DS = 5 V": {
+     "C_iss_pF": {
+      "median": {
+       "frame": 23.913,
+       "fit": 23.944,
+       "local": 23.913
+      },
+      "line": {
+       "frame": 23.899,
+       "fit": 23.929,
+       "local": 23.934
+      },
+      "median_columns_min": 13
+     },
+     "C_oss_pF": {
+      "median": {
+       "frame": 7.681,
+       "fit": 7.727,
+       "local": 7.766
+      },
+      "line": {
+       "frame": 7.703,
+       "fit": 7.749,
+       "local": 7.787
+      },
+      "median_columns_min": 13
+     },
+     "C_rss_pF": {
+      "median": {
+       "frame": 4.13,
+       "fit": 4.18,
+       "local": 4.176
+      },
+      "line": {
+       "frame": 4.117,
+       "fit": 4.167,
+       "local": 4.162
+      },
+      "median_columns_min": 13
+     }
+    }
+   }
+  },
+  "JFE2140 Fig. 6-17": {
+   "pdf": "refs/datasheets/jfet/TI/TI_JFE2140_datasheet_SLPS730B.pdf",
+   "caption": "Figure 6-17. Input, Output, and Reverse Transfer Capacitance",
+   "page": {
+    "index_from_0": 7,
+    "printed": 8
+   },
+   "dpi": 400,
+   "search_box_pt": [
+    200,
+    536,
+    412,
+    690
+   ],
+   "frame_pt": {
+    "left": 222.03,
+    "right": 403.29,
+    "top": 543.33,
+    "bottom": 671.67
+   },
+   "axes": {
+    "x": {
+     "scale": "log",
+     "limits_on_frame": [
+      0.5,
+      40.0
+     ],
+     "n_grid_lines": 16,
+     "px_per_decade": {
+      "frame": 529.14,
+      "fit": 528.86
+     },
+     "grid_max_offset_from_frame_scale_px": 1.21,
+     "grid_max_offset_from_frame_scale_decade": 0.0023,
+     "fit_max_residual_px": 0.67,
+     "fit_max_residual_decade": 0.0013
+    },
+    "y": {
+     "scale": "lin",
+     "limits_on_frame": [
+      0.0,
+      30.0
+     ],
+     "n_grid_lines": 2,
+     "px_per_unit": {
+      "frame": -23.77,
+      "fit": -23.78
+     },
+     "grid_max_offset_from_frame_scale_px": 1.17,
+     "grid_max_offset_from_frame_scale_unit": 0.0491,
+     "fit_max_residual_px": 0.75,
+     "fit_max_residual_unit": 0.0315
+    }
+   },
+   "readings": {
+    "V_DS = 5 V": {
+     "C_iss_pF": {
+      "median": {
+       "frame": 13.359,
+       "fit": 13.354,
+       "local": 13.375
+      },
+      "line": {
+       "frame": 13.367,
+       "fit": 13.381,
+       "local": 13.402
+      },
+      "median_columns_min": 13
+     },
+     "C_oss_pF": {
+      "median": {
+       "frame": 4.902,
+       "fit": 4.879,
+       "local": 4.884
+      },
+      "line": {
+       "frame": 4.882,
+       "fit": 4.901,
+       "local": 4.906
+      },
+      "median_columns_min": 13
+     },
+     "C_rss_pF": {
+      "median": {
+       "frame": 3.934,
+       "fit": 3.912,
+       "local": 3.911
+      },
+      "line": {
+       "frame": 3.923,
+       "fit": 3.943,
+       "local": 3.943
+      },
+      "median_columns_min": 13
+     }
+    }
+   }
+  },
+  "THS4021 Fig. 5-11": {
+   "pdf": "refs/datasheets/opamp/TI_ths4021_datasheet.pdf",
+   "caption": "Figure 5-11. Input-Referred Voltage Noise vs Frequency",
+   "page": {
+    "index_from_0": 10,
+    "printed": 11
+   },
+   "dpi": 400,
+   "search_box_pt": [
+    80,
+    465,
+    300,
+    615
+   ],
+   "frame_pt": {
+    "left": 92.16,
+    "right": 287.46,
+    "top": 476.01,
+    "bottom": 600.3
+   },
+   "axes": {
+    "x": {
+     "scale": "log",
+     "limits_on_frame": [
+      10.0,
+      100000.0
+     ],
+     "n_grid_lines": 35,
+     "px_per_decade": {
+      "frame": 271.25,
+      "fit": 271.09
+     },
+     "grid_max_offset_from_frame_scale_px": 0.59,
+     "grid_max_offset_from_frame_scale_decade": 0.0022,
+     "fit_max_residual_px": 0.44,
+     "fit_max_residual_decade": 0.0016
+    },
+    "y": {
+     "scale": "log",
+     "limits_on_frame": [
+      1.0,
+      10.0
+     ],
+     "n_grid_lines": 8,
+     "px_per_decade": {
+      "frame": -690.5,
+      "fit": -690.37
+     },
+     "grid_max_offset_from_frame_scale_px": 0.31,
+     "grid_max_offset_from_frame_scale_decade": 0.0005,
+     "fit_max_residual_px": 0.3,
+     "fit_max_residual_decade": 0.0004
+    }
+   },
+   "readings": {
+    "e_n_nV_rtHz": {
+     "10 Hz (frame edge, extrapolated)": {
+      "frame": 4.069,
+      "fit": 4.064,
+      "local": 4.066
+     },
+     "first visible point": {
+      "f_Hz": {
+       "frame": 10.3,
+       "fit": 10.27,
+       "local": 10.3
+      },
+      "value": {
+       "frame": 3.99,
+       "fit": 3.99,
+       "local": 3.987
+      }
+     },
+     "100 kHz (frame edge, extrapolated)": {
+      "frame": 1.183,
+      "fit": 1.183,
+      "local": 1.183
+     },
+     "last visible point": {
+      "f_Hz": {
+       "frame": 97070.0,
+       "fit": 97280.0,
+       "local": 97200.0
+      },
+      "value": {
+       "frame": 1.183,
+       "fit": 1.183,
+       "local": 1.183
+      }
+     }
+    }
+   }
+  },
+  "THS4021 Fig. 5-12": {
+   "pdf": "refs/datasheets/opamp/TI_ths4021_datasheet.pdf",
+   "caption": "Figure 5-12. Input-Referred Current Noise vs Frequency",
+   "page": {
+    "index_from_0": 10,
+    "printed": 11
+   },
+   "dpi": 400,
+   "search_box_pt": [
+    325,
+    465,
+    550,
+    615
+   ],
+   "frame_pt": {
+    "left": 341.55,
+    "right": 536.76,
+    "top": 476.01,
+    "bottom": 600.3
+   },
+   "axes": {
+    "x": {
+     "scale": "log",
+     "limits_on_frame": [
+      10.0,
+      100000.0
+     ],
+     "n_grid_lines": 35,
+     "px_per_decade": {
+      "frame": 271.12,
+      "fit": 271.08
+     },
+     "grid_max_offset_from_frame_scale_px": 0.59,
+     "grid_max_offset_from_frame_scale_decade": 0.0022,
+     "fit_max_residual_px": 0.39,
+     "fit_max_residual_decade": 0.0015
+    },
+    "y": {
+     "scale": "log",
+     "limits_on_frame": [
+      1.0,
+      50.0
+     ],
+     "n_grid_lines": 12,
+     "px_per_decade": {
+      "frame": -406.42,
+      "fit": -406.55
+     },
+     "grid_max_offset_from_frame_scale_px": 0.35,
+     "grid_max_offset_from_frame_scale_decade": 0.0008,
+     "fit_max_residual_px": 0.25,
+     "fit_max_residual_decade": 0.0006
+    }
+   },
+   "readings": {
+    "i_n_pA_rtHz": {
+     "10 Hz (frame edge, extrapolated)": {
+      "frame": 18.724,
+      "fit": 18.725,
+      "local": 18.701
+     },
+     "first visible point": {
+      "f_Hz": {
+       "frame": 10.35,
+       "fit": 10.35,
+       "local": 10.35
+      },
+      "value": {
+       "frame": 18.343,
+       "fit": 18.34,
+       "local": 18.321
+      }
+     },
+     "100 kHz (frame edge, extrapolated)": {
+      "frame": 2.095,
+      "fit": 2.096,
+      "local": 2.098
+     },
+     "last visible point": {
+      "f_Hz": {
+       "frame": 97070.0,
+       "fit": 97260.0,
+       "local": 97200.0
+      },
+      "value": {
+       "frame": 2.095,
+       "fit": 2.096,
+       "local": 2.098
+      }
+     }
+    }
+   }
+  },
+  "THS4031 Fig. 5-13": {
+   "pdf": "refs/datasheets/opamp/TI_ths4031_datasheet.pdf",
+   "caption": "Figure 5-13. Input-Referred Voltage Noise vs Frequency",
+   "page": {
+    "index_from_0": 11,
+    "printed": 12
+   },
+   "dpi": 400,
+   "search_box_pt": [
+    80,
+    112,
+    300,
+    262
+   ],
+   "frame_pt": {
+    "left": 92.16,
+    "right": 287.46,
+    "top": 123.75,
+    "bottom": 248.04
+   },
+   "axes": {
+    "x": {
+     "scale": "log",
+     "limits_on_frame": [
+      10.0,
+      100000.0
+     ],
+     "n_grid_lines": 35,
+     "px_per_decade": {
+      "frame": 271.25,
+      "fit": 271.09
+     },
+     "grid_max_offset_from_frame_scale_px": 0.59,
+     "grid_max_offset_from_frame_scale_decade": 0.0022,
+     "fit_max_residual_px": 0.44,
+     "fit_max_residual_decade": 0.0016
+    },
+    "y": {
+     "scale": "log",
+     "limits_on_frame": [
+      1.0,
+      10.0
+     ],
+     "n_grid_lines": 8,
+     "px_per_decade": {
+      "frame": -690.5,
+      "fit": -690.6
+     },
+     "grid_max_offset_from_frame_scale_px": 0.55,
+     "grid_max_offset_from_frame_scale_decade": 0.0008,
+     "fit_max_residual_px": 0.32,
+     "fit_max_residual_decade": 0.0005
+    }
+   },
+   "readings": {
+    "e_n_nV_rtHz": {
+     "10 Hz (frame edge, extrapolated)": {
+      "frame": 4.071,
+      "fit": 4.062,
+      "local": 4.067
+     },
+     "first visible point": {
+      "f_Hz": {
+       "frame": 10.3,
+       "fit": 10.27,
+       "local": 10.3
+      },
+      "value": {
+       "frame": 3.99,
+       "fit": 3.987,
+       "local": 3.987
+      }
+     },
+     "100 kHz (frame edge, extrapolated)": {
+      "frame": 1.183,
+      "fit": 1.183,
+      "local": 1.183
+     },
+     "last visible point": {
+      "f_Hz": {
+       "frame": 97070.0,
+       "fit": 97280.0,
+       "local": 97200.0
+      },
+      "value": {
+       "frame": 1.183,
+       "fit": 1.183,
+       "local": 1.183
+      }
+     }
+    }
+   }
+  },
+  "THS4031 Fig. 5-14": {
+   "pdf": "refs/datasheets/opamp/TI_ths4031_datasheet.pdf",
+   "caption": "Figure 5-14. Input-Referred Current Noise vs Frequency",
+   "page": {
+    "index_from_0": 11,
+    "printed": 12
+   },
+   "dpi": 400,
+   "search_box_pt": [
+    325,
+    112,
+    550,
+    262
+   ],
+   "frame_pt": {
+    "left": 341.55,
+    "right": 536.76,
+    "top": 123.75,
+    "bottom": 248.04
+   },
+   "axes": {
+    "x": {
+     "scale": "log",
+     "limits_on_frame": [
+      10.0,
+      100000.0
+     ],
+     "n_grid_lines": 35,
+     "px_per_decade": {
+      "frame": 271.12,
+      "fit": 271.08
+     },
+     "grid_max_offset_from_frame_scale_px": 0.59,
+     "grid_max_offset_from_frame_scale_decade": 0.0022,
+     "fit_max_residual_px": 0.39,
+     "fit_max_residual_decade": 0.0015
+    },
+    "y": {
+     "scale": "log",
+     "limits_on_frame": [
+      1.0,
+      50.0
+     ],
+     "n_grid_lines": 12,
+     "px_per_decade": {
+      "frame": -406.42,
+      "fit": -406.35
+     },
+     "grid_max_offset_from_frame_scale_px": 0.42,
+     "grid_max_offset_from_frame_scale_decade": 0.001,
+     "fit_max_residual_px": 0.28,
+     "fit_max_residual_decade": 0.0007
+    }
+   },
+   "readings": {
+    "i_n_pA_rtHz": {
+     "10 Hz (frame edge, extrapolated)": {
+      "frame": 18.729,
+      "fit": 18.723,
+      "local": 18.706
+     },
+     "first visible point": {
+      "f_Hz": {
+       "frame": 10.35,
+       "fit": 10.35,
+       "local": 10.35
+      },
+      "value": {
+       "frame": 18.343,
+       "fit": 18.332,
+       "local": 18.321
+      }
+     },
+     "100 kHz (frame edge, extrapolated)": {
+      "frame": 2.095,
+      "fit": 2.093,
+      "local": 2.093
+     },
+     "last visible point": {
+      "f_Hz": {
+       "frame": 97070.0,
+       "fit": 97260.0,
+       "local": 97200.0
+      },
+      "value": {
+       "frame": 2.095,
+       "fit": 2.093,
+       "local": 2.093
+      }
+     }
+    }
+   }
+  }
+ }
+}

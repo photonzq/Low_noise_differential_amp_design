@@ -1,0 +1,91 @@
+{
+ "T_K": 300.15,
+ "JFE150 channel noise": {
+  "gm": 0.02592567,
+  "gm_source": "jfet_calibration.json JFE150.gm (5 mA, 5 V)",
+  "e_th": 6.528752226577115e-10,
+  "e_th_25C": 6.506964239142194e-10,
+  "e_ngspice_with_RS_RD": 7.0447597e-10,
+  "e_datasheet": 8e-10
+ },
+ "current doubling": {
+  "factor": 0.8408964152537145,
+  "improvement": 0.1591035847462855
+ },
+ "gate-current shot noise": {
+  "1e-12": 5.660700723408719e-16,
+  "1e-11": 1.7900707438534378e-15,
+  "1e-10": 5.66070072340872e-15,
+  "1e-09": 1.790070743853438e-14
+ },
+ "e_n/i_n crossover": {
+  "I_G 1e-12": {
+   "i_n": 5.660700723408719e-16,
+   "R_x": {
+    "e_n 8e-10": 1413252.5973184851,
+    "e_n 9e-10": 1589909.1719832958,
+    "e_n 1e-09": 1766565.7466481065
+   },
+   "R_source_thermal": 51729851572.65751,
+   "R_source_thermal_2VT_over_IG": 51729851572.65751
+  },
+  "I_G 1e-09": {
+   "i_n": 1.790070743853438e-14,
+   "R_x": {
+    "e_n 8e-10": 44690.971166751835,
+    "e_n 9e-10": 50277.34256259581,
+    "e_n 1e-09": 55863.713958439796
+   },
+   "R_source_thermal": 51729851.5726575,
+   "R_source_thermal_2VT_over_IG": 51729851.5726575
+  },
+  "note": "1 nV / 1 fA = 1 Mohm (identity); R_x = e_n / i_n"
+ },
+ "Eq. (2)": {
+  "H: 2 x JFE2140 per side": {
+   "e_1": 9.000000000000001e-10,
+   "N": 2,
+   "e_side": 6.363961030678928e-10,
+   "e_diff": 9e-10,
+   "C_in": 2.6e-11,
+   "src": "JFE2140 0.9 nV/rtHz at 5 mA (SLPS730B Fig. 6-16), 13 pF (SLPS730B p. 5)"
+  },
+  "L: 12 x JFE150 per side": {
+   "e_1": 8.000000000000001e-10,
+   "N": 12,
+   "e_side": 2.3094010767585035e-10,
+   "e_diff": 3.265986323710905e-10,
+   "C_in": 2.8800000000000004e-10,
+   "src": "JFE150 0.8 nV/rtHz at 5 mA, 24 pF at 5 V (SLPS732B p. 5, Table 6.5)"
+  },
+  "SR560: 1 x 2N5564 per side": {
+   "e_1": 1.28e-09,
+   "N": 1,
+   "e_side": 1.28e-09,
+   "e_diff": 1.8101933598375616e-09,
+   "src": "the 2N5564 calibration target (models.py; jfet_model_check.json '2N5564 targets')"
+  }
+ },
+ "Eq. (4)": {
+  "f": 10000000.0,
+  "C_1": 2.4e-11,
+  "R_s_N12": 55.26213301801922,
+  "R_s_N1": 663.1455962162306
+ },
+ "current sharing": {
+  "dVTO": 0.085,
+  "dVTO_source": "sigma assumed in cmrr_mc.py; 0.6 V / 7 = 0.0857 V from SLPS732B p. 5 (V_GS(off) -1.5 to -0.9 V)",
+  "V_GS": -0.5682819,
+  "V_TO": -0.975,
+  "I_D": 0.005,
+  "overdrive_operating_point": 0.40671809999999997,
+  "dI_over_I": 0.4179799227032188,
+  "overdrive_square_law": 0.38560204267207754,
+  "dI_over_I_square_law": 0.44086903384111703
+ },
+ "R_G thermal noise": {
+  "10.1 ohm": 4.091678459133855e-10,
+  "2.49 ohm": 2.03161066683703e-10
+ },
+ "differential penalty dB": 3.010299956639812
+}

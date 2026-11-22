@@ -1,0 +1,192 @@
+section | quantity | value | shown | unit | source
+4.1 chain | headroom of H_HR over H_LN, 20 log10(100/10) | 20 | 20 | dB | arithmetic
+4.1 chain | noise ratio H_HR / H_LN at 1 kHz and 100 kHz, gains 100 and 1000 | {"gain 100, 1000 Hz": 2.3724, "gain 100, 100000 Hz": 2.335, "gain 1000, 1000 Hz": 2.4764, "gain 1000, 100000 Hz": 2.4085} | 2.3-2.5 |  | chain_noise.json (Table 9)
+Table 5 | H100: g_m per JFET | 17.2616 | 17.3 | mS | frontend.check_op, @j.xja1.j1[gm]
+Table 5 | H100: N g_m per side (N = 2) | 34.5233 | 35 | mS | N x g_m
+Table 5 | L200: g_m per JFET | 25.7058 | 25.7 | mS | frontend.check_op, @j.xja1.j1[gm]
+Table 5 | L200: N g_m per side (N = 12) | 308.47 | 308 | mS | N x g_m
+Table 5 | H100: N C_iss, data sheet (2 x 13 pF) | 26 | 26 | pF | SLPS730B p. 5 (JFE2140) / SLPS732B p. 5 (JFE150), C_iss at V_DS = 5 V
+Table 5 | H100: input JFET V_GS, V_GD (intrinsic) | [-0.395228, -4.21071] |  | V | op deck, @j.xja1.j1[vgs], [vgd]
+Table 5 | H100: model C_gs + C_gd per JFET at the operating point | 12.6736 | 12.67 | pF | C0 / sqrt(1 - V / PB), card in _lib/jfets.lib
+Table 5 | H100: N (C_gs + C_gd), model at the operating point | 25.3473 | 25 | pF | N x the above
+Table 5 | L200: N C_iss, data sheet (12 x 24 pF) | 288 | 288 | pF | SLPS730B p. 5 (JFE2140) / SLPS732B p. 5 (JFE150), C_iss at V_DS = 5 V
+Table 5 | L200: input JFET V_GS, V_GD (intrinsic) | [-0.585573, -4.40079] |  | V | op deck, @j.xja1.j1[vgs], [vgd]
+Table 5 | L200: model C_gs + C_gd per JFET at the operating point | 23.2678 | 23.27 | pF | C0 / sqrt(1 - V / PB), card in _lib/jfets.lib
+Table 5 | L200: N (C_gs + C_gd), model at the operating point | 279.213 | 279 | pF | N x the above
+Table 5 | H100: source-node current N I_D + I_BS | 11.0248 | 11.0 | mA | check_op: N @j.xja1.j1[id] + (V_P - v(ba)) / R_UP
+Table 5 | H100: R_T current I_T (base current included) | 11.1172 | 11.1 | mA | sink_power.json, H100 | 2 V, i_sink
+Table 5 | H100: sink base current I_T - I_C | 0.0923409 | 0.09 | mA | difference
+Table 5 | L200: source-node current N I_D + I_BS | 61.0658 | 61.1 | mA | check_op: N @j.xja1.j1[id] + (V_P - v(ba)) / R_UP
+Table 5 | L200: R_T current I_T (base current included) | 61.9163 | 61.9 | mA | sink_power.json, L200 | 6 V, i_sink
+Table 5 | L200: sink base current I_T - I_C | 0.850575 | 0.85 | mA | difference
+4.2 servo | H: output error, 1% of 11 mA x R_F 500 ohm | 55 | 55 | mV | eps (N I_D + I_BS) R_F
+4.2 servo | H: output error, 3% of 11 mA x R_F 500 ohm | 165 | 0.17 V | mV | eps (N I_D + I_BS) R_F
+4.2 servo | L: output error, 1% of 61 mA x R_F 249 ohm | 151.89 | 152 | mV | eps (N I_D + I_BS) R_F
+4.2 servo | L: output error, 3% of 61 mA x R_F 249 ohm | 455.67 | 0.46 V | mV | eps (N I_D + I_BS) R_F
+4.2 servo | H: dV_BE/dT of the MMBT3904 sink | -1.71099 | -1.7 | mV/K | fe_closed_forms.json, drift, H100, 2 V
+4.2 servo | H: dI/I per kelvin = |dV_BE/dT| / V_RT (2 V) | 0.0855497 | 0.09 | %/K | arithmetic
+4.2 servo | H: dI/dT = |dV_BE/dT| / R_T | 9.41047 | 9.4 | uA/K | arithmetic
+4.2 servo | H: R_F dI/dT (closed form) | 4.70523 | 4.7 | mV/K | arithmetic
+4.2 servo | H: output drift per kelvin, simulated | 4.8633 | 4.9 | mV/K | fe_closed_forms.json, drift, H100, 2 V, output_mV_per_K
+4.2 servo | L (6 V): output drift per kelvin, simulated | 4.91694 | 4.9 | mV/K | fe_closed_forms.json, drift, L, 6 V, output_mV_per_K
+4.2 servo | H: sink mismatch, an assumed 0.05 % of 11 mA | 5.5 | 5.5 | uA | assumption x design current
+4.2 servo | H: differential output offset dI R_F | 2.75 | 2.75 | mV | arithmetic
+4.2 servo | H: referred to the input, dI R_F / G | 27.4973 | 27.5 | uV | G = 1 + 2 R_F / R_G
+4.2 servo | integrator unity-gain frequency g / (2 pi C) | 0.159155 | 0.16 | Hz | 1 uS, 1 uF (frontend.netlist)
+4.2 servo | filter corner 1 / (2 pi R C) | 15.9155 | 16 | Hz | 1 kohm, 10 uF (frontend.netlist)
+4.2 servo | H: R_T = V_RT / (N I_D + I_BS) | 181.818 | 181.8 | ohm | frontend.side
+4.2 servo | H: R_F / R_T | 2.75 | 2.75 | V/V | arithmetic
+4.2 servo | H: servo crossover (R_F / R_T) f_int | 0.437676 | 0.44 | Hz | arithmetic
+4.2 servo | H: filter's phase lag at the crossover | 1.57524 | 1.6 | deg | atan(f_c / f_filt)
+4.2 servo | H: servo phase margin 90 - lag | 88.4248 | 88 | deg | arithmetic
+4.2 servo | H: servo clamp V_M + 1 V ... V_M + V_RT + 3 V | [-14, -10] | V_M + 1 V ... V_M + 5 V | V | frontend.netlist, BSNK
+4.2 servo | H: sink base (vsink) at the operating point, relative to V_M | 2.75534 | 2.8 | V | sink_power.json, H100 | 2 V, v_ctrl
+4.2 servo | L: R_T = V_RT / (N I_D + I_BS) | 98.3607 | 98.4 | ohm | frontend.side
+4.2 servo | L: R_F / R_T | 2.5315 | 2.53 | V/V | arithmetic
+4.2 servo | L: servo crossover (R_F / R_T) f_int | 0.402901 | 0.40 | Hz | arithmetic
+4.2 servo | L: filter's phase lag at the crossover | 1.45013 | 1.5 | deg | atan(f_c / f_filt)
+4.2 servo | L: servo phase margin 90 - lag | 88.5499 | 89 | deg | arithmetic
+4.2 servo | L: servo clamp V_M + 1 V ... V_M + V_RT + 3 V | [-14, -6] | V_M + 1 V ... V_M + 9 V | V | frontend.netlist, BSNK
+4.2 servo | L: sink base (vsink) at the operating point, relative to V_M | 6.89875 | 6.9 | V | sink_power.json, L200 | 6 V, v_ctrl
+4.2 servo | noise current of 100 kohm, sqrt(4kT / R) | 0.407137 | 0.4 | pA/rtHz | arithmetic
+4.2 cascode | bootstrap corner 1 / (2 pi R_BS C_BS) | 45.4728 | 45 | Hz | R_BS 3.5 kohm, C_BS 1 uF (frontend.side)
+4.2 cascode | MMBTH10 cascode: base current at the operating point | 47.994 | 48 | uA | op deck, @qca1[ib]
+4.2 cascode | MMBTH10 cascode: collector current | 5.00391 | 5.00 | mA | op deck, @qca1[ic]
+4.2 cascode | MMBTH10 cascode: input JFETs' V_DS | 2.47773 | 2.5 | V | v(da1) - v(sa)
+4.2 cascode | MMBTH10 cascodes: input-referred noise at 10 kHz (group 'cascodes') | 0.261186 | 0.26 | nV/rtHz | run here (noise run: direct)
+4.2 cascode | MMBTH10 cascodes: of which base-current shot noise (onoise_qc*_ib) | 0.259717 | 0.26 | nV/rtHz | run here
+4.2 cascode | MMBTH10 cascodes: front end's total at 10 kHz | 1.10403 | 1.10 | nV/rtHz | run here
+4.2 cascode | MMBTH10 cascodes: front end's -3 dB bandwidth | 14.88 | 14.9 | MHz | run here
+4.2 cascode | LSBF862 cascodes (adopted): group 'cascodes' at 10 kHz | 0.00249113 | 0.002 | nV/rtHz | fe_gain_options.json
+4.2 noise | H100: JFETs at 10 kHz | 0.93621 | 0.94 | nV/rtHz | fe_gain_options.json (Table 6c)
+4.2 noise | H100: R_G at 10 kHz | 0.404892 | 0.40 | nV/rtHz | fe_gain_options.json (Table 6c)
+4.2 noise | H100: R_D at 10 kHz | 0.282999 | 0.28 | nV/rtHz | fe_gain_options.json (Table 6c)
+4.2 noise | H100: op amps at 10 kHz | 0.133895 | 0.13 | nV/rtHz | fe_gain_options.json (Table 6c)
+4.2 noise | H100: sinks at 10 kHz | 0.0791957 | 0.08 | nV/rtHz | fe_gain_options.json (Table 6c)
+4.2 noise | L200: JFETs at 10 kHz | 0.328203 | 0.33 | nV/rtHz | curves_noise.npz
+4.2 noise | L200: R_G at 10 kHz | 0.202125 | 0.20 | nV/rtHz | curves_noise.npz
+4.2 noise | Spinelli and Haberman: R_B / G_n | 0.4995 | 0.50 | ohm | p. 5, arithmetic
+4.2 noise | Spinelli and Haberman: 1 / g_m | 33.3333 | 33 | ohm | p. 5, arithmetic
+4.2.1 sinks | V_CE(sat) max, 10 mA / 50 mA (data sheets) | [0.2, 0.3] | 0.2 / 0.3 | V | MMBT3904LT1/D Rev. 15 p. 2; PZT3904T1/D Rev. 7 p. 2
+4.2.1 sinks | V_CE,min (design margin) | 0.5 | 0.5 | V | design choice (sink_options.V_SAT_BJT)
+4.3 loops | H100: k_DM = g_m R_G / (2 + g_m R_G) | 0.14846 | 0.15 |  | g_m of one side from the operating point
+4.3 loops | H100: 1 / k_DM | 6.73584 | 6.7 |  | arithmetic
+4.3 loops | H100: cascode V_GD (intrinsic) | -5.04112 | -5.0 | V | op deck, @j.xca1.j1[vgd]
+4.3 loops | H100: cascode C_gd at its bias | 4.29078 | 4.3 | pF | LSBF862 card CGD 14.28 pF, PB 0.5 V
+4.3 loops | H100: C_par = N C_gd + C_i(THS4021 1.5 pF) | 10.0816 | 10.1 | pF | arithmetic; SLOS265F p. 7
+4.3 loops | H100 first: beta_CM = S / (S + C_node + C_par) | 0.51277 | 0.51 |  | S 10.61 pF, C_node 0 pF
+4.3 loops | H100 first: beta_DM = D / (S + C_node + C_par) | 0.0855421 | 0.086 |  | D 1.77 pF
+4.3 loops | H100 first: S + C_node + C_par | 20.6916 | 21 | pF | arithmetic
+4.3 loops | H100 final: beta_CM = S / (S + C_node + C_par) | 0.0573579 | 0.057 |  | S 14 pF, C_node 220 pF
+4.3 loops | H100 final: beta_DM = D / (S + C_node + C_par) | 0.016388 | 0.016 |  | D 4 pF
+4.3 loops | H100 final: S + C_node + C_par | 244.082 | 244 | pF | arithmetic
+4.3 loops | L200: cascode V_GD (intrinsic) | -4.88264 | -4.9 | V | op deck, @j.xca1.j1[vgd]
+4.3 loops | L200: cascode C_gd at its bias | 4.35349 | 4.4 | pF | LSBF862 card CGD 14.28 pF, PB 0.5 V
+4.3 loops | L200: C_par = N C_gd + C_i(THS4021 1.5 pF) | 53.7418 | 53.7 | pF | arithmetic; SLOS265F p. 7
+4.3 loops | L200 first: beta_CM = S / (S + C_node + C_par) | 0.282886 | 0.28 |  | S 21.2 pF, C_node 0 pF
+4.3 loops | L200 first: beta_DM = D / (S + C_node + C_par) | 0.0747246 | 0.075 |  | D 5.6 pF
+4.3 loops | L200 first: S + C_node + C_par | 74.9418 | 75 | pF | arithmetic
+4.3 loops | L200 final: beta_CM = S / (S + C_node + C_par) | 0.0541769 | 0.054 |  | S 30 pF, C_node 470 pF
+4.3 loops | L200 final: beta_DM = D / (S + C_node + C_par) | 0.0252825 | 0.025 |  | D 14 pF
+4.3 loops | L200 final: S + C_node + C_par | 553.742 | 554 | pF | arithmetic
+4.3 loops | H100 final: f_local,DM = GBW beta_DM | 32.7759 | 33 | MHz | GBW 2 GHz (SLOS265F p. 1)
+4.3 loops | Eq. (10b): GBW k_DM / 10 | 29.6919 | 30 | MHz | GBW 2 GHz, stable at gains >= 10 (SLOS265F p. 1)
+4.3 loops | H100 adopted: D / S | 0.285714 | 0.29 |  | 4 pF / 14 pF
+4.3 loops | outer loop H100 dm: f_c, PM, GM | [8.92577, 60.9761, 21.1612] | 8.9 MHz, 61 deg, 21 dB | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | outer loop H100 cm: f_c, PM, GM | [21.1693, 62.8089, 13.3801] | 21.2 MHz, 63 deg, 13 dB | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | outer loop L200 dm: f_c, PM, GM | [10.6086, 65.6459, 18.533] | 10.6 MHz, 66 deg, 19 dB | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | outer loop L200 cm: f_c, PM, GM | [19.9849, 63.3857, 11.5703] | 20.0 MHz, 63 deg, 12 dB | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | outer loop H100_nocross dm: f_c, PM, GM | [31.6764, 65.8747, 14.9578] | 31.7 MHz, 66 deg, 15 dB | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | outer loop H100_nocross cm: f_c, PM, GM | [188.739, -93.3159, nan] | 188.7 MHz, -93 deg, - | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | outer loop H100_old dm: f_c, PM, GM | [21.1693, 71.6543, 16.1756] | 21.2 MHz, 72 deg, 16 dB | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | outer loop H100_old cm: f_c, PM, GM | [28.2311, 76.9827, 16.7871] | 28.2 MHz, 77 deg, 17 dB | MHz, deg, dB | curves_loop.npz, check_loop convention
+4.3 loops | complete loop H100 dm: f_c, PM, GM | [19.5589, 59.9102, 19.0322] | 19.6 MHz, 60 deg, 19.0 dB | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | complete loop H100 dm: -180 deg crossing (interpolated / sweep point) | [247.014, 247.89, 19.0322] | 247 MHz | MHz, MHz, dB | curves_loop.npz
+4.3 loops | complete loop H100 cm: f_c, PM, GM | [59.2401, 56.7741, 8.42325] | 59.2 MHz, 57 deg, 8.4 dB | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | complete loop H100 cm: -180 deg crossing (interpolated / sweep point) | [250.535, 259.604, 8.42325] | 251 MHz | MHz, MHz, dB | curves_loop.npz
+4.3 loops | complete loop H10 dm: f_c, PM, GM | [51.5771, 61.9955, 9.76966] | 51.6 MHz, 62 deg, 9.8 dB | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | complete loop H10 dm: -180 deg crossing (interpolated / sweep point) | [249.203, 259.604, 9.76966] | 249 MHz | MHz, MHz, dB | curves_loop.npz
+4.3 loops | complete loop H10 cm: f_c, PM, GM | [59.2401, 56.7741, 8.42325] | 59.2 MHz, 57 deg, 8.4 dB | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | complete loop H10 cm: -180 deg crossing (interpolated / sweep point) | [250.535, 259.604, 8.42325] | 251 MHz | MHz, MHz, dB | curves_loop.npz
+4.3 loops | complete loop L200 dm: f_c, PM, GM | [27.0218, 63.0428, 16.6117] | 27.0 MHz, 63 deg, 16.6 dB | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | complete loop L200 dm: -180 deg crossing (interpolated / sweep point) | [202.983, 206.085, 16.6117] | 203 MHz | MHz, MHz, dB | curves_loop.npz
+4.3 loops | complete loop L200 cm: f_c, PM, GM | [59.2401, 51.4607, 10.1527] | 59.2 MHz, 51 deg, 10.2 dB | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | complete loop L200 cm: -180 deg crossing (interpolated / sweep point) | [203.933, 206.085, 10.1527] | 204 MHz | MHz, MHz, dB | curves_loop.npz
+4.3 loops | complete loop H100_old dm: f_c, PM, GM | [89.762, 65.4429, 5.34258] | 89.8 MHz, 65 deg, 5.3 dB | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | complete loop H100_old dm: -180 deg crossing (interpolated / sweep point) | [265.229, 271.872, 5.34258] | 265 MHz | MHz, MHz, dB | curves_loop.npz
+4.3 loops | complete loop H100_old cm: f_c, PM, GM | [451.802, -80.6881, nan] | 451.8 MHz, -81 deg, - | MHz, deg, dB | curves_loop.npz, frontend._margins
+4.3 loops | Figure 9 (a, d): CM outer loop without C_X, f_c and PM (frontend._margins) | [188.739, -93.3159] | 189 MHz, -93 deg | MHz, deg | curves_loop.npz (make_figures.fig_loop_gain)
+4.3 loops | oscillation H100_first: cm_out pk-pk, frequency | [1.00536, 292.831] | 1.01 V, 293 MHz | V, MHz | osc_check.json (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)
+4.3 loops | oscillation H100_first_ties: cm_out pk-pk, frequency | [1.0316, 282.84] | 1.03 V, 283 MHz | V, MHz | osc_check.json (inputs tied to ground through 1 milliohm, global options only (trapezoidal))
+4.3 loops | oscillation L200_first: cm_out pk-pk, frequency | [0.782546, 275.692] | 0.78 V, 276 MHz | V, MHz | osc_check.json (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)
+4.3 loops | final values H100: output pk-pk | 0.56 | 0.56 | uV | osc_check.json, H100_cnode220p
+4.3 loops | chain at total gain 100, first front end, LM7171 in S2: -3 dB | 30.0571 | 30.1 | MHz | da_compare_before_cnode.json
+4.3 loops | chain at total gain 100, final front end: -3 dB | 14.8218 | 14.8 | MHz | chain_ac.json, H_LN_100
+4.3 loops | chain bandwidth ratio final / first | 0.493123 | 0.49 |  | arithmetic
+4.3 loops | front end alone, H100: -3 dB | 15.0307 | 15 | MHz | fe_gain_options.json / sink_power.json
+4.3 loops | front end alone, H10: -3 dB | 25.747 | 26 | MHz | fe_gain_options.json / sink_power.json
+4.3 loops | front end alone, L200 (6 V sinks): -3 dB | 16.7867 | 17 | MHz | fe_gain_options.json / sink_power.json
+4.3 loops | H100: noise at 10 kHz and 10 MHz | [1.07073, 1.49905] | 1.07 / 1.50 | nV/rtHz | fe_gain_options.json / sink_power.json
+4.3 loops | L200 (6 V sinks): noise at 10 kHz and 10 MHz | [0.407343, 0.503747] | 0.41 / 0.50 | nV/rtHz | fe_gain_options.json / sink_power.json
+4.3 loops | comp_search sets (H100, L200, H10) | 119 | 119 |  | comp_search_*.json
+4.3.1 mitigations | Table 6a: H100 | nominal | {"dm": [59.9102, 19.0322, 0.8854], "cm": [56.7741, 8.4232, 0.609]} | 60 deg, 19.0 dB, 0.89 | 57 deg, 8.4 dB, 0.61 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H100 | C_node x0.7 | {"dm": [64.447, 16.3061, 0.8435], "cm": [57.8301, 5.6717, 0.4663]} | 64 deg, 16.3 dB, 0.84 | 58 deg, 5.7 dB, 0.47 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H100 | C_node x1.3 | {"dm": [55.6895, 21.104, 0.8912], "cm": [54.7066, 10.5102, 0.6911]} | 56 deg, 21.1 dB, 0.89 | 55 deg, 10.5 dB, 0.69 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H100 | C_I x1.1, C_X x0.9 | {"dm": [69.3511, 16.4529, 0.8451], "cm": [57.5338, 8.2495, 0.5987]} | 69 deg, 16.5 dB, 0.85 | 58 deg, 8.2 dB, 0.60 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H100 | C_I x0.9, C_X x1.1 | {"dm": [42.6992, 23.0666, 0.7187], "cm": [56.2713, 8.6059, 0.6194]} | 43 deg, 23.1 dB, 0.72 | 56 deg, 8.6 dB, 0.62 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H100 | 10 pF at each op-amp output | {"dm": [58.6668, 19.5905, 0.8857], "cm": [52.8071, 9.2258, 0.6253]} | 59 deg, 19.6 dB, 0.89 | 53 deg, 9.2 dB, 0.63 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H100 | R_iso 10 ohm | {"dm": [58.2483, 19.916, 0.8947], "cm": [54.1636, 9.2976, 0.6437]} | 58 deg, 19.9 dB, 0.89 | 54 deg, 9.3 dB, 0.64 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H100 | R_iso 33 ohm | {"dm": [56.4044, 21.6568, 0.881], "cm": [48.5862, 11.0925, 0.6951]} | 56 deg, 21.7 dB, 0.88 | 49 deg, 11.1 dB, 0.70 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | nominal | {"dm": [61.9955, 9.7697, 0.6617], "cm": [56.7741, 8.4232, 0.609]} | 62 deg, 9.8 dB, 0.66 | 57 deg, 8.4 dB, 0.61 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | C_node x0.7 | {"dm": [62.6649, 7.0196, 0.5386], "cm": [57.8301, 5.6717, 0.4663]} | 63 deg, 7.0 dB, 0.54 | 58 deg, 5.7 dB, 0.47 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | C_node x1.3 | {"dm": [59.7652, 11.8556, 0.7332], "cm": [54.7066, 10.5102, 0.6911]} | 60 deg, 11.9 dB, 0.73 | 55 deg, 10.5 dB, 0.69 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | C_I x1.1, C_X x0.9 | {"dm": [63.7451, 8.7253, 0.6257], "cm": [58.4727, 7.6481, 0.5787]} | 64 deg, 8.7 dB, 0.63 | 58 deg, 7.6 dB, 0.58 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | C_I x0.9, C_X x1.1 | {"dm": [59.1097, 10.6506, 0.6997], "cm": [54.6537, 9.0002, 0.6386]} | 59 deg, 10.7 dB, 0.70 | 55 deg, 9.0 dB, 0.64 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | 10 pF at each op-amp output | {"dm": [58.5922, 10.5128, 0.6703], "cm": [52.8071, 9.2258, 0.6253]} | 59 deg, 10.5 dB, 0.67 | 53 deg, 9.2 dB, 0.63 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | R_iso 10 ohm | {"dm": [59.7071, 10.6399, 0.6911], "cm": [54.1636, 9.2976, 0.6437]} | 60 deg, 10.6 dB, 0.69 | 54 deg, 9.3 dB, 0.64 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: H10 | R_iso 33 ohm | {"dm": [54.8623, 12.4104, 0.7294], "cm": [48.5862, 11.0925, 0.6951]} | 55 deg, 12.4 dB, 0.73 | 49 deg, 11.1 dB, 0.70 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | nominal | {"dm": [63.0428, 16.6117, 0.8313], "cm": [51.4607, 10.1527, 0.6567]} | 63 deg, 16.6 dB, 0.83 | 51 deg, 10.2 dB, 0.66 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | C_node x0.7 | {"dm": [65.9617, 14.0394, 0.7753], "cm": [49.5092, 7.5619, 0.5431]} | 66 deg, 14.0 dB, 0.78 | 50 deg, 7.6 dB, 0.54 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | C_node x1.3 | {"dm": [59.9094, 18.5938, 0.8648], "cm": [50.5591, 12.1456, 0.7249]} | 60 deg, 18.6 dB, 0.86 | 51 deg, 12.1 dB, 0.72 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | C_I x1.1, C_X x0.9 | {"dm": [67.4218, 15.0763, 0.7949], "cm": [51.9499, 9.934, 0.639]} | 67 deg, 15.1 dB, 0.79 | 52 deg, 9.9 dB, 0.64 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | C_I x0.9, C_X x1.1 | {"dm": [55.4906, 18.5824, 0.8661], "cm": [50.8578, 10.8, 0.6738]} | 55 deg, 18.6 dB, 0.87 | 51 deg, 10.8 dB, 0.67 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | 10 pF at each op-amp output | {"dm": [61.3754, 16.9883, 0.8225], "cm": [47.8831, 10.5904, 0.6358]} | 61 deg, 17.0 dB, 0.82 | 48 deg, 10.6 dB, 0.64 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | R_iso 10 ohm | {"dm": [60.6538, 18.2017, 0.8373], "cm": [46.9635, 11.7244, 0.6645]} | 61 deg, 18.2 dB, 0.84 | 47 deg, 11.7 dB, 0.66 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | Table 6a: L200 | R_iso 33 ohm | {"dm": [55.7172, 20.2347, 0.8035], "cm": [39.0493, 13.7695, 0.595]} | 56 deg, 20.2 dB, 0.80 | 39 deg, 13.8 dB, 0.60 | deg, dB, - | stability_corners.json
+4.3.1 mitigations | H100 cm: frequency of the smallest |1 + T| | 236.704 | 240 | MHz | stability_corners.json, f_modulus
+4.3.1 mitigations | L200 cm: frequency of the smallest |1 + T| | 163.599 | 160 | MHz | stability_corners.json, f_modulus
+4.3.1 mitigations | modulus margin 0.5 as a sensitivity peak, 20 log10(1/0.5) | 6.0206 | 6 | dB | arithmetic
+4.3.1 mitigations | H: E12 values / simulated C_node | [1.22727, 1.5] | 1.23-1.50 |  | arithmetic
+4.3.1 mitigations | H: 1.3 and 1.5 x C_node | [286, 330] | 286-330 | pF | arithmetic
+4.3.1 mitigations | L: E12 values / simulated C_node | [1.19149, 1.44681] | 1.19-1.45 |  | arithmetic
+4.3.1 mitigations | L: 1.3 and 1.5 x C_node | [611, 705] | 611-705 | pF | arithmetic
+4.3.1 mitigations | comp_search H100 S14_D4_CN330: DM PM, GM; CM PM, GM; f3db | [52.3722, 22.2534, 52.6242, 11.6667, 14.038] | 52 deg, 22 dB | 53 deg, 11.7 dB | 14 MHz | deg, dB, deg, dB, MHz | comp_search_H100.json
+4.3.1 mitigations | comp_search L200 S30_D14_CN680: DM PM, GM; CM PM, GM; f3db | [58.1936, 19.4205, 49.6711, 12.9761, 16.808] | 58 deg, 19 dB | 50 deg, 13.0 dB | 17 MHz | deg, dB, deg, dB, MHz | comp_search_L200.json
+4.3.1 mitigations | R_G route gain 20: noise at 10 Hz / 10 kHz / 10 MHz | [3.08729, 1.44469, 2.14221] | 3.09 / 1.44 / 2.14 | nV/rtHz | fe_gain_options.json
+4.3.1 mitigations | white rise, gains 20 and 30 (R_G route) | [0.349266, 0.205055] | +35 % / +21 % |  | fe_gain_derived.json
+4.3.1 mitigations | Table 6c: R_G, gain 100 | 0.404892 | 0.40 | nV/rtHz | fe_gain_options.json, 10 kHz
+4.3.1 mitigations | Table 6c: loop op amps, gain 20 (R_G) | 0.204022 | 0.20 | nV/rtHz | fe_gain_options.json, 10 kHz
+4.3.1 mitigations | Table 6c: R_F, gain 10 | 0.404859 | 0.40 | nV/rtHz | fe_gain_options.json, 10 kHz
+4.3.1 mitigations | R_F route gain 20 against adopted: -3 dB | [15.898, 15.0307] | 16 / 15 | MHz | fe_gain_options.json
+4.3.1 mitigations | output current V_o / R_F at V_o = 12 V, R_F route gain 20 | 125.065 | 125 | mA | V_O >= +-12 V into 250 ohm, I_O >= 80 mA (SLOS265F p. 7)
+4.3.1 mitigations | THS4031: f_u k_DM x 1 | 17.8152 | 18 | MHz | 120 MHz (SLOS224L p. 1)
+4.3.1 mitigations | LM7171A: f_u k_DM x 0.5 | 11.8768 | 12 | MHz | 160 MHz (SNOS760D p. 5), gains >= +2 (p. 1)
+4.3.1 mitigations | LM7171B: f_u k_DM x 0.5 | 14.846 | 15 | MHz | 200 MHz (SNOS760D p. 5)
+4.3.1 mitigations | adopted ratio f_local,DM / f_c,DM,outer | 3.67206 | 3.7 |  | arithmetic
+4.3.1 mitigations | outer DM crossover scaled to the LM7171A and THS4031 bounds | [3.23437, 4.85155] | 3-5 | MHz | estimate (adopted ratio)
+4.3.1 mitigations | LV: ADA4899 model swing into R_F (V_OH, V_OL) | [3.34012, -3.34012] | +-3.34 | V | lv_option_range.json, swing
+4.3.1 mitigations | LV: outputs above V_CM (V_GS1) | 0.347375 | 0.35 | V | lv_option_range.json
+4.3.1 mitigations | LV: largest differential output at V_CM = 0, 2 (V_OH - V_GS1) | 5.98548 | 6.0 | V | lv_option_range.json (V_od_max_at_V_CM_0)
+4.3.1 mitigations | LV: CM range at V_od = 0 V (1 V cascode margin; cascode at saturation) | [-3.6875, 0.093746, 0.65994] | -3.7 ... +0.09 (+0.66) | V | lv_option_range.json
+4.3.1 mitigations | LV: CM range at V_od = 1 V (1 V cascode margin; cascode at saturation) | [-3.1875, 0.093746, 0.65494] | -3.2 ... +0.09 (+0.65) | V | lv_option_range.json
+4.3.1 mitigations | LV: CM range at V_od = 10 V (1 V cascode margin; cascode at saturation) | [1.3125, -2.00726, -2.00726] | empty | V | lv_option_range.json
+4.3.1 mitigations | adopted: CM range at V_od = 0 V (1 V cascode margin) | [-12.8339, 3.7326] | -12.8 ... +3.7 | V | lv_option_range.json
+4.3.1 mitigations | adopted: CM range at V_od = 1 V (1 V cascode margin) | [-12.8339, 3.7326] | -12.8 ... +3.7 | V | lv_option_range.json
+4.3.1 mitigations | adopted: CM range at V_od = 10 V (1 V cascode margin) | [-8.66739, 3.7326] | -8.7 ... +3.7 | V | lv_option_range.json
+4.3.1 mitigations | LV: ADA4899 model input common-mode range on +-5 V | [-3.71, 3.71] | +-3.71 | V | lv_option_range.json
+4.3.1 mitigations | LV: V_DS of the input JFETs and of the cascodes | [1.54621, 1.09375] | 1.55 / 1.1 | V | lv_option_range.json
+4.3.1 mitigations | ADA4899 model corrected for its 4 kohm input resistor: e_n, i_n white | [0.997458, 2.60176] | 1.0 / 2.6 | nV/rtHz, pA/rtHz | opamp_noise_check.json
+4.3.1 mitigations | ADA4899 corrected at 10 Hz: e_n, i_n | [10.0136, 45.024] | 10 / 45 | nV/rtHz, pA/rtHz | opamp_noise_check.json
+4.3.1 mitigations | THS4021 (corrected model) i_n at 10 Hz | 18.5355 | 19 | pA/rtHz | opamp_noise_check.json
+4.3.1 mitigations | LV front end against adopted: noise at 10 Hz | [3.52937, 2.66837] | 3.5 / 2.7 | nV/rtHz | lv_option.json
+4.3.1 mitigations | ADA4817 model: e_n at 100 kHz and at 10 Hz | [3.99691, 169.803] | 4.0 / 170 | nV/rtHz | opamp_noise_check.json

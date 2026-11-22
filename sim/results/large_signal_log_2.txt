@@ -1,0 +1,16 @@
+H100 PSRR (input-referred, dB): {'VP': {'100': -101.2801786721375, '1000.0': -101.27990587573998, '10000.0': -101.22944131939407, '100000.0': -97.90364468979662, '1000000.0': -80.56662633398349, '10000000.0': -60.695751193853496}, 'VM': {'100': -100.68775544197604, '1000.0': -100.68807435972431, '10000.0': -100.67581978607372, '100000.0': -99.59726066216601, '1000000.0': -86.0214947742183, '10000000.0': -65.95193497525493}}
+L1000 THD     1000 Hz   1 Vpp: 0.0001 %  (H2 -126 dBc, H3 -131 dBc, fundamental 1.001 Vpp)
+  (L1000_thd_1000_10: ran with '.options abstol=1e-12 method=gear itl4=1000 reltol=2e-4')
+L1000 THD     1000 Hz  10 Vpp: 0.0002 %  (H2 -118 dBc, H3 -121 dBc, fundamental 10.013 Vpp)
+  (L1000_thd_100000_1: ran with '.options abstol=1e-12')
+L1000 THD   100000 Hz   1 Vpp: 0.0001 %  (H2 -138 dBc, H3 -121 dBc, fundamental 1.001 Vpp)
+L1000 THD   100000 Hz  10 Vpp: 0.0025 %  (H2 -115 dBc, H3 -95 dBc, fundamental 10.013 Vpp)
+L1000 THD    1e+06 Hz   1 Vpp: 0.0008 %  (H2 -125 dBc, H3 -101 dBc, fundamental 1.001 Vpp)
+L1000 THD    1e+06 Hz  10 Vpp: 0.0235 %  (H2 -98 dBc, H3 -76 dBc, fundamental 10.008 Vpp)
+  (L1000_thd_1e+07_1: ran with '.options abstol=1e-12')
+L1000 THD    1e+07 Hz   1 Vpp: 0.0078 %  (H2 -90 dBc, H3 -85 dBc, fundamental 0.918 Vpp)
+L1000 step 1 V failed: stderr doAnalyses: TRAN:  Timestep too small; time = 3.35773e-08, timestep = 2.5e-22: trouble with xua.x1:npn_in-instance q.xua.x1.q1
+L1000 step 10 V failed: stderr doAnalyses: TRAN:  Timestep too small; time = 1.65919e-07, timestep = 2.5e-22: trouble with xjb7:jfe150_m-instance j.xjb7.j1
+L1000 PSRR (input-referred, dB): {'VP': {'100': -117.10234136656446, '1000.0': -117.09921090646696, '10000.0': -116.86326678862885, '100000.0': -108.90652449274748, '1000000.0': -89.621764419335, '10000000.0': -69.62169088283916}, 'VM': {'100': -122.11669209018835, '1000.0': -122.30385721541181, '10000.0': -122.26127614306736, '100000.0': -119.20535610499586, '1000000.0': -102.08306605205496, '10000000.0': -79.87816101349658}}
+  (L1000_overload: ran with '50ohm')
+L1000 overload x3: recovery 0.15 us, output during 11.36 V

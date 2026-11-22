@@ -1,0 +1,270 @@
+{
+ "table3": [
+  {
+   "part": "BF862",
+   "vendor": "NXP",
+   "status": "discontinued",
+   "en": 0.8,
+   "id_mA": 15.0,
+   "en10": null,
+   "ciss_pF": 10.0,
+   "fom": 2.529822128134704,
+   "note": "single; e_n at 100 kHz at V_GS = 0 (I_DSS, 10-25 mA)"
+  },
+  {
+   "part": "LSBF862",
+   "vendor": "Linear Systems",
+   "status": "active",
+   "en": 0.8,
+   "id_mA": 2.0,
+   "en10": 1.4,
+   "ciss_pF": 11.5,
+   "fom": 2.7129319932501073,
+   "note": "single; e_n at 10 kHz"
+  },
+  {
+   "part": "JFE2140",
+   "vendor": "TI",
+   "status": "active",
+   "en": 0.9,
+   "id_mA": 5.0,
+   "en10": 2.4,
+   "ciss_pF": 13.0,
+   "fom": 3.24499614791759,
+   "note": "matched dual; e_n at 5 mA off Fig. 6-16 (c), 10 Hz at 2 mA"
+  },
+  {
+   "part": "LSK489",
+   "vendor": "Linear Systems",
+   "status": "active",
+   "en": 1.8,
+   "id_mA": 2.0,
+   "en10": 3.5,
+   "ciss_pF": 4.0,
+   "fom": 3.6,
+   "note": "dual, low capacitance"
+  },
+  {
+   "part": "JFE150",
+   "vendor": "TI",
+   "status": "active",
+   "en": 0.8,
+   "id_mA": 5.0,
+   "en10": 1.8,
+   "ciss_pF": 24.0,
+   "fom": 3.919183588453085,
+   "note": "single; C_iss at V_DS = 5 V"
+  },
+  {
+   "part": "JFE2325",
+   "vendor": "TI",
+   "status": "active",
+   "en": 4.3,
+   "id_mA": 0.385,
+   "en10": null,
+   "ciss_pF": 0.85,
+   "fom": 3.9644041166359414,
+   "note": "dual, self-biased gate; e_n at 10 kHz with the gate grounded, I_D = I_DSS (0.385 mA typ)"
+  },
+  {
+   "part": "LSK170",
+   "vendor": "Linear Systems",
+   "status": "active",
+   "en": 0.9,
+   "id_mA": 2.0,
+   "en10": 1.4,
+   "ciss_pF": 20.0,
+   "fom": 4.024922359499622,
+   "note": "single"
+  },
+  {
+   "part": "IF170",
+   "vendor": "InterFET",
+   "status": "active",
+   "en": 1.0,
+   "id_mA": 2.0,
+   "en10": 1.7,
+   "ciss_pF": 20.0,
+   "fom": 4.47213595499958,
+   "note": "single, 2SK170 type; C_iss max; 10 Hz at 5 mA"
+  },
+  {
+   "part": "2SK170",
+   "vendor": "Toshiba",
+   "status": "discontinued",
+   "en": 0.95,
+   "id_mA": 1.0,
+   "en10": null,
+   "ciss_pF": 30.0,
+   "fom": 5.203364296299078,
+   "note": "single"
+  },
+  {
+   "part": "IF9030",
+   "vendor": "InterFET",
+   "status": "active",
+   "en": 0.7,
+   "id_mA": 5.0,
+   "en10": null,
+   "ciss_pF": 60.0,
+   "fom": 5.422176684690384,
+   "note": "single; C_iss max"
+  },
+  {
+   "part": "IF150",
+   "vendor": "InterFET",
+   "status": "active",
+   "en": 3.4,
+   "id_mA": 0.5,
+   "en10": 5.5,
+   "ciss_pF": 2.9,
+   "fom": 5.789991364414976,
+   "note": "single, low capacitance; c"
+  },
+  {
+   "part": "IF4500",
+   "vendor": "InterFET",
+   "status": "active",
+   "en": 0.85,
+   "id_mA": 5.0,
+   "en10": 1.1,
+   "ciss_pF": 55.0,
+   "fom": 6.303768714031313,
+   "note": "single; C_iss off curve (table max 35)"
+  },
+  {
+   "part": "2SK369",
+   "vendor": "Toshiba",
+   "status": "discontinued",
+   "en": 0.78,
+   "id_mA": 3.0,
+   "en10": null,
+   "ciss_pF": 75.0,
+   "fom": 6.754998149518622,
+   "note": "single; c"
+  },
+  {
+   "part": "LSK389",
+   "vendor": "Linear Systems",
+   "status": "active",
+   "en": 1.6,
+   "id_mA": 2.0,
+   "en10": 3.2,
+   "ciss_pF": 25.0,
+   "fom": 8.0,
+   "note": "dual; Rev A27 table (app note: 1.17 measured, A-weighted, with its test amplifier's second stage)"
+  },
+  {
+   "part": "U401",
+   "vendor": "Vishay",
+   "status": "discontinued",
+   "en": 4.3,
+   "id_mA": 0.2,
+   "en10": 10.0,
+   "ciss_pF": 4.0,
+   "fom": 8.6,
+   "note": "dual; c"
+  },
+  {
+   "part": "IF3601",
+   "vendor": "InterFET",
+   "status": "active",
+   "en": 0.34,
+   "id_mA": 5.0,
+   "en10": 0.6,
+   "ciss_pF": 650.0,
+   "fom": 8.668333173107735,
+   "note": "single (IF3602 dual); c; C_iss table 650, curve 890"
+  },
+  {
+   "part": "2N5564",
+   "vendor": "Vishay",
+   "status": "discontinued",
+   "en": 3.9,
+   "id_mA": 2.0,
+   "en10": 12.0,
+   "ciss_pF": 10.0,
+   "fom": 12.33288287465668,
+   "note": "dual (SR560: NPD5564); 1 kHz, c"
+  }
+ ],
+ "lsk389_ratios": {
+  "fom_lsk389_datasheet": 8.0,
+  "fom_lsk389_measured": 5.85,
+  "ratio_datasheet": {
+   "LSK170": 1.9876159799998128,
+   "LSK489": 2.2222222222222223,
+   "LSBF862": 2.9488391230979425,
+   "JFE150": 2.041241452319315,
+   "JFE2140": 2.465334205445463,
+   "JFE2325": 2.01795774715029,
+   "IF3601": 0.9228994594738071,
+   "IF4500": 1.2690820940484557,
+   "IF9030": 1.4754222271266348,
+   "IF170": 1.7888543819998317,
+   "IF150": 1.3816946341522436,
+   "2SK170": 1.5374668280846768,
+   "2SK369": 1.18430824449154,
+   "BF862": 3.1622776601683786,
+   "2N5564": 0.6486723405473599,
+   "U401": 0.9302325581395349
+  },
+  "ratio_measured": {
+   "LSK170": 1.453444185374863,
+   "LSK489": 1.6249999999999998,
+   "LSBF862": 2.1563386087653704,
+   "JFE150": 1.4926578120084992,
+   "JFE2140": 1.8027756377319946,
+   "JFE2325": 1.4756316026036496,
+   "IF3601": 0.6748702297402215,
+   "IF4500": 0.9280162812729332,
+   "IF9030": 1.0789025035863518,
+   "IF170": 1.3080997668373768,
+   "IF150": 1.010364201223828,
+   "2SK170": 1.1242726180369198,
+   "2SK369": 0.8660254037844385,
+   "BF862": 2.3124155389981267,
+   "2N5564": 0.4743416490252569,
+   "U401": 0.6802325581395349
+  }
+ },
+ "fig1_basis": {
+  "SRS SR560": {
+   "en": 4.0,
+   "cin": 25.0
+  },
+  "NF 5307": {
+   "en": 4.0,
+   "cin": 35.0
+  },
+  "NF SA-440F5": {
+   "en": 1.8,
+   "cin": 60.0
+  },
+  "NF SA-421F5": {
+   "en": 0.5,
+   "cin": 85.0
+  },
+  "NF LI-75A": {
+   "en": 2.0,
+   "cin": 50.0
+  },
+  "FEMTO DLPVA-101-B": {
+   "en": 3.0,
+   "cin": 105.0
+  },
+  "Signal Recovery 5184": {
+   "en": 0.8,
+   "cin": 50.0
+  },
+  "Stahl PR-E3": {
+   "en": 0.69,
+   "cin": 32.8
+  },
+  "BasPI SP1004": {
+   "en": 1.0,
+   "cin": 125.0
+  }
+ },
+ "fom_definition": "e_n sqrt(C_iss), nV sqrt(pF)/rtHz (Eq. (6))"
+}

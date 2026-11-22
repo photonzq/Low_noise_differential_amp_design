@@ -1,0 +1,9 @@
+H100_jfet_rs0_R_UP: CMRR median 10:106 100:112 1000:129 10000:131 100000:113 1e+06:93 3e+06:83 1e+07:72
+H100_jfet_rs0_R_UP: CMRR 10 %   10:103 100:108 1000:127 10000:130 100000:109 1e+06:89 3e+06:80 1e+07:69
+H100_jfet_rs0_R_UP: output DC offset rms 5.015 V at gain 1000
+H100_jfet_rs0_ideal_I_BS: CMRR median 10:138 100:138 1000:137 10000:130 100000:113 1e+06:93 3e+06:84 1e+07:73
+H100_jfet_rs0_ideal_I_BS: CMRR 10 %   10:131 100:131 1000:131 10000:129 100000:109 1e+06:89 3e+06:80 1e+07:69
+H100_jfet_rs0_ideal_I_BS: output DC offset rms 5.019 V at gain 1000
+R_UP test, CMRR medians (dB) at 10 Hz, 100 Hz, 1000 Hz: R_UP [106.2, 111.8, 129.1], ideal I_BS [138.0, 137.9, 137.5], improvement [31.8, 26.1, 8.4]
+  the same medians from the archived decks of the first test: test_rup_R_UP [106.2, 111.8, 129.1], test_rup_ideal_I_BS [138.0, 137.9, 137.5]
+  R_BS / R_UP = 3500 / 10900 = 0.321;  f_BS = 1/(2 pi R_BS C_BS) = 45.5 Hz

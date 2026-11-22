@@ -1,0 +1,14 @@
+H_LN  G       1: H10_a3_0p1_a4_0p01_a5_0p2    gain(1k) 1.007  f3dB  24.93 MHz  1M -0.00 dB  10M -0.42 dB  peak 0.00 dB  Vout_dc -6.8 mV
+H_LN  G      10: H10_a3_0p1_a4_0p1_a5_0p2     gain(1k) 10.07  f3dB  24.96 MHz  1M -0.00 dB  10M -0.41 dB  peak 0.00 dB  Vout_dc -6.5 mV
+H_LN  G     100: H100_a3_0p1_a4_0p1_a5_0p2    gain(1k) 100.2  f3dB  14.82 MHz  1M +0.01 dB  10M -0.37 dB  peak 0.17 dB  Vout_dc -6.5 mV
+H_LN  G    1000: H100_a3_1_a4_0p1_a5_0p2      gain(1k) 1002  f3dB  14.82 MHz  1M +0.01 dB  10M -0.37 dB  peak 0.17 dB  Vout_dc 10.7 mV
+H_LN  G   10000: H100_a3_1_a4_1_a5_0p2        gain(1k) 1.002e+04  f3dB  14.83 MHz  1M +0.01 dB  10M -0.37 dB  peak 0.17 dB  Vout_dc 174.5 mV
+H_LN  G   50000: H100_a3_1_a4_1_a5_1          gain(1k) 5.009e+04  f3dB  14.84 MHz  1M +0.01 dB  10M -0.37 dB  peak 0.17 dB  Vout_dc 898.0 mV
+H_HR  G       1: H10_a3_0p1_a4_0p01_a5_0p2    gain(1k) 1.007  f3dB  24.93 MHz  1M -0.00 dB  10M -0.42 dB  peak 0.00 dB  Vout_dc -6.8 mV
+H_HR  G      10: H10_a3_0p1_a4_0p1_a5_0p2     gain(1k) 10.07  f3dB  24.96 MHz  1M -0.00 dB  10M -0.41 dB  peak 0.00 dB  Vout_dc -6.5 mV
+H_HR  G     100: H10_a3_1_a4_0p1_a5_0p2       gain(1k) 100.7  f3dB  24.98 MHz  1M -0.00 dB  10M -0.41 dB  peak 0.00 dB  Vout_dc 10.7 mV
+H_HR  G    1000: H10_a3_1_a4_1_a5_0p2         gain(1k) 1007  f3dB  25.04 MHz  1M -0.00 dB  10M -0.41 dB  peak 0.00 dB  Vout_dc 174.5 mV
+L     G     200: L200_a3_0p1_a4_0p1_a5_0p2    gain(1k) 201.3  f3dB  16.51 MHz  1M -0.01 dB  10M -0.82 dB  peak 0.00 dB  Vout_dc -6.5 mV
+L     G    1000: L200_a3_0p5_a4_0p1_a5_0p2    gain(1k) 1006  f3dB  16.53 MHz  1M -0.01 dB  10M -0.82 dB  peak 0.00 dB  Vout_dc -0.3 mV
+L     G   10000: L200_a3_1_a4_0p5_a5_0p2      gain(1k) 1.006e+04  f3dB  16.53 MHz  1M -0.01 dB  10M -0.82 dB  peak 0.00 dB  Vout_dc 82.1 mV
+L     G  100000: L200_a3_1_a4_1_a5_1          gain(1k) 1.006e+05  f3dB  16.55 MHz  1M -0.01 dB  10M -0.82 dB  peak 0.00 dB  Vout_dc 898.9 mV

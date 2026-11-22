@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "<root>\scripts\overload_detail.py", line 368, in <module>
+    main(sys.argv[1:])
+    ~~~~^^^^^^^^^^^^^^
+  File "<root>\scripts\overload_detail.py", line 328, in main
+    _child(args[1], int(args[2]))
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "<root>\scripts\overload_detail.py", line 319, in _child
+    r, d = run(name, k)
+           ~~~^^^^^^^^^
+  File "<root>\scripts\overload_detail.py", line 87, in run
+    f = spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl))
+  File "<root>\scripts\spice.py", line 68, in run
+    raise RuntimeError(f"ngspice reported problems in {name}:\n" + "\n".join(bad[:12]))
+RuntimeError: ngspice reported problems in large/H100_overload_detail:
+stderr doAnalyses: TRAN:  Timestep too small; time = 2.07161e-06, timestep = 2.5e-21: trouble with node "xs3.x1.17"
+stderr tran simulation(s) aborted
+H100: attempt 0 failed
+H100: attempt 1 timed out
+H100: attempt 2 timed out
+Traceback (most recent call last):
+  File "<root>\scripts\overload_detail.py", line 368, in <module>
+    main(sys.argv[1:])
+    ~~~~^^^^^^^^^^^^^^
+  File "<root>\scripts\overload_detail.py", line 328, in main
+    _child(args[1], int(args[2]))
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "<root>\scripts\overload_detail.py", line 319, in _child
+    r, d = run(name, k)
+           ~~~^^^^^^^^^
+  File "<root>\scripts\overload_detail.py", line 87, in run
+    f = spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl))
+  File "<root>\scripts\spice.py", line 68, in run
+    raise RuntimeError(f"ngspice reported problems in {name}:\n" + "\n".join(bad[:12]))
+RuntimeError: ngspice reported problems in large/H100_overload_detail:
+stderr doAnalyses: TRAN:  Timestep too small; time = 2.10451e-06, timestep = 2.5e-21: trouble with xja2:jfe2140_m-instance j.xja2.j1
+stderr tran simulation(s) aborted
+H100: attempt 3 failed
+H100: attempt 4 timed out
+L1000: attempt 0 ran {"input_overdrive": 3, "bench": "50 ohm sources and input network", "options": ".options abstol=1e-12 method=gear", "input_edge": "10n", "recovery_us": 0.15274799999999733, "v_during": 11.362180759164366, "fe_out_during": 5.99983618068585, "oa_ob_during": [3.5644677828931806, -2.4353683977926686], "sa_sb_during": [0.5794743466141111, 0.5496275001497831], "ca_cb_during": [8.99330120035475, 8.993388491407174], "ca_cb_before": [8.993343801424214, 8.993343801424214], "servo_change_mV": 2.220446049250313e-13, "oa_recovery_us": 0.14674799999999774, "ob_recovery_us": 0.14674799999999774, "ca_recovery_us": 0.04418899999999857, "cb_recovery_us": 0.045008999999998335, "sa_recovery_us": 0.021786999999998103, "sb_recovery_us": 0.021786999999998103}

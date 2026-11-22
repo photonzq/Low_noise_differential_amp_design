@@ -1,0 +1,5 @@
+failed 1.0 stderr doAnalyses: TRAN:  Timestep too small; time = 1.97494e-06, timestep = 2.5e-22: trouble with xja1:jfe150_m-instance j.xja1.j1
+  (L1000_step_10: ran with '50ohm')
+<root>\scripts\large_signal.py:99: RuntimeWarning: invalid value encountered in divide
+  slew_v_us=float(np.max(np.abs(np.diff(v) / np.diff(t))) / 1e6))
+L1000 step 10 V: rise 33.8 ns, overshoot 4.9 %, settle 1 % 106 ns, 0.1 % 164 ns, slew nan V/us

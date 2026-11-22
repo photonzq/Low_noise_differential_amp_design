@@ -1,0 +1,137 @@
+{
+ "fig46_cmrr": {
+  "file": "refs/commercial_preamps/NF_Corporation/NF_5307_datasheet_fig46.jpg",
+  "axes": {
+   "x_per_decade_px": 150.63,
+   "dB_per_px": -0.2607,
+   "row_fit_residuals_dB": [
+    -0.16,
+    -0.11,
+    -0.05,
+    0.45,
+    0.38,
+    -0.09,
+    -0.42
+   ]
+  },
+  "CMRR_dB": {
+   "10": {
+    "gain_100x1": 136.1,
+    "gain_50x1": 134.0,
+    "gain_20x1": 129.5,
+    "gain_10x1": 125.6
+   },
+   "100": {
+    "gain_100x1": 134.8,
+    "gain_50x1": 132.5,
+    "gain_20x1": 128.1,
+    "gain_10x1": 120.1
+   },
+   "1000": {
+    "gain_100x1": 135.3,
+    "gain_50x1": 132.4,
+    "gain_20x1": 119.5,
+    "gain_10x1": 106.8
+   },
+   "3000": {
+    "gain_100x1": 132.8,
+    "gain_50x1": 122.7,
+    "gain_20x1": 108.8,
+    "gain_10x1": 96.7
+   },
+   "10000": {
+    "gain_100x1": 125.9,
+    "gain_50x1": 111.4,
+    "gain_20x1": 98.2,
+    "gain_10x1": 85.6
+   },
+   "20000": {
+    "gain_100x1": 120.2,
+    "gain_50x1": 105.3,
+    "gain_20x1": 91.9,
+    "gain_10x1": 79.7
+   },
+   "30000": {
+    "gain_100x1": 117.1,
+    "gain_50x1": 101.9,
+    "gain_20x1": 88.4,
+    "gain_10x1": 76.4
+   },
+   "100000": {
+    "gain_100x1": 106.6,
+    "gain_50x1": 91.6,
+    "gain_20x1": 78.1,
+    "gain_10x1": 67.1
+   },
+   "200000": {
+    "gain_100x1": 100.3,
+    "gain_50x1": 86.1,
+    "gain_20x1": 72.2,
+    "gain_10x1": 60.8
+   },
+   "500000": {
+    "gain_100x1": 91.7,
+    "gain_50x1": 78.6,
+    "gain_20x1": 64.4,
+    "gain_10x1": 53.5
+   },
+   "1e+06 (straight-line extrapolation of 0.4-0.95 MHz)": {
+    "gain_100x1": 84.8,
+    "gain_50x1": 73.0,
+    "gain_20x1": 58.4,
+    "gain_10x1": 48.1
+   }
+  },
+  "note": "Curves from the top: gains 100, 50, 20 and 10 (x1). 1 MHz lies on the frame and is extrapolated from the last 0.4 decade."
+ },
+ "fig47_noise": {
+  "file": "refs/commercial_preamps/NF_Corporation/NF_5307_instruction_manual_EN.pdf, PDF p. 37 (400 dpi)",
+  "noise_nV_rtHz": {
+   "flat (gain 10x1: 1 kHz-100 kHz; gain 100x1: 100 Hz-100 kHz)": {
+    "gain_10x1": {
+     "ticks": 15.76,
+     "uniform": 15.27
+    },
+    "gain_100x1": {
+     "ticks": 3.07,
+     "uniform": 2.8
+    }
+   },
+   "2": {
+    "gain_10x1": {
+     "ticks": 141.29,
+     "uniform": 135.42
+    },
+    "gain_100x1": {
+     "ticks": 18.5,
+     "uniform": 17.72
+    }
+   },
+   "10": {
+    "gain_10x1": {
+     "ticks": 43.99,
+     "uniform": 41.79
+    },
+    "gain_100x1": {
+     "ticks": 5.85,
+     "uniform": 5.6
+    }
+   },
+   "100": {
+    "gain_10x1": {
+     "ticks": 21.05,
+     "uniform": 19.97
+    },
+    "gain_100x1": {
+     "ticks": 3.3,
+     "uniform": 3.04
+    }
+   },
+   "1 (gain 100x1, frame edge)": {
+    "ticks": 35.35,
+    "uniform": 33.03
+   }
+  },
+  "note": "ticks = log interpolation between the printed minor ticks; uniform = uniform log scale between the decade lines. The two bracket the reading."
+ }
+}

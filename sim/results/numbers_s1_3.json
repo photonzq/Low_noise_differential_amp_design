@@ -1,0 +1,1128 @@
+{
+ "e_SR560_1kHz_G1000_nV": {
+  "value": 5.707097399999999,
+  "source": "sr560_chain.json noise.LN_1000.en['1000.0']"
+ },
+ "e_H_1kHz_G1000_nV": {
+  "value": 1.1139139,
+  "source": "chain_noise.json H_LN_1000.en['1000.0']"
+ },
+ "e_L_1kHz_G1000_nV": {
+  "value": 0.42633154,
+  "source": "chain_noise.json L_1000.en['1000.0']"
+ },
+ "e_H_white_G1000_nV": {
+  "value": 1.0836303,
+  "source": "chain_noise.json H_LN_1000.en['100000.0']"
+ },
+ "e_L_white_G1000_nV": {
+  "value": 0.41759166000000003,
+  "source": "chain_noise.json L_1000.en['100000.0']"
+ },
+ "SR560_over_H_1kHz": {
+  "value": 5.123463671653617,
+  "source": "(1) 5.707 / 1.114"
+ },
+ "SR560_over_L_1kHz": {
+  "value": 13.386524018373118,
+  "source": "(1) 5.707 / 0.426"
+ },
+ "SR560_over_H_L_1kHz_quoted": {
+  "value": [
+   5.135135135135135,
+   13.255813953488373
+  ],
+  "source": "(1) 5.7 / 1.11, 5.7 / 0.43"
+ },
+ "f3dB_H_LN_gain_ge_100_MHz": {
+  "value": [
+   14.821844602798777,
+   14.84098570781358
+  ],
+  "source": "chain_ac.json H_LN_100..50000.f3db"
+ },
+ "f3dB_H_gain_le_10_MHz": {
+  "value": [
+   24.925938345453467,
+   24.959207079490195
+  ],
+  "source": "chain_ac.json H_*_1, H_*_10 .f3db"
+ },
+ "f3dB_H_HR_gain_ge_100_MHz": {
+  "value": [
+   24.979131100879034,
+   25.044698325396904
+  ],
+  "source": "chain_ac.json H_HR_100, 1000 .f3db"
+ },
+ "f3dB_L_MHz": {
+  "value": [
+   16.511698546880947,
+   16.54989034661535
+  ],
+  "source": "chain_ac.json L_*.f3db"
+ },
+ "f3dB_new_chain_all_MHz": {
+  "value": [
+   14.821844602798777,
+   25.044698325396904
+  ],
+  "source": "chain_ac.json, every entry"
+ },
+ "f3dB_SR560_MHz": {
+  "value": [
+   0.7285387449701122,
+   0.7948038804621006
+  ],
+  "source": "sr560_chain.json ac.*.f3db"
+ },
+ "f3dB_SR560_G100_MHz": {
+  "value": 0.7292464289536386,
+  "source": "sr560_chain.json ac['100'].f3db"
+ },
+ "f3dB_SR560_G1000_MHz": {
+  "value": 0.7285387449701122,
+  "source": "sr560_chain.json ac['1000'].f3db"
+ },
+ "BW_ratio_H_G100": {
+  "value": 20.324877866136344,
+  "source": "(2) 14.82 / 0.729"
+ },
+ "BW_ratio_H_G1000": {
+  "value": 20.348422697786432,
+  "source": "(2) 14.82 / 0.729"
+ },
+ "BW_ratio_L_G1000": {
+  "value": 22.688207228186126,
+  "source": "(2) 16.53 / 0.729"
+ },
+ "BW_ratio_H_G100_to_spec_1MHz": {
+  "value": 14.821844602798777,
+  "source": "(2) 14.82 / 1"
+ },
+ "BW_ratio_L_G1000_to_spec_1MHz": {
+  "value": 16.52923801964455,
+  "source": "(2) 16.53 / 1"
+ },
+ "BW_ratio_H_G100_to_ds_1p2MHz": {
+  "value": 12.35153716899898,
+  "source": "(2) 14.82 / 1.2"
+ },
+ "BW_ratio_L_G1000_to_ds_1p2MHz": {
+  "value": 13.774365016370458,
+  "source": "(2) 16.53 / 1.2"
+ },
+ "BW_ratio_new_chain_to_spec_1MHz": {
+  "value": [
+   14.821844602798777,
+   25.044698325396904
+  ],
+  "source": "(2) 14.82 / 1 to 25.04 / 1"
+ },
+ "BW_ratio_H_L_quoted": {
+  "value": [
+   20.3013698630137,
+   22.602739726027398
+  ],
+  "source": "(2) 14.82 / 0.73, 16.5 / 0.73"
+ },
+ "f3dB_H_front_end_x10_MHz": {
+  "value": [
+   24.925938345453467,
+   25.044698325396904
+  ],
+  "source": "chain_ac.json H gains 1, 10 and high reserve 100, 1000 (front end at x10)"
+ },
+ "db_10M_H_x100": {
+  "value": [
+   -0.3745827270943735,
+   -0.36836871951817834
+  ],
+  "source": "chain_ac.json H_LN_100..50000.db_10M (Table 11)"
+ },
+ "db_10M_H_x10": {
+  "value": [
+   -0.41538707331058694,
+   -0.41092179496429315
+  ],
+  "source": "chain_ac.json H gains 1, 10, H_HR_100, 1000 .db_10M (Table 11)"
+ },
+ "db_10M_L": {
+  "value": [
+   -0.8216470922673789,
+   -0.8156030770925613
+  ],
+  "source": "chain_ac.json L_*.db_10M (Table 11)"
+ },
+ "NF5307_plot_white_nV": {
+  "value": [
+   2.8,
+   3.1000000000000005
+  ],
+  "source": "numbers_s6_7.NF_EN_PLOT_G100 (manual Fig. 4.7)"
+ },
+ "NF5307_plot_over_H_white": {
+  "value": [
+   2.5839070760572125,
+   2.8607542627776286
+  ],
+  "source": "(3) 2.8 / 1.084, 3.1 / 1.084"
+ },
+ "NF5307_plot_over_L_white": {
+  "value": [
+   6.705114752531216,
+   7.423519904588134
+  ],
+  "source": "(3) 2.8 / 0.418, 3.1 / 0.418"
+ },
+ "NF5307_spec_over_H_1kHz": {
+  "value": 3.5909418133663658,
+  "source": "(3) 4 / 1.114"
+ },
+ "NF5307_spec_over_L_1kHz": {
+  "value": 9.382369411374068,
+  "source": "(3) 4 / 0.426"
+ },
+ "NF5307_ratios_quoted": {
+  "value": [
+   2.592592592592592,
+   2.8703703703703707,
+   3.603603603603603,
+   6.666666666666666,
+   7.380952380952382,
+   9.30232558139535
+  ],
+  "source": "(3) 2.8/1.08, 3.1/1.08, 4/1.11 (H); 2.8/0.42, 3.1/0.42, 4/0.43 (L)"
+ },
+ "H_L_crossover_10Hz_ohm": {
+  "value": [
+   69934.7562833701,
+   21589.11005233165,
+   228491.41713533696
+  ],
+  "source": "(4) noise_vs_source.json: R_x (e_H = e_L), e_H/e_L = 1.01, = 0.99"
+ },
+ "H_L_crossover_1000Hz_ohm": {
+  "value": [
+   27027.246244262078,
+   3201.8834338013494,
+   204659.6896482723
+  ],
+  "source": "(4) noise_vs_source.json: R_x (e_H = e_L), e_H/e_L = 1.01, = 0.99"
+ },
+ "H_L_crossover_100000Hz_ohm": {
+  "value": [
+   6787.375035095058,
+   2684.4319309547277,
+   15788.22503426299
+  ],
+  "source": "(4) noise_vs_source.json: R_x (e_H = e_L), e_H/e_L = 1.01, = 0.99"
+ },
+ "H_L_crossover_1e+06Hz_ohm": {
+  "value": [
+   699.7466204530723,
+   621.3358726545733,
+   788.9944300043625
+  ],
+  "source": "(4) noise_vs_source.json: R_x (e_H = e_L), e_H/e_L = 1.01, = 0.99"
+ },
+ "H_L_crossover_1e+07Hz_ohm": {
+  "value": [
+   95.75555378766173,
+   93.55958181199142,
+   98.0259224126517
+  ],
+  "source": "(4) noise_vs_source.json: R_x (e_H = e_L), e_H/e_L = 1.01, = 0.99"
+ },
+ "H_L_crossover_detail": {
+  "10": {
+   "R_x": 69934.7562833701,
+   "R_L_quieter_by_1pc": 21589.11005233165,
+   "R_H_quieter_by_1pc": 228491.41713533696
+  },
+  "1000.0": {
+   "R_x": 27027.246244262078,
+   "R_L_quieter_by_1pc": 3201.8834338013494,
+   "R_H_quieter_by_1pc": 204659.6896482723
+  },
+  "100000.0": {
+   "R_x": 6787.375035095058,
+   "R_L_quieter_by_1pc": 2684.4319309547277,
+   "R_H_quieter_by_1pc": 15788.22503426299
+  },
+  "1000000.0": {
+   "R_x": 699.7466204530723,
+   "R_L_quieter_by_1pc": 621.3358726545733,
+   "R_H_quieter_by_1pc": 788.9944300043625
+  },
+  "10000000.0": {
+   "R_x": 95.75555378766173,
+   "R_L_quieter_by_1pc": 93.55958181199142,
+   "R_H_quieter_by_1pc": 98.0259224126517
+  }
+ },
+ "osc_H100_first_MHz_Vpp": {
+  "value": [
+   292.831174255379,
+   1.00536209
+  ],
+  "source": "osc_check.json H100_first.cm_out (f_dom, pkpk); bench: 50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12"
+ },
+ "osc_H10_first_MHz_Vpp": {
+  "value": [
+   292.8327765225318,
+   1.00540714
+  ],
+  "source": "osc_check.json H10_first.cm_out (f_dom, pkpk); bench: 50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12"
+ },
+ "osc_L200_first_MHz_Vpp": {
+  "value": [
+   275.69171986924357,
+   0.7825457
+  ],
+  "source": "osc_check.json L200_first.cm_out (f_dom, pkpk); bench: 50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12"
+ },
+ "osc_H100_first_ties_MHz_Vpp": {
+  "value": [
+   282.8397827721783,
+   1.03160314
+  ],
+  "source": "osc_check.json H100_first_ties.cm_out (f_dom, pkpk); bench: inputs tied to ground through 1 milliohm, global options only (trapezoidal)"
+ },
+ "osc_L200_first_ties_MHz_Vpp": {
+  "value": [
+   227.1233970349984,
+   0.81513346
+  ],
+  "source": "osc_check.json L200_first_ties.cm_out (f_dom, pkpk); bench: inputs tied to ground through 1 milliohm, global options only (trapezoidal)"
+ },
+ "LV_CM_range_at_Vod_0V": {
+  "value": [
+   -3.6874979,
+   0.6599396626794475
+  ],
+  "source": "lv_option_range.json low-voltage ranges (empty: False)"
+ },
+ "LV_CM_range_at_Vod_1V": {
+  "value": [
+   -3.1874979,
+   0.6549401576799425
+  ],
+  "source": "lv_option_range.json low-voltage ranges (empty: False)"
+ },
+ "LV_CM_range_at_Vod_10V": {
+  "value": null,
+  "source": "lv_option_range.json low-voltage ranges (empty: True)"
+ },
+ "LV_CM_range_1V_margin_at_Vod_0V": {
+  "value": [
+   -3.6874979,
+   0.09374600000000033
+  ],
+  "source": "lv_option_range.json range_1V (upper end with the cascodes' 1 V margin, as Section 4.3.1)"
+ },
+ "LV_CM_range_1V_margin_at_Vod_1V": {
+  "value": [
+   -3.1874979,
+   0.09374600000000033
+  ],
+  "source": "lv_option_range.json range_1V (upper end with the cascodes' 1 V margin, as Section 4.3.1)"
+ },
+ "LV_CM_range_1V_margin_at_Vod_10V": {
+  "value": null,
+  "source": "lv_option_range.json range_1V (upper end with the cascodes' 1 V margin, as Section 4.3.1)"
+ },
+ "LV_Vod_max_at_VCM_0_V": {
+  "value": 5.985483400000001,
+  "source": "lv_option_range.json V_od_max_at_V_CM_0"
+ },
+ "LV_Vod_for_VCM_min_-0.9V": {
+  "value": 5.5749958,
+  "source": "lv_option_range.json V_od_for_V_CM_min_minus_0p9"
+ },
+ "LV_op_amp_swing_V": {
+  "value": [
+   -3.3401223,
+   3.3401173
+  ],
+  "source": "lv_option_range.json swing (R_F load)"
+ },
+ "chain_f3dB_G100_first_final_ratio": {
+  "value": [
+   30.057118885858245,
+   14.821844602798777,
+   0.4931225996438533
+  ],
+  "source": "da_compare_before_cnode.json LM7171.ac_H100.f3db (first version), chain_ac.json H_LN_100.f3db; 14.8 / 30.1"
+ },
+ "modulus_margin_min_nominal_and_Cnode_x0.7": {
+  "value": [
+   0.6090398095526339,
+   0.4663076635291383
+  ],
+  "source": "stability_corners.json, smallest over H100, H10, L200, DM and CM"
+ },
+ "Cnode_E12_over_simulated_H_L": {
+  "value": [
+   1.2272727272727273,
+   1.5,
+   1.1914893617021276,
+   1.446808510638298
+  ],
+  "source": "numbers_s4a.json: 270-330 pF / 220 pF (H), 560-680 pF / 470 pF (L)"
+ },
+ "LV_CM_gain_margin_dB_f3dB_MHz": {
+  "value": [
+   20.19599339184748,
+   18.858524047167325
+  ],
+  "source": "lv_option.json loop.cm.gm_db, f3db"
+ },
+ "Cin_H100_network_pF_1k_100k_300k_1M": {
+  "value": [
+   20.053218512049824,
+   20.04464307653903,
+   20.03437993357446,
+   19.922217001932232
+  ],
+  "source": "zin_numbers.json H100.network_dm.C_eff"
+ },
+ "Cin_H100_bare_pF_1k_100k_300k_1M": {
+  "value": [
+   0.05329104121557591,
+   0.04662102774210288,
+   0.051728298009922076,
+   0.1098003559349368
+  ],
+  "source": "zin_numbers.json H100.bare_dm.C_eff"
+ },
+ "CP_plus_CZ_H100_pF": {
+  "value": 20.0,
+  "source": "zin_numbers.json H100.C_P_plus_C_Z"
+ },
+ "f_Z_H100_MHz": {
+  "value": 7.234315595086152,
+  "source": "zin_numbers.json H100.f_Z = 1/(2 pi R_Z C_Z)"
+ },
+ "Cin_L200_network_pF_1k_100k_300k_1M": {
+  "value": [
+   250.34370042639307,
+   250.2956728469477,
+   250.2738903415923,
+   250.0318155754775
+  ],
+  "source": "zin_numbers.json L200.network_dm.C_eff"
+ },
+ "Cin_L200_bare_pF_1k_100k_300k_1M": {
+  "value": [
+   0.3448484033914442,
+   0.3060152988082279,
+   0.35876552125806277,
+   0.9542196327814857
+  ],
+  "source": "zin_numbers.json L200.bare_dm.C_eff"
+ },
+ "CP_plus_CZ_L200_pF": {
+  "value": 249.99999999999997,
+  "source": "zin_numbers.json L200.C_P_plus_C_Z"
+ },
+ "f_Z_L200_MHz": {
+  "value": 15.392160840608831,
+  "source": "zin_numbers.json L200.f_Z = 1/(2 pi R_Z C_Z)"
+ },
+ "CMRR_median_H100_1kHz_dB": {
+  "value": 123.79630332250244,
+  "source": "cmrr_mc.json H100 (12 trials, 50 ohm)"
+ },
+ "CMRR_median_H100_rs0_1MHz_dB": {
+  "value": 95.1158255676217,
+  "source": "cmrr_mc.json H100_rs0 (12 trials)"
+ },
+ "CMRR_median_L200_rs0_1MHz_dB": {
+  "value": 98.30807620549228,
+  "source": "cmrr_mc.json L200_rs0 (12 trials)"
+ },
+ "THD_H100_1Vpp_1MHz_10MHz_percent": {
+  "value": [
+   0.0008735170856397185,
+   0.011917824619433921
+  ],
+  "source": "large_signal.json H100.thd"
+ },
+ "slew_H100_10V_V_per_us": {
+  "value": 311.9144499999767,
+  "source": "large_signal.json H100.step"
+ },
+ "table1": {
+  "LN_1": {
+   "model_1k_nV": [
+    51.98479699999999,
+    51.98479699999999
+   ],
+   "model_100k_nV": [
+    50.772117,
+    50.772117
+   ],
+   "manual": 60,
+   "deviation": [
+    -0.13358671666666677,
+    -0.13358671666666677
+   ]
+  },
+  "LN_2": {
+   "model_1k_nV": [
+    36.423935,
+    36.423935
+   ],
+   "model_100k_nV": [
+    35.462908,
+    35.462908
+   ],
+   "manual": 40,
+   "deviation": [
+    -0.08940162500000004,
+    -0.08940162500000004
+   ]
+  },
+  "LN_5": {
+   "model_1k_nV": [
+    16.880313,
+    16.880313
+   ],
+   "model_100k_nV": [
+    15.972589999999999,
+    15.972589999999999
+   ],
+   "manual": 25,
+   "deviation": [
+    -0.3247874799999999,
+    -0.3247874799999999
+   ]
+  },
+  "LN_10": {
+   "model_1k_nV": [
+    11.460968000000001,
+    11.460968000000001
+   ],
+   "model_100k_nV": [
+    10.351248,
+    10.351248
+   ],
+   "manual": 13,
+   "deviation": [
+    -0.11838707692307682,
+    -0.11838707692307682
+   ]
+  },
+  "LN_20": {
+   "model_1k_nV": [
+    9.9289078,
+    9.9289078
+   ],
+   "model_100k_nV": [
+    8.7002203,
+    8.7002203
+   ],
+   "manual": 11,
+   "deviation": [
+    -0.09737201818181829,
+    -0.09737201818181829
+   ]
+  },
+  "LN_50": {
+   "model_1k_nV": [
+    9.4469161,
+    9.4469161
+   ],
+   "model_100k_nV": [
+    8.1678143,
+    8.1678143
+   ],
+   "manual": 10,
+   "deviation": [
+    -0.055308390000000096,
+    -0.055308390000000096
+   ]
+  },
+  "LN_100-50000": {
+   "model_1k_nV": [
+    5.7062654,
+    5.7434078
+   ],
+   "model_100k_nV": [
+    3.1830672,
+    3.2465472
+   ],
+   "manual": 4,
+   "deviation": [
+    0.4265663500000001,
+    0.43585195
+   ]
+  },
+  "HDR_10": {
+   "model_1k_nV": [
+    35.124066,
+    35.124066
+   ],
+   "model_100k_nV": [
+    34.093578,
+    34.093578
+   ],
+   "manual": 25,
+   "deviation": [
+    0.40496263999999993,
+    0.40496263999999993
+   ]
+  },
+  "HDR_20": {
+   "model_1k_nV": [
+    25.481839,
+    25.481839
+   ],
+   "model_100k_nV": [
+    24.732785,
+    24.732785
+   ],
+   "manual": 25,
+   "deviation": [
+    0.019273560000000023,
+    0.019273560000000023
+   ]
+  },
+  "HDR_50": {
+   "model_1k_nV": [
+    21.968176999999997,
+    21.968176999999997
+   ],
+   "model_100k_nV": [
+    21.316629,
+    21.316629
+   ],
+   "manual": 25,
+   "deviation": [
+    -0.12127292000000012,
+    -0.12127292000000012
+   ]
+  },
+  "HDR_100": {
+   "model_1k_nV": [
+    19.898144,
+    19.898144
+   ],
+   "model_100k_nV": [
+    19.183922,
+    19.183922
+   ],
+   "manual": 20,
+   "deviation": [
+    -0.0050928000000001195,
+    -0.0050928000000001195
+   ]
+  },
+  "HDR_200": {
+   "model_1k_nV": [
+    16.614409000000002,
+    16.614409000000002
+   ],
+   "model_100k_nV": [
+    15.808032999999998,
+    15.808032999999998
+   ],
+   "manual": 18,
+   "deviation": [
+    -0.07697727777777763,
+    -0.07697727777777763
+   ]
+  },
+  "HDR_500": {
+   "model_1k_nV": [
+    16.407137,
+    16.407137
+   ],
+   "model_100k_nV": [
+    15.590252,
+    15.590252
+   ],
+   "manual": 15,
+   "deviation": [
+    0.0938091333333333,
+    0.0938091333333333
+   ]
+  },
+  "HDR_1000": {
+   "model_1k_nV": [
+    9.446783400000001,
+    9.446783400000001
+   ],
+   "model_100k_nV": [
+    8.1705097,
+    8.1705097
+   ],
+   "manual": 15,
+   "deviation": [
+    -0.3702144399999999,
+    -0.3702144399999999
+   ]
+  },
+  "HDR_2000": {
+   "model_1k_nV": [
+    9.432423900000002,
+    9.432423900000002
+   ],
+   "model_100k_nV": [
+    8.1539057,
+    8.1539057
+   ],
+   "manual": 10,
+   "deviation": [
+    -0.05675760999999979,
+    -0.05675760999999979
+   ]
+  }
+ },
+ "Table1_LN_1": {
+  "value": [
+   51.98479699999999,
+   51.98479699999999,
+   -13.358671666666677,
+   -13.358671666666677
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_LN_2": {
+  "value": [
+   36.423935,
+   36.423935,
+   -8.940162500000003,
+   -8.940162500000003
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_LN_5": {
+  "value": [
+   16.880313,
+   16.880313,
+   -32.47874799999999,
+   -32.47874799999999
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_LN_10": {
+  "value": [
+   11.460968000000001,
+   11.460968000000001,
+   -11.838707692307683,
+   -11.838707692307683
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_LN_20": {
+  "value": [
+   9.9289078,
+   9.9289078,
+   -9.737201818181829,
+   -9.737201818181829
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_LN_50": {
+  "value": [
+   9.4469161,
+   9.4469161,
+   -5.530839000000009,
+   -5.530839000000009
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_LN_100-50000": {
+  "value": [
+   5.7062654,
+   5.7434078,
+   42.65663500000001,
+   43.585195
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_10": {
+  "value": [
+   35.124066,
+   35.124066,
+   40.496264,
+   40.496264
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_20": {
+  "value": [
+   25.481839,
+   25.481839,
+   1.9273560000000023,
+   1.9273560000000023
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_50": {
+  "value": [
+   21.968176999999997,
+   21.968176999999997,
+   -12.127292000000011,
+   -12.127292000000011
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_100": {
+  "value": [
+   19.898144,
+   19.898144,
+   -0.509280000000012,
+   -0.509280000000012
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_200": {
+  "value": [
+   16.614409000000002,
+   16.614409000000002,
+   -7.697727777777763,
+   -7.697727777777763
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_500": {
+  "value": [
+   16.407137,
+   16.407137,
+   9.380913333333329,
+   9.380913333333329
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_1000": {
+  "value": [
+   9.446783400000001,
+   9.446783400000001,
+   -37.021443999999995,
+   -37.021443999999995
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_HDR_2000": {
+  "value": [
+   9.432423900000002,
+   9.432423900000002,
+   -5.675760999999979,
+   -5.675760999999979
+  ],
+  "source": "(5) sr560_chain.json noise: e_model(1 kHz) min, max (nV/rtHz); d min, max (%)"
+ },
+ "Table1_columns_within_30pc": {
+  "value": [
+   11,
+   15
+  ],
+  "source": "(5) count of |d| <= 30 %"
+ },
+ "Table1_exceptions": {
+  "value": [
+   "LN_5",
+   "LN_100-50000",
+   "HDR_10",
+   "HDR_1000"
+  ],
+  "source": "(5)"
+ },
+ "SR560_FE_CMRR_1kHz_dB": {
+  "value": 102.55405930345631,
+  "source": "sr560_frontend.json cmrr_db_1k"
+ },
+ "SR560_FE_f3dB_MHz": {
+  "value": 2.4444987719081404,
+  "source": "sr560_frontend.json f3db"
+ },
+ "SR560_FE_gain_1k": {
+  "value": 10.156518020531324,
+  "source": "sr560_frontend.json gain_1k"
+ },
+ "SR560_chain_CMRR_dB_10_1k_10k_100k_1M": {
+  "value": [
+   104.96569572692229,
+   102.53425651128546,
+   86.4653022884928,
+   67.6709635571501,
+   61.648983273284216
+  ],
+  "source": "sr560_chain.json cmrr_ideal_matching"
+ },
+ "2N5564_loglog_white_nV": {
+  "value": [
+   1.2500296107693776,
+   1.2770924392347285
+  ],
+  "source": "jfet_model_check.json '2N5564 targets' log-log, both readings"
+ },
+ "2N5564_loglog_1kHz_nV": {
+  "value": [
+   3.4156186833668287,
+   3.444281681873545
+  ],
+  "source": "jfet_model_check.json '2N5564 targets' log-log, both readings"
+ },
+ "JFE150_gm_mS": {
+  "value": 25.92567,
+  "source": "jfet_calibration.json JFE150.gm (5 mA, 5 V)"
+ },
+ "e_th_JFE150_nV": {
+  "value": 0.6528752226577115,
+  "source": "noise_theory.json sqrt(4kT (2/3) / g_m)"
+ },
+ "two_pow_minus_quarter": {
+  "value": 0.8408964152537145,
+  "source": "noise_theory.json 2^(-1/4)"
+ },
+ "i_n_1pA_1nA_fA": {
+  "value": [
+   0.5660700723408719,
+   17.90070743853438
+  ],
+  "source": "noise_theory.json sqrt(2 q I_G)"
+ },
+ "R_x_1nV_at_1pA_1nA_kohm": {
+  "value": [
+   1766.5657466481066,
+   55.863713958439796
+  ],
+  "source": "noise_theory.json e_n / i_n, e_n = 1 nV/rtHz"
+ },
+ "sigma_VTO_from_VGSoff_range_mV": {
+  "value": 85.71428571428571,
+  "source": "(7) 0.6 V / 7 (SLPS732B p. 5)"
+ },
+ "dI_over_I_per_sigma": {
+  "value": [
+   85.0,
+   406.7181,
+   0.4179799227032188
+  ],
+  "source": "(8) noise_theory.json: dV_TO (mV), V_GS - V_TO (mV), 2 dV_TO / (V_GS - V_TO)"
+ },
+ "Eq4_Rs_N12_N1_10MHz_ohm": {
+  "value": [
+   55.26213301801922,
+   663.1455962162306
+  ],
+  "source": "noise_theory.json 1 / (2 pi 10 MHz N 24 pF)"
+ },
+ "Eq2_H_side_diff_nV": {
+  "value": [
+   0.6363961030678928,
+   0.9
+  ],
+  "source": "noise_theory.json Eq. (2)"
+ },
+ "Eq2_L_side_diff_nV": {
+  "value": [
+   0.23094010767585035,
+   0.3265986323710905
+  ],
+  "source": "noise_theory.json Eq. (2)"
+ },
+ "Eq2_SR560_side_diff_nV": {
+  "value": [
+   1.28,
+   1.8101933598375617
+  ],
+  "source": "noise_theory.json Eq. (2)"
+ },
+ "C_JFETs_H_L_pF": {
+  "value": [
+   26.0,
+   288.0
+  ],
+  "source": "(6) 2 x 13 pF, 12 x 24 pF"
+ },
+ "H_bias_current_per_input_pA": {
+  "value": 2.0,
+  "source": "2 x about 1 pA (SLPS730B Fig. 6-6 at 3.9 V)"
+ },
+ "Stahl_both_channels_pF": {
+  "value": 32.8,
+  "source": "(6) 2 x 16.4 pF"
+ },
+ "Fig1_stars_10kHz_H100_L200_nV": {
+  "value": [
+   1.0707259,
+   0.40734264
+  ],
+  "source": "curves_noise.npz H100_total, L200_total at 10 kHz (front ends alone)"
+ },
+ "Fig1_FEMTO_Stahl_basis": {
+  "value": [
+   3.0,
+   0.69,
+   32.8
+  ],
+  "source": "jfet_table3.json fig1_basis"
+ },
+ "FOM_LSK389_JFE2140_JFE150_LSBF862_BF862": {
+  "value": [
+   8.0,
+   3.24499614791759,
+   3.919183588453085,
+   2.7129319932501073,
+   2.529822128134704
+  ],
+  "source": "jfet_table3.json table3.fom = e_n sqrt(C_iss)"
+ },
+ "FOM_LSK389_measured": {
+  "value": 5.85,
+  "source": "jfet_table3.json 1.17 sqrt(25)"
+ },
+ "LSK389_over_best_datasheet": {
+  "value": [
+   2.041241452319315,
+   2.465334205445463,
+   2.9488391230979425
+  ],
+  "source": "jfet_table3.json (JFE150, JFE2140, LSBF862)"
+ },
+ "LSK389_over_best_measured": {
+  "value": [
+   1.4926578120084992,
+   1.8027756377319946,
+   2.1563386087653704
+  ],
+  "source": "jfet_table3.json (JFE150, JFE2140, LSBF862)"
+ },
+ "LSK389_over_Sec3.3_parts_datasheet": {
+  "value": [
+   2.465334205445463,
+   2.041241452319315,
+   2.9488391230979425,
+   1.9876159799998128,
+   1.7888543819998317,
+   2.2222222222222223
+  ],
+  "source": "jfet_table3.json JFE2140, JFE150, LSBF862, LSK170, IF170, LSK489"
+ },
+ "LSK389_over_Sec3.3_parts_measured": {
+  "value": [
+   1.8027756377319946,
+   1.4926578120084992,
+   2.1563386087653704,
+   1.453444185374863,
+   1.3080997668373768,
+   1.6249999999999998
+  ],
+  "source": "jfet_table3.json JFE2140, JFE150, LSBF862, LSK170, IF170, LSK489"
+ },
+ "IF3601_x1_side_diff_nV_C_pF": {
+  "value": [
+   0.34,
+   0.4808326112068524,
+   650.0
+  ],
+  "source": "(9) 0.34, sqrt(2) 0.34, 650 pF"
+ },
+ "JFE150_x12_side_diff_nV_C_pF": {
+  "value": [
+   0.23094010767585033,
+   0.3265986323710905,
+   288.0
+  ],
+  "source": "(9) 0.8/sqrt(12), sqrt(2) 0.8/sqrt(12), 12 x 24 pF"
+ },
+ "FOM_10Hz_JFE150_IF3601": {
+  "value": [
+   8.818163074019441,
+   15.297058540778353
+  ],
+  "source": "(9) 1.8 sqrt(24), 0.60 sqrt(650)"
+ },
+ "opamp_e10_ratio_THS4021_THS4031_THS3091": {
+  "value": [
+   4.55368967235399,
+   5.546493041989355,
+   5.698104345330214
+  ],
+  "source": "model_defects.json opamp.*.ratio_e_10"
+ },
+ "opamp_i10_ratio_THS4021_THS4031": {
+  "value": [
+   15.774830985451294,
+   16.148350591171603
+  ],
+  "source": "model_defects.json opamp.*.ratio_i_10"
+ },
+ "THS3091_white_i_ratio": {
+  "value": 0.11055331071290599,
+  "source": "model_defects.json opamp.THS3091.ratio_i_white"
+ },
+ "LM7171_white_e_ratio": {
+  "value": 0.4802514571747231,
+  "source": "model_defects.json opamp.LM7171.ratio_e_white"
+ },
+ "JFE2140_1f_power_ratio": {
+  "value": 14.496347864023674,
+  "source": "model_defects.json jfet['JFE2140 1/f']"
+ },
+ "LSBF862_1f_power_ratio": {
+  "value": 50.31174322590206,
+  "source": "model_defects.json jfet['LSBF862 1/f']"
+ },
+ "2N5564_KF_ratio": {
+  "value": 999999.9999999999,
+  "source": "model_defects.json jfet['2N5564 KF'] (67860f / 6.786e-002f)"
+ },
+ "ngspice_channel_noise_check_nV": {
+  "value": [
+   0.7041772208152975,
+   0.70447597,
+   -0.00042407292430779453
+  ],
+  "source": "(10) sqrt(4kT (2/(3 g_m) + R_S)); jfet_calibration.json en_model_white; relative difference"
+ },
+ "ngspice_check_inputs_gm_mS_RS_ohm_T_K": {
+  "value": [
+   25.92567,
+   4.2,
+   300.15
+  ],
+  "source": "jfet_calibration.json JFE150.gm and its card's RS; spice.KT"
+ },
+ "JFE2325_KF_refit": {
+  "value": [
+   1.26043752188631e-17,
+   1.26043752188631e-17,
+   4e-17,
+   3.1735012093370507
+  ],
+  "source": "(11) jfet_calibration.json kf; (32^2 - 4.3^2) nV^2 g_m^2 10 Hz / I_D; kf_card; kf_card / kf"
+ },
+ "JFE2325_RX_ohm_ID_mA_gm_mS": {
+  "value": [
+   143.13605105863053,
+   0.3781509,
+   0.6884938
+  ],
+  "source": "jfet_calibration.json JFE2325"
+ },
+ "JFE2325_model_10kHz_10Hz_nV": {
+  "value": [
+   4.415368621874651,
+   31.999532294007935
+  ],
+  "source": "jfet_calibration.json JFE2325 en_achieved_at_f_w, en_achieved_lf"
+ },
+ "JFE2325_published_card_1f_ratio": {
+  "value": 3.171835330008473,
+  "source": "jfet_model_check.json JFE2325.published_card"
+ },
+ "LSBF862_achieved_white_10Hz_nV": {
+  "value": [
+   0.8976951599999999,
+   1.458036015388353,
+   0.0
+  ],
+  "source": "jfet_calibration.json LSBF862 (RX clipped at 0)"
+ }
+}

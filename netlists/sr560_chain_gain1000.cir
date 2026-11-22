@@ -1,0 +1,251 @@
+* SR560 reproduction, low-noise mode, gain 1000 (Section 2.2 of the note).
+.options reltol=1e-4 abstol=1e-15 vntol=1e-9 gmin=1e-14 itl1=500 itl4=200
+.include "../sim/models/_lib/jfets.lib"
+.subckt OP37 inp inn out vcc vee
+Rnv nv 0 1
+Vnv nv 0 0
+Hnv inp ip1 Vnv 20.1795
+Ifv 0 fv 1e-05
+Dfv fv 0 dflk_v
+Cfv fv fvs 1000
+Vfv fvs 0 0
+Hfv ip1 ip2 Vfv 837.956
+.model dflk_v d(is=1e-14 n=1 kf=3.4607e-18 af=1)
+Rnip nip 0 1
+Vnip nip 0 0
+Fnip 0 inp Vnip 0.0026906
+Ifip 0 fip 1e-05
+Dfip fip 0 dflk_ip
+Cfip fip fisp 1000
+Vfip fisp 0 0
+Ffip 0 inp Vfip 0.111727
+.model dflk_ip d(is=1e-14 n=1 kf=1.79444e-16 af=1)
+Rnin nin 0 1
+Vnin nin 0 0
+Fnin 0 inn Vnin 0.0026906
+Ifin 0 fin 1e-05
+Dfin fin 0 dflk_in
+Cfin fin fisn 1000
+Vfin fisn 0 0
+Ffin 0 inn Vfin 0.111727
+.model dflk_in d(is=1e-14 n=1 kf=1.79444e-16 af=1)
+Bg 0 n1 I=0.00017*tanh(0.00395841*(V(ip2)-V(inn))/0.00017)
+R1 n1 0 4.54728e+08 rnl
+C1 n1 0 1e-11
+E2 n2 0 n1 0 1
+R2 n2 n3 1 rnl
+C2 n3 0 3.97887e-09
+Bo no 0 V=min(max(V(n3), V(vee)+1.5), V(vcc)-1.5)
+Ro no out 20 rnl
+.model rnl r(noisy=0)
+.ends OP37
+.subckt LF411 inp inn out vcc vee
+Rnv nv 0 1
+Vnv nv 0 0
+Hnv inp ip1 Vnv 168.163
+Ifv 0 fv 1e-05
+Dfv fv 0 dflk_v
+Cfv fv fvs 1000
+Vfv fvs 0 0
+Hfv ip1 ip2 Vfv 6982.96
+.model dflk_v d(is=1e-14 n=1 kf=1.28174e-16 af=1)
+Rnip nip 0 1
+Vnip nip 0 0
+Fnip 0 inp Vnip 7.76711e-05
+Rnin nin 0 1
+Vnin nin 0 0
+Fnin 0 inn Vnin 7.76711e-05
+Bg 0 n1 I=0.00015*tanh(0.000251327*(V(ip2)-V(inn))/0.00015)
+R1 n1 0 7.95775e+08 rnl
+C1 n1 0 1e-11
+E2 n3 0 n1 0 1
+Bo no 0 V=min(max(V(n3), V(vee)+1.5), V(vcc)-1.5)
+Ro no out 50 rnl
+.model rnl r(noisy=0)
+.ends LF411
+.subckt LT1028 inp inn out vcc vee
+Rnv nv 0 1
+Vnv nv 0 0
+Hnv inp ip1 Vnv 5.71753
+Ifv 0 fv 1e-05
+Dfv fv 0 dflk_v
+Cfv fv fvs 1000
+Vfv fvs 0 0
+Hfv ip1 ip2 Vfv 237.421
+.model dflk_v d(is=1e-14 n=1 kf=4.48609e-18 af=1)
+Rnip nip 0 1
+Vnip nip 0 0
+Fnip 0 inp Vnip 0.00672651
+Ifip 0 fip 1e-05
+Dfip fip 0 dflk_ip
+Cfip fip fisp 1000
+Vfip fisp 0 0
+Ffip 0 inp Vfip 0.279319
+.model dflk_ip d(is=1e-14 n=1 kf=3.20435e-16 af=1)
+Rnin nin 0 1
+Vnin nin 0 0
+Fnin 0 inn Vnin 0.00672651
+Ifin 0 fin 1e-05
+Dfin fin 0 dflk_in
+Cfin fin fisn 1000
+Vfin fisn 0 0
+Ffin 0 inn Vfin 0.279319
+.model dflk_in d(is=1e-14 n=1 kf=3.20435e-16 af=1)
+Bg 0 n1 I=0.00015*tanh(0.00471239*(V(ip2)-V(inn))/0.00015)
+R1 n1 0 6.3662e+09 rnl
+C1 n1 0 1e-11
+E2 n2 0 n1 0 1
+R2 n2 n3 1 rnl
+C2 n3 0 2.65258e-09
+Bo no 0 V=min(max(V(n3), V(vee)+1.5), V(vcc)-1.5)
+Ro no out 20 rnl
+.model rnl r(noisy=0)
+.ends LT1028
+.subckt LF356 inp inn out vcc vee
+Rnv nv 0 1
+Vnv nv 0 0
+Hnv inp ip1 Vnv 80.7181
+Ifv 0 fv 1e-05
+Dfv fv 0 dflk_v
+Cfv fv fvs 1000
+Vfv fvs 0 0
+Hfv ip1 ip2 Vfv 3351.82
+.model dflk_v d(is=1e-14 n=1 kf=1.28174e-16 af=1)
+Rnip nip 0 1
+Vnip nip 0 0
+Fnip 0 inp Vnip 7.76711e-05
+Rnin nin 0 1
+Vnin nin 0 0
+Fnin 0 inn Vnin 7.76711e-05
+Bg 0 n1 I=0.00012*tanh(0.000314159*(V(ip2)-V(inn))/0.00012)
+R1 n1 0 6.3662e+08 rnl
+C1 n1 0 1e-11
+E2 n3 0 n1 0 1
+Bo no 0 V=min(max(V(n3), V(vee)+1.5), V(vcc)-1.5)
+Ro no out 50 rnl
+.model rnl r(noisy=0)
+.ends LF356
+.model rnl r(noisy=0)
+VIN ina 0 DC 0 AC 1
+VB inb 0 DC 0
+* --- SR560 front end (schematic 560_1F) ---
+R101 ina 0 100Meg
+R102 inb 0 100Meg
+XJA da ina sa 2N5564
+XJB db inb sb 2N5564
+R119 p10 vtop 165
+C113 vtop 0 2.2u
+R131 vtop da 499
+R117 vtop db 499
+R120 db 0 100k
+C108 da 0 33p
+R121 da ptrim 75k
+VTRIM ptrim 0 DC -0.00466142
+R113 sa xa 110
+R115 xa ya 909
+R135 ya tail 10
+R114 sb xb 110
+R128 xb yb 909
+R137 yb tail 10
+RP101A ya tail 50
+RP101B yb tail 50
+RK102 xa xb 1m rnl
+R111 sa p102 1k
+RP102 p102 0 10
+R136 xa 0 100k
+R112 sb fb 10
+R118 fb out 1k
+R116 out fo 499
+C116 fo 0 150p
+XU102 da db out p10 m10 OP37
+C109 out db 33p
+R129 da mid 100k
+R127 db mid 100k
+C110 mid tail 6.8p
+VREF zref 0 DC 6.2
+R125 zref ref 49.9k
+C112 ref 0 0.1u
+XU103 ref mid sv p10 m10 LF411
+R130 tail sv 100
+R122 sv m10 1k
+VP p10 0 DC 10
+VM m10 0 DC -10
+* ---- U105 (LT1028, x10.09) with its input attenuator
+RA1051 out A105t1 249
+RA1052 A105t1 A105t2 150
+RA1053 A105t2 0 100
+RA105SW out p105 50
+XU105 p105 n105 o105 p10 m10 LT1028
+R123 o105 n105 909
+C111 o105 n105 68p
+R124 n105 0 100
+RU104 o105 ft 23.3333
+* ---- filter 1, LF356 follower U204, attenuator, OP37 U201 (x5.23)
+RF1BYP ft F1x 50
+CF1MUX F1x 0 80p
+XU204 F1x b1 b1 p10 m10 LF356
+RA2011 b1 A201t1 604
+RA2012 A201t1 A201t2 200
+RA2013 A201t2 0 200
+RA201SW b1 p201 50
+XU201 p201 n201 f1o p10 m10 OP37
+R217 f1o n201 845
+R229 f1o c201 4.3k
+C201 c201 n201 68p
+R215 n201 0 200
+* ---- filter 2, LF356 follower U303, attenuator, OP37 U305 (x5.23)
+RF2BYP f1o F2x 50
+CF2MUX F2x 0 80p
+XU303 F2x b2 b2 p10 m10 LF356
+RA3051 b2 A305t1 604
+RA3052 A305t1 A305t2 200
+RA3053 A305t2 0 200
+RA305SW A305t1 p305 50
+XU305 p305 n305 o305 p10 m10 OP37
+R315 o305 n305 845
+R330 o305 c301 3.3k
+C301 c301 n305 6.8p
+R313 n305 0 200
+R328 o305 f2o 10
+* ---- U402 (LT1028, x5.23)
+RA4021 f2o A402t1 604
+RA4022 A402t1 A402t2 200
+RA4023 A402t2 0 200
+RA402SW A402t2 p402 50
+XU402 p402 n402 o402 p10 m10 LT1028
+R403 o402 n402 845
+C401 o402 n402 47p
+R404 n402 0 200
+* ---- vernier: AD7528 ladder (10 k / code) and its 10-k feedback around LF411 U404
+RDAC o402 n404 12091.1
+RFB o404 n404 10k
+C407 o404 n404 3p
+XU404 0 n404 o404 p10 m10 LF411
+R423 o404 v403 10
+* ---- U403 (OP37) with the LM6321 buffer U406 in its loop (x5.22), outputs
+RA4031 v403 A403t1 604
+RA4032 A403t1 A403t2 200
+RA4033 A403t2 0 200
+RA403SW A403t2 p403 50
+XU403 p403 n403 o403 p10 m10 OP37
+R437 o403 i406 220
+E406 b406 0 i406 0 1
+R406P b406 c406 1 rnl
+C406P c406 0 3.18n
+E406B o406 0 c406 0 1
+R408 o406 n403 422
+R425 n403 0 100
+R438 o406 out50 49.9
+RL out50 0 1Meg
+.control
+set wr_singlescale
+set wr_vecnames
+op
+print v(out)
+ac dec 40 1 300meg
+wrdata ac.txt v(out)
+noise v(out) VIN dec 20 1 100meg
+setplot noise2
+print onoise_total
+.endc
+.end

@@ -1,0 +1,1635 @@
+{
+ "4.1 chain": {
+  "headroom of H_HR over H_LN, 20 log10(100/10)": {
+   "value": 20.0,
+   "unit": "dB",
+   "source": "arithmetic",
+   "shown": "20"
+  },
+  "noise ratio H_HR / H_LN at 1 kHz and 100 kHz, gains 100 and 1000": {
+   "value": {
+    "gain 100, 1000 Hz": 2.3723990720668704,
+    "gain 100, 100000 Hz": 2.334978410642467,
+    "gain 1000, 1000 Hz": 2.476429372144472,
+    "gain 1000, 100000 Hz": 2.4084750121881973
+   },
+   "unit": "",
+   "source": "chain_noise.json (Table 9)",
+   "shown": "2.3-2.5"
+  }
+ },
+ "Table 5": {
+  "H100: g_m per JFET": {
+   "value": 17.261629,
+   "unit": "mS",
+   "source": "frontend.check_op, @j.xja1.j1[gm]",
+   "shown": "17.3"
+  },
+  "H100: N g_m per side (N = 2)": {
+   "value": 34.523258,
+   "unit": "mS",
+   "source": "N x g_m",
+   "shown": "35"
+  },
+  "L200: g_m per JFET": {
+   "value": 25.705842999999998,
+   "unit": "mS",
+   "source": "frontend.check_op, @j.xja1.j1[gm]",
+   "shown": "25.7"
+  },
+  "L200: N g_m per side (N = 12)": {
+   "value": 308.47011599999996,
+   "unit": "mS",
+   "source": "N x g_m",
+   "shown": "308"
+  },
+  "H100: N C_iss, data sheet (2 x 13 pF)": {
+   "value": 26.0,
+   "unit": "pF",
+   "source": "SLPS730B p. 5 (JFE2140) / SLPS732B p. 5 (JFE150), C_iss at V_DS = 5 V",
+   "shown": "26"
+  },
+  "H100: input JFET V_GS, V_GD (intrinsic)": {
+   "value": [
+    -0.3952276,
+    -4.210707
+   ],
+   "unit": "V",
+   "source": "op deck, @j.xja1.j1[vgs], [vgd]"
+  },
+  "H100: model C_gs + C_gd per JFET at the operating point": {
+   "value": 12.67362691140509,
+   "unit": "pF",
+   "source": "C0 / sqrt(1 - V / PB), card in _lib/jfets.lib",
+   "shown": "12.67"
+  },
+  "H100: N (C_gs + C_gd), model at the operating point": {
+   "value": 25.34725382281018,
+   "unit": "pF",
+   "source": "N x the above",
+   "shown": "25"
+  },
+  "L200: N C_iss, data sheet (12 x 24 pF)": {
+   "value": 288.00000000000006,
+   "unit": "pF",
+   "source": "SLPS730B p. 5 (JFE2140) / SLPS732B p. 5 (JFE150), C_iss at V_DS = 5 V",
+   "shown": "288"
+  },
+  "L200: input JFET V_GS, V_GD (intrinsic)": {
+   "value": [
+    -0.585573,
+    -4.400786
+   ],
+   "unit": "V",
+   "source": "op deck, @j.xja1.j1[vgs], [vgd]"
+  },
+  "L200: model C_gs + C_gd per JFET at the operating point": {
+   "value": 23.26777074510074,
+   "unit": "pF",
+   "source": "C0 / sqrt(1 - V / PB), card in _lib/jfets.lib",
+   "shown": "23.27"
+  },
+  "L200: N (C_gs + C_gd), model at the operating point": {
+   "value": 279.21324894120886,
+   "unit": "pF",
+   "source": "N x the above",
+   "shown": "279"
+  },
+  "H100: source-node current N I_D + I_BS": {
+   "value": 11.024817056880734,
+   "unit": "mA",
+   "source": "check_op: N @j.xja1.j1[id] + (V_P - v(ba)) / R_UP",
+   "shown": "11.0"
+  },
+  "H100: R_T current I_T (base current included)": {
+   "value": 11.117158,
+   "unit": "mA",
+   "source": "sink_power.json, H100 | 2 V, i_sink",
+   "shown": "11.1"
+  },
+  "H100: sink base current I_T - I_C": {
+   "value": 0.0923409431192665,
+   "unit": "mA",
+   "source": "difference",
+   "shown": "0.09"
+  },
+  "L200: source-node current N I_D + I_BS": {
+   "value": 61.06575096146789,
+   "unit": "mA",
+   "source": "check_op: N @j.xja1.j1[id] + (V_P - v(ba)) / R_UP",
+   "shown": "61.1"
+  },
+  "L200: R_T current I_T (base current included)": {
+   "value": 61.916326,
+   "unit": "mA",
+   "source": "sink_power.json, L200 | 6 V, i_sink",
+   "shown": "61.9"
+  },
+  "L200: sink base current I_T - I_C": {
+   "value": 0.8505750385321074,
+   "unit": "mA",
+   "source": "difference",
+   "shown": "0.85"
+  }
+ },
+ "4.2 servo": {
+  "H: output error, 1% of 11 mA x R_F 500 ohm": {
+   "value": 54.99999999999999,
+   "unit": "mV",
+   "source": "eps (N I_D + I_BS) R_F",
+   "shown": "55"
+  },
+  "H: output error, 3% of 11 mA x R_F 500 ohm": {
+   "value": 164.99999999999997,
+   "unit": "mV",
+   "source": "eps (N I_D + I_BS) R_F",
+   "shown": "0.17 V"
+  },
+  "L: output error, 1% of 61 mA x R_F 249 ohm": {
+   "value": 151.89,
+   "unit": "mV",
+   "source": "eps (N I_D + I_BS) R_F",
+   "shown": "152"
+  },
+  "L: output error, 3% of 61 mA x R_F 249 ohm": {
+   "value": 455.66999999999996,
+   "unit": "mV",
+   "source": "eps (N I_D + I_BS) R_F",
+   "shown": "0.46 V"
+  },
+  "H: dV_BE/dT of the MMBT3904 sink": {
+   "value": -1.710993760982795,
+   "unit": "mV/K",
+   "source": "fe_closed_forms.json, drift, H100, 2 V",
+   "shown": "-1.7"
+  },
+  "H: dI/I per kelvin = |dV_BE/dT| / V_RT (2 V)": {
+   "value": 0.08554968804913976,
+   "unit": "%/K",
+   "source": "arithmetic",
+   "shown": "0.09"
+  },
+  "H: dI/dT = |dV_BE/dT| / R_T": {
+   "value": 9.410465685405372,
+   "unit": "uA/K",
+   "source": "arithmetic",
+   "shown": "9.4"
+  },
+  "H: R_F dI/dT (closed form)": {
+   "value": 4.705232842702686,
+   "unit": "mV/K",
+   "source": "arithmetic",
+   "shown": "4.7"
+  },
+  "H: output drift per kelvin, simulated": {
+   "value": 4.863300000000015,
+   "unit": "mV/K",
+   "source": "fe_closed_forms.json, drift, H100, 2 V, output_mV_per_K",
+   "shown": "4.9"
+  },
+  "L (6 V): output drift per kelvin, simulated": {
+   "value": 4.916939999999981,
+   "unit": "mV/K",
+   "source": "fe_closed_forms.json, drift, L, 6 V, output_mV_per_K",
+   "shown": "4.9"
+  },
+  "H: sink mismatch, an assumed 0.05 % of 11 mA": {
+   "value": 5.5,
+   "unit": "uA",
+   "source": "assumption x design current",
+   "shown": "5.5"
+  },
+  "H: differential output offset dI R_F": {
+   "value": 2.75,
+   "unit": "mV",
+   "source": "arithmetic",
+   "shown": "2.75"
+  },
+  "H: referred to the input, dI R_F / G": {
+   "value": 27.497277497277494,
+   "unit": "uV",
+   "source": "G = 1 + 2 R_F / R_G",
+   "shown": "27.5"
+  },
+  "integrator unity-gain frequency g / (2 pi C)": {
+   "value": 0.15915494309189535,
+   "unit": "Hz",
+   "source": "1 uS, 1 uF (frontend.netlist)",
+   "shown": "0.16"
+  },
+  "filter corner 1 / (2 pi R C)": {
+   "value": 15.915494309189533,
+   "unit": "Hz",
+   "source": "1 kohm, 10 uF (frontend.netlist)",
+   "shown": "16"
+  },
+  "H: R_T = V_RT / (N I_D + I_BS)": {
+   "value": 181.81818181818184,
+   "unit": "ohm",
+   "source": "frontend.side",
+   "shown": "181.8"
+  },
+  "H: R_F / R_T": {
+   "value": 2.7499999999999996,
+   "unit": "V/V",
+   "source": "arithmetic",
+   "shown": "2.75"
+  },
+  "H: servo crossover (R_F / R_T) f_int": {
+   "value": 0.43767609350271214,
+   "unit": "Hz",
+   "source": "arithmetic",
+   "shown": "0.44"
+  },
+  "H: filter's phase lag at the crossover": {
+   "value": 1.5752369256830545,
+   "unit": "deg",
+   "source": "atan(f_c / f_filt)",
+   "shown": "1.6"
+  },
+  "H: servo phase margin 90 - lag": {
+   "value": 88.42476307431694,
+   "unit": "deg",
+   "source": "arithmetic",
+   "shown": "88"
+  },
+  "H: servo clamp V_M + 1 V ... V_M + V_RT + 3 V": {
+   "value": [
+    -14.0,
+    -10.0
+   ],
+   "unit": "V",
+   "source": "frontend.netlist, BSNK",
+   "shown": "V_M + 1 V ... V_M + 5 V"
+  },
+  "H: sink base (vsink) at the operating point, relative to V_M": {
+   "value": 2.7553400000000003,
+   "unit": "V",
+   "source": "sink_power.json, H100 | 2 V, v_ctrl",
+   "shown": "2.8"
+  },
+  "L: R_T = V_RT / (N I_D + I_BS)": {
+   "value": 98.36065573770492,
+   "unit": "ohm",
+   "source": "frontend.side",
+   "shown": "98.4"
+  },
+  "L: R_F / R_T": {
+   "value": 2.5315,
+   "unit": "V/V",
+   "source": "arithmetic",
+   "shown": "2.53"
+  },
+  "L: servo crossover (R_F / R_T) f_int": {
+   "value": 0.40290073843713303,
+   "unit": "Hz",
+   "source": "arithmetic",
+   "shown": "0.40"
+  },
+  "L: filter's phase lag at the crossover": {
+   "value": 1.450132939103797,
+   "unit": "deg",
+   "source": "atan(f_c / f_filt)",
+   "shown": "1.5"
+  },
+  "L: servo phase margin 90 - lag": {
+   "value": 88.5498670608962,
+   "unit": "deg",
+   "source": "arithmetic",
+   "shown": "89"
+  },
+  "L: servo clamp V_M + 1 V ... V_M + V_RT + 3 V": {
+   "value": [
+    -14.0,
+    -6.0
+   ],
+   "unit": "V",
+   "source": "frontend.netlist, BSNK",
+   "shown": "V_M + 1 V ... V_M + 9 V"
+  },
+  "L: sink base (vsink) at the operating point, relative to V_M": {
+   "value": 6.8987490000000005,
+   "unit": "V",
+   "source": "sink_power.json, L200 | 6 V, v_ctrl",
+   "shown": "6.9"
+  },
+  "noise current of 100 kohm, sqrt(4kT / R)": {
+   "value": 0.40713722372192895,
+   "unit": "pA/rtHz",
+   "source": "arithmetic",
+   "shown": "0.4"
+  }
+ },
+ "4.2 cascode": {
+  "bootstrap corner 1 / (2 pi R_BS C_BS)": {
+   "value": 45.47284088339867,
+   "unit": "Hz",
+   "source": "R_BS 3.5 kohm, C_BS 1 uF (frontend.side)",
+   "shown": "45"
+  },
+  "MMBTH10 cascode: base current at the operating point": {
+   "value": 47.994046,
+   "unit": "uA",
+   "source": "op deck, @qca1[ib]",
+   "shown": "48"
+  },
+  "MMBTH10 cascode: collector current": {
+   "value": 5.003908399999999,
+   "unit": "mA",
+   "source": "op deck, @qca1[ic]",
+   "shown": "5.00"
+  },
+  "MMBTH10 cascode: input JFETs' V_DS": {
+   "value": 2.47773152,
+   "unit": "V",
+   "source": "v(da1) - v(sa)",
+   "shown": "2.5"
+  },
+  "MMBTH10 cascodes: input-referred noise at 10 kHz (group 'cascodes')": {
+   "value": 0.26118649584793574,
+   "unit": "nV/rtHz",
+   "source": "run here (noise run: direct)",
+   "shown": "0.26"
+  },
+  "MMBTH10 cascodes: of which base-current shot noise (onoise_qc*_ib)": {
+   "value": 0.25971667901131346,
+   "unit": "nV/rtHz",
+   "source": "run here",
+   "shown": "0.26"
+  },
+  "MMBTH10 cascodes: front end's total at 10 kHz": {
+   "value": 1.1040296,
+   "unit": "nV/rtHz",
+   "source": "run here",
+   "shown": "1.10"
+  },
+  "MMBTH10 cascodes: front end's -3 dB bandwidth": {
+   "value": 14.880009077978986,
+   "unit": "MHz",
+   "source": "run here",
+   "shown": "14.9"
+  },
+  "LSBF862 cascodes (adopted): group 'cascodes' at 10 kHz": {
+   "value": 0.002491128270680482,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json",
+   "shown": "0.002"
+  }
+ },
+ "4.2 noise": {
+  "H100: JFETs at 10 kHz": {
+   "value": 0.936210486131667,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json (Table 6c)",
+   "shown": "0.94"
+  },
+  "H100: R_G at 10 kHz": {
+   "value": 0.4048915804682612,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json (Table 6c)",
+   "shown": "0.40"
+  },
+  "H100: R_D at 10 kHz": {
+   "value": 0.2829994942058875,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json (Table 6c)",
+   "shown": "0.28"
+  },
+  "H100: op amps at 10 kHz": {
+   "value": 0.13389539103981968,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json (Table 6c)",
+   "shown": "0.13"
+  },
+  "H100: sinks at 10 kHz": {
+   "value": 0.07919574673823306,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json (Table 6c)",
+   "shown": "0.08"
+  },
+  "L200: JFETs at 10 kHz": {
+   "value": 0.32820326938845074,
+   "unit": "nV/rtHz",
+   "source": "curves_noise.npz",
+   "shown": "0.33"
+  },
+  "L200: R_G at 10 kHz": {
+   "value": 0.20212538352895965,
+   "unit": "nV/rtHz",
+   "source": "curves_noise.npz",
+   "shown": "0.20"
+  },
+  "Spinelli and Haberman: R_B / G_n": {
+   "value": 0.4995004995004995,
+   "unit": "ohm",
+   "source": "p. 5, arithmetic",
+   "shown": "0.50"
+  },
+  "Spinelli and Haberman: 1 / g_m": {
+   "value": 33.333333333333336,
+   "unit": "ohm",
+   "source": "p. 5, arithmetic",
+   "shown": "33"
+  }
+ },
+ "4.2.1 sinks": {
+  "V_CE(sat) max, 10 mA / 50 mA (data sheets)": {
+   "value": [
+    0.2,
+    0.3
+   ],
+   "unit": "V",
+   "source": "MMBT3904LT1/D Rev. 15 p. 2; PZT3904T1/D Rev. 7 p. 2",
+   "shown": "0.2 / 0.3"
+  },
+  "V_CE,min (design margin)": {
+   "value": 0.5,
+   "unit": "V",
+   "source": "design choice (sink_options.V_SAT_BJT)",
+   "shown": "0.5"
+  }
+ },
+ "4.3 loops": {
+  "H100: k_DM = g_m R_G / (2 + g_m R_G)": {
+   "value": 0.14845963583234775,
+   "unit": "",
+   "source": "g_m of one side from the operating point",
+   "shown": "0.15"
+  },
+  "H100: 1 / k_DM": {
+   "value": 6.73583761938685,
+   "unit": "",
+   "source": "arithmetic",
+   "shown": "6.7"
+  },
+  "H100: cascode V_GD (intrinsic)": {
+   "value": -5.041121,
+   "unit": "V",
+   "source": "op deck, @j.xca1.j1[vgd]",
+   "shown": "-5.0"
+  },
+  "H100: cascode C_gd at its bias": {
+   "value": 4.29077781782684,
+   "unit": "pF",
+   "source": "LSBF862 card CGD 14.28 pF, PB 0.5 V",
+   "shown": "4.3"
+  },
+  "H100: C_par = N C_gd + C_i(THS4021 1.5 pF)": {
+   "value": 10.08155563565368,
+   "unit": "pF",
+   "source": "arithmetic; SLOS265F p. 7",
+   "shown": "10.1"
+  },
+  "H100 first: beta_CM = S / (S + C_node + C_par)": {
+   "value": 0.5127695658473294,
+   "unit": "",
+   "source": "S 10.61 pF, C_node 0 pF",
+   "shown": "0.51"
+  },
+  "H100 first: beta_DM = D / (S + C_node + C_par)": {
+   "value": 0.0855421424646346,
+   "unit": "",
+   "source": "D 1.77 pF",
+   "shown": "0.086"
+  },
+  "H100 first: S + C_node + C_par": {
+   "value": 20.69155563565368,
+   "unit": "pF",
+   "source": "arithmetic",
+   "shown": "21"
+  },
+  "H100 final: beta_CM = S / (S + C_node + C_par)": {
+   "value": 0.05735787763045125,
+   "unit": "",
+   "source": "S 14 pF, C_node 220 pF",
+   "shown": "0.057"
+  },
+  "H100 final: beta_DM = D / (S + C_node + C_par)": {
+   "value": 0.016387965037271784,
+   "unit": "",
+   "source": "D 4 pF",
+   "shown": "0.016"
+  },
+  "H100 final: S + C_node + C_par": {
+   "value": 244.08155563565367,
+   "unit": "pF",
+   "source": "arithmetic",
+   "shown": "244"
+  },
+  "L200: cascode V_GD (intrinsic)": {
+   "value": -4.882638,
+   "unit": "V",
+   "source": "op deck, @j.xca1.j1[vgd]",
+   "shown": "-4.9"
+  },
+  "L200: cascode C_gd at its bias": {
+   "value": 4.353487052187665,
+   "unit": "pF",
+   "source": "LSBF862 card CGD 14.28 pF, PB 0.5 V",
+   "shown": "4.4"
+  },
+  "L200: C_par = N C_gd + C_i(THS4021 1.5 pF)": {
+   "value": 53.74184462625199,
+   "unit": "pF",
+   "source": "arithmetic; SLOS265F p. 7",
+   "shown": "53.7"
+  },
+  "L200 first: beta_CM = S / (S + C_node + C_par)": {
+   "value": 0.28288601789465,
+   "unit": "",
+   "source": "S 21.2 pF, C_node 0 pF",
+   "shown": "0.28"
+  },
+  "L200 first: beta_DM = D / (S + C_node + C_par)": {
+   "value": 0.07472460850047359,
+   "unit": "",
+   "source": "D 5.6 pF",
+   "shown": "0.075"
+  },
+  "L200 first: S + C_node + C_par": {
+   "value": 74.94184462625199,
+   "unit": "pF",
+   "source": "arithmetic",
+   "shown": "75"
+  },
+  "L200 final: beta_CM = S / (S + C_node + C_par)": {
+   "value": 0.05417687012663545,
+   "unit": "",
+   "source": "S 30 pF, C_node 470 pF",
+   "shown": "0.054"
+  },
+  "L200 final: beta_DM = D / (S + C_node + C_par)": {
+   "value": 0.025282539392429876,
+   "unit": "",
+   "source": "D 14 pF",
+   "shown": "0.025"
+  },
+  "L200 final: S + C_node + C_par": {
+   "value": 553.741844626252,
+   "unit": "pF",
+   "source": "arithmetic",
+   "shown": "554"
+  },
+  "H100 final: f_local,DM = GBW beta_DM": {
+   "value": 32.77593007454357,
+   "unit": "MHz",
+   "source": "GBW 2 GHz (SLOS265F p. 1)",
+   "shown": "33"
+  },
+  "Eq. (10b): GBW k_DM / 10": {
+   "value": 29.69192716646955,
+   "unit": "MHz",
+   "source": "GBW 2 GHz, stable at gains >= 10 (SLOS265F p. 1)",
+   "shown": "30"
+  },
+  "H100 adopted: D / S": {
+   "value": 0.2857142857142857,
+   "unit": "",
+   "source": "4 pF / 14 pF",
+   "shown": "0.29"
+  },
+  "outer loop H100 dm: f_c, PM, GM": {
+   "value": [
+    8.925772,
+    60.97605399104434,
+    21.16118381707394
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "8.9 MHz, 61 deg, 21 dB"
+  },
+  "outer loop H100 cm: f_c, PM, GM": {
+   "value": [
+    21.169329,
+    62.80890463739955,
+    13.380078683352997
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "21.2 MHz, 63 deg, 13 dB"
+  },
+  "outer loop L200 dm: f_c, PM, GM": {
+   "value": [
+    10.608599,
+    65.64587397692243,
+    18.53301698550472
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "10.6 MHz, 66 deg, 19 dB"
+  },
+  "outer loop L200 cm: f_c, PM, GM": {
+   "value": [
+    19.984948,
+    63.38574755666012,
+    11.570264267218029
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "20.0 MHz, 63 deg, 12 dB"
+  },
+  "outer loop H100_nocross dm: f_c, PM, GM": {
+   "value": [
+    31.676392,
+    65.87470959711807,
+    14.957786455737965
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "31.7 MHz, 66 deg, 15 dB"
+  },
+  "outer loop H100_nocross cm: f_c, PM, GM": {
+   "value": [
+    188.73933,
+    -93.31585596527992,
+    NaN
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "188.7 MHz, -93 deg, -"
+  },
+  "outer loop H100_old dm: f_c, PM, GM": {
+   "value": [
+    21.169329,
+    71.65427609998062,
+    16.175579778611077
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "21.2 MHz, 72 deg, 16 dB"
+  },
+  "outer loop H100_old cm: f_c, PM, GM": {
+   "value": [
+    28.231083,
+    76.98273669983831,
+    16.787093290480907
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, check_loop convention",
+   "shown": "28.2 MHz, 77 deg, 17 dB"
+  },
+  "complete loop H100 dm: f_c, PM, GM": {
+   "value": [
+    19.558858,
+    59.910171987885306,
+    19.032189096175472
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "19.6 MHz, 60 deg, 19.0 dB"
+  },
+  "complete loop H100 dm: -180 deg crossing (interpolated / sweep point)": {
+   "value": [
+    247.01359842209064,
+    247.88993,
+    19.032189096175472
+   ],
+   "unit": "MHz, MHz, dB",
+   "source": "curves_loop.npz",
+   "shown": "247 MHz"
+  },
+  "complete loop H100 cm: f_c, PM, GM": {
+   "value": [
+    59.240083,
+    56.774111335034846,
+    8.423248589834403
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "59.2 MHz, 57 deg, 8.4 dB"
+  },
+  "complete loop H100 cm: -180 deg crossing (interpolated / sweep point)": {
+   "value": [
+    250.535257594029,
+    259.6043,
+    8.423248589834403
+   ],
+   "unit": "MHz, MHz, dB",
+   "source": "curves_loop.npz",
+   "shown": "251 MHz"
+  },
+  "complete loop H10 dm: f_c, PM, GM": {
+   "value": [
+    51.577067,
+    61.99552397009647,
+    9.769663455131635
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "51.6 MHz, 62 deg, 9.8 dB"
+  },
+  "complete loop H10 dm: -180 deg crossing (interpolated / sweep point)": {
+   "value": [
+    249.2033184958088,
+    259.6043,
+    9.769663455131635
+   ],
+   "unit": "MHz, MHz, dB",
+   "source": "curves_loop.npz",
+   "shown": "249 MHz"
+  },
+  "complete loop H10 cm: f_c, PM, GM": {
+   "value": [
+    59.240083,
+    56.774111335034846,
+    8.423248589834403
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "59.2 MHz, 57 deg, 8.4 dB"
+  },
+  "complete loop H10 cm: -180 deg crossing (interpolated / sweep point)": {
+   "value": [
+    250.535257594029,
+    259.6043,
+    8.423248589834403
+   ],
+   "unit": "MHz, MHz, dB",
+   "source": "curves_loop.npz",
+   "shown": "251 MHz"
+  },
+  "complete loop L200 dm: f_c, PM, GM": {
+   "value": [
+    27.021817,
+    63.042756764786105,
+    16.611690695908766
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "27.0 MHz, 63 deg, 16.6 dB"
+  },
+  "complete loop L200 dm: -180 deg crossing (interpolated / sweep point)": {
+   "value": [
+    202.98279188865067,
+    206.08522,
+    16.611690695908766
+   ],
+   "unit": "MHz, MHz, dB",
+   "source": "curves_loop.npz",
+   "shown": "203 MHz"
+  },
+  "complete loop L200 cm: f_c, PM, GM": {
+   "value": [
+    59.240083,
+    51.460690651483446,
+    10.152656384397517
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "59.2 MHz, 51 deg, 10.2 dB"
+  },
+  "complete loop L200 cm: -180 deg crossing (interpolated / sweep point)": {
+   "value": [
+    203.9333947581829,
+    206.08522,
+    10.152656384397517
+   ],
+   "unit": "MHz, MHz, dB",
+   "source": "curves_loop.npz",
+   "shown": "204 MHz"
+  },
+  "complete loop H100_old dm: f_c, PM, GM": {
+   "value": [
+    89.762042,
+    65.44292754364439,
+    5.34258079728359
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "89.8 MHz, 65 deg, 5.3 dB"
+  },
+  "complete loop H100_old dm: -180 deg crossing (interpolated / sweep point)": {
+   "value": [
+    265.2293117884146,
+    271.87226,
+    5.34258079728359
+   ],
+   "unit": "MHz, MHz, dB",
+   "source": "curves_loop.npz",
+   "shown": "265 MHz"
+  },
+  "complete loop H100_old cm: f_c, PM, GM": {
+   "value": [
+    451.80181,
+    -80.6881212994565,
+    NaN
+   ],
+   "unit": "MHz, deg, dB",
+   "source": "curves_loop.npz, frontend._margins",
+   "shown": "451.8 MHz, -81 deg, -"
+  },
+  "Figure 9 (a, d): CM outer loop without C_X, f_c and PM (frontend._margins)": {
+   "value": [
+    188.73933,
+    -93.31585596527992
+   ],
+   "unit": "MHz, deg",
+   "source": "curves_loop.npz (make_figures.fig_loop_gain)",
+   "shown": "189 MHz, -93 deg"
+  },
+  "oscillation H100_first: cm_out pk-pk, frequency": {
+   "value": [
+    1.00536209,
+    292.831174255379
+   ],
+   "unit": "V, MHz",
+   "source": "osc_check.json (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)",
+   "shown": "1.01 V, 293 MHz"
+  },
+  "oscillation H100_first_ties: cm_out pk-pk, frequency": {
+   "value": [
+    1.03160314,
+    282.8397827721783
+   ],
+   "unit": "V, MHz",
+   "source": "osc_check.json (inputs tied to ground through 1 milliohm, global options only (trapezoidal))",
+   "shown": "1.03 V, 283 MHz"
+  },
+  "oscillation L200_first: cm_out pk-pk, frequency": {
+   "value": [
+    0.7825457,
+    275.69171986924357
+   ],
+   "unit": "V, MHz",
+   "source": "osc_check.json (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)",
+   "shown": "0.78 V, 276 MHz"
+  },
+  "final values H100: output pk-pk": {
+   "value": 0.5599999999827965,
+   "unit": "uV",
+   "source": "osc_check.json, H100_cnode220p",
+   "shown": "0.56"
+  },
+  "chain at total gain 100, first front end, LM7171 in S2: -3 dB": {
+   "value": 30.057118885858245,
+   "unit": "MHz",
+   "source": "da_compare_before_cnode.json",
+   "shown": "30.1"
+  },
+  "chain at total gain 100, final front end: -3 dB": {
+   "value": 14.821844602798777,
+   "unit": "MHz",
+   "source": "chain_ac.json, H_LN_100",
+   "shown": "14.8"
+  },
+  "chain bandwidth ratio final / first": {
+   "value": 0.4931225996438533,
+   "unit": "",
+   "source": "arithmetic",
+   "shown": "0.49"
+  },
+  "front end alone, H100: -3 dB": {
+   "value": 15.030739168216696,
+   "unit": "MHz",
+   "source": "fe_gain_options.json / sink_power.json",
+   "shown": "15"
+  },
+  "front end alone, H10: -3 dB": {
+   "value": 25.7470227556639,
+   "unit": "MHz",
+   "source": "fe_gain_options.json / sink_power.json",
+   "shown": "26"
+  },
+  "front end alone, L200 (6 V sinks): -3 dB": {
+   "value": 16.786707154290195,
+   "unit": "MHz",
+   "source": "fe_gain_options.json / sink_power.json",
+   "shown": "17"
+  },
+  "H100: noise at 10 kHz and 10 MHz": {
+   "value": [
+    1.0707259,
+    1.4990478
+   ],
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json / sink_power.json",
+   "shown": "1.07 / 1.50"
+  },
+  "L200 (6 V sinks): noise at 10 kHz and 10 MHz": {
+   "value": [
+    0.40734264,
+    0.50374685
+   ],
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json / sink_power.json",
+   "shown": "0.41 / 0.50"
+  },
+  "comp_search sets (H100, L200, H10)": {
+   "value": 119,
+   "unit": "",
+   "source": "comp_search_*.json",
+   "shown": "119"
+  }
+ },
+ "4.3.1 mitigations": {
+  "Table 6a: H100 | nominal": {
+   "value": {
+    "dm": [
+     59.910171987885306,
+     19.032189096175472,
+     0.885430555924805
+    ],
+    "cm": [
+     56.774111335034846,
+     8.423248589834403,
+     0.6090398095526339
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "60 deg, 19.0 dB, 0.89 | 57 deg, 8.4 dB, 0.61"
+  },
+  "Table 6a: H100 | C_node x0.7": {
+   "value": {
+    "dm": [
+     64.44698641452081,
+     16.30608788212769,
+     0.8435492255092436
+    ],
+    "cm": [
+     57.83008344553278,
+     5.671715510553209,
+     0.4663076635291383
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "64 deg, 16.3 dB, 0.84 | 58 deg, 5.7 dB, 0.47"
+  },
+  "Table 6a: H100 | C_node x1.3": {
+   "value": {
+    "dm": [
+     55.689537236980584,
+     21.10401918037161,
+     0.89120985143722
+    ],
+    "cm": [
+     54.70664803879491,
+     10.510249801656219,
+     0.6911223316065066
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "56 deg, 21.1 dB, 0.89 | 55 deg, 10.5 dB, 0.69"
+  },
+  "Table 6a: H100 | C_I x1.1, C_X x0.9": {
+   "value": {
+    "dm": [
+     69.35113183292309,
+     16.452879299806288,
+     0.845091365138223
+    ],
+    "cm": [
+     57.533841085647,
+     8.249452590908637,
+     0.5986588487703601
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "69 deg, 16.5 dB, 0.85 | 58 deg, 8.2 dB, 0.60"
+  },
+  "Table 6a: H100 | C_I x0.9, C_X x1.1": {
+   "value": {
+    "dm": [
+     42.69917612480708,
+     23.066575457785547,
+     0.7187250207844464
+    ],
+    "cm": [
+     56.271284488367144,
+     8.60592826552908,
+     0.6194406593039725
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "43 deg, 23.1 dB, 0.72 | 56 deg, 8.6 dB, 0.62"
+  },
+  "Table 6a: H100 | 10 pF at each op-amp output": {
+   "value": {
+    "dm": [
+     58.66681044997007,
+     19.590494106742817,
+     0.8856840874007735
+    ],
+    "cm": [
+     52.807108970864235,
+     9.225756235384015,
+     0.62526272065085
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "59 deg, 19.6 dB, 0.89 | 53 deg, 9.2 dB, 0.63"
+  },
+  "Table 6a: H100 | R_iso 10 ohm": {
+   "value": {
+    "dm": [
+     58.248329897242414,
+     19.91602763368408,
+     0.8946970756980164
+    ],
+    "cm": [
+     54.16358465332246,
+     9.297558652891059,
+     0.643723598847538
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "58 deg, 19.9 dB, 0.89 | 54 deg, 9.3 dB, 0.64"
+  },
+  "Table 6a: H100 | R_iso 33 ohm": {
+   "value": {
+    "dm": [
+     56.40435371503362,
+     21.656844094793406,
+     0.8809518872021233
+    ],
+    "cm": [
+     48.5862332411252,
+     11.09254627011122,
+     0.6951072937314526
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "56 deg, 21.7 dB, 0.88 | 49 deg, 11.1 dB, 0.70"
+  },
+  "Table 6a: H10 | nominal": {
+   "value": {
+    "dm": [
+     61.99552397009647,
+     9.769663455131635,
+     0.6616764432206526
+    ],
+    "cm": [
+     56.774111335034846,
+     8.423248589834403,
+     0.6090398095526339
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "62 deg, 9.8 dB, 0.66 | 57 deg, 8.4 dB, 0.61"
+  },
+  "Table 6a: H10 | C_node x0.7": {
+   "value": {
+    "dm": [
+     62.66488240123002,
+     7.01956528477497,
+     0.5386293635566789
+    ],
+    "cm": [
+     57.83008344553278,
+     5.671715510553209,
+     0.4663076635291383
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "63 deg, 7.0 dB, 0.54 | 58 deg, 5.7 dB, 0.47"
+  },
+  "Table 6a: H10 | C_node x1.3": {
+   "value": {
+    "dm": [
+     59.76523966795331,
+     11.855584028630568,
+     0.7331586854237574
+    ],
+    "cm": [
+     54.70664803879491,
+     10.510249801656219,
+     0.6911223316065066
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "60 deg, 11.9 dB, 0.73 | 55 deg, 10.5 dB, 0.69"
+  },
+  "Table 6a: H10 | C_I x1.1, C_X x0.9": {
+   "value": {
+    "dm": [
+     63.74505132317229,
+     8.725260566930665,
+     0.6256750165278537
+    ],
+    "cm": [
+     58.47274234531315,
+     7.648135386936038,
+     0.5787363909761581
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "64 deg, 8.7 dB, 0.63 | 58 deg, 7.6 dB, 0.58"
+  },
+  "Table 6a: H10 | C_I x0.9, C_X x1.1": {
+   "value": {
+    "dm": [
+     59.109705902163995,
+     10.6506375734037,
+     0.6997255821907907
+    ],
+    "cm": [
+     54.653749842293706,
+     9.000190956518493,
+     0.6385510921618143
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "59 deg, 10.7 dB, 0.70 | 55 deg, 9.0 dB, 0.64"
+  },
+  "Table 6a: H10 | 10 pF at each op-amp output": {
+   "value": {
+    "dm": [
+     58.59215202187313,
+     10.512794600034477,
+     0.6702997285367215
+    ],
+    "cm": [
+     52.807108970864235,
+     9.225756235384015,
+     0.62526272065085
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "59 deg, 10.5 dB, 0.67 | 53 deg, 9.2 dB, 0.63"
+  },
+  "Table 6a: H10 | R_iso 10 ohm": {
+   "value": {
+    "dm": [
+     59.70709827004556,
+     10.639931169858388,
+     0.6911203989238449
+    ],
+    "cm": [
+     54.16358465332246,
+     9.297558652891059,
+     0.643723598847538
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "60 deg, 10.6 dB, 0.69 | 54 deg, 9.3 dB, 0.64"
+  },
+  "Table 6a: H10 | R_iso 33 ohm": {
+   "value": {
+    "dm": [
+     54.86234865288749,
+     12.410390628300886,
+     0.7294130575524305
+    ],
+    "cm": [
+     48.5862332411252,
+     11.09254627011122,
+     0.6951072937314526
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "55 deg, 12.4 dB, 0.73 | 49 deg, 11.1 dB, 0.70"
+  },
+  "Table 6a: L200 | nominal": {
+   "value": {
+    "dm": [
+     63.042756764786105,
+     16.611690695908766,
+     0.8312903085642818
+    ],
+    "cm": [
+     51.460690651483446,
+     10.152656384397517,
+     0.6566661410535485
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "63 deg, 16.6 dB, 0.83 | 51 deg, 10.2 dB, 0.66"
+  },
+  "Table 6a: L200 | C_node x0.7": {
+   "value": {
+    "dm": [
+     65.96166732709817,
+     14.039386700270578,
+     0.7753154617016558
+    ],
+    "cm": [
+     49.509195107427644,
+     7.5618957316186455,
+     0.5430736422433314
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "66 deg, 14.0 dB, 0.78 | 50 deg, 7.6 dB, 0.54"
+  },
+  "Table 6a: L200 | C_node x1.3": {
+   "value": {
+    "dm": [
+     59.90937319521838,
+     18.593796233655176,
+     0.8647579882595551
+    ],
+    "cm": [
+     50.55909139835347,
+     12.145593270328979,
+     0.7248770481004441
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "60 deg, 18.6 dB, 0.86 | 51 deg, 12.1 dB, 0.72"
+  },
+  "Table 6a: L200 | C_I x1.1, C_X x0.9": {
+   "value": {
+    "dm": [
+     67.42184850762786,
+     15.076256321301841,
+     0.7948611844017806
+    ],
+    "cm": [
+     51.94987072447839,
+     9.933972873705294,
+     0.6389503797523345
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "67 deg, 15.1 dB, 0.79 | 52 deg, 9.9 dB, 0.64"
+  },
+  "Table 6a: L200 | C_I x0.9, C_X x1.1": {
+   "value": {
+    "dm": [
+     55.49059411256428,
+     18.58237298755145,
+     0.8661338755933728
+    ],
+    "cm": [
+     50.857787983212916,
+     10.799990373867008,
+     0.6737677470598192
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "55 deg, 18.6 dB, 0.87 | 51 deg, 10.8 dB, 0.67"
+  },
+  "Table 6a: L200 | 10 pF at each op-amp output": {
+   "value": {
+    "dm": [
+     61.37536007081937,
+     16.988290579805124,
+     0.8224838117124221
+    ],
+    "cm": [
+     47.883103857410305,
+     10.590419815567918,
+     0.635847541374225
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "61 deg, 17.0 dB, 0.82 | 48 deg, 10.6 dB, 0.64"
+  },
+  "Table 6a: L200 | R_iso 10 ohm": {
+   "value": {
+    "dm": [
+     60.65384580977518,
+     18.201736940185487,
+     0.8372538894117103
+    ],
+    "cm": [
+     46.963466919423524,
+     11.724421012559574,
+     0.6645146768282204
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "61 deg, 18.2 dB, 0.84 | 47 deg, 11.7 dB, 0.66"
+  },
+  "Table 6a: L200 | R_iso 33 ohm": {
+   "value": {
+    "dm": [
+     55.717153239196634,
+     20.234712515500316,
+     0.8035042853555043
+    ],
+    "cm": [
+     39.04930211714395,
+     13.769496956925117,
+     0.5950061015291892
+    ]
+   },
+   "unit": "deg, dB, -",
+   "source": "stability_corners.json",
+   "shown": "56 deg, 20.2 dB, 0.80 | 39 deg, 13.8 dB, 0.60"
+  },
+  "H100 cm: frequency of the smallest |1 + T|": {
+   "value": 236.70415,
+   "unit": "MHz",
+   "source": "stability_corners.json, f_modulus",
+   "shown": "240"
+  },
+  "L200 cm: frequency of the smallest |1 + T|": {
+   "value": 163.59944,
+   "unit": "MHz",
+   "source": "stability_corners.json, f_modulus",
+   "shown": "160"
+  },
+  "modulus margin 0.5 as a sensitivity peak, 20 log10(1/0.5)": {
+   "value": 6.020599913279624,
+   "unit": "dB",
+   "source": "arithmetic",
+   "shown": "6"
+  },
+  "H: E12 values / simulated C_node": {
+   "value": [
+    1.2272727272727273,
+    1.5
+   ],
+   "unit": "",
+   "source": "arithmetic",
+   "shown": "1.23-1.50"
+  },
+  "H: 1.3 and 1.5 x C_node": {
+   "value": [
+    286.0,
+    330.0
+   ],
+   "unit": "pF",
+   "source": "arithmetic",
+   "shown": "286-330"
+  },
+  "L: E12 values / simulated C_node": {
+   "value": [
+    1.1914893617021276,
+    1.446808510638298
+   ],
+   "unit": "",
+   "source": "arithmetic",
+   "shown": "1.19-1.45"
+  },
+  "L: 1.3 and 1.5 x C_node": {
+   "value": [
+    611.0,
+    705.0
+   ],
+   "unit": "pF",
+   "source": "arithmetic",
+   "shown": "611-705"
+  },
+  "comp_search H100 S14_D4_CN330: DM PM, GM; CM PM, GM; f3db": {
+   "value": [
+    52.37222821228215,
+    22.253360875838048,
+    52.62417236359714,
+    11.666701541006447,
+    14.037985601139269
+   ],
+   "unit": "deg, dB, deg, dB, MHz",
+   "source": "comp_search_H100.json",
+   "shown": "52 deg, 22 dB | 53 deg, 11.7 dB | 14 MHz"
+  },
+  "comp_search L200 S30_D14_CN680: DM PM, GM; CM PM, GM; f3db": {
+   "value": [
+    58.1936332202238,
+    19.42045055659321,
+    49.671093813689225,
+    12.976067122800202,
+    16.807989544584665
+   ],
+   "unit": "deg, dB, deg, dB, MHz",
+   "source": "comp_search_L200.json",
+   "shown": "58 deg, 19 dB | 50 deg, 13.0 dB | 17 MHz"
+  },
+  "R_G route gain 20: noise at 10 Hz / 10 kHz / 10 MHz": {
+   "value": [
+    3.0872881,
+    1.4446942,
+    2.1422065
+   ],
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json",
+   "shown": "3.09 / 1.44 / 2.14"
+  },
+  "white rise, gains 20 and 30 (R_G route)": {
+   "value": [
+    0.34926613804709494,
+    0.20505537411582186
+   ],
+   "unit": "",
+   "source": "fe_gain_derived.json",
+   "shown": "+35 % / +21 %"
+  },
+  "Table 6c: R_G, gain 100": {
+   "value": 0.4048915804682612,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json, 10 kHz",
+   "shown": "0.40"
+  },
+  "Table 6c: loop op amps, gain 20 (R_G)": {
+   "value": 0.20402192906255562,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json, 10 kHz",
+   "shown": "0.20"
+  },
+  "Table 6c: R_F, gain 10": {
+   "value": 0.40485934726968387,
+   "unit": "nV/rtHz",
+   "source": "fe_gain_options.json, 10 kHz",
+   "shown": "0.40"
+  },
+  "R_F route gain 20 against adopted: -3 dB": {
+   "value": [
+    15.8980267369825,
+    15.030739168216696
+   ],
+   "unit": "MHz",
+   "source": "fe_gain_options.json",
+   "shown": "16 / 15"
+  },
+  "output current V_o / R_F at V_o = 12 V, R_F route gain 20": {
+   "value": 125.06513809275663,
+   "unit": "mA",
+   "source": "V_O >= +-12 V into 250 ohm, I_O >= 80 mA (SLOS265F p. 7)",
+   "shown": "125"
+  },
+  "THS4031: f_u k_DM x 1": {
+   "value": 17.815156299881732,
+   "unit": "MHz",
+   "source": "120 MHz (SLOS224L p. 1)",
+   "shown": "18"
+  },
+  "LM7171A: f_u k_DM x 0.5": {
+   "value": 11.876770866587819,
+   "unit": "MHz",
+   "source": "160 MHz (SNOS760D p. 5), gains >= +2 (p. 1)",
+   "shown": "12"
+  },
+  "LM7171B: f_u k_DM x 0.5": {
+   "value": 14.845963583234775,
+   "unit": "MHz",
+   "source": "200 MHz (SNOS760D p. 5)",
+   "shown": "15"
+  },
+  "adopted ratio f_local,DM / f_c,DM,outer": {
+   "value": 3.6720554899389732,
+   "unit": "",
+   "source": "arithmetic",
+   "shown": "3.7"
+  },
+  "outer DM crossover scaled to the LM7171A and THS4031 bounds": {
+   "value": [
+    3.2343658474467123,
+    4.851548771170068
+   ],
+   "unit": "MHz",
+   "source": "estimate (adopted ratio)",
+   "shown": "3-5"
+  },
+  "LV: ADA4899 model swing into R_F (V_OH, V_OL)": {
+   "value": [
+    3.3401173,
+    -3.3401223
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json, swing",
+   "shown": "+-3.34"
+  },
+  "LV: outputs above V_CM (V_GS1)": {
+   "value": 0.34737504999999996,
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "0.35"
+  },
+  "LV: largest differential output at V_CM = 0, 2 (V_OH - V_GS1)": {
+   "value": 5.985483400000001,
+   "unit": "V",
+   "source": "lv_option_range.json (V_od_max_at_V_CM_0)",
+   "shown": "6.0"
+  },
+  "LV: CM range at V_od = 0 V (1 V cascode margin; cascode at saturation)": {
+   "value": [
+    -3.6874979,
+    0.09374600000000033,
+    0.6599396626794475
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "-3.7 ... +0.09 (+0.66)"
+  },
+  "LV: CM range at V_od = 1 V (1 V cascode margin; cascode at saturation)": {
+   "value": [
+    -3.1874979,
+    0.09374600000000033,
+    0.6549401576799425
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "-3.2 ... +0.09 (+0.65)"
+  },
+  "LV: CM range at V_od = 10 V (1 V cascode margin; cascode at saturation)": {
+   "value": [
+    1.3125021000000001,
+    -2.0072582999999997,
+    -2.0072582999999997
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "empty"
+  },
+  "adopted: CM range at V_od = 0 V (1 V cascode margin)": {
+   "value": [
+    -12.8338963,
+    3.7326009000000004
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "-12.8 ... +3.7"
+  },
+  "adopted: CM range at V_od = 1 V (1 V cascode margin)": {
+   "value": [
+    -12.8338963,
+    3.7326009000000004
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "-12.8 ... +3.7"
+  },
+  "adopted: CM range at V_od = 10 V (1 V cascode margin)": {
+   "value": [
+    -8.6673943,
+    3.7326009000000004
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "-8.7 ... +3.7"
+  },
+  "LV: ADA4899 model input common-mode range on +-5 V": {
+   "value": [
+    -3.71,
+    3.71
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "+-3.71"
+  },
+  "LV: V_DS of the input JFETs and of the cascodes": {
+   "value": [
+    1.5462110999999998,
+    1.093746
+   ],
+   "unit": "V",
+   "source": "lv_option_range.json",
+   "shown": "1.55 / 1.1"
+  },
+  "ADA4899 model corrected for its 4 kohm input resistor: e_n, i_n white": {
+   "value": [
+    0.9974581503547406,
+    2.6017574789336604
+   ],
+   "unit": "nV/rtHz, pA/rtHz",
+   "source": "opamp_noise_check.json",
+   "shown": "1.0 / 2.6"
+  },
+  "ADA4899 corrected at 10 Hz: e_n, i_n": {
+   "value": [
+    10.013627716251698,
+    45.024004573372494
+   ],
+   "unit": "nV/rtHz, pA/rtHz",
+   "source": "opamp_noise_check.json",
+   "shown": "10 / 45"
+  },
+  "THS4021 (corrected model) i_n at 10 Hz": {
+   "value": 18.535547995270296,
+   "unit": "pA/rtHz",
+   "source": "opamp_noise_check.json",
+   "shown": "19"
+  },
+  "LV front end against adopted: noise at 10 Hz": {
+   "value": [
+    3.5293672000000003,
+    2.6683718
+   ],
+   "unit": "nV/rtHz",
+   "source": "lv_option.json",
+   "shown": "3.5 / 2.7"
+  },
+  "ADA4817 model: e_n at 100 kHz and at 10 Hz": {
+   "value": [
+    3.996905385641035,
+    169.80346947289365
+   ],
+   "unit": "nV/rtHz",
+   "source": "opamp_noise_check.json",
+   "shown": "4.0 / 170"
+  }
+ }
+}

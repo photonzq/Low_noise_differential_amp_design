@@ -1,0 +1,5 @@
+THS4031 in S2, H_HR gain 100 (H10_a3_1_a4_0p1_a5_0p2): input noise 10 Hz 4.566, 1 kHz 2.060, 10 kHz 2.024, 10 MHz 3.027 nV/rtHz; white (100 kHz) 2.020; stages after the front end 10 Hz 2.667, 1 kHz 0.739, 10 kHz 0.697, 10 MHz 0.726
+THS4031 in S2, H_HR gain 1000 (H10_a3_1_a4_1_a5_0p2): input noise 10 Hz 4.076, 1 kHz 2.035, 10 kHz 2.007, 10 MHz 3.016 nV/rtHz; white (100 kHz) 2.005; stages after the front end 10 Hz 1.697, 1 kHz 0.665, 10 kHz 0.648, 10 MHz 0.678
+LM7171 in S2, H_HR gain 100 (H10_a3_1_a4_0p1_a5_0p2): input noise 10 Hz 9.596, 1 kHz 2.777, 10 kHz 2.636, 10 MHz 4.860 nV/rtHz; white (100 kHz) 2.622; stages after the front end 10 Hz 8.851, 1 kHz 2.003, 10 kHz 1.828, 10 MHz 3.870
+LM7171 in S2, H_HR gain 1000 (H10_a3_1_a4_1_a5_0p2): input noise 10 Hz 9.372, 1 kHz 2.759, 10 kHz 2.623, 10 MHz 4.853 nV/rtHz; white (100 kHz) 2.610; stages after the front end 10 Hz 8.609, 1 kHz 1.977, 10 kHz 1.809, 10 MHz 3.861
+default S2 restored: chain.DA_OPAMP = LM7171

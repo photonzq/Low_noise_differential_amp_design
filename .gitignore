@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+
+# Every simulation deck with its log and data (about 0.5 GB); the scripts regenerate them
+sim/runs/
+
+# The vendors' SPICE models are not redistributed: each must be downloaded from its vendor, as the
+# READMEs kept here describe; scripts/models.py then writes ngspice-ready copies into sim/models/_lib/
+sim/models/*
+!sim/models/README*.md
+!sim/models/vendor_opamps_raw/
+sim/models/vendor_opamps_raw/*
+!sim/models/vendor_opamps_raw/README.md
+
+# The model calibration record embeds the vendors' JFET cards; scripts/models.py writes it
+sim/results/jfet_calibration.json
+
+# Third-party documents (data sheets, manuals, papers, saved web pages, figures from them); their
+# sources, revisions and the pages read are listed in each folder's README
+refs/**/*.pdf
+refs/**/*.html
+refs/**/*.htm
+refs/**/*.jpg
+refs/**/*.jpeg
+refs/**/*.png
+
+# Scratch output of overload_detail.py's child processes (the results are in overload_curves.npz)
+sim/results/_*

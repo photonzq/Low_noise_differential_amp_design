@@ -1,0 +1,721 @@
+{
+ "table7": [
+  {
+   "model": "TI JFE2140 (SLPM355)",
+   "quantity": "1/f, KF",
+   "model_gives": "2e-19: 1.194 nV/rtHz at 10 Hz (card's white; Eq. (1) 1.210; with the calibrated white 1.234)",
+   "data_sheet": "2.4 nV/rtHz (SLPS730B Table 6.5)",
+   "error": "1/f power 14.50x too low",
+   "json_key": "jfet/JFE2140 1/f"
+  },
+  {
+   "model": "TI JFE2140",
+   "quantity": "C_iss, C_rss at 5 V",
+   "model_gives": "8.648 pF, 1.249 pF",
+   "data_sheet": "13 pF, 4.2 pF",
+   "error": "0.665x, 0.320x",
+   "json_key": "jfet/JFE2140 capacitances"
+  },
+  {
+   "model": "TI JFE150 (SLPM349I)",
+   "quantity": "1/f, KF",
+   "model_gives": "3.25e-18 (10 Hz: 1.749 nV/rtHz with the calibrated white)",
+   "data_sheet": "1.8 nV/rtHz at 10 Hz, 5 mA",
+   "error": "KF +7.5 % (calibrated 3.495e-18)",
+   "json_key": "jfet/JFE150 1/f"
+  },
+  {
+   "model": "TI JFE150",
+   "quantity": "C_iss, C_rss at 5 V",
+   "model_gives": "17.810 pF, 2.255 pF",
+   "data_sheet": "24 pF, 4.5 pF",
+   "error": "0.742x, 0.550x",
+   "json_key": "jfet/JFE150 capacitances"
+  },
+  {
+   "model": "Linear Systems LSBF862 (Rev 2)",
+   "quantity": "1/f, KF",
+   "model_gives": "8.75e-17: 9.07 nV/rtHz at 10 Hz by Eq. (1) (8.20 in ngspice, with lambda V_DS)",
+   "data_sheet": "1.4 typ, 4.0 max",
+   "error": "1/f power 50.3x too high",
+   "json_key": "jfet/LSBF862 1/f"
+  },
+  {
+   "model": "Linear Systems LSBF862",
+   "quantity": "C_iss, C_rss at 8 V",
+   "model_gives": "6.496 pF, 0.868 pF",
+   "data_sheet": "11.5 pF, 3.5 pF",
+   "error": "0.565x, 0.248x",
+   "json_key": "jfet/LSBF862 capacitances"
+  },
+  {
+   "model": "LTspice standard.jft 2N5564",
+   "quantity": "KF",
+   "model_gives": "Kf=67860f = 6.786e-11",
+   "data_sheet": "Linear Systems' listing: Kf=6.786e-002f = 6.786e-17",
+   "error": "x 1e+06; 1/f corner 1.14 GHz",
+   "json_key": "jfet/2N5564 KF"
+  },
+  {
+   "model": "LTspice standard.jft J310",
+   "quantity": "KF",
+   "model_gives": "Kf=46340f = 4.634e-11: 0.585 uV/rtHz gate-referred at 10 kHz (Eq. (1)); 0.544 in ngspice at 11.0 mA",
+   "data_sheet": "-",
+   "error": "H at a gain of 10 with a J310 sink: 60.7 nV/rtHz at 10 kHz",
+   "json_key": "jfet/J310"
+  },
+  {
+   "model": "Linear Systems LSK389B (LTspice)",
+   "quantity": "channel noise",
+   "model_gives": "Nlev=3, Gdsnoi=7",
+   "data_sheet": "1.6 nV/rtHz (Rev A27 p. 2)",
+   "error": "ngspice at 2 mA, 10 V: 1.409 with NLEV/GDSNOI, 0.858 without",
+   "json_key": "jfet/LSK389"
+  },
+  {
+   "model": "TI THS4021",
+   "quantity": "e_n, i_n- at 10 Hz",
+   "model_gives": "18.21 nV/rtHz, 293.4 pA/rtHz",
+   "data_sheet": "4 nV/rtHz, 18.6 pA/rtHz (SLOS265F Figs. 5-11, 5-12)",
+   "error": "4.55x, 15.77x",
+   "json_key": "opamp/THS4021"
+  },
+  {
+   "model": "TI THS4031",
+   "quantity": "e_n, i_n- at 10 Hz",
+   "model_gives": "22.19 nV/rtHz, 300.4 pA/rtHz",
+   "data_sheet": "4 nV/rtHz, 18.6 pA/rtHz (SLOS224L Figs. 5-13, 5-14)",
+   "error": "5.55x, 16.15x",
+   "json_key": "opamp/THS4031"
+  },
+  {
+   "model": "TI THS3091",
+   "quantity": "e_n, i_n- at 10 Hz",
+   "model_gives": "37.04 nV/rtHz, 316.9 pA/rtHz",
+   "data_sheet": "6.5 nV/rtHz, 200 pA/rtHz (SLOS423K Fig. 7-16)",
+   "error": "5.70x, 1.58x",
+   "json_key": "opamp/THS3091"
+  },
+  {
+   "model": "TI THS4031",
+   "quantity": "HD3 at 10 MHz",
+   "model_gives": "-37.7 dBc at 1 Vpp (in S2)",
+   "data_sheet": "about -50 dBc at 2 Vpp, G = 2 (Fig. 5-15)",
+   "error": "12.3 dB as read; 24.3 dB after scaling to 2 Vpp",
+   "json_key": "opamp/THS4031 HD3"
+  },
+  {
+   "model": "TI THS3091",
+   "quantity": "white i_n-",
+   "model_gives": "1.548 pA/rtHz",
+   "data_sheet": "14 pA/rtHz (SLOS423K Sec. 7.5, p. 6)",
+   "error": "0.111x",
+   "json_key": "opamp/THS3091"
+  },
+  {
+   "model": "TI LM7171 (SNOM205A)",
+   "quantity": "white e_n; 1/f",
+   "model_gives": "4.082 nV/rtHz; none (10 Hz: 4.083)",
+   "data_sheet": "8.5 nV/rtHz (A grade, SNOS760D Sec. 5.5 p. 5); 43 nV/rtHz at 10 Hz (Fig. 5-16)",
+   "error": "0.480x; missing",
+   "json_key": "opamp/LM7171"
+  }
+ ],
+ "jfet": {
+  "JFE2140 1/f": {
+   "card": "TI SLPM355 (JFEx140 card)",
+   "kf_card": 2e-19,
+   "kf_calibrated": 2.8989812850202755e-18,
+   "beta": 0.014240000000000001,
+   "e_1f_10Hz_eq1": 5.925568289249716e-10,
+   "e_10Hz_eq1_with_card_white": 1.2096190164361746e-09,
+   "e_10Hz_card_ngspice": 1.19413488e-09,
+   "e_white_card_ngspice": 1.05455486e-09,
+   "e_10Hz_card_with_calibrated_white": 1.2344521695403977e-09,
+   "datasheet_10Hz": 2.4e-09,
+   "datasheet_white": 1.1e-09,
+   "op": {
+    "id": 0.002,
+    "vds": 10.0
+   },
+   "one_over_f_power_ratio_datasheet_to_card": 14.496347864023674,
+   "kf_ratio_calibrated_to_card": 14.494906425101378,
+   "density_ratio_card_to_datasheet_10Hz": 0.49755619999999995,
+   "src": "TI JFE2140 data sheet SLPS730B: Table 6.5 (e_n 1.1/2.4 nV/rtHz at 1 kHz/10 Hz, 2 mA, 10 V; C_iss 13 pF at 5 V); C_rss at 5 V read off Fig. 6-17 (p. 8) from its pixels, 3.93 pF (C_iss reads 13.4 pF there; the first reading by eye was 4.2 pF)",
+   "note_text": "0.2e-18: 1.2 nV/rtHz at 10 Hz, 2 mA | 2.4 | 1/f power 14x too low | KF = 2.9e-18"
+  },
+  "JFE2140 capacitances": {
+   "ciss_card": 8.64835228365912e-12,
+   "crss_card": 1.2493230131268576e-12,
+   "ciss_ds": 1.3e-11,
+   "crss_ds": 3.9e-12,
+   "vds": 5.0,
+   "ratio_ciss": 0.6652578679737785,
+   "ratio_crss": 0.3203392341350917,
+   "note_text": "8.6 pF, 1.25 pF | 13 pF, 4.2 pF (Fig. 6-17) | 0.66x, 0.30x"
+  },
+  "JFE150 1/f": {
+   "card": "TI SLPM349I",
+   "kf_card": 3.25e-18,
+   "kf_calibrated": 3.495129897734281e-18,
+   "beta": 0.031,
+   "kf_ratio_calibrated_to_card": 1.0754245839182404,
+   "kf_difference_percent": 7.542458391824036,
+   "e_1f_10Hz_eq1": 1.6189403145068331e-09,
+   "e_10Hz_card_ngspice": 1.70702549e-09,
+   "e_white_card_ngspice": 7.04647539e-10,
+   "e_10Hz_card_with_calibrated_white": 1.748544500231831e-09,
+   "datasheet_10Hz": 1.8e-09,
+   "op": {
+    "id": 0.005,
+    "vds": 5.0
+   },
+   "density_difference_percent_card_with_calibrated_white": -2.8586388760093895,
+   "note_text": "3.25e-18 | 1.8 nV/rtHz at 10 Hz, 5 mA | consistent (7 %) | KF = 3.5e-18"
+  },
+  "JFE150 capacitances": {
+   "ciss_card": 1.781007475175546e-11,
+   "crss_card": 2.254830839353289e-12,
+   "ciss_ds": 2.4e-11,
+   "crss_ds": 4.1e-12,
+   "vds": 5.0,
+   "ratio_ciss": 0.7420864479898107,
+   "ratio_crss": 0.5499587413056802,
+   "note_text": "17.8 pF, 2.3 pF | 24 pF, 4.5 pF (Fig. 6-12) | 0.74x, 0.50x"
+  },
+  "TI process argument": {
+   "beta_JFE150": 0.031,
+   "beta_JFE2140": 0.014240000000000001,
+   "beta_ratio": 2.176966292134831,
+   "kf_card_ratio_JFE150_to_JFE2140": 16.25,
+   "kf_calibrated_JFE2140": 2.8989812850202755e-18,
+   "kf_card_JFE150": 3.25e-18,
+   "kf_calibrated_JFE150": 3.495129897734281e-18,
+   "crss_ratios": [
+    0.3203392341350917,
+    0.5499587413056802
+   ],
+   "density_ratio_JFE2140_card_to_datasheet_10Hz": 0.49755619999999995,
+   "grading_M_in_cards": {
+    "JFE150": "M=0.33",
+    "JFE2140": "M=0.33"
+   },
+   "note_text": "beta = 31 mA/V^2; beta = 14.24 mA/V^2; KF 0.2e-18 'sixteen times less'; 1.2 against 2.4; KF 2.9e-18; 'half the true 1/f noise'; C_rss 30-50 % of the data sheet's; M = 0.33"
+  },
+  "LSBF862 1/f": {
+   "card": "Linear Systems LSBF862, Rev 2 (2026-02-09)",
+   "kf_card": 8.75e-17,
+   "kf_calibrated": 1.7389836352653594e-18,
+   "beta": 0.02658,
+   "lambda_": 0.03,
+   "e_1f_10Hz_eq1": 9.071864242962353e-09,
+   "e_1f_10Hz_eq1_with_lambda": 8.146774586515764e-09,
+   "e_10Hz_card_ngspice": 8.1990243e-09,
+   "e_white_card_ngspice": 9.01386939e-10,
+   "op": {
+    "id": 0.002,
+    "vds": 8.0
+   },
+   "datasheet_10Hz_typ": 1.4e-09,
+   "datasheet_10Hz_max": 4e-09,
+   "kf_ratio_card_to_calibrated": 50.31674722266606,
+   "one_over_f_power_ratio_card_to_datasheet": 50.31174322590206,
+   "kf_of_NXP_BF862_model": 8.75e-17,
+   "calibration": {
+    "en_target_white": 8e-10,
+    "en_achieved_white": 8.9769516e-10,
+    "rx": 0.0,
+    "rx_clipped": true,
+    "en_achieved_10Hz": 1.458036015388353e-09
+   },
+   "src": "Linear Systems LSBF862 data sheet, Doc 201195 Rev A2 (2026-02-17), p. 2: e_n 0.8 nV/rtHz at 10 kHz and 1.4 at 10 Hz typ (V_DS 8 V, I_D 2 mA); C_iss 11.5 pF, C_rss 3.5 pF (8 V); maximum 4.0 nV/rtHz at 10 Hz on the same page",
+   "note_text": "8.75e-17: about 9 nV/rtHz at 10 Hz | 1.4 typ, 4.0 max | 1/f power 50x too high | KF = 1.74e-18"
+  },
+  "LSBF862 capacitances": {
+   "ciss_card": 6.495845340318472e-12,
+   "crss_card": 8.676201215601339e-13,
+   "ciss_ds": 1.15e-11,
+   "crss_ds": 3.5e-12,
+   "vds": 8.0,
+   "ratio_ciss": 0.5648561165494324,
+   "ratio_crss": 0.2478914633028954,
+   "note_text": "6.5 pF, 0.87 pF | 11.5 pF, 3.5 pF | 0.56x, 0.25x"
+  },
+  "2N5564 KF": {
+   "ltspice_token": "Kf=67860f",
+   "kf_ltspice": 6.786e-11,
+   "linear_systems_token": "Kf=6.786e-002f",
+   "kf_linear_systems": 6.786000000000001e-17,
+   "linear_systems_listing": "sim\\models\\LinearSystems\\2N5564\\Copy_2N5564_NJF.txt.pdf",
+   "ratio": 999999.9999999999,
+   "beta": 0.009109,
+   "e_1f_eq1": {
+    "10": 1.3647137930582525e-05,
+    "1000": 1.3647137930582524e-06,
+    "1e+06": 4.3156039403117646e-08
+   },
+   "corner_eq1_with_calibrated_white": 1136745444.9239762,
+   "corner_eq1_with_card_white": 2159519885.1464453,
+   "corner_ngspice_gm_with_calibrated_white": 1091783211.7982142,
+   "kf_calibrated": 4.295021191548304e-16,
+   "calibrated_white": 1.28e-09,
+   "op": {
+    "id": 0.0045,
+    "vds": 5.5,
+    "gm": 0.01306577
+   },
+   "note_text": "67860f = 6.786e-11 | 6.786e-002f = 6.786e-17 | x 10^6 (unit prefix); paragraph: 'puts the 1/f corner ... in the megahertz range'"
+  },
+  "J310": {
+   "ltspice_token": "Kf=46340f",
+   "kf": 4.6340000000000005e-11,
+   "beta": 0.003384,
+   "lambda_": 0.017,
+   "e_1f_10kHz_eq1": 5.851036965336996e-07,
+   "e_1f_10kHz_eq1_with_lambda": 5.435344511587881e-07,
+   "e_10kHz_card_ngspice": 5.4362317e-07,
+   "gm_card_ngspice": 0.013148203,
+   "e_1f_10kHz_ngspice_gm": 5.436223810418401e-07,
+   "sink_op": {
+    "v_sa": 0.3551963,
+    "v_ea": -8.986458,
+    "v_ctrl": -10.70743,
+    "i_sink": 0.011024818,
+    "v_ce": 9.3416543,
+    "p_transistor": 0.10299003847641741,
+    "p_rt": 0.066298206085356,
+    "vcm_min": -7.353626300000001
+   },
+   "sink_current": 0.011024818,
+   "sink_vds": 9.3416543,
+   "sink_run": {
+    "case": "replace(frontend.CASES['H10'], sink='J:J310', v_sink=6.0, v_be_sink=-1.6)",
+    "noise_op": "direct",
+    "f3db": 25683418.571974885,
+    "gain_1k": 10.064217411890578,
+    "en": {
+     "1": 6.0813148e-06,
+     "10": 1.9229835e-06,
+     "100": 6.0728326e-07,
+     "1000.0": 1.9195141e-07,
+     "10000.0": 6.072294e-08,
+     "100000.0": 1.9274838e-08,
+     "1000000.0": 6.3243666e-09,
+     "10000000.0": 3.4433201e-09
+    },
+    "sinks": {
+     "10": 1.922980057292393e-06,
+     "1000": 1.91943395648824e-07,
+     "10000": 6.069835623057196e-08,
+     "100000": 1.919747397441419e-08
+    }
+   },
+   "note_text": "46340f = 4.634e-11: about 0.6 uV/rtHz gate-referred at 10 kHz and 11 mA; 61 nV/rtHz at 10 kHz (H, gain 10)"
+  },
+  "LSK389": {
+   "LSK389A": {
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=8",
+    "kf": "Kf=0.004f",
+    "gm": 0.018631464,
+    "with_nlev_gdsnoi": {
+     "en_white_100k": 1.39004e-09,
+     "en_1k": 1.3982228e-09,
+     "en_10": 2.0582962e-09
+    },
+    "without_nlev_gdsnoi": {
+     "en_white_100k": 7.8208769e-10,
+     "en_1k": 7.9654048e-10,
+     "en_10": 1.7076396e-09
+    },
+    "ratio_white_with_to_without": 1.7773454534235158,
+    "same_card_as": "LSK170A"
+   },
+   "LSK389B": {
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=7",
+    "kf": "Kf=0.004f",
+    "gm": 0.016967734,
+    "with_nlev_gdsnoi": {
+     "en_white_100k": 1.4090219e-09,
+     "en_1k": 1.4187501e-09,
+     "en_10": 2.182606e-09
+    },
+    "without_nlev_gdsnoi": {
+     "en_white_100k": 8.5815302e-10,
+     "en_1k": 8.7403422e-10,
+     "en_10": 1.8747941e-09
+    },
+    "ratio_white_with_to_without": 1.6419238377789547,
+    "same_card_as": "LSK170B"
+   },
+   "LSK389C": {
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=5",
+    "kf": "Kf=0.005f",
+    "gm": 0.017372487,
+    "with_nlev_gdsnoi": {
+     "en_white_100k": 1.2621593e-09,
+     "en_1k": 1.2750878e-09,
+     "en_10": 2.2149788e-09
+    },
+    "without_nlev_gdsnoi": {
+     "en_white_100k": 8.9214871e-10,
+     "en_1k": 9.1034728e-10,
+     "en_10": 2.0270704e-09
+    },
+    "ratio_white_with_to_without": 1.4147409348380946,
+    "same_card_as": "LSK170C"
+   },
+   "datasheet": {
+    "id": 0.002,
+    "vds": 10.0,
+    "en_1k": 1.6e-09,
+    "en_10": 3.2e-09,
+    "src": "Linear Systems LSK389 data sheet, Doc 201122 Rev A27 (2023-06-23), p. 2: e_n 1.6 nV/rtHz typ at 1 kHz and 3.2 at 10 Hz, V_DS 10 V, I_D 2 mA"
+   },
+   "note_text": "NLEV = 3, GDSNOI = 5-8 ... in ngspice 1.41 vs 0.86 nV/rtHz (an LSK389 card gave 1.41 instead of 0.86)"
+  },
+  "JFE2325 1/f (not in Table 7)": {
+   "kf": 4e-17,
+   "id": 0.0003781509,
+   "gm": 0.0006884938,
+   "e_1f_10Hz_model": 5.6488823682216095e-08,
+   "e_10Hz_datasheet_fig": 3.2e-08,
+   "e_white_datasheet_fig": 4.25e-09,
+   "one_over_f_power_ratio_10Hz": 3.172152545262999,
+   "src": "SLPS816A Fig. 5-24, p. 9 (gate connected to ground), read by eye (jfet_model_check.FIG_5_24)",
+   "remark": "not in Table 7: the card's 1/f power at 10 Hz against the data sheet's curve"
+  }
+ },
+ "opamp": {
+  "THS4021": {
+   "model": "TI SLOJ004, THS4021 PSpice model (1999)",
+   "kf_tokens_in_file": [
+    "KF=2.5E-13"
+   ],
+   "e_n_10": 1.8214758689415958e-08,
+   "i_n_10": 2.9341185632939403e-10,
+   "e_n_white": 1.2742797381886558e-09,
+   "i_n_white": 1.184683027137798e-12,
+   "datasheet": {
+    "e_10": 4e-09,
+    "i_10": 1.86e-11,
+    "e_w": 1.2e-09,
+    "i_w": 2.3e-12,
+    "src": "SLOS265F: 10 Hz from Figs. 5-11 and 5-12, p. 11 (e_n read by eye; i_n read from the pixels at the 10 Hz frame edge, 18.5-18.8 pA, where the reading by eye gave 20); white from the electrical characteristics, p. 6 (f > 10 kHz)"
+   },
+   "ratio_e_10": 4.55368967235399,
+   "ratio_i_10": 15.774830985451294,
+   "ratio_e_white": 1.0618997818238798,
+   "ratio_i_white": 0.515079577016434,
+   "corner_i_model": {
+    "approx": 613410.1886837198,
+    "exact": 613400.1886837198
+   },
+   "corner_i_model_vs_datasheet_white": {
+    "approx": 162741.99893130618,
+    "exact": 162731.99893130618
+   },
+   "corner_i_model_100kHz_as_white": {
+    "approx": 85983.99886593966,
+    "exact": 85973.99886593966
+   },
+   "corner_i_datasheet": {
+    "approx": 653.9886578449907,
+    "exact": 643.9886578449907
+   },
+   "corner_e_model": {
+    "approx": 2043.230151980768,
+    "exact": 2033.230151980768
+   },
+   "corner_e_datasheet": {
+    "approx": 111.11111111111113,
+    "exact": 101.11111111111113
+   },
+   "note_table7": {
+    "e_10": 1.82e-08,
+    "i_10": 2.93e-10
+   }
+  },
+  "THS4031": {
+   "model": "TI SLOJ005A, THS4031 PSpice model",
+   "kf_tokens_in_file": [
+    "KF=2.75E-13"
+   ],
+   "e_n_10": 2.218597216795742e-08,
+   "i_n_10": 3.003593209957918e-10,
+   "e_n_white": 1.2646904837749117e-09,
+   "i_n_white": 1.1170220863339908e-12,
+   "datasheet": {
+    "e_10": 4e-09,
+    "i_10": 1.86e-11,
+    "e_w": 1.2e-09,
+    "i_w": 2.3e-12,
+    "src": "SLOS224L: 10 Hz from Figs. 5-13 and 5-14, p. 12 (e_n read by eye; i_n read from the pixels at the 10 Hz frame edge, 18.5-18.8 pA, where the reading by eye gave 20); white from the electrical characteristics, Sec. 5.6, p. 6 (f > 10 kHz: 1.2 nV, 2.3 pA; the 2.1 pA read earlier off Fig. 5-14 at 100 kHz is replaced by the table's value)"
+   },
+   "ratio_e_10": 5.546493041989355,
+   "ratio_i_10": 16.148350591171603,
+   "ratio_e_white": 1.0539087364790931,
+   "ratio_i_white": 0.48566177666695254,
+   "corner_i_model": {
+    "approx": 723033.9785092226,
+    "exact": 723023.9785092226
+   },
+   "corner_i_model_vs_datasheet_white": {
+    "approx": 170540.11665227433,
+    "exact": 170530.11665227433
+   },
+   "corner_i_model_100kHz_as_white": {
+    "approx": 87850.85146718267,
+    "exact": 87840.85146718267
+   },
+   "corner_i_datasheet": {
+    "approx": 653.9886578449907,
+    "exact": 643.9886578449907
+   },
+   "corner_e_model": {
+    "approx": 3077.431722808337,
+    "exact": 3067.431722808337
+   },
+   "corner_e_datasheet": {
+    "approx": 111.11111111111113,
+    "exact": 101.11111111111113
+   },
+   "note_table7": {
+    "e_10": 2.22e-08,
+    "i_10": 3e-10
+   }
+  },
+  "THS3091": {
+   "model": "TI SLOM418, THS3091 PSpice model",
+   "kf_tokens_in_file": [
+    "KF=1.5e-13"
+   ],
+   "e_n_10": 3.7037678244646396e-08,
+   "i_n_10": 3.169215057849844e-10,
+   "e_n_white": 1.9168614264787334e-09,
+   "i_n_white": 1.5477463499806839e-12,
+   "datasheet": {
+    "e_10": 6.5e-09,
+    "i_10": 2e-10,
+    "e_w": 1.1e-09,
+    "i_w": 1.4e-11,
+    "i_w_noninv": 1.5e-11,
+    "src": "SLOS423K: 10 Hz from Fig. 7-16, p. 12 (inverting input, read by eye); white from Sec. 7.5, p. 6 (f > 10 kHz: 1.1 nV, 15 pA non-inverting, 14 pA inverting)"
+   },
+   "ratio_e_10": 5.698104345330214,
+   "ratio_i_10": 1.584607528924922,
+   "ratio_e_white": 1.7426012967988487,
+   "ratio_i_white": 0.11055331071290599,
+   "corner_i_model": {
+    "approx": 419279.7081931556,
+    "exact": 419269.7081931556
+   },
+   "corner_i_model_vs_datasheet_white": {
+    "approx": 5124.451062705199,
+    "exact": 5114.451062705199
+   },
+   "corner_i_model_100kHz_as_white": {
+    "approx": 80744.1663078797,
+    "exact": 80734.1663078797
+   },
+   "corner_i_datasheet": {
+    "approx": 2040.8163265306123,
+    "exact": 2030.8163265306123
+   },
+   "corner_e_model": {
+    "approx": 3733.4133233140255,
+    "exact": 3723.4133233140255
+   },
+   "corner_e_datasheet": {
+    "approx": 349.1735537190084,
+    "exact": 339.1735537190084
+   },
+   "note_table7": {
+    "e_10": 3.7e-08,
+    "i_10": 3.17e-10,
+    "i_w": 1.5e-12
+   }
+  },
+  "LM7171": {
+   "model": "TI SNOM205A, LM7171 PSpice model",
+   "kf_tokens_in_file": [],
+   "e_n_10": 4.083072323750604e-09,
+   "i_n_10": 9.703275929766184e-13,
+   "e_n_white": 4.0821373859851464e-09,
+   "i_n_white": 1.0885221023195553e-12,
+   "datasheet": {
+    "e_10": 4.3e-08,
+    "i_10": null,
+    "e_w": 8.5e-09,
+    "i_w": 1e-12,
+    "src": "SNOS760D: white from Sec. 5.5, p. 5 (A grade, 10 kHz: 8.5 nV, 1 pA); 10 Hz from Fig. 5-16, p. 10 (+/-5 V, read by eye)"
+   },
+   "ratio_e_10": 0.09495517031978147,
+   "ratio_i_10": null,
+   "ratio_e_white": 0.4802514571747231,
+   "ratio_i_white": 1.0885221023195553,
+   "corner_i_model": {
+    "approx": 7.946250640361322,
+    "exact": -2.0537493596386778
+   },
+   "corner_i_model_vs_datasheet_white": {
+    "approx": 9.41535637691798,
+    "exact": -0.5846436230820196
+   },
+   "corner_i_model_100kHz_as_white": {
+    "approx": 7.946250640361322,
+    "exact": -2.0537493596386778
+   },
+   "corner_i_datasheet": {
+    "approx": null,
+    "exact": null
+   },
+   "corner_e_model": {
+    "approx": 10.004581153166157,
+    "exact": 0.004581153166156593
+   },
+   "corner_e_datasheet": {
+    "approx": 255.916955017301,
+    "exact": 245.916955017301
+   },
+   "note_table7": {
+    "e_w": 4.1e-09
+   }
+  },
+  "THS4031 HD3": {
+   "h3": 0.012973787045680167,
+   "hd3_dBc_1Vpp": -37.73866469886508,
+   "hd3_dBc_scaled_to_2Vpp": -25.69746487230583,
+   "datasheet_dBc_2Vpp": -50.0,
+   "excess_unscaled_dB": 12.26133530113492,
+   "excess_scaled_dB": 24.30253512769417,
+   "datasheet_src": "SLOS224L Fig. 5-15, p. 12 (+/-15 V, G = +2, R_L 1 kohm, 2 Vpp): the HD3 curve reaches the plot's top edge, -50 dBc, at 10 MHz (read by eye)",
+   "model_src": "da_compare.json THS4031.thd (10 MHz, 1 Vpp at the output, S2 at unity gain)",
+   "note_text": "-37 dBc at 1 Vpp (in S2) | about -50 dBc at 2 Vpp, G = 2 (Fig. 5-15) | about 20 dB too high"
+  },
+  "THS4021 in the H front end": {
+   "en_10Hz_published": 1.6189747e-08,
+   "en_10Hz_corrected": 2.6683718e-09,
+   "ratio_10Hz": 6.067275557326756,
+   "en_1Hz_published": 5.1096183e-08,
+   "en_1Hz_corrected": 7.8055652e-09,
+   "loop_op_amps_10Hz_published": 1.600357857822168e-08,
+   "loop_op_amps_10Hz_corrected": 1.0615190738494796e-09,
+   "note_text": "the H front end showed 11.3 nV/rtHz at 10 Hz, four times the 2.7 nV/rtHz it has with the corrected model"
+  },
+  "THS3091 in the chain": {
+   "H_LN_1": {
+    "ratio_1Hz": 1.760711807873299,
+    "published_1Hz": 1.1454345e-06,
+    "corrected_1Hz": 6.5055195e-07,
+    "ratio_10Hz": 1.7519350073441426,
+    "ratio_10kHz": 0.9099880019053803,
+    "setting": "H10_a3_0p1_a4_0p01_a5_0p2"
+   },
+   "H_LN_10": {
+    "ratio_1Hz": 1.6469115274131176,
+    "published_1Hz": 1.1865363e-07,
+    "corrected_1Hz": 7.2046147e-08,
+    "ratio_10Hz": 1.6322665982810312,
+    "ratio_10kHz": 0.9645706808245613,
+    "setting": "H10_a3_0p1_a4_0p1_a5_0p2"
+   },
+   "note_text": "at low gains, where the THS3091 output stage dominates, it put the noise at 1 Hz too high by a factor of 1.8"
+  }
+ },
+ "ltspice_library": {
+  "library": "%LOCALAPPDATA%\\LTspice\\lib\\cmp\\standard.jft",
+  "size_bytes": 54648,
+  "sha256": "82bdc4a4f1981086ff9221e38767a60d8327391850a97ce3f7ee8dc5b99e3557",
+  "modified_utc": "2026-09-20T15:56:40+00:00",
+  "header": "* Copyright \u00a9 2000 Linear Technology Corporation.   All rights reserved.",
+  "ltspice_exe": "%LOCALAPPDATA%\\Programs\\ADI\\LTspice\\LTspice.exe",
+  "ltspice_version": "26.1.1.0",
+  "ltspice_exe_modified_utc": "2026-09-13T06:53:08+00:00",
+  "changelog": "%LOCALAPPDATA%\\LTspice\\ChangeLog.txt",
+  "changelog_latest_entry": "11/02/26 MAX6070-5.0 Update Application Circuit",
+  "changelog_jfet_entries": [
+   "08/29/24 Updated list of jfet devices to currently supported  ones",
+   "06/26/23 Updated JFET device models from Linear Systems",
+   "10/14/19 Added some JFET models supplied by Linear Systems.",
+   "10/08/19 Improved the initial column width choices in the select diode, bipolar, JFET, and MOSFET dialogs.",
+   "04/05/19 Added 123 JFET models graciously supplied by Linear Integrated Systems, Inc."
+  ],
+  "cards": {
+   "2N5564": {
+    "kf": "Kf=67860f",
+    "nlev": null,
+    "gdsnoi": null
+   },
+   "J310": {
+    "kf": "Kf=46340f",
+    "nlev": null,
+    "gdsnoi": null
+   },
+   "LSK389A": {
+    "kf": "Kf=0.004f",
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=8"
+   },
+   "LSK389B": {
+    "kf": "Kf=0.004f",
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=7"
+   },
+   "LSK389C": {
+    "kf": "Kf=0.005f",
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=5"
+   },
+   "LSK170A": {
+    "kf": "Kf=0.004f",
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=8"
+   },
+   "LSK170B": {
+    "kf": "Kf=0.004f",
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=7"
+   },
+   "LSK170C": {
+    "kf": "Kf=0.005f",
+    "nlev": "Nlev=3",
+    "gdsnoi": "Gdsnoi=5"
+   }
+  }
+ },
+ "summary": {
+  "JFE2140 1/f power too low (KF ratio)": 14.494906425101378,
+  "LSBF862 1/f power too high (KF ratio)": 50.31674722266606,
+  "2N5564 KF factor (LTspice / Linear Systems)": 999999.9999999999,
+  "e_n at 10 Hz, model / data sheet (THS4021, THS4031, THS3091)": [
+   4.55368967235399,
+   5.546493041989355,
+   5.698104345330214
+  ],
+  "i_n- at 10 Hz, model / data sheet (THS4021, THS4031)": [
+   15.774830985451294,
+   16.148350591171603
+  ],
+  "THS3091 white i_n-, model / data sheet": 0.11055331071290599,
+  "LM7171 white e_n, model / data sheet": 0.4802514571747231,
+  "LSK389B white e_n in ngspice, with / without NLEV and GDSNOI (nV/rtHz)": [
+   1.4090219,
+   0.85815302
+  ],
+  "H front end at 10 Hz, published / corrected THS4021 (nV/rtHz, ratio)": [
+   16.189747,
+   2.6683718,
+   6.067275557326756
+  ],
+  "chain at a gain of 1, 1 Hz, published / corrected THS3091": 1.760711807873299,
+  "J310 sink, H at a gain of 10: input noise at 10 kHz (nV/rtHz)": 60.72294,
+  "2N5564 1/f corner with KF = 67860f, Eq. (1) with the calibrated white (Hz)": 1136745444.9239762,
+  "J310 gate-referred 1/f at 10 kHz, Eq. (1) (V/rtHz)": 5.851036965336996e-07,
+  "LSBF862 card at 10 Hz, Eq. (1) (V/rtHz)": 9.071864242962353e-09,
+  "JFE2140 card at 10 Hz, ngspice, card's own white (V/rtHz)": 1.19413488e-09,
+  "JFE150 KF, calibrated / card": 1.0754245839182404
+ }
+}

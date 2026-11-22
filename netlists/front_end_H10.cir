@@ -1,0 +1,69 @@
+* Front end H10 of the low-noise differential preamplifier note: 2 x JFE2140 per side at 5 mA, LSBF862 cascodes bootstrapped 3.5 V above the source node,
+* THS4021 loop op amps, R_F 500 ohm, R_G 111 ohm (gain 10.01), C_I 13 pF, C_X 1 pF, C_node 220 pF.
+* Input A driven (VIN, AC 1), input B grounded; outputs oa, ob.  Section 4.2 of the note.
+.options reltol=1e-4 abstol=1e-15 vntol=1e-9 gmin=1e-14 itl1=500 itl4=200
+.options rshunt=1e12
+.include "../sim/models/_lib/jfets.lib"
+.include "../sim/models/_lib/opamps.lib"
+.include "../sim/models/_lib/bjts.lib"
+.model rnl r(noisy=0)
+VIN ina 0 DC 0 AC 1
+RIA ina ga 1m rnl
+RIB 0 gb 1m rnl
+* ===== front end H10: 2 x JFE2140 per side at 5 mA, R_F 500, R_G 111, gain 10.01
+VP vp 0 DC 15
+VM vm 0 DC -15
+VREF vref0 0 DC 9
+RREF vref0 vref 1k rnl
+CREF vref 0 10u
+BERR nerr 0 V=(V(oa)+V(ob)-V(sa)-V(sb))/2
+GINT 0 nint nerr 0 1e-6
+CINT nint 0 1u
+RINT nint 0 1e12 rnl
+BSNK vsink0 0 V=max(min(-12.34-V(nint), -10), -14)
+RSNK vsink0 vsink 1k rnl
+CSNK vsink 0 10u
+* --- side a
+XJa1 da1 ga sa JFE2140
+XCa1 ca ba da1 LSBF862
+XJa2 da2 ga sa JFE2140
+XCa2 ca ba da2 LSBF862
+RBSa ba sa 3500
+CBSa ba sa 1e-06
+RUPa vp ba 10900
+RDa vp ca 600
+CIa oa ca 1.3e-11
+CXa ob ca 1e-12
+CNa ca 0 2.2e-10
+XUa vref ca oa vp vm OA_THS4021
+RFa oa sa 500
+QTa sa vsink ea MMBT3904
+RTa ea vm 181.818
+* --- side b
+XJb1 db1 gb sb JFE2140
+XCb1 cb bb db1 LSBF862
+XJb2 db2 gb sb JFE2140
+XCb2 cb bb db2 LSBF862
+RBSb bb sb 3500
+CBSb bb sb 1e-06
+RUPb vp bb 10900
+RDb vp cb 600
+CIb ob cb 1.3e-11
+CXb oa cb 1e-12
+CNb cb 0 2.2e-10
+XUb vref cb ob vp vm OA_THS4021
+RFb ob sb 500
+QTb sb vsink eb MMBT3904
+RTb eb vm 181.818
+RG sa sb 111
+.control
+set wr_singlescale
+set wr_vecnames
+op
+ac dec 40 1 1g
+wrdata ac.txt v(oa) v(ob)
+noise v(oa,ob) VIN dec 20 1 100meg
+setplot noise2
+print onoise_total
+.endc
+.end

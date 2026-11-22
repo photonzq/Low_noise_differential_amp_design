@@ -1,0 +1,15 @@
+THS4031: G 100 f3dB 30.7 MHz, peak 0.00 dB, 10 MHz -0.37 dB
+THS4031: THD 10 MHz 1 Vpp 1.3602 % (H2 -75, H3 -37 dBc)
+THS4031: THD 1 MHz 10 Vpp 0.1245 % (H2 -73, H3 -58 dBc)
+THS4031: noise H_HR G 10: 1 kHz 4.89, 1 MHz 3.26 nV/rtHz
+THS4031: noise H_LN G 100: 1 kHz 1.19, 1 MHz 1.10 nV/rtHz
+LM7171: G 100 f3dB 30.1 MHz, peak 0.00 dB, 10 MHz -0.38 dB
+LM7171: THD 10 MHz 1 Vpp 0.0760 % (H2 -79, H3 -63 dBc)
+LM7171: THD 1 MHz 10 Vpp 0.0419 % (H2 -77, H3 -69 dBc)
+LM7171: noise H_HR G 10: 1 kHz 5.24, 1 MHz 3.68 nV/rtHz
+LM7171: noise H_LN G 100: 1 kHz 1.20, 1 MHz 1.11 nV/rtHz
+THS3091: G 100 f3dB 29.7 MHz, peak 0.00 dB, 10 MHz -0.40 dB
+THS3091: THD 10 MHz 1 Vpp 0.1502 % (H2 -64, H3 -60 dBc)
+THS3091: THD 1 MHz 10 Vpp 0.0366 % (H2 -88, H3 -70 dBc)
+THS3091: noise H_HR G 10: 1 kHz 6.48, 1 MHz 3.33 nV/rtHz
+THS3091: noise H_LN G 100: 1 kHz 1.26, 1 MHz 1.10 nV/rtHz

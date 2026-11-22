@@ -1,0 +1,109 @@
+* Front end L200 of the low-noise differential preamplifier note: 12 x JFE150 per side at 5 mA, LSBF862 cascodes bootstrapped 3.5 V above the source node,
+* THS4021 loop op amps, R_F 249 ohm, R_G 2.49 ohm (gain 201), C_I 22 pF, C_X 8 pF, C_node 470 pF.
+* Input A driven (VIN, AC 1), input B grounded; outputs oa, ob.  Section 4.2 of the note.
+.options reltol=1e-4 abstol=1e-15 vntol=1e-9 gmin=1e-14 itl1=500 itl4=200
+.options rshunt=1e12
+.include "../sim/models/_lib/jfets.lib"
+.include "../sim/models/_lib/opamps.lib"
+.include "../sim/models/_lib/bjts.lib"
+.model rnl r(noisy=0)
+VIN ina 0 DC 0 AC 1
+RIA ina ga 1m rnl
+RIB 0 gb 1m rnl
+* ===== front end L200: 12 x JFE150 per side at 5 mA, R_F 249, R_G 2.49, gain 201
+VP vp 0 DC 15
+VM vm 0 DC -15
+VREF vref0 0 DC 9
+RREF vref0 vref 1k rnl
+CREF vref 0 10u
+BERR nerr 0 V=(V(oa)+V(ob)-V(sa)-V(sb))/2
+GINT 0 nint nerr 0 1e-6
+CINT nint 0 1u
+RINT nint 0 1e12 rnl
+BSNK vsink0 0 V=max(min(-8.34-V(nint), -6), -14)
+RSNK vsink0 vsink 1k rnl
+CSNK vsink 0 10u
+* --- side a
+XJa1 da1 ga sa JFE150
+XCa1 ca ba da1 LSBF862
+XJa2 da2 ga sa JFE150
+XCa2 ca ba da2 LSBF862
+XJa3 da3 ga sa JFE150
+XCa3 ca ba da3 LSBF862
+XJa4 da4 ga sa JFE150
+XCa4 ca ba da4 LSBF862
+XJa5 da5 ga sa JFE150
+XCa5 ca ba da5 LSBF862
+XJa6 da6 ga sa JFE150
+XCa6 ca ba da6 LSBF862
+XJa7 da7 ga sa JFE150
+XCa7 ca ba da7 LSBF862
+XJa8 da8 ga sa JFE150
+XCa8 ca ba da8 LSBF862
+XJa9 da9 ga sa JFE150
+XCa9 ca ba da9 LSBF862
+XJa10 da10 ga sa JFE150
+XCa10 ca ba da10 LSBF862
+XJa11 da11 ga sa JFE150
+XCa11 ca ba da11 LSBF862
+XJa12 da12 ga sa JFE150
+XCa12 ca ba da12 LSBF862
+RBSa ba sa 3500
+CBSa ba sa 1e-06
+RUPa vp ba 10900
+RDa vp ca 100
+CIa oa ca 2.2e-11
+CXa ob ca 8e-12
+CNa ca 0 4.7e-10
+XUa vref ca oa vp vm OA_THS4021
+RFa oa sa 249
+QTa sa vsink ea PZT3904
+RTa ea vm 98.3607
+* --- side b
+XJb1 db1 gb sb JFE150
+XCb1 cb bb db1 LSBF862
+XJb2 db2 gb sb JFE150
+XCb2 cb bb db2 LSBF862
+XJb3 db3 gb sb JFE150
+XCb3 cb bb db3 LSBF862
+XJb4 db4 gb sb JFE150
+XCb4 cb bb db4 LSBF862
+XJb5 db5 gb sb JFE150
+XCb5 cb bb db5 LSBF862
+XJb6 db6 gb sb JFE150
+XCb6 cb bb db6 LSBF862
+XJb7 db7 gb sb JFE150
+XCb7 cb bb db7 LSBF862
+XJb8 db8 gb sb JFE150
+XCb8 cb bb db8 LSBF862
+XJb9 db9 gb sb JFE150
+XCb9 cb bb db9 LSBF862
+XJb10 db10 gb sb JFE150
+XCb10 cb bb db10 LSBF862
+XJb11 db11 gb sb JFE150
+XCb11 cb bb db11 LSBF862
+XJb12 db12 gb sb JFE150
+XCb12 cb bb db12 LSBF862
+RBSb bb sb 3500
+CBSb bb sb 1e-06
+RUPb vp bb 10900
+RDb vp cb 100
+CIb ob cb 2.2e-11
+CXb oa cb 8e-12
+CNb cb 0 4.7e-10
+XUb vref cb ob vp vm OA_THS4021
+RFb ob sb 249
+QTb sb vsink eb PZT3904
+RTb eb vm 98.3607
+RG sa sb 2.49
+.control
+set wr_singlescale
+set wr_vecnames
+op
+ac dec 40 1 1g
+wrdata ac.txt v(oa) v(ob)
+noise v(oa,ob) VIN dec 20 1 100meg
+setplot noise2
+print onoise_total
+.endc
+.end
