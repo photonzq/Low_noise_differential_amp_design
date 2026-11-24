@@ -2547,6 +2547,379 @@
    "source": "nf_map.json input_network"
   }
  },
+ "s6.2 Figure 14j-l": {
+  "5113 plot: px per decade (f | R); largest residual of the grid calibration (px)": {
+   "value": [
+    99.99999999999993,
+    -99.99999999999999,
+    0.3888888888891415
+   ],
+   "text": "100.0 | 100.0; 0.4",
+   "source": "nf5113_manual.json calibration"
+  },
+  "5113 plot: the image's ink within 1 px of the page's render (share)": {
+   "value": 1.0,
+   "text": "1.0000",
+   "source": "nf5113_manual.json image_check"
+  },
+  "5113 plot: the unlabelled corner contours on the 1 MHz edge, 6 | 10 | 15 | 20 | 30 dB (Mohm); their ratios against those of F - 1, largest difference (%)": {
+   "value": [
+    {
+     "6": 198152.70258050968,
+     "10": 598411.5950603199,
+     "15": 2074913.5174549106,
+     "20": 6561452.663029057,
+     "30": 65614526.63029057
+    },
+    0.019360630570912418
+   ],
+   "text": "0.20 | 0.60 | 2.1 | 6.6 | 66; 1.9",
+   "source": "nf5113_manual.json corner_check"
+  },
+  "5113 plot: two-port fit, largest deviation where both sides are drawn (dB | decade); below, e_n alone (dB | decade); both sides drawn from (Hz)": {
+   "value": [
+    {
+     "db": 0.23514267709035153,
+     "decades": 0.03442505145703656
+    },
+    {
+     "db": 0.48187862927243685,
+     "decades": 0.061052527206909346
+    },
+    3.9810717055349722
+   ],
+   "text": "0.24 | 0.034; 0.48 | 0.061; 3.98",
+   "source": "nf5113_manual.json two_port_fit"
+  },
+  "5113 plot: e_n at 0.1 Hz (uV/rtHz) | 1 Hz | 10 Hz | 100 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz (nV/rtHz)": {
+   "value": {
+    "0.1": 8.195436145164857e-06,
+    "1.0": 7.219034820004651e-07,
+    "10.0": 1.0127098352827239e-07,
+    "100.0": 2.9920301582879243e-08,
+    "1000.0": 7.938535667907358e-09,
+    "10000.0": 4.025832933434029e-09,
+    "100000.0": 3.98647994477259e-09,
+    "1000000.0": 4.007009840685178e-09
+   },
+   "text": "8.2 | 722 | 101 | 29.9 | 7.94 | 4.03 | 3.99 | 4.01",
+   "source": "nf5113_manual.json model.at"
+  },
+  "5113 plot at 1 kHz: e_n from each low-side contour of 3 to 30 dB alone, range (nV/rtHz); e_n over the specified 4 nV/rtHz; the 3 dB contour's low side, drawn | for 4 nV/rtHz with the plot's i_n (kohm)": {
+   "value": [
+    [
+     7.853973217873289e-09,
+     8.00399571030568e-09,
+     8.00279865861503e-09,
+     7.927621722597842e-09,
+     8.015640542799597e-09,
+     7.868707106706377e-09
+    ],
+    1.9846339169768392,
+    3869.9022919026925,
+    1003.805809325167
+   ],
+   "text": "7.85\u20138.02; 1.98; 3.87 | 1.00",
+   "source": "nf5113_manual.json spec_check"
+  },
+  "5113 plot: 1/f corner f (e^2 - e_w^2) / e_w^2 from 10 Hz | 100 Hz | 1 kHz (kHz; e_w at 100 kHz)": {
+   "value": {
+    "10.0": 6443.434231884158,
+    "100.0": 5533.168813195593,
+    "1000.0": 2965.5335968202667
+   },
+   "text": "6.4 | 5.5 | 3.0",
+   "source": "nf5113_manual.json model.corner_hz"
+  },
+  "5113 plot: slope of S_e over each decade from 0.1 Hz to 1 MHz (d log S_e / d log f)": {
+   "value": {
+    "0.1-1": -2.110185868503459,
+    "1-10": -1.7059882175514822,
+    "10-100": -1.0590381221964194,
+    "100-1000": -1.1524511325816018,
+    "1000-10000": -0.589769304226671,
+    "10000-100000": -0.0085323294352051,
+    "100000-1e+06": 0.004461650844639564
+   },
+   "text": "\u22122.11 | \u22121.71 | \u22121.06 | \u22121.15 | \u22120.59 | \u22120.01 | 0.00",
+   "source": "nf5113_manual.json model.s_e_slope_per_decade"
+  },
+  "5113 plot: largest departure of log e_n from the straight lines between whole decades (decade)": {
+   "value": {
+    "0.1-1": 0.011542481738727517,
+    "1-10": 0.013884802225004655,
+    "10-100": 0.008620490007028359,
+    "100-1000": 0.0044998905801278966,
+    "1000-10000": 0.004216607684822904,
+    "10000-100000": 0.001123105236107591,
+    "100000-1e+06": 0.0014855681295120604
+   },
+   "text": "0.014",
+   "source": "nf5113_manual.json model.e_n_stray_from_decade_chords_decades"
+  },
+  "5113 plot: i_n at low frequencies (fA/rtHz) and its range from 5 Hz to 5 kHz; the resistance with that thermal noise at 290 K (Mohm); 100 Mohm's (fA/rtHz); the ratio": {
+   "value": [
+    1.769933068973072e-14,
+    [
+     1.7510075204349512e-14,
+     1.7967210056983824e-14
+    ],
+    51124324.732854925,
+    1.2655247291143702e-14
+   ],
+   "text": "17.7 (17.5\u201318.0); 51; 12.7; 1.40",
+   "source": "nf5113_manual.json model"
+  },
+  "5113 plot: C of the e_n w C term at 100 kHz | 316 kHz | 1 MHz (pF)": {
+   "value": {
+    "100000": 19.592815912120756,
+    "316228": 20.110434934197475,
+    "1e+06": 19.4573350808143
+   },
+   "text": "19.6 | 20.1 | 19.5",
+   "source": "nf5113_manual.json model.c_eff_pf"
+  },
+  "5113 plot at 0.1 Hz: its i_n through 1 / (w 0.1 uF) (uV/rtHz); the plotted e_n over that; the signal transfer of the 10 s high-pass": {
+   "value": {
+    "f_hz": 0.1,
+    "i_n_through_coupling_v": 2.8169359686887295e-07,
+    "e_n_plot_v": 8.195436145164857e-06,
+    "ratio": 29.09344137126338,
+    "signal_transfer": 0.9875704921513918
+   },
+   "text": "0.28; 29; 0.988",
+   "source": "nf5113_manual.json ac_coupling_check"
+  },
+  "5113 plot, 10 Hz: drawn 3 dB contour (ohm) | drawn 1 dB contour (ohm) | minimum (dB) at R_opt (ohm)": {
+   "value": {
+    "e_n": 1.0127098352827239e-07,
+    "fitted": "S_e, S_x, S_i",
+    "drawn_1db_ohm": [],
+    "drawn_3db_ohm": [
+     672511.9410047602,
+     48853985.59319369
+    ],
+    "i_n": 1.773407922270004e-14,
+    "corr": 0.06639348579252115,
+    "r_opt": 5710529.554793188,
+    "nf_min_db": 0.9312957358571676,
+    "fit_1db_ohm": [
+     3764319.9742526445,
+     8662958.520852309
+    ],
+    "fit_3db_ohm": [
+     661964.7996932706,
+     49262661.415345326
+    ]
+   },
+   "text": "670000, 49000000 | - | 0.93 at 5700000",
+   "source": "nf5113_manual.json model.at"
+  },
+  "5113 plot, 1000 Hz: drawn 3 dB contour (ohm) | drawn 1 dB contour (ohm) | minimum (dB) at R_opt (ohm)": {
+   "value": {
+    "e_n": 7.938535667907358e-09,
+    "fitted": "S_e, S_x, S_i",
+    "drawn_1db_ohm": [
+     15406.358517478753,
+     13455504.939324317
+    ],
+    "drawn_3db_ohm": [
+     3869.9022919026925,
+     51156403.00070042
+    ],
+    "i_n": 1.768506043686026e-14,
+    "corr": 0.020139768366065597,
+    "r_opt": 448883.71720581665,
+    "nf_min_db": 0.07698827018709059,
+    "fit_1db_ohm": [
+     15235.528139140986,
+     13225441.85749997
+    ],
+    "fit_3db_ohm": [
+     3955.3943807593723,
+     50942225.26902725
+    ]
+   },
+   "text": "3900, 51000000 | 15000, 13000000 | 0.077 at 450000",
+   "source": "nf5113_manual.json model.at"
+  },
+  "5113 plot, 1e+06 Hz: drawn 3 dB contour (ohm) | drawn 1 dB contour (ohm) | minimum (dB) at R_opt (ohm)": {
+   "value": {
+    "e_n": 4.007009840685178e-09,
+    "fitted": "S_e, S_x, S_i",
+    "drawn_1db_ohm": [
+     5755.7245253511,
+     11719.254886625693
+    ],
+    "drawn_3db_ohm": [
+     1020.7044307665852,
+     65614.52663029057
+    ],
+    "i_n": 4.901927869344582e-13,
+    "corr": -0.01182411892783745,
+    "r_opt": 8174.354962960603,
+    "nf_min_db": 0.942570886878122,
+    "fit_1db_ohm": [
+     5673.592023575732,
+     11777.38525837215
+    ],
+    "fit_3db_ohm": [
+     1020.0193957670107,
+     65508.63575513949
+    ]
+   },
+   "text": "1000, 66000 | 5800, 12000 | 0.94 at 8200",
+   "source": "nf5113_manual.json model.at"
+  },
+  "H minus the 5113 plot (3.98 Hz to 1 MHz): fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)": {
+   "value": [
+    0.9182558499123802,
+    0.08174415008761983,
+    0.0
+   ],
+   "text": "92 | 8 | 0",
+   "source": "nf5113_manual.json versus"
+  },
+  "H minus the 5113 plot: extremes (dB) at (Hz, ohm); the higher region's bounds": {
+   "value": [
+    {
+     "value": -34.14211194369335,
+     "f_hz": 3.9810717055349722,
+     "r_ohm": 1.0
+    },
+    {
+     "value": -0.027130019453856787,
+     "f_hz": 8912.509381337459,
+     "r_ohm": 323593.6569296281
+    },
+    null
+   ],
+   "text": "\u221234.1 at (3.98, 1); \u22120.03 at (8.91e+03, 3.24e+05); nowhere higher",
+   "source": "nf5113_manual.json versus"
+  },
+  "H equal to the 5113 plot at (ohm): 10 Hz | 100 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz": {
+   "value": {
+    "10.0": [],
+    "100.0": [],
+    "1000.0": [],
+    "10000.0": [],
+    "100000.0": [],
+    "1000000.0": []
+   },
+   "text": "- | - | - | - | - | -",
+   "source": "nf5113_manual.json versus.equal_at_r_ohm"
+  },
+  "L minus the 5113 plot (3.98 Hz to 1 MHz): fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)": {
+   "value": [
+    0.6348715481794546,
+    0.04291653781397107,
+    0.32221191400657434
+   ],
+   "text": "63 | 4 | 32",
+   "source": "nf5113_manual.json versus"
+  },
+  "L minus the 5113 plot: extremes (dB) at (Hz, ohm); the higher region's bounds": {
+   "value": [
+    {
+     "value": -43.5705821086517,
+     "f_hz": 3.9810717055349722,
+     "r_ohm": 1.0
+    },
+    {
+     "value": 9.793232852545046,
+     "f_hz": 1000000.0,
+     "r_ohm": 100000000.0
+    },
+    {
+     "f_hz": [
+      3.9810717055349722,
+      1000000.0
+     ],
+     "r_ohm": [
+      2951.209226666387,
+      100000000.0
+     ]
+    }
+   ],
+   "text": "\u221243.6 at (3.98, 1); 9.79 at (1e+06, 1e+08); higher from 4.0 Hz to 1000000 Hz, 3000 to 100000000 ohm",
+   "source": "nf5113_manual.json versus"
+  },
+  "L equal to the 5113 plot at (ohm): 10 Hz | 100 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz": {
+   "value": {
+    "10.0": [
+     2853319.838738119
+    ],
+    "100.0": [
+     818770.4017871376
+    ],
+    "1000.0": [
+     218067.07518046978
+    ],
+    "10000.0": [
+     105113.001592201
+    ],
+    "100000.0": [
+     27017.001638267273
+    ],
+    "1000000.0": [
+     2763.211380520966
+    ]
+   },
+   "text": "2900000 | 820000 | 220000 | 110000 | 27000 | 2800",
+   "source": "nf5113_manual.json versus.equal_at_r_ohm"
+  },
+  "SR560 data sheet minus the 5113 plot (3.98 Hz to 1 MHz): fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)": {
+   "value": [
+    0.7577683858479652,
+    0.11406613293016757,
+    0.12816548122186716
+   ],
+   "text": "76 | 11 | 13",
+   "source": "nf5113_manual.json versus"
+  },
+  "SR560 data sheet minus the 5113 plot: extremes (dB) at (Hz, ohm); the higher region's bounds": {
+   "value": [
+    {
+     "value": -24.086447970949102,
+     "f_hz": 3.9810717055349722,
+     "r_ohm": 1.0
+    },
+    {
+     "value": 4.8758440644978265,
+     "f_hz": 1000000.0,
+     "r_ohm": 100000000.0
+    },
+    {
+     "f_hz": [
+      19952.62314968879,
+      1000000.0
+     ],
+     "r_ohm": [
+      3019.9517204020162,
+      100000000.0
+     ]
+    }
+   ],
+   "text": "\u221224.1 at (3.98, 1); 4.88 at (1e+06, 1e+08); higher from 20000 Hz to 1000000 Hz, 3000 to 100000000 ohm",
+   "source": "nf5113_manual.json versus"
+  },
+  "SR560 data sheet equal to the 5113 plot at (ohm): 10 Hz | 100 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz": {
+   "value": {
+    "10.0": [],
+    "100.0": [],
+    "1000.0": [],
+    "10000.0": [],
+    "100000.0": [
+     24523.243565120516
+    ],
+    "1000000.0": [
+     2436.2806976625684
+    ]
+   },
+   "text": "- | - | - | - | 25000 | 2400",
+   "source": "nf5113_manual.json versus.equal_at_r_ohm"
+  }
+ },
  "table11": {
   "H x10: -3 dB (MHz)": {
    "value": [

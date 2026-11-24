@@ -142,7 +142,9 @@ def fig_noise_vs_capacitance():
         e = math.sqrt(2) * v[2] / np.sqrt(n)
         m = c <= 3000
         ax.plot(c[m], e[m], color=col, lw=1.2, label=f"{part} ({v[3]:g} mA)")
-    offs = {"SRS SR560": (-4, 3, "right"), "NF 5307": (4, 3, "left"), "NF LI-75A": (-4, 6, "right"),
+    # the SR560 and the Signal Recovery 5113 share a point (4 nV/rtHz, 25 pF): one label above it, one below
+    offs = {"SRS SR560": (-4, 3, "right"), "Signal Recovery 5113": (-4, -9, "right"),
+            "NF 5307": (4, 3, "left"), "NF LI-75A": (-4, 6, "right"),
             "FEMTO DLPVA-101-B": (4, 3, "left"), "NF SA-440F5": (4, -8, "left"),
             "Signal Recovery 5184": (4, -9, "left"), "Stahl PR-E3": (-4, -8, "right"),
             "NF SA-421F5": (-4, -9, "right"), "BasPI SP1004": (4, 2, "left")}
@@ -417,15 +419,22 @@ def fig_noise_vs_source():
     return PS.export(fig, "fig_noise_vs_source")
 
 
-def _label_lines(ax, lines, color, x_lo: float = 2e3, x_hi: float = 50.0, y_max: float = 10 ** 7.7) -> None:
+def _label_lines(ax, lines, color, x_lo: float = 2e3, x_hi: float = 50.0, y_max: float = 10 ** 7.7,
+                 x_lo_more: tuple = (), span: int = 0) -> None:
     """Contour labels placed as the SR560 data sheet places its own: each level where it crosses x_lo, on its
     lowest crossing (the low-resistance branch), and where it crosses x_hi twice, on the higher crossing (the
-    high-resistance branch of a closed or open loop) if below y_max; on white, along the line.  lines: (level,
-    array of (x, y) in data coordinates) for every piece of every contour.  Call after the layout is final: the
-    angles are computed in screen space."""
+    high-resistance branch of a closed or open loop) if below y_max; on white, along the line.  A level that does
+    not cross x_lo is labelled on its lowest crossing of the first of x_lo_more that it crosses.  lines: (level,
+    array of (x, y) in data coordinates) for every piece of every contour.  The label's angle is that of the
+    segment it sits on, or with span > 0 of the chord from span points before to span points after it (for lines
+    traced from pixels, whose segments step).  Call after the layout is final: the angles are computed in screen
+    space."""
     box = dict(facecolor="white", edgecolor="none", pad=0.2)
     for lev in sorted({lv for lv, _ in lines}):
-        for xt, pick, need_two in ((x_lo, min, False), (x_hi, max, True)):
+        low_done = False
+        for xt, pick, need_two in ((x_lo, min, False), *((x, min, False) for x in x_lo_more), (x_hi, max, True)):
+            if not need_two and low_done:
+                continue
             t0 = math.log10(xt)
             hits = []
             for lv, xy in lines:
@@ -436,12 +445,13 @@ def _label_lines(ax, lines, color, x_lo: float = 2e3, x_hi: float = 50.0, y_max:
                     if lx[i + 1] != lx[i]:
                         y = ly[i] + (t0 - lx[i]) / (lx[i + 1] - lx[i]) * (ly[i + 1] - ly[i])
                         if all(abs(y - h[0]) > 1e-3 for h in hits):      # a vertex on the line: one crossing
-                            hits.append((y, xy[i], xy[i + 1]))
+                            hits.append((y, xy[max(i - span, 0)], xy[min(i + 1 + span, len(xy) - 1)]))
             if not hits or (need_two and len(hits) < 2):
                 continue
             y, p0, p1 = pick(hits, key=lambda h: h[0])
             if need_two and y > math.log10(y_max):
                 continue
+            low_done = low_done or not need_two
             (a0, b0), (a1, b1) = ax.transData.transform([p0, p1])
             ang = math.degrees(math.atan2(b1 - b0, a1 - a0))
             ang = ang - 180 if ang > 90 else ang + 180 if ang < -90 else ang
@@ -457,12 +467,17 @@ def fig_nf_map():
     1000.  The simulated maps (nf_map.npz) are drawn from their two-port fits, which reproduce the 41 runs within
     2e-5 dB (0.003 dB for the LSK389B model) from 1 Hz to 10 MHz.  (e) H, (f) L, (h) the NPD5564 and (i) the LSK389B
     reproduction minus the data sheet, which is drawn there from the two-port fit of its contours (within 0.03 dB
-    of them), on the data sheet's range.  SR560 maps in the warm accent, the new design's in the primary colour, as
-    the difference scale (blue: below the data sheet)."""
+    of them), on the data sheet's range.  Fourth row, the Signal Recovery 5113: (j) the contours of its manual's
+    Fig. A-1 as read from the plot's pixels (nf5113_manual.json), at their own levels, 0.1 to 50 dB, labelled as the
+    others and, for 40 and 50 dB, which do not reach 2 kHz, at 10 Hz; (k) H and (l) L minus the 5113's plot, drawn
+    from its two-port fit (within 0.24 dB of its contours) where the plot draws both sides of its minimum, from 3.98 Hz
+    to its 1 MHz limit.  SR560 maps in the warm accent, the 5113's in the purple accent, the new design's in the
+    primary colour, as the difference scale (blue: below the plot subtracted)."""
     from matplotlib.colors import BoundaryNorm
     from matplotlib.ticker import LogLocator, NullFormatter
     d = np.load(R / "nf_map.npz")
     ds = json.loads((R / "sr560_nf_datasheet.json").read_text(encoding="utf-8"))
+    m5 = json.loads((R / "nf5113_manual.json").read_text(encoding="utf-8"))
     levels = ds["levels_db"]
     k_b, t0 = 1.380649e-23, 290.0
     r = 10 ** np.linspace(0, 8, 401)
@@ -475,7 +490,7 @@ def fig_nf_map():
     nf_ds = nf(np.array([ds["two_port_fit"][k] for k in ("S_e", "S_x", "S_i")]))
     dlev = [-25, -15, -10, -6, -3, -1, -0.3, -0.1, 0.1, 0.3, 1, 3, 6, 10, 15, 25]
     norm = BoundaryNorm(dlev, PS.MUTED_CLASSIC_CMAP.N)
-    fig, axs = plt.subplots(3, 3, figsize=(7.0, 7.2), sharex=True, sharey=True, constrained_layout=True)
+    fig, axs = plt.subplots(4, 3, figsize=(7.0, 8.6), sharex=True, sharey=True, constrained_layout=True)
     for ax in axs.flat:
         ax.set_xscale("log")
         ax.set_yscale("log")
@@ -490,9 +505,9 @@ def fig_nf_map():
         ax.xaxis.set_major_formatter(LogFormatterMathtext())
         ax.yaxis.set_major_formatter(LogFormatterMathtext())
 
-    def beyond(ax):
+    def beyond(ax, whose="data sheet's"):
         ax.axvspan(1e6, 1e7, color=C["annotation"], alpha=0.15, lw=0)
-        ax.text(3.2e6, 1e4, "beyond the\ndata sheet's plot", rotation=90, ha="center", va="center",
+        ax.text(3.2e6, 1e4, f"beyond the\n{whose} plot", rotation=90, ha="center", va="center",
                 fontsize=PS.FONT_SIZE - 2, color=C["annotation"])
 
     # (a) the data sheet, as published
@@ -524,7 +539,26 @@ def fig_nf_map():
                          cmap=PS.MUTED_CLASSIC_CMAP, norm=norm, extend="both")
         beyond(ax)
         ax.set_title(f"{title} minus data sheet", fontsize=PS.FONT_SIZE)
-    for ax in axs[2]:
+    # (j) the 5113's plot as published, at its own levels; (k) H and (l) L minus it, where it draws both sides
+    ax = axs[3, 0]
+    m5_lines = [(c["level_db"], 10 ** np.array(c["points"])) for c in m5["contours"]]
+    for _, xy in m5_lines:
+        ax.plot(xy[:, 0], xy[:, 1], color=C["purple_accent"], lw=0.9)
+    beyond(ax, "5113's")
+    ax.set_title("Model 5113 manual (Fig. A-1)", fontsize=PS.FONT_SIZE)
+    fit5 = m5["two_port_fit"]
+    both = np.array(fit5["both_sides"])
+    lf5 = np.array(fit5["log10_f"])[both]
+    nf5 = nf(np.array([fit5[k] for k in ("S_e", "S_x", "S_i")])[:, both])
+    for ax, key in ((axs[3, 1], "H"), (axs[3, 2], "L")):
+        f = d[f"f_{key}"]
+        idx = [int(np.flatnonzero(np.abs(np.log10(f) - x) < 1e-6)[0]) for x in lf5]
+        ax.contourf(10 ** lf5, r, nf(d[f"coef_{key}"][:, idx]) - nf5, levels=dlev, cmap=PS.MUTED_CLASSIC_CMAP,
+                    norm=norm, extend="both")
+        ax.axvspan(1, 10 ** lf5[0], color=C["annotation"], alpha=0.15, lw=0)
+        beyond(ax, "5113's")
+        ax.set_title(f"{key} minus 5113 plot", fontsize=PS.FONT_SIZE)
+    for ax in axs[3]:
         ax.set_xlabel("Frequency (Hz)")
     for ax in axs[:, 0]:
         ax.set_ylabel(r"Source resistance at 290 K ($\Omega$)")
@@ -532,7 +566,7 @@ def fig_nf_map():
     cb.set_label("Difference in noise figure (dB)")
     cb.ax.tick_params(labelsize=PS.FONT_SIZE - 1.5)
     cb.ax.set_yticklabels([f"{v:g}" for v in dlev])
-    for ax, lab in zip(axs.flat, "abcdefghi"):
+    for ax, lab in zip(axs.flat, "abcdefghijkl"):
         PS.panel_label(ax, lab)
     # the layout is final now (the labels stay inside the axes): freeze it, so that the labels' angles,
     # computed in screen space, are those of the saved figure
@@ -540,6 +574,7 @@ def fig_nf_map():
     fig.set_layout_engine("none")
     for ax, (lines, col) in maps.items():
         _label_lines(ax, lines, col)
+    _label_lines(axs[3, 0], m5_lines, C["purple_accent"], x_lo_more=(10.0,), span=3)
     return PS.export(fig, "fig_nf_map")
 
 

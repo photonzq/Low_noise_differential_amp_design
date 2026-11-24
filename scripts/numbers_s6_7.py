@@ -29,6 +29,11 @@ Formulas, in the order of the note:
                  readouts of sr560_nf_sources.json (the SR560 models' input capacitance, JFET A's C_gs + C_gd
                  at its bias, and the effective capacitance sqrt(S_i / S_e) / w of each group of noise sources),
                  and the ratios LSK389B / NPD5564 of the servo's noise current and of the input capacitance
+  Figure 14j-l   readouts of nf5113_manual.json (the Signal Recovery 5113 manual's plot read from its pixels: the
+                 calibration, the corner contours' check, the fit's deviations, e_n, i_n, C, the slopes and corners,
+                 the specification and AC-coupling checks, the drawn 1 and 3 dB contours, and H, L and the SR560
+                 data sheet's plot against it); the corner check's largest difference max |(R / R_6dB) / ((F - 1) /
+                 (F_6dB - 1)) - 1|
   Section 6.2    crossover of NF_H - NF_L (noise_vs_source.json): the two source resistances of
                  Table 10 (and of the full grid) between which the sign changes, per frequency
   Table 11       ranges of chain_ac.json over the gains of a row; SR560 peaking
@@ -539,6 +544,89 @@ def section62_nf_map():
                 f" | {f(100 * row['rza_share_of_output_noise_rs_100000'], 0)}", sm + " input_network")
 
 
+def section62_5113():
+    """Figure 14j-l: the Signal Recovery 5113 manual's noise-figure plot (nf5113_manual.py) and H, L and the SR560
+    data sheet's plot against it."""
+    p, sp = load("nf5113_manual.json"), "nf5113_manual.json"
+    g = "s6.2 Figure 14j-l"
+    cal, fit, mod = p["calibration"], p["two_port_fit"], p["model"]
+    put(g, "5113 plot: px per decade (f | R); largest residual of the grid calibration (px)",
+        (cal["px_per_decade_f"], cal["px_per_decade_r"], cal["max_residual_px"]),
+        f"{f(cal['px_per_decade_f'], 1)} | {f(-cal['px_per_decade_r'], 1)}; {f(cal['max_residual_px'], 1)}", sp + " calibration")
+    put(g, "5113 plot: the image's ink within 1 px of the page's render (share)", p["image_check"]["ink_within_1px_of_render"],
+        f(p["image_check"]["ink_within_1px_of_render"], 4), sp + " image_check")
+    cc = p["corner_check"]
+    rr = cc["r_ohm"]
+    dev = max(abs(cc["r_over_r_6db"][k] / cc["f_minus_1_over_6db"][k] - 1) for k in rr)
+    put(g, "5113 plot: the unlabelled corner contours on the 1 MHz edge, 6 | 10 | 15 | 20 | 30 dB (Mohm); their ratios "
+           "against those of F - 1, largest difference (%)", (rr, dev),
+        " | ".join(sig(rr[k] / 1e6, 2) for k in ("6", "10", "15", "20", "30")) + f"; {f(100 * dev, 1)}",
+        sp + " corner_check")
+    b, lo = fit["largest_dev_both_sides"], fit["largest_dev_low_side"]
+    put(g, "5113 plot: two-port fit, largest deviation where both sides are drawn (dB | decade); below, e_n alone "
+           "(dB | decade); both sides drawn from (Hz)", (b, lo, fit["both_sides_from_hz"]),
+        f"{f(b['db'], 2)} | {f(b['decades'], 3)}; {f(lo['db'], 2)} | {f(lo['decades'], 3)}; {f(fit['both_sides_from_hz'], 2)}",
+        sp + " two_port_fit")
+    at = mod["at"]
+    e = {float(k): v["e_n"] for k, v in at.items()}
+    put(g, "5113 plot: e_n at 0.1 Hz (uV/rtHz) | 1 Hz | 10 Hz | 100 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz (nV/rtHz)", e,
+        f"{sig(e[0.1] * 1e6, 2)} | " + " | ".join(sig(e[k] * 1e9, 3) for k in (1.0, 10.0, 100.0, 1e3, 1e4, 1e5, 1e6)),
+        sp + " model.at")
+    s = p["spec_check"]
+    pc = list(s["e_n_from_each_low_side_contour_3db_up"].values())
+    put(g, "5113 plot at 1 kHz: e_n from each low-side contour of 3 to 30 dB alone, range (nV/rtHz); e_n over the "
+           "specified 4 nV/rtHz; the 3 dB contour's low side, drawn | for 4 nV/rtHz with the plot's i_n (kohm)",
+        (pc, s["ratio"], s["drawn_3db_low_ohm"], s["spec_3db_low_ohm"]),
+        f"{rng([x * 1e9 for x in pc], 2)}; {f(s['ratio'], 2)}; {sig(s['drawn_3db_low_ohm'] / 1e3, 3)} | "
+        f"{sig(s['spec_3db_low_ohm'] / 1e3, 3)}", sp + " spec_check")
+    c = {float(k): v for k, v in mod["corner_hz"].items()}
+    put(g, "5113 plot: 1/f corner f (e^2 - e_w^2) / e_w^2 from 10 Hz | 100 Hz | 1 kHz (kHz; e_w at 100 kHz)", c,
+        " | ".join(f(c[k] / 1e3, 1) for k in (10.0, 100.0, 1e3)), sp + " model.corner_hz")
+    sl = mod["s_e_slope_per_decade"]
+    put(g, "5113 plot: slope of S_e over each decade from 0.1 Hz to 1 MHz (d log S_e / d log f)", sl,
+        " | ".join(f(v, 2) for v in sl.values()), sp + " model.s_e_slope_per_decade")
+    st = mod["e_n_stray_from_decade_chords_decades"]
+    put(g, "5113 plot: largest departure of log e_n from the straight lines between whole decades (decade)",
+        st, f(max(st.values()), 3), sp + " model.e_n_stray_from_decade_chords_decades")
+    r100 = mod["i_n_of_100mohm_at_t0"]
+    put(g, "5113 plot: i_n at low frequencies (fA/rtHz) and its range from 5 Hz to 5 kHz; the resistance with that "
+           "thermal noise at 290 K (Mohm); 100 Mohm's (fA/rtHz); the ratio", (mod["i_n_low"], mod["i_n_low_range"],
+                                                                         mod["r_equiv_ohm"], r100),
+        f"{f(mod['i_n_low'] * 1e15, 1)} ({rng([x * 1e15 for x in mod['i_n_low_range']], 1)}); "
+        f"{f(mod['r_equiv_ohm'] / 1e6, 0)}; {f(r100 * 1e15, 1)}; {f(mod['i_n_low'] / r100, 2)}", sp + " model")
+    ce = mod["c_eff_pf"]
+    put(g, "5113 plot: C of the e_n w C term at 100 kHz | 316 kHz | 1 MHz (pF)", ce,
+        " | ".join(f(v, 1) for v in ce.values()), sp + " model.c_eff_pf")
+    ac = p["ac_coupling_check"]
+    put(g, "5113 plot at 0.1 Hz: its i_n through 1 / (w 0.1 uF) (uV/rtHz); the plotted e_n over that; the signal "
+           "transfer of the 10 s high-pass", ac,
+        f"{f(ac['i_n_through_coupling_v'] * 1e6, 2)}; {f(ac['ratio'], 0)}; {f(ac['signal_transfer'], 3)}",
+        sp + " ac_coupling_check")
+    for f0 in ("10.0", "1000.0", "1000000.0"):
+        a = at[f0]
+        d3, d1 = a["drawn_3db_ohm"], a["drawn_1db_ohm"]
+        put(g, f"5113 plot, {float(f0):g} Hz: drawn 3 dB contour (ohm) | drawn 1 dB contour (ohm) | minimum (dB) at "
+               "R_opt (ohm)", a,
+            f"{', '.join(sig(x, 2) for x in d3) or '-'} | {', '.join(sig(x, 2) for x in d1) or '-'} | "
+            f"{f(a['nf_min_db'], 3 if a['nf_min_db'] < 0.1 else 2)} at {sig(a['r_opt'], 2)}", sp + " model.at")
+    for who, v in p["versus"].items():
+        put(g, f"{who} minus the 5113 plot ({sig(v['f_hz'][0], 3)} Hz to 1 MHz): fraction of the plane lower by > 0.1 dB "
+               "| within 0.1 dB | higher (%)", (v["fraction_lower"], v["fraction_within_0p1"], v["fraction_higher"]),
+            " | ".join(f(100 * x, 0) for x in (v["fraction_lower"], v["fraction_within_0p1"], v["fraction_higher"])),
+            sp + " versus")
+        box = v["higher_region_bounds"]
+        put(g, f"{who} minus the 5113 plot: extremes (dB) at (Hz, ohm); the higher region's bounds", (v["min_db"], v["max_db"], box),
+            f"{f(v['min_db']['value'], 1)} at ({v['min_db']['f_hz']:.3g}, {v['min_db']['r_ohm']:.3g}); "
+            f"{f(v['max_db']['value'], 2)} at ({v['max_db']['f_hz']:.3g}, {v['max_db']['r_ohm']:.3g}); "
+            + (f"higher from {sig(box['f_hz'][0], 2)} Hz to {sig(box['f_hz'][1], 2)} Hz, {sig(box['r_ohm'][0], 2)} to "
+               f"{sig(box['r_ohm'][1], 2)} ohm" if box else "nowhere higher"), sp + " versus")
+        eq = v["equal_at_r_ohm"]
+        put(g, f"{who} equal to the 5113 plot at (ohm): 10 Hz | 100 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz", eq,
+            " | ".join(",".join(sig(x, 2) for x in eq[k]) or "-" for k in ("10.0", "100.0", "1000.0", "10000.0",
+                                                                          "100000.0", "1000000.0")),
+            sp + " versus.equal_at_r_ohm")
+
+
 # ---- Section 6.3 -------------------------------------------------------------------------------
 def section63():
     d = load("chain_ac.json")
@@ -919,8 +1007,8 @@ def section7():
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
-    for step in (table8, table8a, stages_after, table9, section62, section62_nf_map, section63, section64, section65,
-                 table15, section7):
+    for step in (table8, table8a, stages_after, table9, section62, section62_nf_map, section62_5113, section63, section64,
+                 section65, table15, section7):
         step()
     (R / "numbers_s6_7.json").write_text(json.dumps(OUT, indent=1, default=float), encoding="utf-8", newline="\n")
     w = max(len(q) for q, _, _ in ROWS)

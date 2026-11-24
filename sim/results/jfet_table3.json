@@ -253,6 +253,10 @@
    "en": 3.0,
    "cin": 105.0
   },
+  "Signal Recovery 5113": {
+   "en": 4.0,
+   "cin": 25.0
+  },
   "Signal Recovery 5184": {
    "en": 0.8,
    "cin": 50.0
