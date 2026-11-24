@@ -2277,6 +2277,33 @@
    "text": "0.00 | 0.04 | 0.06",
    "source": "nf_map.json balanced_tail_servo_share_rs_1e6"
   },
+  "SR560 at 1 MHz: i_n without the servo's share (pA/rtHz); its C in e_n w C (pF)": {
+   "value": [
+    1.6824572459326132e-13,
+    8.456335524021218e-12
+   ],
+   "text": "0.17; 8.5",
+   "source": "nf_map.json at, tail_servo_share_rs_1e6"
+  },
+  "SR560_LSK389B at 1 MHz: i_n without the servo's share (pA/rtHz); its C in e_n w C (pF)": {
+   "value": [
+    3.1682791987285455e-13,
+    1.5688738004985868e-11
+   ],
+   "text": "0.32; 15.7",
+   "source": "nf_map.json at, tail_servo_share_rs_1e6"
+  },
+  "white level at 100 kHz: the reproductions below the plot, NPD5564 | LSK389B (%); the LSK389B model above the NPD5564 model (%)": {
+   "value": [
+    {
+     "SR560": 11.603011525895834,
+     "SR560_LSK389B": 10.934891538452817
+    },
+    0.7558175894631702
+   ],
+   "text": "11.6 | 10.9; 0.76",
+   "source": "nf_map.json low_frequency.e_n"
+  },
   "2N5564 card per device: its 1/f corner (kHz); e_n at 10 Hz | 100 Hz | 1 kHz, card / Vishay at 4.5 mA (nV/rtHz) and their ratio": {
    "value": {
     "corner": 6910.15625,

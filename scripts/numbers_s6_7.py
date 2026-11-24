@@ -21,7 +21,11 @@ Formulas, in the order of the note:
   headroom       20 log10(G_FE,LN / G_FE,HR) = 20 log10(100 / 10)
   Figure 14      readouts of nf_map.json and sr560_nf_datasheet.json (the noise-figure maps and the
                  SR560 data sheet's two-port fit), resistances to two or three significant figures;
-                 a deviation's bound rounded up to one significant figure
+                 a deviation's bound rounded up to one significant figure; the SR560 models' noise current
+                 at 1 MHz without the tail servo's share, i = sqrt(1 - s) i_n with s the servo's share of the
+                 output noise with 1 Mohm (where i_n R_S dominates e_n), and the capacitance it corresponds
+                 to, C = sqrt(i^2 - i_n(1 kHz)^2) / (2 pi f e_n) (i_n(1 kHz): the input resistors' noise);
+                 the white levels' ratios 100 (1 - e_w / e_w,sheet) and 100 (e_w,LSK389B / e_w,NPD5564 - 1)
   Section 6.2    crossover of NF_H - NF_L (noise_vs_source.json): the two source resistances of
                  Table 10 (and of the full grid) between which the sign changes, per frequency
   Table 11       ranges of chain_ac.json over the gains of a row; SR560 peaking
@@ -452,6 +456,23 @@ def section62_nf_map():
             sh = {float(k): v for k, v in m[key][name].items()}
             put(g, f"{key}: the tail servo's share of the output noise, {lab}, at 10 kHz | 100 kHz | 1 MHz (%)",
                 sh, " | ".join(f(100 * sh[k], 2 if sh[k] < 0.01 else 0) for k in (1e4, 1e5, 1e6)), sm + " " + name)
+    # at 1 MHz with 1 Mohm: the SR560 models' noise current without the tail servo's share, as e_n w C
+    for key in ("SR560", "SR560_LSK389B"):
+        a = m[key]["at"]["1000000.0"]
+        sh = m[key]["tail_servo_share_rs_1e6"]["1000000.0"]
+        i_rest = math.sqrt(1 - sh) * a["i_n"]
+        i_low = m[key]["at"]["1000.0"]["i_n"]
+        c = math.sqrt(max(i_rest ** 2 - i_low ** 2, 0.0)) / (2 * math.pi * 1e6 * a["e_n"])
+        put(g, f"{key} at 1 MHz: i_n without the servo's share (pA/rtHz); its C in e_n w C (pF)", (i_rest, c),
+            f"{f(i_rest * 1e12, 2)}; {f(c * 1e12, 1)}", sm + " at, tail_servo_share_rs_1e6")
+    # the white level (100 kHz): the reproductions against the plot, and against each other
+    ew = {k: m[k]["low_frequency"]["e_n"]["100000.0"] for k in ("SR560", "SR560_LSK389B")}
+    ew_ds = m["datasheet"]["low_frequency"]["e_n"]["100000.0"]
+    below = {k: 100 * (1 - v / ew_ds) for k, v in ew.items()}
+    mutual = 100 * (ew["SR560_LSK389B"] / ew["SR560"] - 1)
+    put(g, "white level at 100 kHz: the reproductions below the plot, NPD5564 | LSK389B (%); the LSK389B model "
+           "above the NPD5564 model (%)", (below, mutual),
+        f"{f(below['SR560'], 1)} | {f(below['SR560_LSK389B'], 1)}; {f(mutual, 2)}", sm + " low_frequency.e_n")
     # per device: the 2N5564 card's single 1/f line against Vishay's curve at 4.5 mA
     cd = CARD_2N5564
     card = {f0: math.sqrt(cd["e_w"] ** 2 + (cd["e_lf"] ** 2 - cd["e_w"] ** 2) * cd["f_lf"] / f0) for f0 in (10.0, 100.0, 1e3)}
