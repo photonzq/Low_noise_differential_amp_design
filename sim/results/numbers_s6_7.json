@@ -2277,7 +2277,7 @@
    "text": "0.00 | 0.04 | 0.06",
    "source": "nf_map.json balanced_tail_servo_share_rs_1e6"
   },
-  "SR560 at 1 MHz: i_n without the servo's share (pA/rtHz); its C in e_n w C (pF)": {
+  "SR560 at 1 MHz: i_n without the servo's share (pA/rtHz); the C with which the plot's form, the whole e_n times w C, would give it (pF)": {
    "value": [
     1.6824572459326132e-13,
     8.456335524021218e-12
@@ -2285,13 +2285,157 @@
    "text": "0.17; 8.5",
    "source": "nf_map.json at, tail_servo_share_rs_1e6"
   },
-  "SR560_LSK389B at 1 MHz: i_n without the servo's share (pA/rtHz); its C in e_n w C (pF)": {
+  "SR560_LSK389B at 1 MHz: i_n without the servo's share (pA/rtHz); the C with which the plot's form, the whole e_n times w C, would give it (pF)": {
    "value": [
     3.1682791987285455e-13,
     1.5688738004985868e-11
    ],
    "text": "0.32; 15.7",
    "source": "nf_map.json at, tail_servo_share_rs_1e6"
+  },
+  "SR560: input capacitance (input A, input B grounded) at 1 kHz | 10 kHz | 100 kHz | 1 MHz (pF)": {
+   "value": {
+    "1000.0": {
+     "c_in_pf": 3.736938896184544,
+     "g_without_r101_us": -0.00043626613730206727
+    },
+    "10000.0": {
+     "c_in_pf": 3.776328753307002,
+     "g_without_r101_us": -0.04478044009110005
+    },
+    "100000.0": {
+     "c_in_pf": 6.903534620822855,
+     "g_without_r101_us": -3.3968244601989
+    },
+    "1000000.0": {
+     "c_in_pf": 15.779890069670842,
+     "g_without_r101_us": 4.991958902005227
+    },
+    "10000000.0": {
+     "c_in_pf": 7.396823364450271,
+     "g_without_r101_us": 265.9240165755792
+    }
+   },
+   "text": "3.7 | 3.8 | 6.9 | 15.8",
+   "source": "sr560_nf_sources.json zin"
+  },
+  "SR560: JFET A's C_gs + C_gd at its bias (pF)": {
+   "value": {
+    "part": "2N5564",
+    "v_gs": -0.7518592999997417,
+    "v_gd": -6.200019999999742,
+    "c_gs_pf": 5.835393702556243,
+    "c_gd_pf": 3.723346153623706,
+    "sum_pf": 9.55873985617995
+   },
+   "text": "5.84 + 3.72 = 9.56",
+   "source": "sr560_nf_sources.json jfet_a_capacitance"
+  },
+  "SR560: JFET A's channel noise, effective capacitance at 10 kHz | 100 kHz | 1 MHz (pF)": {
+   "value": [
+    9.553757453798546,
+    9.554602099426312,
+    9.555928787576557
+   ],
+   "text": "9.55 | 9.55 | 9.56",
+   "source": "sr560_nf_sources.json noise.groups"
+  },
+  "SR560: JFET A's gate resistor RX (in series with the driven gate), effective capacitance at 1 MHz (pF)": {
+   "value": 0.0015915492500418276,
+   "text": "0.00",
+   "source": "sr560_nf_sources.json noise.groups"
+  },
+  "SR560: the other sources' effective capacitances at 1 MHz, JFET B, the input pair's other generators, U102 and the rest (pF), range": {
+   "value": {
+    "JFET B, channel": 7.74312559031536,
+    "JFET B, gate resistor RX": 7.745572533516608,
+    "input pair, other": 7.536124010105214,
+    "U102": 12.093983205361207,
+    "rest": 8.11715508320836
+   },
+   "text": "7.5\u201312.1",
+   "source": "sr560_nf_sources.json noise.groups"
+  },
+  "SR560_LSK389B: input capacitance (input A, input B grounded) at 1 kHz | 10 kHz | 100 kHz | 1 MHz (pF)": {
+   "value": {
+    "1000.0": {
+     "c_in_pf": 6.830784132350043,
+     "g_without_r101_us": -0.0007995528910782006
+    },
+    "10000.0": {
+     "c_in_pf": 6.898026567888466,
+     "g_without_r101_us": -0.0822123938378679
+    },
+    "100000.0": {
+     "c_in_pf": 12.422780453413408,
+     "g_without_r101_us": -6.4386332920639155
+    },
+    "1000000.0": {
+     "c_in_pf": 31.051985809717195,
+     "g_without_r101_us": 6.435740665334113
+    },
+    "10000000.0": {
+     "c_in_pf": 12.382979510416154,
+     "g_without_r101_us": 596.1178622492694
+    }
+   },
+   "text": "6.8 | 6.9 | 12.4 | 31.1",
+   "source": "sr560_nf_sources.json zin"
+  },
+  "SR560_LSK389B: JFET A's C_gs + C_gd at its bias (pF)": {
+   "value": {
+    "part": "LSK389B_LIS",
+    "v_gs": -0.2687626498652084,
+    "v_gd": -6.200025599865208,
+    "c_gs_pf": 18.4118580924239,
+    "c_gd_pf": 6.786826924312276,
+    "sum_pf": 25.198685016736174
+   },
+   "text": "18.41 + 6.79 = 25.20",
+   "source": "sr560_nf_sources.json jfet_a_capacitance"
+  },
+  "SR560_LSK389B: JFET A's channel noise, effective capacitance at 10 kHz | 100 kHz | 1 MHz (pF)": {
+   "value": [
+    25.139868974610255,
+    25.149415646267983,
+    25.147367327287668
+   ],
+   "text": "25.14 | 25.15 | 25.15",
+   "source": "sr560_nf_sources.json noise.groups"
+  },
+  "SR560_LSK389B: JFET A's gate resistor RX (in series with the driven gate), effective capacitance at 1 MHz (pF)": {
+   "value": 0.001591549785770962,
+   "text": "0.00",
+   "source": "sr560_nf_sources.json noise.groups"
+  },
+  "SR560_LSK389B: the other sources' effective capacitances at 1 MHz, JFET B, the input pair's other generators, U102 and the rest (pF), range": {
+   "value": {
+    "JFET B, channel": 14.688389782431583,
+    "JFET B, gate resistor RX": 14.69560442577609,
+    "input pair, other": 12.462063955919493,
+    "U102": 24.724095510435614,
+    "rest": 15.691788187091124
+   },
+   "text": "12.5\u201324.7",
+   "source": "sr560_nf_sources.json noise.groups"
+  },
+  "LSK389B over NPD5564 at 10 kHz | 100 kHz | 1 MHz: the servo's noise current; the input capacitance": {
+   "value": {
+    "10000.0": [
+     1.8502465856804355,
+     1.8266488482624121
+    ],
+    "100000.0": [
+     1.877804561909454,
+     1.7994811550510768
+    ],
+    "1000000.0": [
+     2.0356837885805157,
+     1.9678201605091992
+    ]
+   },
+   "text": "1.85 | 1.88 | 2.04; 1.83 | 1.80 | 1.97",
+   "source": "sr560_nf_sources.json noise.groups[tail servo], zin"
   },
   "white level at 100 kHz: the reproductions below the plot, NPD5564 | LSK389B (%); the LSK389B model above the NPD5564 model (%)": {
    "value": [

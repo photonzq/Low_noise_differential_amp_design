@@ -25,7 +25,10 @@ Formulas, in the order of the note:
                  at 1 MHz without the tail servo's share, i = sqrt(1 - s) i_n with s the servo's share of the
                  output noise with 1 Mohm (where i_n R_S dominates e_n), and the capacitance it corresponds
                  to, C = sqrt(i^2 - i_n(1 kHz)^2) / (2 pi f e_n) (i_n(1 kHz): the input resistors' noise);
-                 the white levels' ratios 100 (1 - e_w / e_w,sheet) and 100 (e_w,LSK389B / e_w,NPD5564 - 1)
+                 the white levels' ratios 100 (1 - e_w / e_w,sheet) and 100 (e_w,LSK389B / e_w,NPD5564 - 1);
+                 readouts of sr560_nf_sources.json (the SR560 models' input capacitance, JFET A's C_gs + C_gd
+                 at its bias, and the effective capacitance sqrt(S_i / S_e) / w of each group of noise sources),
+                 and the ratios LSK389B / NPD5564 of the servo's noise current and of the input capacitance
   Section 6.2    crossover of NF_H - NF_L (noise_vs_source.json): the two source resistances of
                  Table 10 (and of the full grid) between which the sign changes, per frequency
   Table 11       ranges of chain_ac.json over the gains of a row; SR560 peaking
@@ -463,8 +466,38 @@ def section62_nf_map():
         i_rest = math.sqrt(1 - sh) * a["i_n"]
         i_low = m[key]["at"]["1000.0"]["i_n"]
         c = math.sqrt(max(i_rest ** 2 - i_low ** 2, 0.0)) / (2 * math.pi * 1e6 * a["e_n"])
-        put(g, f"{key} at 1 MHz: i_n without the servo's share (pA/rtHz); its C in e_n w C (pF)", (i_rest, c),
+        put(g, f"{key} at 1 MHz: i_n without the servo's share (pA/rtHz); the C with which the plot's form, the "
+               f"whole e_n times w C, would give it (pF)", (i_rest, c),
             f"{f(i_rest * 1e12, 2)}; {f(c * 1e12, 1)}", sm + " at, tail_servo_share_rs_1e6")
+    # the SR560 models' input capacitance and their noise current by source (sr560_nf_sources.py)
+    q, sq = load("sr560_nf_sources.json"), "sr560_nf_sources.json"
+    fk = ("1000.0", "10000.0", "100000.0", "1000000.0")
+    for key in ("SR560", "SR560_LSK389B"):
+        z = q[key]["zin"]
+        put(g, f"{key}: input capacitance (input A, input B grounded) at 1 kHz | 10 kHz | 100 kHz | 1 MHz (pF)",
+            z, " | ".join(f(z[k]["c_in_pf"], 1) for k in fk), sq + " zin")
+        c = q[key]["jfet_a_capacitance"]
+        put(g, f"{key}: JFET A's C_gs + C_gd at its bias (pF)", c, f"{f(c['c_gs_pf'], 2)} + {f(c['c_gd_pf'], 2)} = "
+            f"{f(c['sum_pf'], 2)}", sq + " jfet_a_capacitance")
+        gr = q[key]["noise"]["groups"]
+        ch = [gr["JFET A, channel"][k]["c_eff_pf"] for k in fk[1:]]
+        put(g, f"{key}: JFET A's channel noise, effective capacitance at 10 kHz | 100 kHz | 1 MHz (pF)", ch,
+            " | ".join(f(x, 2) for x in ch), sq + " noise.groups")
+        rx = gr["JFET A, gate resistor RX"]["1000000.0"]["c_eff_pf"]
+        put(g, f"{key}: JFET A's gate resistor RX (in series with the driven gate), effective capacitance at 1 MHz "
+               "(pF)", rx, f(rx, 2), sq + " noise.groups")
+        oth = {n: gr[n]["1000000.0"]["c_eff_pf"] for n in ("JFET B, channel", "JFET B, gate resistor RX",
+                                                          "input pair, other", "U102", "rest")}
+        put(g, f"{key}: the other sources' effective capacitances at 1 MHz, JFET B, the input pair's other "
+               "generators, U102 and the rest (pF), range", oth, rng(list(oth.values()), 1), sq + " noise.groups")
+    rat = {}
+    for k in fk[1:]:
+        i_l, i_d = (q[m_]["noise"]["groups"]["tail servo"][k]["i_n"] for m_ in ("SR560_LSK389B", "SR560"))
+        c_l, c_d = (q[m_]["zin"][k]["c_in_pf"] for m_ in ("SR560_LSK389B", "SR560"))
+        rat[k] = (i_l / i_d, c_l / c_d)
+    put(g, "LSK389B over NPD5564 at 10 kHz | 100 kHz | 1 MHz: the servo's noise current; the input capacitance", rat,
+        " | ".join(f(v[0], 2) for v in rat.values()) + "; " + " | ".join(f(v[1], 2) for v in rat.values()),
+        sq + " noise.groups[tail servo], zin")
     # the white level (100 kHz): the reproductions against the plot, and against each other
     ew = {k: m[k]["low_frequency"]["e_n"]["100000.0"] for k in ("SR560", "SR560_LSK389B")}
     ew_ds = m["datasheet"]["low_frequency"]["e_n"]["100000.0"]

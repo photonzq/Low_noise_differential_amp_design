@@ -1,0 +1,74 @@
+== SR560
+  C_in at     1000 Hz:    3.74 pF, G without R101 -0.000436 uS
+  C_in at    10000 Hz:    3.78 pF, G without R101 -0.0448 uS
+  C_in at   100000 Hz:    6.90 pF, G without R101 -3.4 uS
+  C_in at    1e+06 Hz:   15.78 pF, G without R101 4.99 uS
+  C_in at    1e+07 Hz:    7.40 pF, G without R101 266 uS
+  JFET A (2N5564): V_GS -0.752 V, V_GD -6.200 V, C_gs 5.84 + C_gd 3.72 = 9.56 pF
+     10000 Hz: i_n total    17.1 fA, sum of groups    17.1 fA; e_n total 3.489 nV, sum 3.489 nV
+      JFET A, channel      e_n   0.919 nV  i_n      0.6 fA  C_eff      9.55 pF
+      JFET A, gate resistor RX e_n   0.881 nV  i_n      0.0 fA  C_eff      0.16 pF
+      JFET B, channel      e_n   0.919 nV  i_n      0.2 fA  C_eff      3.75 pF
+      JFET B, gate resistor RX e_n   0.881 nV  i_n      0.2 fA  C_eff      3.75 pF
+      input pair, other    e_n   1.516 nV  i_n      0.7 fA  C_eff      7.23 pF
+      tail servo           e_n   0.104 nV  i_n     11.1 fA  C_eff   1701.91 pF
+      input resistors      e_n   0.000 nV  i_n     12.9 fA  C_eff 15915477.41 pF
+      U102                 e_n   1.087 nV  i_n      0.7 fA  C_eff     10.15 pF
+      rest                 e_n   2.333 nV  i_n      0.6 fA  C_eff      4.36 pF
+    100000 Hz: i_n total   100.3 fA, sum of groups   100.3 fA; e_n total 3.184 nV, sum 3.184 nV
+      JFET A, channel      e_n   0.919 nV  i_n      5.5 fA  C_eff      9.55 pF
+      JFET A, gate resistor RX e_n   0.881 nV  i_n      0.0 fA  C_eff      0.02 pF
+      JFET B, channel      e_n   0.919 nV  i_n      2.9 fA  C_eff      5.04 pF
+      JFET B, gate resistor RX e_n   0.881 nV  i_n      2.8 fA  C_eff      5.04 pF
+      input pair, other    e_n   0.510 nV  i_n      2.4 fA  C_eff      7.37 pF
+      tail servo           e_n   0.104 nV  i_n     98.6 fA  C_eff   1512.24 pF
+      input resistors      e_n   0.000 nV  i_n     12.9 fA  C_eff 1591346.35 pF
+      U102                 e_n   1.087 nV  i_n      7.3 fA  C_eff     10.67 pF
+      rest                 e_n   2.333 nV  i_n      8.1 fA  C_eff      5.51 pF
+     1e+06 Hz: i_n total   367.7 fA, sum of groups   367.7 fA; e_n total 3.157 nV, sum 3.157 nV
+      JFET A, channel      e_n   0.919 nV  i_n     55.2 fA  C_eff      9.56 pF
+      JFET A, gate resistor RX e_n   0.881 nV  i_n      0.0 fA  C_eff      0.00 pF
+      JFET B, channel      e_n   0.919 nV  i_n     44.7 fA  C_eff      7.74 pF
+      JFET B, gate resistor RX e_n   0.881 nV  i_n     42.9 fA  C_eff      7.75 pF
+      input pair, other    e_n   0.237 nV  i_n     11.2 fA  C_eff      7.54 pF
+      tail servo           e_n   0.102 nV  i_n    326.9 fA  C_eff    509.80 pF
+      input resistors      e_n   0.000 nV  i_n     12.9 fA  C_eff 159072.75 pF
+      U102                 e_n   1.094 nV  i_n     83.1 fA  C_eff     12.09 pF
+      rest                 e_n   2.337 nV  i_n    119.2 fA  C_eff      8.12 pF
+== SR560_LSK389B
+  C_in at     1000 Hz:    6.83 pF, G without R101 -0.0008 uS
+  C_in at    10000 Hz:    6.90 pF, G without R101 -0.0822 uS
+  C_in at   100000 Hz:   12.42 pF, G without R101 -6.44 uS
+  C_in at    1e+06 Hz:   31.05 pF, G without R101 6.44 uS
+  C_in at    1e+07 Hz:   12.38 pF, G without R101 596 uS
+  JFET A (LSK389B_LIS): V_GS -0.269 V, V_GD -6.200 V, C_gs 18.41 + C_gd 6.79 = 25.20 pF
+     10000 Hz: i_n total    24.4 fA, sum of groups    24.4 fA; e_n total 3.210 nV, sum 3.210 nV
+      JFET A, channel      e_n   0.720 nV  i_n      1.1 fA  C_eff     25.14 pF
+      JFET A, gate resistor RX e_n   1.327 nV  i_n      0.0 fA  C_eff      0.16 pF
+      JFET B, channel      e_n   0.720 nV  i_n      0.3 fA  C_eff      6.85 pF
+      JFET B, gate resistor RX e_n   1.328 nV  i_n      0.6 fA  C_eff      6.86 pF
+      input pair, other    e_n   0.287 nV  i_n      0.2 fA  C_eff     11.06 pF
+      tail servo           e_n   0.087 nV  i_n     20.6 fA  C_eff   3754.04 pF
+      input resistors      e_n   0.000 nV  i_n     12.9 fA  C_eff 15915481.05 pF
+      U102                 e_n   0.911 nV  i_n      1.2 fA  C_eff     20.98 pF
+      rest                 e_n   2.196 nV  i_n      1.1 fA  C_eff      8.04 pF
+    100000 Hz: i_n total   187.1 fA, sum of groups   187.1 fA; e_n total 3.208 nV, sum 3.208 nV
+      JFET A, channel      e_n   0.720 nV  i_n     11.4 fA  C_eff     25.15 pF
+      JFET A, gate resistor RX e_n   1.327 nV  i_n      0.0 fA  C_eff      0.02 pF
+      JFET B, channel      e_n   0.720 nV  i_n      4.2 fA  C_eff      9.19 pF
+      JFET B, gate resistor RX e_n   1.328 nV  i_n      7.7 fA  C_eff      9.20 pF
+      input pair, other    e_n   0.261 nV  i_n      1.6 fA  C_eff      9.76 pF
+      tail servo           e_n   0.087 nV  i_n    185.1 fA  C_eff   3383.48 pF
+      input resistors      e_n   0.000 nV  i_n     12.9 fA  C_eff 1591385.77 pF
+      U102                 e_n   0.911 nV  i_n     12.5 fA  C_eff     21.90 pF
+      rest                 e_n   2.196 nV  i_n     14.1 fA  C_eff     10.24 pF
+     1e+06 Hz: i_n total   737.1 fA, sum of groups   737.1 fA; e_n total 3.211 nV, sum 3.211 nV
+      JFET A, channel      e_n   0.720 nV  i_n    113.8 fA  C_eff     25.15 pF
+      JFET A, gate resistor RX e_n   1.327 nV  i_n      0.0 fA  C_eff      0.00 pF
+      JFET B, channel      e_n   0.721 nV  i_n     66.5 fA  C_eff     14.69 pF
+      JFET B, gate resistor RX e_n   1.328 nV  i_n    122.6 fA  C_eff     14.70 pF
+      input pair, other    e_n   0.258 nV  i_n     20.2 fA  C_eff     12.46 pF
+      tail servo           e_n   0.086 nV  i_n    665.5 fA  C_eff   1236.43 pF
+      input resistors      e_n   0.000 nV  i_n     12.9 fA  C_eff 159089.55 pF
+      U102                 e_n   0.920 nV  i_n    143.0 fA  C_eff     24.72 pF
+      rest                 e_n   2.197 nV  i_n    216.6 fA  C_eff     15.69 pF
