@@ -60,7 +60,7 @@ COMMERCIAL = {
     "NF SA-421F5":         (0.5, 85.0, "30 Hz-30 MHz", "AC", ""),
     "NF LI-75A":           (2.0, 50.0, "DC-1 MHz", "DC", ""),
     "FEMTO DLPVA-101-B":   (2.0, 105.0, "DC-100 kHz", "DC", ""),
-    "Signal Recovery 5113": (4.0, 25.0, "DC-1 MHz", "AC or DC", "1 kHz; about 8 at 1 kHz in its own noise-figure plot"),
+    "Signal Recovery 5113": (4.0, 25.0, "DC-1 MHz", "DC", "1 kHz; about 8 at 1 kHz in its own noise-figure plot"),
     "Signal Recovery 5184": (0.8, 50.0, "0.5 Hz-1 MHz", "AC", ""),
     "Stahl PR-E3":         (0.69, 16.4, "0.5 kHz-4 MHz", "AC", "two channels tied"),
     "BasPI SP1004":        (1.0, 125.0, "DC-1 MHz", "DC", ""),
