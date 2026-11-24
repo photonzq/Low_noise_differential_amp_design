@@ -1,0 +1,38 @@
+  sheet        10 Hz: e_n   7.564 nV, i_n    12.684 fA, corr +0.016, R_opt  5.96e+05, NF_min  0.053 dB, <1 dB [1.381e+04, 2.574e+07], <3 dB [3590, 9.905e+07]
+  sheet      1000 Hz: e_n   3.643 nV, i_n    12.724 fA, corr +0.010, R_opt  2.86e+05, NF_min  0.025 dB, <1 dB [3201, 2.56e+07], <3 dB [832.6, 9.845e+07]
+  sheet    100000 Hz: e_n   3.602 nV, i_n    86.965 fA, corr +0.016, R_opt  4.14e+04, NF_min  0.169 dB, <1 dB [3154, 5.438e+05], <3 dB [814.6, 2.105e+06]
+  sheet     1e+06 Hz: e_n   3.602 nV, i_n   859.521 fA, corr +0.001, R_opt  4.19e+03, NF_min  1.420 dB, <1 dB [], <3 dB [847.4, 2.072e+04]
+H: two-port fit within 1.5e-05 dB; Table 10 check {'points': 40, 'max_abs_diff_db': np.float64(1.580096832133615e-06)}
+  H            10 Hz: e_n   2.813 nV, i_n    12.875 fA, corr +0.002, R_opt  2.18e+05, NF_min  0.020 dB, <1 dB [1908, 2.501e+07], <3 dB [496.3, 9.616e+07]
+  H          1000 Hz: e_n   1.114 nV, i_n    12.882 fA, corr +0.001, R_opt  8.65e+04, NF_min  0.008 dB, <1 dB [299.2, 2.499e+07], <3 dB [77.84, 9.605e+07]
+  H        100000 Hz: e_n   1.084 nV, i_n    45.339 fA, corr +0.002, R_opt  2.39e+04, NF_min  0.027 dB, <1 dB [283.2, 2.017e+06], <3 dB [73.67, 7.754e+06]
+  H         1e+06 Hz: e_n   1.089 nV, i_n   431.994 fA, corr +0.020, R_opt  2.52e+03, NF_min  0.253 dB, <1 dB [291, 2.183e+04], <3 dB [74.53, 8.524e+04]
+  H         1e+07 Hz: e_n   1.548 nV, i_n  3525.015 fA, corr +0.096, R_opt       439, NF_min  2.423 dB, <1 dB [], <3 dB [191.6, 1007]
+  input network 100000 Hz: i_n 45 fA, R_Z 38 fA, bias 12.9 fA; R_Z's share of the output noise 0.1% (1 kOhm), 66.2% (100 kOhm)
+  input network 1e+06 Hz: i_n 432 fA, R_Z 376 fA, bias 12.9 fA; R_Z's share of the output noise 10.2% (1 kOhm), 75.6% (100 kOhm)
+  input network 1e+07 Hz: i_n 3525 fA, R_Z 2224 fA, bias 12.9 fA; R_Z's share of the output noise 31.2% (1 kOhm), 39.8% (100 kOhm)
+  vs data sheet: from {'value': -14.352997662376865, 'f_hz': 1.0, 'r_ohm': 1.0} to {'value': 0.07125022662842673, 'f_hz': 1.4125375446227544, 'r_ohm': 100000000.0}; lower on 72.3%, within 0.1 dB on 27.7%, higher on 0.0% (None)
+L: two-port fit within 1.5e-05 dB; Table 10 check {'points': 40, 'max_abs_diff_db': np.float64(1.5494543083027779e-06)}
+  L            10 Hz: e_n   0.960 nV, i_n    40.714 fA, corr +0.002, R_opt  2.36e+04, NF_min  0.021 dB, <1 dB [222.2, 2.501e+06], <3 dB [57.81, 9.616e+06]
+  L          1000 Hz: e_n   0.426 nV, i_n    40.743 fA, corr +0.001, R_opt  1.05e+04, NF_min  0.009 dB, <1 dB [43.83, 2.498e+06], <3 dB [11.4, 9.602e+06]
+  L        100000 Hz: e_n   0.418 nV, i_n   156.838 fA, corr +0.003, R_opt  2.66e+03, NF_min  0.035 dB, <1 dB [42.07, 1.685e+05], <3 dB [10.94, 6.48e+05]
+  L         1e+06 Hz: e_n   0.419 nV, i_n  1514.111 fA, corr +0.024, R_opt       277, NF_min  0.339 dB, <1 dB [43.68, 1752], <3 dB [11.05, 6929]
+  L         1e+07 Hz: e_n   0.544 nV, i_n 14729.717 fA, corr +0.202, R_opt      36.9, NF_min  3.429 dB, <1 dB [], <3 dB []
+  input network 100000 Hz: i_n 157 fA, R_Z 122 fA, bias 40.7 fA; R_Z's share of the output noise 7.5% (1 kOhm), 60.5% (100 kOhm)
+  input network 1e+06 Hz: i_n 1514 fA, R_Z 1218 fA, bias 40.7 fA; R_Z's share of the output noise 59.3% (1 kOhm), 64.7% (100 kOhm)
+  input network 1e+07 Hz: i_n 14730 fA, R_Z 10231 fA, bias 40.7 fA; R_Z's share of the output noise 47.5% (1 kOhm), 48.2% (100 kOhm)
+  vs data sheet: from {'value': -23.87417924056662, 'f_hz': 1.0, 'r_ohm': 1.0} to {'value': 7.535460586404275, 'f_hz': 1.4125375446227544, 'r_ohm': 100000000.0}; lower on 57.4%, within 0.1 dB on 7.8%, higher on 34.8% ({'f_hz': [1.0, 1000000.0], 'r_ohm': [3090.295432513592, 100000000.0]})
+SR560: two-port fit within 1.7e-05 dB; archived check {'file': 'sr560_chain_noise_LN_1000.npz', 'max_abs_diff_db': 0.0}; low frequency {'e_n': {'1.0': 1.5055813e-07, '10.0': 4.7704211e-08, '100.0': 1.5378094e-08, '1000.0': 5.7065909e-09, '100000.0': 3.1836253e-09}, 'corner_hz': {'10.0': 2235.274995364304, '100.0': 2233.2492118031364, '1000.0': 2212.9915570508865}, 'jfet_flicker_share': {'10.0': 0.9953699751791618, '100.0': 0.9578400064158824, '1000.0': 0.6955758447132026, '10000.0': 0.1860783745186326}, 'flicker_generators': ['j.xja.j1_1overf', 'j.xjb.j1_1overf', 'r.xja.rx_1overf', 'r.xjb.rx_1overf']}
+  SR560        10 Hz: e_n  47.704 nV, i_n    12.884 fA, corr +0.037, R_opt   3.7e+06, NF_min  0.333 dB, <1 dB [5.679e+05, 2.414e+07], <3 dB [1.434e+05, 9.561e+07]
+  SR560      1000 Hz: e_n   5.707 nV, i_n    12.925 fA, corr +0.004, R_opt  4.42e+05, NF_min  0.040 dB, <1 dB [7857, 2.481e+07], <3 dB [2043, 9.541e+07]
+  SR560    100000 Hz: e_n   3.184 nV, i_n   100.265 fA, corr -0.017, R_opt  3.18e+04, NF_min  0.167 dB, <1 dB [2452, 4.111e+05], <3 dB [635.7, 1.586e+06]
+  SR560     1e+06 Hz: e_n   3.157 nV, i_n   367.674 fA, corr +0.002, R_opt  8.59e+03, NF_min  0.589 dB, <1 dB [2633, 2.801e+04], <3 dB [628.9, 1.172e+05]
+  SR560     1e+07 Hz: e_n  90.515 nV, i_n 48499.312 fA, corr +0.494, R_opt  1.87e+03, NF_min 29.140 dB, <1 dB [], <3 dB []
+  vs data sheet: from {'value': -7.371661791424984, 'f_hz': 1000000.0, 'r_ohm': 100000000.0} to {'value': 15.994809044149193, 'f_hz': 10.0, 'r_ohm': 1.0}; lower on 22.8%, within 0.1 dB on 24.5%, higher on 52.7% ({'f_hz': [1.0, 141253.75446227554], 'r_ohm': [1.0, 100000000.0]})
+SR560_LSK389B: two-port fit within 0.0027 dB; archived check {'file': 'sr560_variants_corrected_lsk389b_noise_LN_1000.npz', 'max_abs_diff_db': 0.0}; low frequency {'e_n': {'1.0': 1.3222834e-08, '10.0': 5.1712898e-09, '100.0': 3.4542675e-09, '1000.0': 3.2327906e-09, '100000.0': 3.2076877e-09}, 'corner_hz': {'10.0': 15.990437802180871, '100.0': 15.965225099184515, '1000.0': 15.712954744525776}, 'jfet_flicker_share': {'10.0': 0.5969113203329799, '100.0': 0.13378137209352153, '1000.0': 0.015273987815942962, '10000.0': 0.0015493545864866873}, 'flicker_generators': ['j.xja.j1_1overf', 'j.xjb.j1_1overf', 'r.xja.rx_1overf', 'r.xjb.rx_1overf']}
+  SR560_LSK389B       10 Hz: e_n   5.171 nV, i_n    12.875 fA, corr +0.004, R_opt  4.02e+05, NF_min  0.036 dB, <1 dB [6451, 2.501e+07], <3 dB [1678, 9.615e+07]
+  SR560_LSK389B     1000 Hz: e_n   3.233 nV, i_n    13.038 fA, corr +0.002, R_opt  2.48e+05, NF_min  0.023 dB, <1 dB [2521, 2.439e+07], <3 dB [655.7, 9.376e+07]
+  SR560_LSK389B   100000 Hz: e_n   3.208 nV, i_n   187.070 fA, corr -0.018, R_opt  1.71e+04, NF_min  0.308 dB, <1 dB [2522, 1.166e+05], <3 dB [645.6, 4.555e+05]
+  SR560_LSK389B    1e+06 Hz: e_n   3.211 nV, i_n   737.104 fA, corr +0.005, R_opt  4.36e+03, NF_min  1.129 dB, <1 dB [], <3 dB [662.9, 2.863e+04]
+  SR560_LSK389B    1e+07 Hz: e_n 310.969 nV, i_n 304839.957 fA, corr +0.606, R_opt  1.02e+03, NF_min 42.790 dB, <1 dB [], <3 dB []
+  vs data sheet: from {'value': -10.285913515569241, 'f_hz': 1.0, 'r_ohm': 1.0} to {'value': 6.871832785807687, 'f_hz': 63095.7344480193, 'r_ohm': 100000000.0}; lower on 54.6%, within 0.1 dB on 31.2%, higher on 14.3% ({'f_hz': [1000.0, 562341.3251903491], 'r_ohm': [10471.285480508985, 100000000.0]})

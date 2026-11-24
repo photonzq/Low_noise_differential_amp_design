@@ -122,6 +122,7 @@ import spice
 
 K, Q, T = 1.380649e-23, 1.602176634e-19, 300.15
 R = spice.RESULTS
+VCM_LO, VCM_HI = -8.0, 3.0        # servo_check.py's input common modes (VCM)
 
 # ---- data-sheet and literature constants ----
 THS4021 = dict(gbw=2e9,          # 2 GHz gain-bandwidth product: TI SLOS265F (rev. July 2024), p. 1, Sec. 1
@@ -330,6 +331,78 @@ def main():
     i100k = math.sqrt(4 * K * T / 100e3)
     put(s, "noise current of 100 kohm, sqrt(4kT / R)", i100k * 1e12, "pA/rtHz", "arithmetic", rnd(i100k * 1e12, 1))
 
+    # ================= Section 4.2: what the servo sets, and the latch (servo_check.py) =================
+    s = "4.2 servo check"
+    svc = load("servo_check.json")
+    hr = fcf["headroom"]
+    cm_range = {"H": (hr["V_CM_min H (2 V)"], hr["H100"]["V_CM_max"]), "L": (hr["V_CM_min L (6 V)"], hr["L200"]["V_CM_max"])}
+    for c, case, p in (("H", "H100", pH), ("L", "L200", pL)):
+        r = svc["role"][case]
+        sv, de = r["servo"], r["design"]
+        put(s, f"{c}: outputs - sources with the servo (largest of every servo case)",
+            max(abs(r[k]["cm_offset"]) for k in r if k.startswith("servo")) * 1e6, "uV",
+            "servo_check.json role, servo*: cm_offset", rnd(max(abs(r[k]["cm_offset"]) for k in r if k.startswith("servo")) * 1e6, 0))
+        put(s, f"{c}: signal path, servo against the reference fixed at its value (f3dB, noise: largest rel. diff.)",
+            [r["signal_path"]["rel_diff_f3db"], r["signal_path"]["max_rel_diff_en"]], "-", "servo_check.json signal_path",
+            f"{r['signal_path']['rel_diff_f3db']:.0e}, {r['signal_path']['max_rel_diff_en']:.0e}")
+        put(s, f"{c}: the servo's settled reference / the design value V_M + V_RT + 0.66 V", [sv["v_ref"], de["v_ref"]], "V",
+            "servo_check.json servo, design: v_ref", f"{rnd(sv['v_ref'], 2)} / {rnd(de['v_ref'], 2)}")
+        i_b, i_c = sv["i_base"], sv["i_sink"][0]
+        i_e = i_c + i_b
+        r_t = p.v_sink / (p.n * p.id + p.i_bs)
+        v_be = sv["v_base"] - sv["v_emitter"]
+        parts = dict(base_current_in_1k=2 * i_b * 1e3, v_be_minus_0p66=v_be - 0.66, emitter_current_excess=(i_e - p.v_sink / r_t) * r_t)
+        put(s, f"{c}: settled - design reference: 2 I_B x 1 kohm, V_BE - 0.66 V, (I_E - V_RT/R_T) R_T", parts, "V",
+            "servo_check.json servo: i_base, v_base - v_emitter, i_sink + i_base",
+            ", ".join(rnd(x, 2) for x in parts.values()) + f" (sum {rnd(sum(parts.values()), 2)} V)")
+        put(s, f"{c}: beta = I_C / I_B at the operating point", i_c / i_b, "-", "servo_check.json servo", rnd(i_c / i_b, 0))
+        put(s, f"{c}: outputs - sources with the reference at the design value", de["cm_offset"], "V",
+            "servo_check.json design: cm_offset", rnd(de["cm_offset"], 2))
+        sn = r["sens"]
+        put(s, f"{c}: outputs per 20 mV of reference (or of V_BE)", sn["per_mV_ref"] * 20 * 1e3, "mV",
+            "servo_check.json sens.per_mV_ref x 20 mV", rnd(sn["per_mV_ref"] * 20 * 1e3, 0))
+        put(s, f"{c}: outputs per kelvin, reference fixed / with the servo", [sn["per_K_fixed"] * 1e3, sn["per_K_servo"] * 1e3],
+            "mV/K", "servo_check.json sens (27 -> 52 C)", f"{rnd(sn['per_K_fixed'] * 1e3, 1)} / {sn['per_K_servo'] * 1e3:.1e}")
+        put(s, f"{c}: outputs over +25 K, reference fixed", r["fixed_52C"]["cm_offset"] - r["fixed"]["cm_offset"], "V",
+            "servo_check.json fixed_52C - fixed", rnd(r["fixed_52C"]["cm_offset"] - r["fixed"]["cm_offset"], 2))
+        put(s, f"{c}: base current change over +25 K (beta rises), x 2 x 1 kohm",
+            2 * (r["fixed_52C"]["i_base"] - r["fixed"]["i_base"]) * 1e3, "V", "servo_check.json fixed_52C, fixed: i_base",
+            rnd(2 * (r["fixed_52C"]["i_base"] - r["fixed"]["i_base"]) * 1e3, 3))
+        put(s, f"{c}: outputs per volt of input common mode, reference fixed / with the servo",
+            [sn["per_V_cm_fixed"] * 1e3, sn["per_V_cm_servo"] * 1e3], "mV/V", "servo_check.json sens (-8 V, +3 V)",
+            f"{rnd(sn['per_V_cm_fixed'] * 1e3, 0)} / {sn['per_V_cm_servo'] * 1e3:.1e}")
+        lo, hi = cm_range[c]
+        put(s, f"{c}: over the input common-mode range {rnd(lo, 1)} ... {rnd(hi, 1)} V, reference fixed",
+            sn["per_V_cm_fixed"] * (hi - lo), "V", "per_V_cm_fixed x range (fe_closed_forms.json headroom)",
+            rnd(sn["per_V_cm_fixed"] * (hi - lo), 2))
+        dvc = VCM_HI - VCM_LO
+        put(s, f"{c}: R_UP's current per volt of input common mode", sn["i_up_per_V_cm"] * 1e6, "uA/V",
+            "servo_check.json sens.i_up_per_V_cm (-1 / (R_UP + R_BS))", rnd(sn["i_up_per_V_cm"] * 1e6, 0))
+        di_s = (r[f"fixed_cm_{VCM_HI:+g}V"]["i_sink"][0] - r[f"fixed_cm_{VCM_LO:+g}V"]["i_sink"][0]) / dvc
+        put(s, f"{c}: a fixed sink's own current per volt of collector voltage (Early effect)", di_s * 1e6, "uA/V",
+            "servo_check.json fixed_cm_*: i_sink", rnd(di_s * 1e6, 0))
+        # the latch: the servo loop opened (sweep) and closed
+        sw, cl = svc["latch"][case]["sweep"], svc["latch"][case]["closed"]
+        put(s, f"{c}: zeros of e(reference), loop opened: reference, slope", [[z["v_ref"], z["slope"]] for z in sw["zeros"]],
+            "V, V/V", "servo_check.json latch.sweep.zeros", "; ".join(f"{rnd(z['v_ref'], 2)} V, {rnd(z['slope'], 2)}" for z in sw["zeros"]))
+        put(s, f"{c}: e at the design clamp's limits and at +-14 V", [sw["e_at_design_lo"], sw["e_at_design_hi"], sw["e_at_rail_lo"],
+            sw["e_at_rail_hi"]], "V", "servo_check.json latch.sweep",
+            f"{rnd(sw['e_at_design_lo'], 1)} / {rnd(sw['e_at_design_hi'], 2)}; {rnd(sw['e_at_rail_lo'], 1)} / {rnd(sw['e_at_rail_hi'], 1)}")
+        put(s, f"{c}: e above the zero (min) and below it (max)", [sw["e_min_above_zero"], sw["e_max_below_zero"]], "V",
+            "servo_check.json latch.sweep", f"{sw['e_min_above_zero']:.1e} / {sw['e_max_below_zero']:.1e}")
+        put(s, f"{c}: saturation (V_BC > 0.5 V) from a reference of", sw["saturation_onset_v_ref"], "V",
+            "servo_check.json latch.sweep", rnd(sw["saturation_onset_v_ref"], 1))
+        put(s, f"{c}: sink emitter current and R_T's dissipation: nominal / design clamp top / +14 V",
+            [sw["i_sink_nominal"], sw["i_emitter_at_design_hi"], sw["i_emitter_at_rail_hi"], sw["p_rt_nominal"],
+             sw["p_rt_at_design_hi"], sw["p_rt_at_rail_hi"]], "A, W", "servo_check.json latch.sweep",
+            f"{rnd(sw['i_sink_nominal'] * 1e3, 0)} / {rnd(sw['i_emitter_at_design_hi'] * 1e3, 0)} / {rnd(sw['i_emitter_at_rail_hi'] * 1e3, 0)} mA; "
+            f"{rnd(sw['p_rt_nominal'] * 1e3, 0)} / {rnd(sw['p_rt_at_design_hi'] * 1e3, 0)} / {rnd(sw['p_rt_at_rail_hi'] * 1e3, 0)} mW")
+        cls = {k: x for k, x in cl.items() if isinstance(x, dict)}
+        put(s, f"{c}: closed loop from no .nodeset and from the bases at +14 V (design clamp, +-14 V): same state, no fallback",
+            all(abs(x["v_base"] - cls["design_clamp"]["v_base"]) < 1e-6 and not x["fallback"] for x in cls.values()), "-",
+            "servo_check.json latch.closed", str(all(abs(x["v_base"] - cls["design_clamp"]["v_base"]) < 1e-6 and not x["fallback"]
+                                                       for x in cls.values())))
+
     # ================= Section 4.2: bootstrap and cascode =================
     s = "4.2 cascode"
     r_bs = pH.vbs / pH.i_bs
@@ -456,6 +529,13 @@ def main():
     e = osc["H100_cnode220p"]
     put(s, "final values H100: output pk-pk", max(e["v(oa)"]["pkpk"], e["v(ob)"]["pkpk"]) * 1e6, "uV",
         "osc_check.json, H100_cnode220p", rnd(max(e["v(oa)"]["pkpk"], e["v(ob)"]["pkpk"]) * 1e6, 2))
+    put(s, "final values H100: outputs' common mode, window mean minus start", e["cm_out"]["window_mean_minus_start"] * 1e3,
+        "mV", "osc_check.json, H100_cnode220p cm_out.window_mean_minus_start",
+        rnd(e["cm_out"]["window_mean_minus_start"] * 1e3, 2))
+    e = osc["L200_cnode470p"]
+    put(s, "final values L200: output pk-pk, and the run used", [max(e["v(oa)"]["pkpk"], e["v(ob)"]["pkpk"]) * 1e6,
+                                                                 e.get("integration", "Gear")],
+        "uV", "osc_check.json, L200_cnode470p", rnd(max(e["v(oa)"]["pkpk"], e["v(ob)"]["pkpk"]) * 1e6, 2))
     # bandwidth and noise
     put(s, "chain at total gain 100, first front end, LM7171 in S2: -3 dB", dab["LM7171"]["ac_H100"]["f3db"] / 1e6,
         "MHz", "da_compare_before_cnode.json", rnd(dab["LM7171"]["ac_H100"]["f3db"] / 1e6, 1))

@@ -1,5 +1,5 @@
-"""The SR560's front end, as read from its schematic (SR560 manual, Rev. 2.8, sheet 560_1F.SCH,
-manual p. 46 of the PDF), simulated in ngspice to see where its noise comes from.
+"""The SR560's front end, as read from its schematic (SR560 manual, Rev. 3.1, 4/2023, sheet 560_1F.SCH,
+manual p. 47 of the PDF), simulated in ngspice to see where its noise comes from.
 
 Parts (schematic references):
   U106 = NPD5564 dual JFET (2N5564 pair; Linear Systems' 2N5564 card, calibrated in models.py)
@@ -123,9 +123,31 @@ VM m10 0 DC -10
 """
 
 
+# The SR560 decks' operating point.  The decks first tied the inputs to their sources through 1 mOhm,
+# which with abstol = 1e-15 A asks ngspice to resolve about 1e-18 V across them (the note's Appendix,
+# "Tiny resistors and abstol"): on some decks ngspice's gmin and source stepping then failed, and its
+# fallback, the transient op, returned a state that is not a DC solution (U103's reference input at
+# 0.94 V instead of 6.2 V, U102 at its output limit), which spice.run does not flag, and whose value
+# even varied between runs.  The input resistors are now 1 ohm (noiseless, as in the transients);
+# besides, every deck starts Newton at the front end's normal state (NODESET: the zener reference
+# and the servo's sensing node at 6.2 V, the drains at 6.2 V, the drain supply node at 8.5 V;
+# sr560_chain.trimmed continues from converged solutions), and run_checked stops if the fallback
+# still happens.  From either state Newton reaches the same, unique solution (sr560_variants.json,
+# check_operating_point).
+NODESET = ".nodeset v(ref)=6.2 v(mid)=6.2 v(da)=6.2 v(db)=6.2 v(vtop)=8.5\n"
+
+
 def deck(title: str, body: str, src: str, control: str) -> str:
     return (f"* {title}\n{spice.OPTIONS}{spice.lib('jfets.lib')}{OP37}{LF411}{blocks.COMMON}"
-            f"{src}{body}{control}.end\n")
+            f"{src}{body}{NODESET}{control}.end\n")
+
+
+def run_checked(name: str, text: str):
+    """spice.run, then an error if the operating point fell back to the transient op."""
+    f = spice.run(name, text)
+    if spice.op_fallback(f):
+        raise RuntimeError(f"{name}: the operating point fell back to the transient op")
+    return f
 
 
 GROUPS = [
@@ -148,30 +170,34 @@ def group_of(name: str) -> str | None:
     return None
 
 
-def run_case(gain10: bool = True, jfet: str = "2N5564") -> dict:
-    tag = f"sr560_{'x10' if gain10 else 'x2'}_{jfet}"
+def run_case(gain10: bool = True, jfet: str = "2N5564", edit=None, suffix: str = "") -> dict:
+    """edit: an optional function applied to each deck's text before it is run (sr560_variants.py
+    uses it for the corrected models); suffix: appended to the case tag, i.e. to the run folders
+    and the curves file.  The defaults reproduce this script's own runs."""
+    tag = f"sr560_{'x10' if gain10 else 'x2'}_{jfet}{suffix}"
+    ed = edit or (lambda text: text)
     body = front_end(gain10, jfet)
     # operating point and differential gain (A = +1/2, B = -1/2)
     ctl = (".control\n" + spice.WR + "op\nprint v(da) v(db) v(sa) v(sb) v(tail) v(out) v(sv)\n"
            "print @j.xja.j1[id] @j.xjb.j1[id] @j.xja.j1[gm] @j.xjb.j1[gm]\n"
            "ac dec 20 1 100meg\nwrdata ac.txt v(out)\n.endc\n")
-    f_ac = spice.run(f"{tag}/ac", deck(tag, body, "VA ina0 0 DC 0 AC 0.5\nVB inb0 0 DC 0 AC -0.5\n"
-                                               "RSA ina0 ina 1m rnl\nRSB inb0 inb 1m rnl\n", ctl))
+    f_ac = run_checked(f"{tag}/ac", ed(deck(tag, body, "VA ina0 0 DC 0 AC 0.5\nVB inb0 0 DC 0 AC -0.5\n"
+                                               "RSA ina0 ina 1 rnl\nRSB inb0 inb 1 rnl\n", ctl)))
     ac = spice.read_table(f_ac / "ac.txt")
     f, h = ac["frequency"], ac["v(out)"]
     op = {k: spice.printed(f_ac, k) for k in ("v(da)", "v(db)", "v(sa)", "v(sb)", "v(tail)", "v(out)",
                                                "@j.xja.j1[id]", "@j.xja.j1[gm]")}
     # common-mode gain (A = B = 1)
-    f_cm = spice.run(f"{tag}/cm", deck(tag, body, "VA ina0 0 DC 0 AC 1\nRSA ina0 ina 1m rnl\n"
-                                                   "RSB ina0 inb 1m rnl\n",
-                                       ".control\n" + spice.WR + "ac dec 20 1 100meg\nwrdata cm.txt v(out)\n.endc\n"))
+    f_cm = run_checked(f"{tag}/cm", ed(deck(tag, body, "VA ina0 0 DC 0 AC 1\nRSA ina0 ina 1 rnl\n"
+                                                   "RSB ina0 inb 1 rnl\n",
+                                       ".control\n" + spice.WR + "ac dec 20 1 100meg\nwrdata cm.txt v(out)\n.endc\n")))
     cm = spice.read_table(f_cm / "cm.txt")["v(out)"]
-    # noise, input A driven by VIN through 1 mOhm (noiseless), input B grounded
-    f_n = spice.run(f"{tag}/noise", deck(tag, body, "VIN ina0 0 DC 0 AC 1\nRSA ina0 ina 1m rnl\n"
-                                                    "RSB 0 inb 1m rnl\n",
-                                         spice.noise_control("out", "VIN", 0.1, 100e6, 20)))
+    # noise, input A driven by VIN through 1 Ohm (noiseless), input B grounded
+    f_n = run_checked(f"{tag}/noise", ed(deck(tag, body, "VIN ina0 0 DC 0 AC 1\nRSA ina0 ina 1 rnl\n"
+                                                    "RSB 0 inb 1 rnl\n",
+                                         spice.noise_control("out", "VIN", 0.1, 100e6, 20))))
     nz = spice.read_noise(f_n)
-    fn, on, inn = nz["frequency"], nz["onoise_spectrum"], nz["inoise_spectrum"]
+    fn, inn = nz["frequency"], nz["inoise_spectrum"]
     gain_n = np.abs(np.interp(np.log10(fn), np.log10(f), np.abs(h)))
     groups = {g: np.zeros_like(fn) for g, _ in GROUPS}
     other = {}

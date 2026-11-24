@@ -102,13 +102,13 @@
    "shown": "11.0"
   },
   "H100: R_T current I_T (base current included)": {
-   "value": 11.117158,
+   "value": 11.117159,
    "unit": "mA",
    "source": "sink_power.json, H100 | 2 V, i_sink",
    "shown": "11.1"
   },
   "H100: sink base current I_T - I_C": {
-   "value": 0.0923409431192665,
+   "value": 0.09234194311926597,
    "unit": "mA",
    "source": "difference",
    "shown": "0.09"
@@ -120,13 +120,13 @@
    "shown": "61.1"
   },
   "L200: R_T current I_T (base current included)": {
-   "value": 61.916326,
+   "value": 61.916342,
    "unit": "mA",
    "source": "sink_power.json, L200 | 6 V, i_sink",
    "shown": "61.9"
   },
   "L200: sink base current I_T - I_C": {
-   "value": 0.8505750385321074,
+   "value": 0.8505910385321058,
    "unit": "mA",
    "source": "difference",
    "shown": "0.85"
@@ -182,7 +182,7 @@
    "shown": "4.7"
   },
   "H: output drift per kelvin, simulated": {
-   "value": 4.863300000000015,
+   "value": 4.86331000000001,
    "unit": "mV/K",
    "source": "fe_closed_forms.json, drift, H100, 2 V, output_mV_per_K",
    "shown": "4.9"
@@ -308,7 +308,7 @@
    "shown": "V_M + 1 V ... V_M + 9 V"
   },
   "L: sink base (vsink) at the operating point, relative to V_M": {
-   "value": 6.8987490000000005,
+   "value": 6.89875,
    "unit": "V",
    "source": "sink_power.json, L200 | 6 V, v_ctrl",
    "shown": "6.9"
@@ -318,6 +318,320 @@
    "unit": "pA/rtHz",
    "source": "arithmetic",
    "shown": "0.4"
+  }
+ },
+ "4.2 servo check": {
+  "H: outputs - sources with the servo (largest of every servo case)": {
+   "value": 1.000000000139778,
+   "unit": "uV",
+   "source": "servo_check.json role, servo*: cm_offset",
+   "shown": "1"
+  },
+  "H: signal path, servo against the reference fixed at its value (f3dB, noise: largest rel. diff.)": {
+   "value": [
+    0.0,
+    0.0
+   ],
+   "unit": "-",
+   "source": "servo_check.json signal_path",
+   "shown": "0e+00, 0e+00"
+  },
+  "H: the servo's settled reference / the design value V_M + V_RT + 0.66 V": {
+   "value": [
+    -12.05997,
+    -12.34
+   ],
+   "unit": "V",
+   "source": "servo_check.json servo, design: v_ref",
+   "shown": "-12.06 / -12.34"
+  },
+  "H: settled - design reference: 2 I_B x 1 kohm, V_BE - 0.66 V, (I_E - V_RT/R_T) R_T": {
+   "value": {
+    "base_current_in_1k": 0.184684784,
+    "v_be_minus_0p66": 0.07404000000000022,
+    "emitter_current_excess": 0.021301525818182013
+   },
+   "unit": "V",
+   "source": "servo_check.json servo: i_base, v_base - v_emitter, i_sink + i_base",
+   "shown": "0.18, 0.07, 0.02 (sum 0.28 V)"
+  },
+  "H: beta = I_C / I_B at the operating point": {
+   "value": 119.39062613842621,
+   "unit": "-",
+   "source": "servo_check.json servo",
+   "shown": "119"
+  },
+  "H: outputs - sources with the reference at the design value": {
+   "value": -0.68115978,
+   "unit": "V",
+   "source": "servo_check.json design: cm_offset",
+   "shown": "-0.68"
+  },
+  "H: outputs per 20 mV of reference (or of V_BE)": {
+   "value": 48.60441500000001,
+   "unit": "mV",
+   "source": "servo_check.json sens.per_mV_ref x 20 mV",
+   "shown": "49"
+  },
+  "H: outputs per kelvin, reference fixed / with the servo": {
+   "value": [
+    6.525835199999999,
+    5.200000001703842e-06
+   ],
+   "unit": "mV/K",
+   "source": "servo_check.json sens (27 -> 52 C)",
+   "shown": "6.5 / 5.2e-06"
+  },
+  "H: outputs over +25 K, reference fixed": {
+   "value": 0.16314587999999997,
+   "unit": "V",
+   "source": "servo_check.json fixed_52C - fixed",
+   "shown": "0.16"
+  },
+  "H: base current change over +25 K (beta rises), x 2 x 1 kohm": {
+   "value": -0.015690587999999988,
+   "unit": "V",
+   "source": "servo_check.json fixed_52C, fixed: i_base",
+   "shown": "-0.016"
+  },
+  "H: outputs per volt of input common mode, reference fixed / with the servo": {
+   "value": [
+    42.53060909090912,
+    4.5454545501270744e-05
+   ],
+   "unit": "mV/V",
+   "source": "servo_check.json sens (-8 V, +3 V)",
+   "shown": "43 / 4.5e-05"
+  },
+  "H: over the input common-mode range -12.8 ... 3.7 V, reference fixed": {
+   "value": 0.7048661725611223,
+   "unit": "V",
+   "source": "per_V_cm_fixed x range (fe_closed_forms.json headroom)",
+   "shown": "0.70"
+  },
+  "H: R_UP's current per volt of input common mode": {
+   "value": -69.38845204336945,
+   "unit": "uA/V",
+   "source": "servo_check.json sens.i_up_per_V_cm (-1 / (R_UP + R_BS))",
+   "shown": "-69"
+  },
+  "H: a fixed sink's own current per volt of collector voltage (Early effect)": {
+   "value": 15.699272727272758,
+   "unit": "uA/V",
+   "source": "servo_check.json fixed_cm_*: i_sink",
+   "shown": "16"
+  },
+  "H: zeros of e(reference), loop opened: reference, slope": {
+   "value": [
+    [
+     -12.059971919856373,
+     2.4301869999998362
+    ]
+   ],
+   "unit": "V, V/V",
+   "source": "servo_check.json latch.sweep.zeros",
+   "shown": "-12.06 V, 2.43"
+  },
+  "H: e at the design clamp's limits and at +-14 V": {
+   "value": [
+    -4.70057227,
+    4.95816734,
+    -4.70057227,
+    14.72834747
+   ],
+   "unit": "V",
+   "source": "servo_check.json latch.sweep",
+   "shown": "-4.7 / 4.96; -4.7 / 14.7"
+  },
+  "H: e above the zero (min) and below it (max)": {
+   "value": [
+    0.04853550000000001,
+    -6.823999999999719e-05
+   ],
+   "unit": "V",
+   "source": "servo_check.json latch.sweep",
+   "shown": "4.9e-02 / -6.8e-05"
+  },
+  "H: saturation (V_BC > 0.5 V) from a reference of": {
+   "value": 2.336203998763505,
+   "unit": "V",
+   "source": "servo_check.json latch.sweep",
+   "shown": "2.3"
+  },
+  "H: sink emitter current and R_T's dissipation: nominal / design clamp top / +14 V": {
+   "value": [
+    0.011,
+    0.021140861499999997,
+    0.07644129514999999,
+    0.022,
+    0.08126109544766948,
+    1.0624130189471659
+   ],
+   "unit": "A, W",
+   "source": "servo_check.json latch.sweep",
+   "shown": "11 / 21 / 76 mA; 22 / 81 / 1062 mW"
+  },
+  "H: closed loop from no .nodeset and from the bases at +14 V (design clamp, +-14 V): same state, no fallback": {
+   "value": true,
+   "unit": "-",
+   "source": "servo_check.json latch.closed",
+   "shown": "True"
+  },
+  "L: outputs - sources with the servo (largest of every servo case)": {
+   "value": 5.00000000069889,
+   "unit": "uV",
+   "source": "servo_check.json role, servo*: cm_offset",
+   "shown": "5"
+  },
+  "L: signal path, servo against the reference fixed at its value (f3dB, noise: largest rel. diff.)": {
+   "value": [
+    0.0,
+    0.0
+   ],
+   "unit": "-",
+   "source": "servo_check.json signal_path",
+   "shown": "0e+00, 0e+00"
+  },
+  "L: the servo's settled reference / the design value V_M + V_RT + 0.66 V": {
+   "value": [
+    -6.40007,
+    -8.34
+   ],
+   "unit": "V",
+   "source": "servo_check.json servo, design: v_ref",
+   "shown": "-6.40 / -8.34"
+  },
+  "L: settled - design reference: 2 I_B x 1 kohm, V_BE - 0.66 V, (I_E - V_RT/R_T) R_T": {
+   "value": {
+    "base_current_in_1k": 1.7011817,
+    "v_be_minus_0p66": 0.14861600000000064,
+    "emitter_current_excess": 0.09013041147541018
+   },
+   "unit": "V",
+   "source": "servo_check.json servo: i_base, v_base - v_emitter, i_sink + i_base",
+   "shown": "1.70, 0.15, 0.09 (sum 1.94 V)"
+  },
+  "L: beta = I_C / I_B at the operating point": {
+   "value": 71.7921371949863,
+   "unit": "-",
+   "source": "servo_check.json servo",
+   "shown": "72"
+  },
+  "L: outputs - sources with the reference at the design value": {
+   "value": -3.4254918400000003,
+   "unit": "V",
+   "source": "servo_check.json design: cm_offset",
+   "shown": "-3.43"
+  },
+  "L: outputs per 20 mV of reference (or of V_BE)": {
+   "value": 34.32284999999996,
+   "unit": "mV",
+   "source": "servo_check.json sens.per_mV_ref x 20 mV",
+   "shown": "34"
+  },
+  "L: outputs per kelvin, reference fixed / with the servo": {
+   "value": [
+    17.4741088,
+    1.9600000000785656e-05
+   ],
+   "unit": "mV/K",
+   "source": "servo_check.json sens (27 -> 52 C)",
+   "shown": "17.5 / 2.0e-05"
+  },
+  "L: outputs over +25 K, reference fixed": {
+   "value": 0.43685271999999997,
+   "unit": "V",
+   "source": "servo_check.json fixed_52C - fixed",
+   "shown": "0.44"
+  },
+  "L: base current change over +25 K (beta rises), x 2 x 1 kohm": {
+   "value": -0.12833224000000001,
+   "unit": "V",
+   "source": "servo_check.json fixed_52C, fixed: i_base",
+   "shown": "-0.128"
+  },
+  "L: outputs per volt of input common mode, reference fixed / with the servo": {
+   "value": [
+    77.17742727272737,
+    0.0001272727273066659
+   ],
+   "unit": "mV/V",
+   "source": "servo_check.json sens (-8 V, +3 V)",
+   "shown": "77 / 1.3e-04"
+  },
+  "L: over the input common-mode range -9.0 ... 3.6 V, reference fixed": {
+   "value": 0.9690483813477315,
+   "unit": "V",
+   "source": "per_V_cm_fixed x range (fe_closed_forms.json headroom)",
+   "shown": "0.97"
+  },
+  "L: R_UP's current per volt of input common mode": {
+   "value": -69.39205838198498,
+   "unit": "uA/V",
+   "source": "servo_check.json sens.i_up_per_V_cm (-1 / (R_UP + R_BS))",
+   "shown": "-69"
+  },
+  "L: a fixed sink's own current per volt of collector voltage (Early effect)": {
+   "value": 240.7176363636362,
+   "unit": "uA/V",
+   "source": "servo_check.json fixed_cm_*: i_sink",
+   "shown": "241"
+  },
+  "L: zeros of e(reference), loop opened: reference, slope": {
+   "value": [
+    [
+     -6.400067428231895,
+     1.7166400000000337
+    ]
+   ],
+   "unit": "V, V/V",
+   "source": "servo_check.json latch.sweep.zeros",
+   "shown": "-6.40 V, 1.72"
+  },
+  "L: e at the design clamp's limits and at +-14 V": {
+   "value": [
+    -13.5307104,
+    0.6825932899999999,
+    -13.5307104,
+    12.55466296
+   ],
+   "unit": "V",
+   "source": "servo_check.json latch.sweep",
+   "shown": "-13.5 / 0.68; -13.5 / 12.6"
+  },
+  "L: e above the zero (min) and below it (max)": {
+   "value": [
+    0.00011574999999997004,
+    -0.03421704999999997
+   ],
+   "unit": "V",
+   "source": "servo_check.json latch.sweep",
+   "shown": "1.2e-04 / -3.4e-02"
+  },
+  "L: saturation (V_BC > 0.5 V) from a reference of": {
+   "value": 9.948221604723864,
+   "unit": "V",
+   "source": "servo_check.json latch.sweep",
+   "shown": "9.9"
+  },
+  "L: sink emitter current and R_T's dissipation: nominal / design clamp top / +14 V": {
+   "value": [
+    0.061,
+    0.06471858033333333,
+    0.15364323353333334,
+    0.366,
+    0.41198307937988066,
+    2.321925561696237
+   ],
+   "unit": "A, W",
+   "source": "servo_check.json latch.sweep",
+   "shown": "61 / 65 / 154 mA; 366 / 412 / 2322 mW"
+  },
+  "L: closed loop from no .nodeset and from the bases at +14 V (design clamp, +-14 V): same state, no fallback": {
+   "value": true,
+   "unit": "-",
+   "source": "servo_check.json latch.closed",
+   "shown": "True"
   }
  },
  "4.2 cascode": {
@@ -396,7 +710,7 @@
    "shown": "0.28"
   },
   "H100: op amps at 10 kHz": {
-   "value": 0.13389539103981968,
+   "value": 0.13389539103983442,
    "unit": "nV/rtHz",
    "source": "fe_gain_options.json (Table 6c)",
    "shown": "0.13"
@@ -612,7 +926,7 @@
    "value": [
     10.608599,
     65.64587397692243,
-    18.53301698550472
+    18.533016924756115
    ],
    "unit": "MHz, deg, dB",
    "source": "curves_loop.npz, check_loop convention",
@@ -622,7 +936,7 @@
    "value": [
     19.984948,
     63.38574755666012,
-    11.570264267218029
+    11.570264268681303
    ],
    "unit": "MHz, deg, dB",
    "source": "curves_loop.npz, check_loop convention",
@@ -712,7 +1026,7 @@
    "value": [
     51.577067,
     61.99552397009647,
-    9.769663455131635
+    9.769663483419041
    ],
    "unit": "MHz, deg, dB",
    "source": "curves_loop.npz, frontend._margins",
@@ -720,9 +1034,9 @@
   },
   "complete loop H10 dm: -180 deg crossing (interpolated / sweep point)": {
    "value": [
-    249.2033184958088,
+    249.20331863165424,
     259.6043,
-    9.769663455131635
+    9.769663483419041
    ],
    "unit": "MHz, MHz, dB",
    "source": "curves_loop.npz",
@@ -752,7 +1066,7 @@
    "value": [
     27.021817,
     63.042756764786105,
-    16.611690695908766
+    16.611690695908784
    ],
    "unit": "MHz, deg, dB",
    "source": "curves_loop.npz, frontend._margins",
@@ -760,9 +1074,9 @@
   },
   "complete loop L200 dm: -180 deg crossing (interpolated / sweep point)": {
    "value": [
-    202.98279188865067,
+    202.9827918886515,
     206.08522,
-    16.611690695908766
+    16.611690695908784
    ],
    "unit": "MHz, MHz, dB",
    "source": "curves_loop.npz",
@@ -772,7 +1086,7 @@
    "value": [
     59.240083,
     51.460690651483446,
-    10.152656384397517
+    10.152656379354548
    ],
    "unit": "MHz, deg, dB",
    "source": "curves_loop.npz, frontend._margins",
@@ -780,9 +1094,9 @@
   },
   "complete loop L200 cm: -180 deg crossing (interpolated / sweep point)": {
    "value": [
-    203.9333947581829,
+    203.93339310821597,
     206.08522,
-    10.152656384397517
+    10.152656379354548
    ],
    "unit": "MHz, MHz, dB",
    "source": "curves_loop.npz",
@@ -821,7 +1135,7 @@
   "Figure 9 (a, d): CM outer loop without C_X, f_c and PM (frontend._margins)": {
    "value": [
     188.73933,
-    -93.31585596527992
+    -93.31585596527987
    ],
    "unit": "MHz, deg",
    "source": "curves_loop.npz (make_figures.fig_loop_gain)",
@@ -829,8 +1143,8 @@
   },
   "oscillation H100_first: cm_out pk-pk, frequency": {
    "value": [
-    1.00536209,
-    292.831174255379
+    1.00529854,
+    292.84135292416863
    ],
    "unit": "V, MHz",
    "source": "osc_check.json (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)",
@@ -838,8 +1152,8 @@
   },
   "oscillation H100_first_ties: cm_out pk-pk, frequency": {
    "value": [
-    1.03160314,
-    282.8397827721783
+    1.031625125,
+    282.82340630285563
    ],
    "unit": "V, MHz",
    "source": "osc_check.json (inputs tied to ground through 1 milliohm, global options only (trapezoidal))",
@@ -847,18 +1161,33 @@
   },
   "oscillation L200_first: cm_out pk-pk, frequency": {
    "value": [
-    0.7825457,
-    275.69171986924357
+    0.78251914,
+    275.68431153996437
    ],
    "unit": "V, MHz",
    "source": "osc_check.json (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)",
    "shown": "0.78 V, 276 MHz"
   },
   "final values H100: output pk-pk": {
-   "value": 0.5599999999827965,
+   "value": 1.0500000000024379,
    "unit": "uV",
    "source": "osc_check.json, H100_cnode220p",
-   "shown": "0.56"
+   "shown": "1.05"
+  },
+  "final values H100: outputs' common mode, window mean minus start": {
+   "value": -1.0456642254124682,
+   "unit": "mV",
+   "source": "osc_check.json, H100_cnode220p cm_out.window_mean_minus_start",
+   "shown": "-1.05"
+  },
+  "final values L200: output pk-pk, and the run used": {
+   "value": [
+    0.039999999978945766,
+    "Gear with the KLU solver and abstol = 1e-11 A: Gear stopped with 'timestep too small' at 308 ns"
+   ],
+   "unit": "uV",
+   "source": "osc_check.json, L200_cnode470p",
+   "shown": "0.04"
   },
   "chain at total gain 100, first front end, LM7171 in S2: -3 dB": {
    "value": 30.057118885858245,
@@ -891,7 +1220,7 @@
    "shown": "26"
   },
   "front end alone, L200 (6 V sinks): -3 dB": {
-   "value": 16.786707154290195,
+   "value": 16.78670715429023,
    "unit": "MHz",
    "source": "fe_gain_options.json / sink_power.json",
    "shown": "17"
@@ -999,7 +1328,7 @@
     ],
     "cm": [
      56.271284488367144,
-     8.60592826552908,
+     8.605928247954788,
      0.6194406593039725
     ]
    },
@@ -1062,7 +1391,7 @@
    "value": {
     "dm": [
      61.99552397009647,
-     9.769663455131635,
+     9.769663483419041,
      0.6616764432206526
     ],
     "cm": [
@@ -1118,7 +1447,7 @@
     ],
     "cm": [
      58.47274234531315,
-     7.648135386936038,
+     7.648135389630939,
      0.5787363909761581
     ]
    },
@@ -1130,7 +1459,7 @@
    "value": {
     "dm": [
      59.109705902163995,
-     10.6506375734037,
+     10.650637426376557,
      0.6997255821907907
     ],
     "cm": [
@@ -1164,7 +1493,7 @@
    "value": {
     "dm": [
      59.70709827004556,
-     10.639931169858388,
+     10.639931140609098,
      0.6911203989238449
     ],
     "cm": [
@@ -1198,13 +1527,13 @@
    "value": {
     "dm": [
      63.042756764786105,
-     16.611690695908766,
-     0.8312903085642818
+     16.611690695908784,
+     0.8312903124990905
     ],
     "cm": [
      51.460690651483446,
-     10.152656384397517,
-     0.6566661410535485
+     10.152656379354548,
+     0.6566661440551963
     ]
    },
    "unit": "deg, dB, -",
@@ -1215,13 +1544,13 @@
    "value": {
     "dm": [
      65.96166732709817,
-     14.039386700270578,
-     0.7753154617016558
+     14.039386970016757,
+     0.7753154573007116
     ],
     "cm": [
      49.509195107427644,
-     7.5618957316186455,
-     0.5430736422433314
+     7.56189565455653,
+     0.5430736442525367
     ]
    },
    "unit": "deg, dB, -",
@@ -1232,13 +1561,13 @@
    "value": {
     "dm": [
      59.90937319521838,
-     18.593796233655176,
-     0.8647579882595551
+     18.593796209417366,
+     0.8647579951393979
     ],
     "cm": [
      50.55909139835347,
-     12.145593270328979,
-     0.7248770481004441
+     12.145593071035998,
+     0.7248770433274262
     ]
    },
    "unit": "deg, dB, -",
@@ -1249,13 +1578,13 @@
    "value": {
     "dm": [
      67.42184850762786,
-     15.076256321301841,
-     0.7948611844017806
+     15.076256321301845,
+     0.7948611808602704
     ],
     "cm": [
      51.94987072447839,
-     9.933972873705294,
-     0.6389503797523345
+     9.933972609102476,
+     0.6389503763107489
     ]
    },
    "unit": "deg, dB, -",
@@ -1266,13 +1595,13 @@
    "value": {
     "dm": [
      55.49059411256428,
-     18.58237298755145,
-     0.8661338755933728
+     18.582373561844626,
+     0.8661338747877722
     ],
     "cm": [
-     50.857787983212916,
-     10.799990373867008,
-     0.6737677470598192
+     50.85778756138495,
+     10.799990351289626,
+     0.6737677432530021
     ]
    },
    "unit": "deg, dB, -",
@@ -1284,12 +1613,12 @@
     "dm": [
      61.37536007081937,
      16.988290579805124,
-     0.8224838117124221
+     0.8224838084161583
     ],
     "cm": [
-     47.883103857410305,
-     10.590419815567918,
-     0.635847541374225
+     47.883103480000926,
+     10.590419756421849,
+     0.6358475368710229
     ]
    },
    "unit": "deg, dB, -",
@@ -1300,13 +1629,13 @@
    "value": {
     "dm": [
      60.65384580977518,
-     18.201736940185487,
-     0.8372538894117103
+     18.201736981056168,
+     0.8372538866142369
     ],
     "cm": [
-     46.963466919423524,
-     11.724421012559574,
-     0.6645146768282204
+     46.96346655555516,
+     11.724420994851029,
+     0.6645146755210638
     ]
    },
    "unit": "deg, dB, -",
@@ -1318,12 +1647,12 @@
     "dm": [
      55.717153239196634,
      20.234712515500316,
-     0.8035042853555043
+     0.8035042846259592
     ],
     "cm": [
      39.04930211714395,
-     13.769496956925117,
-     0.5950061015291892
+     13.769496702559586,
+     0.5950060962188756
     ]
    },
    "unit": "deg, dB, -",
@@ -1399,9 +1728,9 @@
   "comp_search L200 S30_D14_CN680: DM PM, GM; CM PM, GM; f3db": {
    "value": [
     58.1936332202238,
-    19.42045055659321,
-    49.671093813689225,
-    12.976067122800202,
+    19.420450529106027,
+    49.67109383586285,
+    12.976066890193106,
     16.807989544584665
    ],
    "unit": "deg, dB, deg, dB, MHz",
@@ -1434,7 +1763,7 @@
    "shown": "0.40"
   },
   "Table 6c: loop op amps, gain 20 (R_G)": {
-   "value": 0.20402192906255562,
+   "value": 0.20402192906254382,
    "unit": "nV/rtHz",
    "source": "fe_gain_options.json, 10 kHz",
    "shown": "0.20"
@@ -1503,7 +1832,7 @@
    "shown": "+-3.34"
   },
   "LV: outputs above V_CM (V_GS1)": {
-   "value": 0.34737504999999996,
+   "value": 0.3473751199999999,
    "unit": "V",
    "source": "lv_option_range.json",
    "shown": "0.35"

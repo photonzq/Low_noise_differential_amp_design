@@ -1,15 +1,15 @@
 {
  "H_Ceff_bare_1k_300k_pF": {
   "value": [
-   0.04662102774210288,
-   0.05329104121557591
+   0.046621026563959896,
+   0.05329104047915134
   ],
   "unit": "pF",
   "text": "0.047-0.053 pF",
   "source": "zin_numbers.json H100.bare_dm.C_eff (1 k, 100 k, 300 kHz)"
  },
  "H_Ceff_bare_1M_pF": {
-  "value": 0.1098003559349368,
+  "value": 0.10980035876498906,
   "unit": "pF",
   "text": "0.11 pF",
   "source": "zin_numbers.json H100.bare_dm.C_eff 1 MHz"
@@ -33,7 +33,7 @@
   "source": "protection.json admittance_readout.H100.f_rise_high"
  },
  "H_Rneg_bare": {
-  "value": -1068.5777615500965,
+  "value": -1068.5774992007114,
   "unit": "ohm",
   "text": "-1.07 kohm at 12.6 MHz",
   "source": "zin_numbers.json H100.bare_dm.Rpar_neg_min(_f)"
@@ -79,15 +79,15 @@
  },
  "L_Ceff_bare_1k_300k_pF": {
   "value": [
-   0.3060152988082279,
-   0.35876552125806277
+   0.3060154007667898,
+   0.3587656262467434
   ],
   "unit": "pF",
   "text": "0.31-0.36 pF",
   "source": "zin_numbers.json L200.bare_dm.C_eff (1 k, 100 k, 300 kHz)"
  },
  "L_Ceff_bare_1M_pF": {
-  "value": 0.9542196327814857,
+  "value": 0.9542196873130141,
   "unit": "pF",
   "text": "0.95 pF",
   "source": "zin_numbers.json L200.bare_dm.C_eff 1 MHz"
@@ -111,7 +111,7 @@
   "source": "protection.json admittance_readout.L200.f_rise_high"
  },
  "L_Rneg_bare": {
-  "value": -111.88356778740074,
+  "value": -111.88348847654476,
   "unit": "ohm",
   "text": "-112 ohm at 17.8 MHz",
   "source": "zin_numbers.json L200.bare_dm.Rpar_neg_min(_f)"
@@ -180,7 +180,7 @@
   "source": "1 / R_Z, R_Z = 2.2 kohm (chain.INPUT_NET)"
  },
  "H_Gbare_at_min_mS": {
-  "value": 0.935823330769474,
+  "value": 0.93582356052602,
   "unit": "mS",
   "text": "0.94 mS at 12.6 MHz",
   "source": "zin_numbers.json H100.bare_dm.ReY_min (magnitude)"
@@ -193,7 +193,7 @@
  },
  "H_ReY_network_check": {
   "value": [
-   -0.0005941047010179827,
+   -0.0005941049307745288,
    -0.0005935892035435306
   ],
   "unit": "S",
@@ -289,7 +289,7 @@
  },
  "L_CM_range_V": {
   "value": [
-   -8.97441789,
+   -8.97441589,
    3.5750396
   ],
   "unit": "V",
@@ -303,19 +303,19 @@
   "source": "chain.Setting('H100', 0.5, 0.5, 0.4).gain (make_schematics.CHAIN_SETTING): G_FE x 5 x 5 x 2"
  },
  "S2_THS4031_THD_10MHz_pct": {
-  "value": 1.2980979288843364,
+  "value": 1.2982899691353418,
   "unit": "%",
   "text": "1.3 %",
   "source": "da_compare.json THS4031.thd (10 MHz, 1 Vpp, total gain 100)"
  },
  "S2_LM7171_THD_10MHz_pct": {
-  "value": 0.011917824619433921,
+  "value": 0.01191906180164251,
   "unit": "%",
   "text": "0.012 %",
   "source": "da_compare.json LM7171.thd (10 MHz, 1 Vpp)"
  },
  "S2_THS4031_slew_V_us": {
-  "value": 133.0134999999899,
+  "value": 133.0139999999902,
   "unit": "V/us",
   "text": "133 V/us",
   "source": "large_signal_THS4031.json H100.step (10 V)"
@@ -446,19 +446,19 @@
   "source": "(1/2)(V_GS - V_TO) sigma_beta,d / sqrt(N) and sigma_VTO,d / sqrt(N), N = 2"
  },
  "H100_MC_offset_input_mV": {
-  "value": 3.3593766879551374,
+  "value": 3.359376672474314,
   "unit": "mV",
   "text": "3.36 V rms at G = 1000: 3.4 mV",
   "source": "cmrr_mc.json H100.vout_dc_rms / gain (12 trials)"
  },
  "H10_MC_offset_input_mV": {
-  "value": 3.31315852343913,
+  "value": 3.313158393433608,
   "unit": "mV",
   "text": "0.33 V rms at G = 100: 3.3 mV",
   "source": "cmrr_mc.json H10.vout_dc_rms / gain (12 trials)"
  },
  "L200_MC_offset_input_mV": {
-  "value": 2.249075240508361,
+  "value": 2.2490751637384587,
   "unit": "mV",
   "text": "2.26 V rms at G = 1005: 2.2 mV",
   "source": "cmrr_mc.json L200.vout_dc_rms / gain (12 trials)"
@@ -599,13 +599,13 @@
   "source": "sqrt(4kT/R_trim); x w"
  },
  "H100_trim_range_over_MC_offset": {
-  "value": 2.2668797438542616,
+  "value": 2.266879754300594,
   "unit": "",
   "text": "2.3",
   "source": "range / the Monte Carlo's rms input offset"
  },
  "H100_trim_share_outside": {
-  "value": 0.023397572956246445,
+  "value": 0.023397572317924387,
   "unit": "",
   "text": "2.3 %",
   "source": "erfc(r / sqrt(2)), r = trim range / Monte Carlo rms input offset (Gaussian spread assumed)"
@@ -638,13 +638,13 @@
   "source": "sqrt(4kT/R_trim); x w"
  },
  "H10_trim_range_over_MC_offset": {
-  "value": 5.003673912845707,
+  "value": 5.0036741091856225,
   "unit": "",
   "text": "5.0",
   "source": "range / the Monte Carlo's rms input offset"
  },
  "H10_trim_share_outside": {
-  "value": 5.62478736577202e-07,
+  "value": 5.624781634029234e-07,
   "unit": "",
   "text": "5.6e-05 %",
   "source": "erfc(r / sqrt(2)), r = trim range / Monte Carlo rms input offset (Gaussian spread assumed)"
@@ -677,13 +677,13 @@
   "source": "sqrt(4kT/R_trim); x w"
  },
  "L200_trim_range_over_MC_offset": {
-  "value": 2.154579243209263,
+  "value": 2.154579316753643,
   "unit": "",
   "text": "2.2",
   "source": "range / the Monte Carlo's rms input offset"
  },
  "L200_trim_share_outside": {
-  "value": 0.03119477477088567,
+  "value": 0.031194769010573067,
   "unit": "",
   "text": "3.1 %",
   "source": "erfc(r / sqrt(2)), r = trim range / Monte Carlo rms input offset (Gaussian spread assumed)"
@@ -696,8 +696,8 @@
  },
  "H100_trim_100k_range_over_MC_offset_and_share_outside": {
   "value": [
-   1.1334398719271308,
-   0.2570295781246767
+   1.133439877150297,
+   0.2570295759323367
   ],
   "unit": "",
   "text": "1.1; 26 %",
@@ -705,8 +705,8 @@
  },
  "H_PSRR_to_100k_dB": {
   "value": [
-   97.90364509496186,
-   101.28017867213774
+   97.90364148784323,
+   101.28012108797263
   ],
   "unit": "dB",
   "text": "98-101 dB",
@@ -714,8 +714,8 @@
  },
  "H_PSRR_1M_dB": {
   "value": [
-   80.56662549354516,
-   86.02149007503306
+   80.56662546784396,
+   86.02149025002112
   ],
   "unit": "dB",
   "text": "81 / 86 dB (+15 / -15 V)",
@@ -723,8 +723,8 @@
  },
  "H_PSRR_10M_dB": {
   "value": [
-   60.69564343212577,
-   65.95172841211236
+   60.69564350474718,
+   65.95172837289189
   ],
   "unit": "dB",
   "text": "61 / 66 dB (+15 / -15 V)",
@@ -732,29 +732,29 @@
  },
  "L_minus_H_PSRR_dB": {
   "value": [
-   8.925401685657015,
-   19.595540036225586
+   8.925401793993842,
+   19.595535894431464
   ],
   "unit": "dB",
   "text": "9-20 dB",
   "source": "sink_power.json 'L200 | 6 V'.psrr_L1000 minus large_signal.json H100.psrr, per rail, 100 Hz-10 MHz"
  },
  "reg_noise_at_input_VP_pV": {
-  "value": 0.6040725573009552,
+  "value": 0.6040765620869515,
   "unit": "pV/rtHz",
   "text": "0.60 pV/rtHz (101.3 dB)",
   "source": "70 nV/rtHz x 10^(-PSRR(100 Hz)/20), +15 V, LT3045"
  },
  "reg_noise_at_input_VM_pV": {
-  "value": 0.6467110358415663,
+  "value": 0.6467215309862021,
   "unit": "pV/rtHz",
   "text": "0.65 pV/rtHz (100.7 dB)",
   "source": "70 nV/rtHz x 10^(-PSRR(100 Hz)/20), -15 V, LT3094"
  },
  "ripple_series_1MHz_dB": {
   "value": [
-   156.56662549354516,
-   160.02149007503306
+   156.56662546784395,
+   160.02149025002112
   ],
   "unit": "dB",
   "text": "157 dB (+15 V: 76 + 80.6), 160 dB (-15 V: 74 + 86.0)",
@@ -763,7 +763,7 @@
  "supply_L_1000_mA": {
   "value": [
    176.8756,
-   177.92171000000002
+   177.92173
   ],
   "unit": "mA",
   "text": "177 / 178 mA",
@@ -772,7 +772,7 @@
  "supply_L_1000_filters_on_mA": {
   "value": [
    192.61790000000002,
-   193.96899000000002
+   193.96901
   ],
   "unit": "mA",
   "text": "193 / 194 mA",
@@ -781,7 +781,7 @@
  "supply_H_LN_1000_mA": {
   "value": [
    76.67613,
-   76.230182
+   76.23018099999999
   ],
   "unit": "mA",
   "text": "77 / 76 mA",
@@ -790,7 +790,7 @@
  "supply_H_LN_1000_filters_on_mA": {
   "value": [
    92.29197,
-   92.397169
+   92.39717
   ],
   "unit": "mA",
   "text": "92 / 92 mA",
@@ -805,7 +805,7 @@
  "P_reg_L_W": {
   "value": [
    0.3537512,
-   0.58190697
+   0.58190703
   ],
   "unit": "W",
   "text": "0.35-0.58 W",
@@ -813,8 +813,8 @@
  },
  "P_reg_H_W": {
   "value": [
-   0.152460364,
-   0.277191507
+   0.152460362,
+   0.27719151
   ],
   "unit": "W",
   "text": "0.15-0.28 W",
@@ -822,8 +822,8 @@
  },
  "reg_junction_rise_K": {
   "value": [
-   19.20293001,
-   20.36674395
+   19.20293199,
+   20.36674605
   ],
   "unit": "K",
   "text": "19-20 K",
@@ -841,9 +841,9 @@
  "H100_10Hz": {
   "value": {
    "total": 2.6683718,
-   "op_amps": 1.06151909083207,
+   "op_amps": 1.061519090832072,
    "jfets": 2.395852376638641,
-   "without_op_amps": 2.4481391469510667
+   "without_op_amps": 2.448139146951066
   },
   "unit": "nV/rtHz",
   "text": "2.67 -> 2.45 nV/rtHz (op amps 1.06, JFETs 2.40)",
@@ -852,9 +852,9 @@
  "H100_1Hz": {
   "value": {
    "total": 7.805565199999999,
-   "op_amps": 3.3342030126631537,
+   "op_amps": 3.334203012663155,
    "jfets": 7.0396369817659314,
-   "without_op_amps": 7.057615628652425
+   "without_op_amps": 7.0576156286524245
   },
   "unit": "nV/rtHz",
   "text": "7.81 -> 7.06 nV/rtHz (op amps 3.33, JFETs 7.04)",
@@ -863,9 +863,9 @@
  "H10_10Hz": {
   "value": {
    "total": 3.7061908999999997,
-   "op_amps": 2.3107468948287746,
+   "op_amps": 2.310746894828772,
    "jfets": 2.395852269157597,
-   "without_op_amps": 2.89763692951377
+   "without_op_amps": 2.897636929513771
   },
   "unit": "nV/rtHz",
   "text": "3.71 -> 2.90 nV/rtHz (op amps 2.31, JFETs 2.40)",
@@ -874,9 +874,9 @@
  "H10_1Hz": {
   "value": {
    "total": 10.241805000000001,
-   "op_amps": 7.258202917282621,
+   "op_amps": 7.258202917282882,
    "jfets": 7.039637040022895,
-   "without_op_amps": 7.22586050720432
+   "without_op_amps": 7.225860507204057
   },
   "unit": "nV/rtHz",
   "text": "10.24 -> 7.23 nV/rtHz (op amps 7.26, JFETs 7.04)",
@@ -885,9 +885,9 @@
  "L200_10Hz": {
   "value": {
    "total": 0.8319705900000001,
-   "op_amps": 0.3039487777537723,
+   "op_amps": 0.3039487777356649,
    "jfets": 0.7406171649804839,
-   "without_op_amps": 0.7744612341020924
+   "without_op_amps": 0.7744612341091989
   },
   "unit": "nV/rtHz",
   "text": "0.83 -> 0.77 nV/rtHz (op amps 0.30, JFETs 0.74)",
@@ -896,9 +896,9 @@
  "L200_1Hz": {
   "value": {
    "total": 2.3292121999999997,
-   "op_amps": 0.9242597461560079,
+   "op_amps": 0.924259746156705,
    "jfets": 2.125947478560964,
-   "without_op_amps": 2.1379834878371886
+   "without_op_amps": 2.1379834878368875
   },
   "unit": "nV/rtHz",
   "text": "2.33 -> 2.14 nV/rtHz (op amps 0.92, JFETs 2.13)",
@@ -948,30 +948,114 @@
   "text": "1 Vpp to 10 MHz, 10 Vpp to 1 MHz",
   "source": "large_signal.json H100.thd (f0, vout_pp)"
  },
- "pitfall_noise_without_nodeset": {
-  "value": 64.012001,
-  "unit": "nV/rtHz",
-  "text": "64.0 nV/rtHz",
-  "source": "op_pitfall.json 'R_F route, gain 30, noise at 10 kHz without .nodeset (nV/rtHz)'"
- },
- "pitfall_kcl_at_bootstrap_node": {
+ "pitfall_gain20_loop_state": {
   "value": [
+   -10.00193,
+   -1.486863,
+   -0.1318692,
+   0.050014055,
+   0.00150693161828,
+   0.0015111614
+  ],
+  "unit": "V, A",
+  "text": "outputs -10.00 V, sources -1.49 V, sinks' bases -0.13 V, gate current 50 mA, KCL residual at b 1.51 mA of R_UP's 1.51 mA",
+  "source": "op_pitfall.json 'without the servo' gain 20, loop deck as run (op)"
+ },
+ "pitfall_gain20_normal_state": {
+  "value": [
+   0.3551963,
+   -12.24466,
+   3.9146972
+  ],
+  "unit": "V",
+  "text": "sources 0.355 V, sinks' bases -12.24 V, b 3.91 V",
+  "source": "op_pitfall.json 'without the servo' gain 20, ac deck (op)"
+ },
+ "pitfall_gain20_margins_fallback": {
+  "value": [
+   36.0,
+   30.8,
+   [],
+   []
+  ],
+  "unit": "dB",
+  "text": "no crossover; gain margin 36 dB (DM), 31 dB (CM)",
+  "source": "op_pitfall.json gain 20, loop deck as run: margins"
+ },
+ "pitfall_gain20_ties1": {
+  "value": [
+   true,
+   []
+  ],
+  "unit": "",
+  "text": "fallback True; crossovers []",
+  "source": "op_pitfall.json gain 20, 1-ohm ties"
+ },
+ "pitfall_gain20_margins_abstol12": {
+  "value": [
+   50.4,
+   21.5,
+   17.8,
+   42.1,
+   10.6,
+   54.0
+  ],
+  "unit": "deg, dB, MHz",
+  "text": "DM 50.4 deg, 21.5 dB at 17.8 MHz; CM 42.1 deg, 10.6 dB at 54.0 MHz",
+  "source": "op_pitfall.json gain 20, abstol 1e-12 A: margins"
+ },
+ "pitfall_gain30_without_servo": {
+  "value": [
+   false,
+   1.0684871
+  ],
+  "unit": "nV/rtHz",
+  "text": "noise deck converges: 1.07 nV/rtHz at 10 kHz",
+  "source": "op_pitfall.json 'without the servo' gain 30"
+ },
+ "pitfall_JFE150_without_servo": {
+  "value": [
+   false,
+   0.3551963,
+   15032967.648613315
+  ],
+  "unit": "V, Hz",
+  "text": "converges: source node 0.355 V, -3 dB 15.0 MHz",
+  "source": "op_pitfall.json 'without the servo' JFE150 sink"
+ },
+ "pitfall_servo_gain30_noise": {
+  "value": [
+   true,
+   64.012001,
    0.001491815222226,
    0.0014962761
   ],
-  "unit": "A",
-  "text": "1.49 mA of R_UP's 1.50 mA",
-  "source": "op_pitfall.json noise deck: kcl_residual_at_b, @rupa[i]"
+  "unit": "nV/rtHz, A",
+  "text": "64.0 nV/rtHz; KCL residual 1.49 mA of R_UP's 1.50 mA",
+  "source": "op_pitfall.json 'with the servo' gain 30, noise deck"
  },
- "pitfall_JFE150_sink": {
+ "pitfall_servo_JFE150": {
   "value": [
+   true,
    -0.9461564,
    322291850.10973155,
    15030739.168216696
   ],
-  "unit": "",
+  "unit": "V, Hz",
   "text": "source node -0.95 V; -3 dB 322 MHz instead of 15.0 MHz",
-  "source": "op_pitfall.json 'JFE150 sink, gain 100' (v_sa, f3db, f3db_adopted)"
+  "source": "op_pitfall.json 'with the servo' JFE150 sink; f3db_adopted"
+ },
+ "pitfall_servo_gain20": {
+  "value": [
+   [],
+   50.4,
+   [
+    17.8
+   ]
+  ],
+  "unit": "",
+  "text": "loop decks converge (0 fallbacks): DM 50.4 deg at [17.8] MHz",
+  "source": "op_pitfall.json 'with the servo' gain 20"
  },
  "JFE2140_card_10Hz": {
   "value": [
@@ -1055,7 +1139,7 @@
   "value": [
    0.5851036965336995,
    0.5436231699999999,
-   11.024818
+   11.024816999999999
   ],
   "unit": "uV/rtHz",
   "text": "0.59 uV/rtHz (Eq. (1)), 0.54 (ngspice, 11 mA)",
@@ -1178,9 +1262,9 @@
  },
  "THS4031_HD3": {
   "value": [
-   -37.73866469886508,
-   12.26133530113492,
-   24.30253512769417
+   -37.789453819411214,
+   12.210546180588786,
+   24.251746007148036
   ],
   "unit": "dB",
   "text": "-38 dBc at 1 Vpp; 12 dB above the curve as read, 24 dB after scaling to 2 Vpp (-25.7 dBc)",

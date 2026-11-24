@@ -1,0 +1,1451 @@
+{
+ "01495b39cab230c4b738": {
+  "case": "L200_comp_S40_D12_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "017c42a8455a9d9ae327": {
+  "case": "H100_comp_S8_D2.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "01bfa4bd9f2ba2016830": {
+  "case": "H100_comp_S8_D3.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "0218ec95e3c94e4672bb": {
+  "case": "H100_comp_S8_D5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "05751467b280a00595ae": {
+  "case": "H10_sink_MMBT3904_6V",
+  "design_value": -8.34,
+  "e": -3.0000000039720476e-08,
+  "operating_points": 4,
+  "v_ref": -8.002472953406796
+ },
+ "0ad6be288a8ab8213023": {
+  "case": "H10_comp_S14_D5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "0df5d879758ac024de1f": {
+  "case": "H100_comp_S10.6_D2.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "0fa90e8700e14a1fb435": {
+  "case": "L200_comp_S40_D5.6_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "0fa97ea9fe1e573d1995": {
+  "case": "H100_corner_C_node_x1_3",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "11643ebc4573ff0fc5fb": {
+  "case": "H100_sinkpow_2V",
+  "design_value": -12.34,
+  "e": -3.4500000004045184e-07,
+  "operating_points": 4,
+  "v_ref": -12.061349192531825
+ },
+ "11fa8e7e51efb7736304": {
+  "case": "H10_comp_S14_D7.77_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "14498981c04dd7654d55": {
+  "case": "H100_LV",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "158459087dc9b7e3d56a": {
+  "case": "H100_sink_BC81725_6V",
+  "design_value": -8.34,
+  "e": 7.399999999990747e-07,
+  "operating_points": 3,
+  "v_ref": -8.242824757094866
+ },
+ "159a7f86aa7fbce4e9cd": {
+  "case": "H100_comp_S14_D3.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "182d6e361e49fd3f08b8": {
+  "case": "H100_comp_S14_D4_CN330",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "1888bc63fe26008d06d3": {
+  "case": "H10_corner_10_pF_at_each_op_amp_output",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "19f96c029623ab7404fa": {
+  "case": "L200_corner_C_I_x0_9_C_X_x1_1",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "1a9619145781a705daed": {
+  "case": "H100_comp_S10.6_D1.77_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "1aaae1e5e06cf14e252b": {
+  "case": "H10_sink_BC81725_2V",
+  "design_value": -12.34,
+  "e": 8.999999995262797e-08,
+  "operating_points": 4,
+  "v_ref": -12.266648298838417
+ },
+ "1b3da4f0fd8f27d22cc0": {
+  "case": "H100_LV_S14_D2.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "205debfb407cf1dbd218": {
+  "case": "H100_LV_S28_D3",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "20a913c6391d3772e41f": {
+  "case": "L200_comp_S21.2_D12_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "213ee5f69a7525b569f6": {
+  "case": "H100_comp_S14_D5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "2234e960c108369ce98c": {
+  "case": "H100_comp_S10.6_D1.77_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "23ea5cd23c97eac0c680": {
+  "case": "H100_comp_S14_D2.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "24e514b348406329ab7e": {
+  "case": "H10_comp_S14_D10_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "262012e381ed2d9ec031": {
+  "case": "H100_LV_S40_D3",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "26898de15cecef964417": {
+  "case": "H100_comp_S6_D1.77_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "26ec0e4f8fe3321cabf9": {
+  "case": "L200_sinkpow_8V",
+  "design_value": -6.34,
+  "e": -6.399999999961992e-07,
+  "operating_points": 5,
+  "v_ref": -4.299331746814469
+ },
+ "28dc69d1b9a5e2cca10a": {
+  "case": "H100_cnode150p",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "28e220ea886ea515dcca": {
+  "case": "H100_comp_S6_D1.77_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "2b518332e079b5efda94": {
+  "case": "L200_sinkpow_4V",
+  "design_value": -10.34,
+  "e": -1.500000007537139e-08,
+  "operating_points": 6,
+  "v_ref": -8.499283018697971
+ },
+ "2b6929032397e3f6394c": {
+  "case": "H10_sinkpow_2V",
+  "design_value": -12.34,
+  "e": -3.4500000001269626e-07,
+  "operating_points": 4,
+  "v_ref": -12.06134919047471
+ },
+ "2bb47fbe373760e0b428": {
+  "case": "H100_sinkpow_6V",
+  "design_value": -8.34,
+  "e": -3.500000000933312e-08,
+  "operating_points": 4,
+  "v_ref": -8.003968298073485
+ },
+ "2ce14655860049a4cc38": {
+  "case": "L200_corner_R_iso_10_ohm",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.400067443614865
+ },
+ "2e3b8388cb015593ed09": {
+  "case": "H100_comp_S10.6_D1.77_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "2f053607932162b61799": {
+  "case": "H100_comp_S10.6_D2.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "305be1d8cb8fdb28cb62": {
+  "case": "H10_comp_S10.6_D7.77_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "32cb31513461b980b35e": {
+  "case": "H100_comp_S14_D5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "36138044895ca3a35a0e": {
+  "case": "H100_corner_R_iso_33_ohm",
+  "design_value": -12.34,
+  "e": -4.6000000003543207e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972062543041
+ },
+ "364ba6052359393d208d": {
+  "case": "L200_comp_S36_D14_CN680",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "36f7203d71e3fb80907f": {
+  "case": "H10_corner_C_node_x0_7",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "37a6e4bd1469c93f8e72": {
+  "case": "H100_comp_S14_D1.77_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "37dab0e9e0e6a57d44ee": {
+  "case": "H10_sink_J310_6V",
+  "design_value": -10.6,
+  "e": -2.0000000044984034e-08,
+  "operating_points": 4,
+  "v_ref": -10.707426058533414
+ },
+ "3929abd5ad81d756cebc": {
+  "case": "L200_comp_S21.2_D5.6_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "3952a9882322ab4e1a5a": {
+  "case": "H100_comp_S14_D1.77_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "397d1004aceddeb629ac": {
+  "case": "L200_comp_S30_D12_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "3ae83d7fa0d5af4a36b6": {
+  "case": "H10_comp_S14_D7.77_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "3b657c759af63fcae195": {
+  "case": "L200_comp_S30_D5.6_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "3e55f2b0c4ef753039c5": {
+  "case": "H10_comp_S10.6_D10_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "404cb207db2a1b7459d3": {
+  "case": "L200_sinkpow_6V_tab140p",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "42392f655e31e2747b4e": {
+  "case": "H10_comp_S14_D10_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "44fcf353e8048d63a341": {
+  "case": "H100_comp_S14_D5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "46e1dcb17afa588c8c8f": {
+  "case": "H100_comp_S8_D3.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "4788bbe50c4ff59f036a": {
+  "case": "H10_sink_BC81725_4V",
+  "design_value": -10.34,
+  "e": -4.000000003445692e-08,
+  "operating_points": 4,
+  "v_ref": -10.25486978385593
+ },
+ "4a50c62dea379bbbf41d": {
+  "case": "H100_corner_10_pF_at_each_op_amp_output",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "4c21eeb40dc3adc43936": {
+  "case": "H10_sinkpow_6V",
+  "design_value": -8.34,
+  "e": -3.00000000119649e-08,
+  "operating_points": 4,
+  "v_ref": -8.003968288210586
+ },
+ "4c694041ce66f22c3f79": {
+  "case": "L200_comp_S30_D12_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "519704d04d337630e5a1": {
+  "case": "H100_comp_S6_D3.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "526434cd26ceb0b347d8": {
+  "case": "L200_comp_S21.2_D8_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "528c4491d76c5cec95a7": {
+  "case": "H100_comp_S6_D5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "5323da72d370e21bc6e4": {
+  "case": "H100_LV_S10.6_D1.77",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "535a95cbbf3a9ee62494": {
+  "case": "H100_comp_S14_D5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "5469afde6286726af7b0": {
+  "case": "L200_comp_S40_D5.6_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "57b8b2a1777dd55ae508": {
+  "case": "L200_sink_MMBT3904_2V",
+  "design_value": -12.34,
+  "e": -6.000000007944095e-08,
+  "operating_points": 6,
+  "v_ref": -10.582266729284559
+ },
+ "58197146438fa45f22a1": {
+  "case": "H100_comp_S10.6_D2.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "5a706bdc7f038b5cf38a": {
+  "case": "H100_comp_S6_D2.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "5c73da31f8cf8a31bfe2": {
+  "case": "H10_comp_S14_D7.77_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "5ccfa45e827bde0ac259": {
+  "case": "H100_sink_MMBT3904_4V",
+  "design_value": -10.34,
+  "e": -2.0000000044984034e-08,
+  "operating_points": 4,
+  "v_ref": -10.031889412384983
+ },
+ "5d7c775b0400ca81e87c": {
+  "case": "H100_comp_S6_D3.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "5f893c74c3d82bc76590": {
+  "case": "H_G20_D6.66",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "5fd188b53ab19f504608": {
+  "case": "H100_comp_S8_D1.77_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "61c0976c32d2037774b8": {
+  "case": "H100_comp_S6_D2.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "622fd51c54d7cc7be4b4": {
+  "case": "H100_comp_S10.6_D3.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "63bff76af1b0f78140d6": {
+  "case": "L200_comp_S21.2_D5.6_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "63c72004ada8c744c186": {
+  "case": "H100_comp_S6_D5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "64034630fdda871cf49e": {
+  "case": "L200_sinkpow_2V",
+  "design_value": -12.34,
+  "e": -6.000000007944095e-08,
+  "operating_points": 6,
+  "v_ref": -10.582266729284559
+ },
+ "6535814edee678414594": {
+  "case": "L200_corner_10_pF_at_each_op_amp_output",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "66c9832397042f602dd8": {
+  "case": "H10_rf250",
+  "design_value": -12.34,
+  "e": -2.1999999999522402e-07,
+  "operating_points": 4,
+  "v_ref": -12.05997212390992
+ },
+ "67ac16b146c809a8835f": {
+  "case": "H100_comp_S8_D3.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "6a5f60d92b6aede26883": {
+  "case": "L200_corner_C_I_x1_1_C_X_x0_9",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "6a8e143cef1a62412185": {
+  "case": "H100_comp_S8_D1.77_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "6c4a5aa15a65669434d5": {
+  "case": "H_G20_D8.33",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "6ee804d591b8d5d09d16": {
+  "case": "H100_sink_JFE150_6V_pitfall",
+  "design_value": -9.4,
+  "e": -5.000000000143778e-07,
+  "operating_points": 3,
+  "v_ref": -9.360712198344574
+ },
+ "6ef180544e5a2023bb3e": {
+  "case": "H100_comp_S10.6_D5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "6ef3b2d824a88ced37fb": {
+  "case": "H100_sink_BC81725_4V",
+  "design_value": -10.34,
+  "e": -4.000000003445692e-08,
+  "operating_points": 4,
+  "v_ref": -10.25486978385593
+ },
+ "6fdf41f69ad9b19a68ec": {
+  "case": "H100_comp_S14_D2.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "70a57ffdbeb7199ed6b9": {
+  "case": "H10_comp_S10.6_D7.77_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "70d0ce253a88174e0c65": {
+  "case": "L200_comp_S21.2_D12_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "728a2989131024ba5cfe": {
+  "case": "L200_comp_S30_D12_CN680",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "73f2b735ea7c2169e37b": {
+  "case": "H10_sink_BC81725_6V",
+  "design_value": -8.34,
+  "e": 7.399999999990747e-07,
+  "operating_points": 3,
+  "v_ref": -8.242824757094866
+ },
+ "7465e083890dc5e9405b": {
+  "case": "H_G30_D6.53",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "75e21381a7e02b5a9fb6": {
+  "case": "H10_sink_MMBT3904_4V",
+  "design_value": -10.34,
+  "e": -2.0000000044984034e-08,
+  "operating_points": 4,
+  "v_ref": -10.031889412384983
+ },
+ "767744b95dc8259b12ce": {
+  "case": "H10_corner_C_node_x1_3",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "78a8d04d3245fe52f441": {
+  "case": "H100_corner_C_I_x1_1_C_X_x0_9",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "7a030db8c8357b36a63c": {
+  "case": "H100_cascode_MMBTH10",
+  "design_value": -12.34,
+  "e": -3.5999999997704535e-07,
+  "operating_points": 4,
+  "v_ref": -12.055034142036764
+ },
+ "7b6a892789697ed3b15b": {
+  "case": "H100_LV_S14_D3.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "7bf4f565ad7cbe8c10f3": {
+  "case": "H100_comp_S10.6_D5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "7c54c98dc5653af43a30": {
+  "case": "L200_comp_S40_D8_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "7e7ab1603d8f8ed57e3c": {
+  "case": "L200_first",
+  "design_value": -12.34,
+  "e": -6.000000007944095e-08,
+  "operating_points": 6,
+  "v_ref": -10.582266729284559
+ },
+ "802e38beab01d4a65b1b": {
+  "case": "H100_corner_R_iso_10_ohm",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972069539528
+ },
+ "82ad59f8f933f129836d": {
+  "case": "L200",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "8313390c30ba46303d72": {
+  "case": "H100_LV_S10.6_D2.5_CN47",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "84720aa228d54aed07e1": {
+  "case": "H100_LV_S8_D1.77",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "894186a2da78c07fc3d9": {
+  "case": "H100_comp_S8_D3.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "8d9e0451219e410e0e31": {
+  "case": "H100_comp_S14_D3.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "8dd1d99591ce0f61b0b7": {
+  "case": "L200_comp_S30_D5.6_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "8f1242158c57e6311ac3": {
+  "case": "L200_sinkpow_6V_tab60p",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "8f640aefb914c9c916a3": {
+  "case": "H100_comp_S6_D5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "8fd7069f8d4b2285179d": {
+  "case": "H100_cnode100p",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "922d65f71a5075f83d7d": {
+  "case": "L200_sink_MMBT3904_6V",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "92bad1cc6c0113bd948c": {
+  "case": "L200_corner_R_iso_33_ohm",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744329585
+ },
+ "92ecdb6801269ef1d43a": {
+  "case": "H100_comp_S8_D5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "9353fd3a9d961591207b": {
+  "case": "H100_LV_S14_D2.5_CN22",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "946dc1c37453a303ebc1": {
+  "case": "L200_comp_S30_D8_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "94f88130b9c855bce1fd": {
+  "case": "H100_comp_S6_D1.77_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "95461eefd3e9d5805557": {
+  "case": "H100_LV_S10.6_D3.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "96855a66205efb74eafd": {
+  "case": "H100_nocross",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "98d82510b51c6cd10b69": {
+  "case": "H10_comp_S14_D10_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "99072330aeab060002c9": {
+  "case": "H100_sink_BC81725_2V",
+  "design_value": -12.34,
+  "e": 8.999999995262797e-08,
+  "operating_points": 4,
+  "v_ref": -12.266648298838417
+ },
+ "991cd85cbc6a60a2a0b7": {
+  "case": "H10",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "9a176c11d4428213d180": {
+  "case": "H_G30_D5.22",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "9a8de3ae59161d9f22f4": {
+  "case": "H10_comp_S10.6_D10_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "9b0bdc7afbdf79c6fa48": {
+  "case": "H100_comp_S6_D3.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "9c4953be2e99756d2489": {
+  "case": "H100_comp_S14_D3.5_CN330",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "9cd93c3fae5521d040c8": {
+  "case": "H100_comp_S14_D2.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "a11b4d24518cc33aebac": {
+  "case": "L200_comp_S30_D5.6_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "a21ed33d989284c2f891": {
+  "case": "L200_sinkpow_8V",
+  "design_value": -6.34,
+  "e": -6.149999999816025e-07,
+  "operating_points": 5,
+  "v_ref": -4.304940733297849
+ },
+ "a27f80e2fd91814dd3c6": {
+  "case": "L200_comp_S40_D5.6_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "a3f8d1374c531ceb5aef": {
+  "case": "H100_comp_S6_D2.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "a48f410abc82b174144a": {
+  "case": "H100_comp_S10.6_D1.77_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "a4a966e05288b2e63b72": {
+  "case": "L200_comp_S40_D8_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "a520448743cce427b444": {
+  "case": "H10_comp_S10.6_D5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "a68eae41c5fed78d3a1f": {
+  "case": "L200_comp_S21.2_D8_CN220",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "aa486ccb351b2850ee7e": {
+  "case": "H10_comp_S14_D5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "aa5169173a06bb976d53": {
+  "case": "L200_comp_S21.2_D5.6_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "abcd9050cde1c5ba0baf": {
+  "case": "H100_comp_S14_D3.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "ac5c36a6e0222f867c7d": {
+  "case": "H10_comp_S10.6_D7.77_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "acbdd87d370db030077d": {
+  "case": "H100_comp_S6_D2.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "b1a8c5af08fa0f52a09c": {
+  "case": "H100_comp_S10.6_D3.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "b2136b78fd6fe08cc332": {
+  "case": "H100_LV_S28_D2.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "b3601f19b4e99e4ba19a": {
+  "case": "L200_comp_S30_D14_CN680",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "b6018faee6d0ea9720cd": {
+  "case": "H100_comp_S10.6_D5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "b6537b0d76959c975eaf": {
+  "case": "L200_sinkpow_4V",
+  "design_value": -10.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -8.494164983426248
+ },
+ "b6c178d42ddc3c609402": {
+  "case": "H100_corner_C_I_x0_9_C_X_x1_1",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "b79da10f522c6885c91b": {
+  "case": "H100_comp_S8_D2.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "b841e30c013771cbd59e": {
+  "case": "H10_comp_S10.6_D5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "bb00eb1bb52b3f8d6521": {
+  "case": "H100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "bd9590ec5d00b5ca93cd": {
+  "case": "H100_LV",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "c00050b2e6723b8df510": {
+  "case": "H_RF20",
+  "design_value": -12.34,
+  "e": -4.000000003445692e-08,
+  "operating_points": 4,
+  "v_ref": -12.059972047694608
+ },
+ "c224b5fdf06994c9fd47": {
+  "case": "L200_comp_S40_D12_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "c27492c6d7dfe0dd1e23": {
+  "case": "H10_corner_C_I_x1_1_C_X_x0_9",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "c43e1b0c30d7408f8cd3": {
+  "case": "L200_corner_C_node_x1_3",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "c5a533a18a9ba278ad6c": {
+  "case": "H100_corner_C_node_x0_7",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "c6c0972c26c129a68c94": {
+  "case": "H100_comp_S14_D3.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "c78ef090c269b4971aef": {
+  "case": "H10_corner_C_I_x0_9_C_X_x1_1",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "c910abd561ef86bf0af0": {
+  "case": "H100_comp_S10.6_D3.5_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "c9b70bd006730b5af27e": {
+  "case": "L200_corner_C_node_x0_7",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "cbfeb9d3057544ac5189": {
+  "case": "H100_comp_S6_D5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "cc3b6580f67ec6e3e0c0": {
+  "case": "L200_comp_S21.2_D12_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "cc71ec037b85329a907d": {
+  "case": "H100_LV_S20_D3",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "cd4b883c03fa75c5a4b6": {
+  "case": "H100_comp_S10.6_D3.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "cdeadb7ffceca5a6ce98": {
+  "case": "L200_comp_S21.2_D8_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "cf2f30e506cf0a3ff1bb": {
+  "case": "H100_LV_S10.6_D2.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "cfa717e50793e9d5e509": {
+  "case": "H100_comp_S8_D5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "cfd281f7d364e586bdb6": {
+  "case": "H10_sink_JFE150_6V",
+  "design_value": -9.4,
+  "e": -5.000000000143778e-07,
+  "operating_points": 3,
+  "v_ref": -9.360712198344574
+ },
+ "d04d938a2aecb04ba4cc": {
+  "case": "H100_LV_S20_D2.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "d0edeff581349272684d": {
+  "case": "H100_comp_S14_D2.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d37a94cdc3dfd40b3694": {
+  "case": "H100_comp_S6_D1.77_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d3df9c86fbb9bfc8272b": {
+  "case": "L200_comp_S40_D8_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "d3ef051c6dbfb940c9b0": {
+  "case": "H10_first",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d44380fb5a2bc69eab27": {
+  "case": "H100_comp_S8_D1.77_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d47bd013f0f0ce00a0d3": {
+  "case": "H100_comp_S6_D3.5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d4f9b21acd36a96655b7": {
+  "case": "H10_corner_R_iso_10_ohm",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972069539528
+ },
+ "d50d4a5a652276bc06c5": {
+  "case": "H100_comp_S8_D2.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d631185deede947403ca": {
+  "case": "H100_cnode33p",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d72838a3ac7014684e53": {
+  "case": "H10_comp_S10.6_D5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d77edb1cf08c10308b99": {
+  "case": "H10_comp_S14_D11_CN330",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "d79525aa2a38062a1285": {
+  "case": "H100_LV_S8_D2.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "d7c176c56e182167f0d3": {
+  "case": "H10_comp_S10.6_D10_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "de1cb0a8d3590711c148": {
+  "case": "H100_comp_S8_D5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "df728239a2908c669cbb": {
+  "case": "H100_comp_S10.6_D5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "e2cc86c47e4fe895ab03": {
+  "case": "L200_comp_S30_D8_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "e3f8882509fee98c7ad8": {
+  "case": "H_RF30",
+  "design_value": -12.34,
+  "e": -6.00000000239298e-08,
+  "operating_points": 4,
+  "v_ref": -12.059972039824448
+ },
+ "e436673302e0d54d5a2b": {
+  "case": "L200_sinkpow_2V",
+  "design_value": -12.34,
+  "e": 7.499999998827889e-08,
+  "operating_points": 6,
+  "v_ref": -10.587165148733321
+ },
+ "e455e91c67eb132d8258": {
+  "case": "H100_LV_S14_D1.77",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "e6ba106f357334714293": {
+  "case": "H100_LV_S14_D2.5_CN47",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "e7fcf1e7b012e7370780": {
+  "case": "L200_comp_S40_D12_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "ea48c5c0c8529396242f": {
+  "case": "H100_cnode0p",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "ea5b4ccd591b86ca8b40": {
+  "case": "H10_corner_R_iso_33_ohm",
+  "design_value": -12.34,
+  "e": -4.6000000003543207e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972062543041
+ },
+ "ea70305c399dcb055da3": {
+  "case": "H100_comp_S14_D1.77_CN150",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "ebe0b586e920a9cee30b": {
+  "case": "L200_comp_S30_D12_CN470",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "ecccc93496d8f6565cb8": {
+  "case": "H100_comp_S14_D1.77_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "ef5576e4cf6883ea5977": {
+  "case": "H100_old",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "f0c49eb067e4c0d1437a": {
+  "case": "H100_sink_MMBT3904_6V",
+  "design_value": -8.34,
+  "e": -3.0000000039720476e-08,
+  "operating_points": 4,
+  "v_ref": -8.002472953406796
+ },
+ "f1190c5b66822555abb6": {
+  "case": "H100_comp_S10.6_D2.5_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "f2c2e6c9cd1ae48f9926": {
+  "case": "H10_comp_S14_D5_CN100",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "fabc85b45a18f5dd852e": {
+  "case": "H100_LV_S14_D2.5_CN100",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "fadf74c7b5d0419c7764": {
+  "case": "L200_sinkpow_6V_tab300p",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "fb5012df70ce8c91ac5a": {
+  "case": "H100_comp_S8_D1.77_CN220",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "fbc10df5c2a16a76fc38": {
+  "case": "H100_LV_S8_D3.5",
+  "design_value": -12.34,
+  "e": -4.80000000024905e-07,
+  "operating_points": 4,
+  "v_ref": -12.060607267503814
+ },
+ "fc746bd20c089487e460": {
+  "case": "L200_comp_S30_D8_CN330",
+  "design_value": -8.34,
+  "e": 9.99999993922529e-09,
+  "operating_points": 6,
+  "v_ref": -6.40006744315583
+ },
+ "fca15ef47706b453b0cc": {
+  "case": "H_RF20_cnode220",
+  "design_value": -12.34,
+  "e": -4.000000003445692e-08,
+  "operating_points": 4,
+  "v_ref": -12.059972047694608
+ },
+ "fd437ad5d43fa6d52fc5": {
+  "case": "H100_comp_S18_D4_CN330",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ },
+ "fd61af1c07468588fce5": {
+  "case": "L200_sink_MMBT3904_4V",
+  "design_value": -10.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -8.494164983426248
+ },
+ "fe5ead7fb608942a1ca9": {
+  "case": "L200_sinkpow_6V",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.405421891637187
+ },
+ "ffabc1ef84f97fe8508b": {
+  "case": "H100_comp_S8_D2.5_CN68",
+  "design_value": -12.34,
+  "e": -4.400000000459592e-07,
+  "operating_points": 4,
+  "v_ref": -12.059972051417223
+ }
+}

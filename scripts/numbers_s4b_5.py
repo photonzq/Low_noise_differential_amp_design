@@ -525,19 +525,57 @@ def method() -> None:
     f10 = max(f for f, v in grid if v == 10)
     f1 = max(f for f, v in grid if v == 1)
     put("THD_grid", [f1, f10], f"1 Vpp to {f1 / 1e6:g} MHz, 10 Vpp to {f10 / 1e6:g} MHz", "large_signal.json H100.thd (f0, vout_pp)", "Hz")
-    # the pitfall of Section 5.1: the two wrong operating points reproduced by op_pitfall.py
+    # the pitfall of Section 5.1: the wrong operating points reproduced by op_pitfall.py
     op = load("op_pitfall.json")
-    nd = op["R_F route, gain 30, noise deck"]
-    put("pitfall_noise_without_nodeset", op["R_F route, gain 30, noise at 10 kHz without .nodeset (nV/rtHz)"],
-        f"{op['R_F route, gain 30, noise at 10 kHz without .nodeset (nV/rtHz)']:.1f} nV/rtHz",
-        "op_pitfall.json 'R_F route, gain 30, noise at 10 kHz without .nodeset (nV/rtHz)'", "nV/rtHz")
-    put("pitfall_kcl_at_bootstrap_node", [nd["kcl_residual_at_b"], nd["values"]["@rupa[i]"]],
-        f"{nd['kcl_residual_at_b'] * 1e3:.2f} mA of R_UP's {nd['values']['@rupa[i]'] * 1e3:.2f} mA",
-        "op_pitfall.json noise deck: kcl_residual_at_b, @rupa[i]", "A")
-    js = op["JFE150 sink, gain 100"]
-    put("pitfall_JFE150_sink", [js["v_sa"], js["f3db"], js["f3db_adopted"]],
-        f"source node {js['v_sa']:.2f} V; -3 dB {js['f3db'] / 1e6:.0f} MHz instead of {js['f3db_adopted'] / 1e6:.1f} MHz",
-        "op_pitfall.json 'JFE150 sink, gain 100' (v_sa, f3db, f3db_adopted)", "")
+    a, b = op["without the servo"], op["with the servo"]
+    g20 = a["R_F route, gain 20"]
+    keys = {k.split(", ")[-1]: k for k in g20 if k.startswith("loop deck")}
+    fb = g20[keys["1-mOhm ties (as run)"]]
+    v = fb["op"]["values"]
+    put("pitfall_gain20_loop_state", [v["v(oa)"], v["v(sa)"], v["v(vsink)"], v["@j.xja1.j1[ig]"],
+                                      fb["op"]["kcl_residual_at_b"], v["@rupa[i]"]],
+        f"outputs {v['v(oa)']:.2f} V, sources {v['v(sa)']:.2f} V, sinks' bases {v['v(vsink)']:.2f} V, gate current "
+        f"{v['@j.xja1.j1[ig]'] * 1e3:.0f} mA, KCL residual at b {fb['op']['kcl_residual_at_b'] * 1e3:.2f} mA of R_UP's "
+        f"{v['@rupa[i]'] * 1e3:.2f} mA", "op_pitfall.json 'without the servo' gain 20, loop deck as run (op)", "V, A")
+    ok = g20["ac deck"]["values"]
+    put("pitfall_gain20_normal_state", [ok["v(sa)"], ok["v(vsink)"], ok["v(ba)"]],
+        f"sources {ok['v(sa)']:.3f} V, sinks' bases {ok['v(vsink)']:.2f} V, b {ok['v(ba)']:.2f} V",
+        "op_pitfall.json 'without the servo' gain 20, ac deck (op)", "V")
+    m = fb["margins"]
+    put("pitfall_gain20_margins_fallback", [m["dm"]["gm_db"], m["cm"]["gm_db"], m["dm"]["fc"], m["cm"]["fc"]],
+        f"no crossover; gain margin {m['dm']['gm_db']:.0f} dB (DM), {m['cm']['gm_db']:.0f} dB (CM)",
+        "op_pitfall.json gain 20, loop deck as run: margins", "dB")
+    t1 = g20[keys["1-ohm ties"]]
+    put("pitfall_gain20_ties1", [t1["op"]["fallback"], t1["margins"]["dm"]["fc"]],
+        f"fallback {t1['op']['fallback']}; crossovers {t1['margins']['dm']['fc']}", "op_pitfall.json gain 20, 1-ohm ties", "")
+    m = g20[keys["abstol 1e-12 A"]]["margins"]
+    put("pitfall_gain20_margins_abstol12", [m["dm"]["pm"], m["dm"]["gm_db"], m["dm"]["fc"][0], m["cm"]["pm"],
+                                            m["cm"]["gm_db"], m["cm"]["fc"][0]],
+        f"DM {m['dm']['pm']:.1f} deg, {m['dm']['gm_db']:.1f} dB at {m['dm']['fc'][0]:.1f} MHz; CM {m['cm']['pm']:.1f} deg, "
+        f"{m['cm']['gm_db']:.1f} dB at {m['cm']['fc'][0]:.1f} MHz", "op_pitfall.json gain 20, abstol 1e-12 A: margins",
+        "deg, dB, MHz")
+    g30 = a["R_F route, gain 30"]
+    put("pitfall_gain30_without_servo", [g30["noise deck"]["fallback"], g30["noise at 10 kHz (nV/rtHz)"]],
+        f"noise deck converges: {g30['noise at 10 kHz (nV/rtHz)']:.2f} nV/rtHz at 10 kHz",
+        "op_pitfall.json 'without the servo' gain 30", "nV/rtHz")
+    js = a["JFE150 sink, gain 100"]
+    put("pitfall_JFE150_without_servo", [js["fallback"], js["v_sa"], js["f3db"]],
+        f"converges: source node {js['v_sa']:.3f} V, -3 dB {js['f3db'] / 1e6:.1f} MHz",
+        "op_pitfall.json 'without the servo' JFE150 sink", "V, Hz")
+    s30 = b["R_F route, gain 30"]
+    nd = s30["noise deck"]
+    put("pitfall_servo_gain30_noise", [nd["fallback"], s30["noise at 10 kHz (nV/rtHz)"], nd["kcl_residual_at_b"],
+                                       nd["values"]["@rupa[i]"]],
+        f"{s30['noise at 10 kHz (nV/rtHz)']:.1f} nV/rtHz; KCL residual {nd['kcl_residual_at_b'] * 1e3:.2f} mA of R_UP's "
+        f"{nd['values']['@rupa[i]'] * 1e3:.2f} mA", "op_pitfall.json 'with the servo' gain 30, noise deck", "nV/rtHz, A")
+    sj = b["JFE150 sink, gain 100"]
+    put("pitfall_servo_JFE150", [sj["fallback"], sj["v_sa"], sj["f3db"], op["f3db_adopted"]],
+        f"source node {sj['v_sa']:.2f} V; -3 dB {sj['f3db'] / 1e6:.0f} MHz instead of {op['f3db_adopted'] / 1e6:.1f} MHz",
+        "op_pitfall.json 'with the servo' JFE150 sink; f3db_adopted", "V, Hz")
+    m = b["R_F route, gain 20, margins"]
+    put("pitfall_servo_gain20", [m["fallbacks"], m["margins"]["dm"]["pm"], m["margins"]["dm"]["fc"]],
+        f"loop decks converge ({len(m['fallbacks'])} fallbacks): DM {m['margins']['dm']['pm']:.1f} deg at "
+        f"{m['margins']['dm']['fc']} MHz", "op_pitfall.json 'with the servo' gain 20", "")
 
 
 def vendor_models() -> None:

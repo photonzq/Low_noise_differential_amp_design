@@ -11,12 +11,13 @@ supply H_HR_100 (H10_a3_1_a4_0p1_a5_0p2): +15 V 76.68 mA, -15 V 76.23 mA; drain 
 supply H_HR_100_filters_on (H10_a3_1_a4_0p1_a5_0p2_f1LP1e+06_f2LP1e+06): +15 V 92.29 mA, -15 V 92.40 mA; drain resistors 20.02 mA, R_UP 2.034 mA, sinks 22.23 mA; op amps +70.24 / -70.16 mA (XUa THS4021 8.12/7.77, XUb THS4021 8.12/7.77, XS2 LM7171 6.50/6.86, XF1B THS4031 7.95/7.94, XS3 THS4021 7.92/7.97, XF2B THS4031 7.91/7.98, XS4 THS4021 7.88/8.01, XS5 THS3091 15.83/15.85); LT3045 0.185 / 0.277 W, LT3094 0.185 / 0.277 W at 2 / 3 V of headroom
 supply L_1000 (L200_a3_0p5_a4_0p1_a5_0p2): +15 V 176.88 mA, -15 V 177.92 mA; drain resistors 120.13 mA, R_UP 2.005 mA, sinks 123.83 mA; op amps +54.74 / -54.09 mA (XUa THS4021 8.23/7.67, XUb THS4021 8.23/7.67, XS2 LM7171 6.50/7.06, XS3 THS4021 7.97/7.92, XS4 THS4021 7.97/7.92, XS5 THS3091 15.84/15.84); LT3045 0.354 / 0.531 W, LT3094 0.356 / 0.534 W at 2 / 3 V of headroom
 supply L_1000_filters_on (L200_a3_0p5_a4_0p1_a5_0p2_f1LP1e+06_f2LP1e+06): +15 V 192.62 mA, -15 V 193.97 mA; drain resistors 120.13 mA, R_UP 2.005 mA, sinks 123.83 mA; op amps +70.48 / -70.14 mA (XUa THS4021 8.23/7.67, XUb THS4021 8.23/7.67, XS2 LM7171 6.50/7.07, XF1B THS4031 7.94/7.95, XS3 THS4021 7.93/7.96, XF2B THS4031 7.92/7.97, XS4 THS4021 7.90/8.00, XS5 THS3091 15.83/15.85); LT3045 0.385 / 0.578 W, LT3094 0.388 / 0.582 W at 2 / 3 V of headroom
+  (extras/H100_step_1: ran with '.options abstol=1e-11 method=gear klu')
 step 1 V, front end alone         : step 1.0004 V, rise 22.6 ns, overshoot 7.21 %, settle 1 % 76 ns, 0.1 % 122 ns, slew 42 V/us
 step 1 V, front end in the chain  : step 1.0004 V, rise 22.8 ns, overshoot 7.72 %, settle 1 % 77 ns, 0.1 % 124 ns, slew 41 V/us
 step 1 V, S2's output (da)        : step 1.0001 V, rise 22.6 ns, overshoot 7.74 %, settle 1 % 79 ns, 0.1 % 125 ns, slew 41 V/us
 step 1 V, chain output            : step 1.0017 V, rise 23.0 ns, overshoot 7.67 %, settle 1 % 83 ns, 0.1 % 129 ns, slew 41 V/us
 full-power bandwidth for 10 Vpp, SR / (pi 10 V): front_end_alone 12.55 MHz, chain_fe_out 12.39 MHz, chain_S2_out 12.41 MHz, chain_out 9.93 MHz
 step 10 V, front end alone         : step 10.0037 V, rise 23.0 ns, overshoot 8.73 %, settle 1 % 77 ns, 0.1 % 123 ns, slew 394 V/us
-step 10 V, front end in the chain  : step 10.0036 V, rise 23.2 ns, overshoot 9.38 %, settle 1 % 78 ns, 0.1 % 125 ns, slew 389 V/us
-step 10 V, S2's output (da)        : step 10.0015 V, rise 23.2 ns, overshoot 9.40 %, settle 1 % 80 ns, 0.1 % 126 ns, slew 390 V/us
+step 10 V, front end in the chain  : step 10.0036 V, rise 23.3 ns, overshoot 9.38 %, settle 1 % 78 ns, 0.1 % 125 ns, slew 389 V/us
+step 10 V, S2's output (da)        : step 10.0015 V, rise 23.3 ns, overshoot 9.40 %, settle 1 % 80 ns, 0.1 % 126 ns, slew 390 V/us
 step 10 V, chain output            : step 10.0169 V, rise 27.2 ns, overshoot 9.31 %, settle 1 % 84 ns, 0.1 % 131 ns, slew 312 V/us

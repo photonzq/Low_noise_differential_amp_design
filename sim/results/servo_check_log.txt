@@ -1,0 +1,13 @@
+H100: servo: outputs - sources -0.001 mV, sinks 11.025 mA, reference -12.0600 V | fixed at it: +0.005 mV | design reference: -681.2 mV (reference -12.340 V) | per mV of reference +2.430 mV | per K: fixed +6.526, servo +0.0000 mV | per V of input CM: fixed +42.53, servo +0.0000 mV (R_UP current -69.4 uA/V) | signal path: f3dB +0.0e+00, noise 0.0e+00 | fallbacks []
+H100: sweep zeros [(-12.06, 2.43)]; e at the design clamp -4.701 / +4.958 V, at the rails -4.701 / +14.728 V; saturation from 2.336203998763505 V; fallback False
+   closed design_clamp             fallback False, base -12.245 V, V_BC -12.600 V, sink +11.025 mA, e -0.0000 V, outputs +0.355 V, sources +0.355 V
+   closed design_clamp_high_start  fallback False, base -12.245 V, V_BC -12.600 V, sink +11.025 mA, e -0.0000 V, outputs +0.355 V, sources +0.355 V
+   closed rail                     fallback False, base -12.245 V, V_BC -12.600 V, sink +11.025 mA, e -0.0000 V, outputs +0.355 V, sources +0.355 V
+   closed rail_high_start          fallback False, base -12.245 V, V_BC -12.600 V, sink +11.025 mA, e -0.0000 V, outputs +0.355 V, sources +0.355 V
+L200: servo: outputs - sources -0.004 mV, sinks 61.066 mA, reference -6.4001 V | fixed at it: -0.004 mV | design reference: -3425.5 mV (reference -8.340 V) | per mV of reference +1.716 mV | per K: fixed +17.474, servo +0.0000 mV | per V of input CM: fixed +77.18, servo +0.0001 mV (R_UP current -69.4 uA/V) | signal path: f3dB +0.0e+00, noise 0.0e+00 | fallbacks []
+L200: sweep zeros [(-6.4, 1.717)]; e at the design clamp -13.531 / +0.683 V, at the rails -13.531 / +12.555 V; saturation from 9.948221604723864 V; fallback False
+   closed design_clamp             fallback False, base -8.101 V, V_BC -8.666 V, sink +61.066 mA, e -0.0000 V, outputs +0.565 V, sources +0.565 V
+   closed design_clamp_high_start  fallback False, base -8.101 V, V_BC -8.666 V, sink +61.066 mA, e -0.0000 V, outputs +0.565 V, sources +0.565 V
+   closed rail                     fallback False, base -8.101 V, V_BC -8.666 V, sink +61.066 mA, e -0.0000 V, outputs +0.565 V, sources +0.565 V
+   closed rail_high_start          fallback False, base -8.101 V, V_BC -8.666 V, sink +61.066 mA, e -0.0000 V, outputs +0.565 V, sources +0.565 V
+written servo_check.json

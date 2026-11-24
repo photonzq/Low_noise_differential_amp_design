@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 import sys
 from dataclasses import asdict, dataclass, field, replace
 
@@ -61,10 +62,17 @@ class FE:
     cnode: float = 0.0
     sink: str = "MMBT3904"     # source-node current sink: an NPN model, or "J:<subckt>" for an N-JFET
     v_sink: float = 2.0        # voltage across the sink's emitter (source) resistor R_T
-    v_be_sink: float = 0.66    # the sink's base-emitter (gate-source) voltage: the servo's starting point
-    cm_servo: bool = True      # slow servo of the sinks' reference: no DC current in R_F
+    v_be_sink: float = 0.66    # the sink's base-emitter (gate-source) voltage: where the reference's adjustment
+                               # (sink_reference), or the servo, starts: V_M + V_RT + v_be_sink
+    cm_servo: bool = False     # True: a slow servo of the sinks' reference (Appendix B of the note); False: the
+                               # reference is a fixed voltage, v_ref_sink, adjusted once (sink_reference)
     oa_rail: float = 0.0       # 0: the loop op amps run on vp/vm; > 0: on their own +/- oa_rail (nodes
                                # vpa, vma), for a low-voltage op amp (Section 4.3, the low-voltage option)
+    r_in: float = 1e-3         # the noiseless resistors that tie the sources to the gates (RIA, RIB); 1 ohm
+                               # where 1 mOhm with abstol = 1e-15 A defeats ngspice's operating point and it
+                               # falls back to its transient op (sink_options.py; the note's Appendix)
+    v_ref_sink: float | None = None   # the sinks' fixed base reference (vsink0), V; None: the adjusted value
+                                      # (sink_reference); not used with cm_servo
 
     @property
     def oa_rails(self) -> str:
@@ -156,27 +164,134 @@ def netlist(p: FE) -> str:
         # base reference so that the mean DC current in the two R_F is zero (the outputs' mean
         # equals the sources' mean); in a build, a precision op-amp integrator
         # The servo's output is clamped to vm + 1 ... vm + v_sink + 3 V (vm + 5 V with the 2 V of
-        # R_T of the adopted design): without the clamp ngspice also
-        # finds a second, latched state in which the servo has driven the sinks into saturation
-        # (their base above the source node), where raising the base no longer lowers the sink
-        # current, so the loop's sign reverses.  A build needs the same limit on its servo.
+        # R_T of the adopted design).  The clamp bounds the sinks' current, and R_T's dissipation,
+        # during start-up and overloads; the loop does not need it to be stable: its error has a
+        # single zero, with the restoring sign everywhere else, also with the sinks saturated
+        # (servo_check.py; the latched state that an early version reported is not reproduced).
         refs += ("BERR nerr 0 V=(V(oa)+V(ob)-V(sa)-V(sb))/2\nGINT 0 nint nerr 0 1e-6\nCINT nint 0 1u\n"
                  f"RINT nint 0 1e12 rnl\nBSNK vsink0 0 V=max(min({v0:g}-V(nint), {p.vm + p.v_sink + 3:g}), {p.vm + 1:g})\n"
                  "RSNK vsink0 vsink 1k rnl\nCSNK vsink 0 10u\n")
     else:
-        refs += f"VSNK vsink0 0 DC {v0:g}\nRSNK vsink0 vsink 1k rnl\nCSNK vsink 0 10u\n"
+        # the sinks' base reference: a fixed voltage, adjusted once so that the sinks take the JFETs' and
+        # the bootstrap's current (sink_reference), through the same 1 kOhm and 10 uF filter
+        v_ref = p.v_ref_sink if p.v_ref_sink is not None else sink_reference(p)
+        refs += f"VSNK vsink0 0 DC {v_ref:.9g}\nRSNK vsink0 vsink 1k rnl\nCSNK vsink 0 10u\n"
     return head + refs + side(p, "a") + side(p, "b") + rg
+
+
+def ties(src: str, p: FE) -> str:
+    """The source text with its gate ties (RIA, RIB: 1 mOhm, noiseless) at p.r_in."""
+    if p.r_in == 1e-3:
+        return src
+    return re.sub(r"^(RI[AB] \S+ \S+) 1m rnl$", rf"\g<1> {p.r_in:g} rnl", src, flags=re.M)
+
+
+# what op_checked tries, in turn: (label, OPTIONS replacement or None, gate ties r_in or None)
+OP_LADDER = (("as given", None, None),
+             ("abstol = 1e-12 A", ("abstol=1e-15", "abstol=1e-12"), None),
+             ("1-ohm ties", None, 1.0),
+             ("abstol = 1e-12 A and 1-ohm ties", ("abstol=1e-15", "abstol=1e-12"), 1.0))
+
+
+def op_checked(fn, p: FE, *args, keep=None, **kw) -> tuple:
+    """fn(p, *args, **kw) with the operating points of its decks checked.  When gmin and source stepping
+    both fail, ngspice-46 falls back to a transient op, a 10 us transient whose end state need not be a DC
+    solution, and notes it only in the log (spice.op_fallback, spice.FALLBACKS); Section 5.1 and Appendix A
+    of the note.  If any deck of the call fell back, fn runs again with abstol = 1e-12 A instead of 1e-15 A,
+    then with the sources tied to the gates through 1 ohm instead of 1 mOhm (FE.r_in, noiseless), then
+    with both (OP_LADDER).  Returns (result, label, note) of the first call in which no deck fell back:
+    the label of its OP_LADDER step, and a note of the decks that fell back before ('' if none did).  A
+    RuntimeError of fn is re-raised unless a deck of that call fell back; a fallback in every step raises
+    RuntimeError.  keep(result) gives run folders (relative to spice.RUNS, '/'-separated) whose fallback
+    the caller has handled itself (gain_options.noise_checked reruns a noise deck from .nodeset)."""
+    import contextlib
+    notes = []
+    for label, opt, r_in in OP_LADDER:
+        q = replace(p, r_in=r_in) if r_in else p
+        n0 = len(spice.FALLBACKS)
+        try:
+            with (spice.options_replaced(*opt) if opt else contextlib.nullcontext()):
+                r, err = fn(q, *args, **kw), None
+        except RuntimeError as exc:
+            r, err = None, exc
+        bad = sorted({f.relative_to(spice.RUNS).as_posix() for f in spice.FALLBACKS[n0:]}
+                     - (set(keep(r)) if keep is not None and r is not None else set()))
+        if not bad:
+            if err is not None:
+                raise err
+            return r, label, "; ".join(notes)
+        notes.append(f"{label}: {', '.join(bad)} fell back to ngspice's transient op")
+    raise RuntimeError(f"{p.name}: " + "; ".join(notes))
 
 
 def deck(p: FE, title: str, src: str, control: str) -> str:
     opn = blocks.opn("OPN_FE", **p.opn_kw) if p.opamp == "OPN" else ""
     return (f"* {title}\n{spice.OPTIONS}.options rshunt=1e12\n{spice.lib('jfets.lib')}{spice.lib('opamps.lib')}"
-            f"{spice.lib('bjts.lib')}{opn}{blocks.COMMON}{src}{netlist(p)}{control}.end\n")
+            f"{spice.lib('bjts.lib')}{opn}{blocks.COMMON}{ties(src, p)}{netlist(p)}{control}.end\n")
 
 
 SRC_DM = "VA ina 0 DC 0 AC 0.5\nVB inb 0 DC 0 AC -0.5\nRIA ina ga 1m rnl\nRIB inb gb 1m rnl\n"
 SRC_CM = "VA ina 0 DC 0 AC 1\nRIA ina ga 1m rnl\nRIB ina gb 1m rnl\n"
 SRC_NOISE = "VIN ina 0 DC 0 AC 1\nRIA ina ga 1m rnl\nRIB 0 gb 1m rnl\n"
+
+# the sinks' adjusted reference of each circuit (sink_reference), in memory and on disk
+_REF: dict = {}
+REF_FILE = spice.RESULTS / "sink_reference.json"
+
+
+def _ref_key(p: FE) -> str:
+    """The circuit a reference is adjusted for: the netlist without its name and reference value, and the
+    model libraries it includes, so that a change of either is a new circuit."""
+    import hashlib
+    h = hashlib.sha256(netlist(replace(p, name="ref", cm_servo=False, v_ref_sink=0.0, v_be_sink=0.0)).encode())
+    for lib in ("jfets.lib", "opamps.lib", "bjts.lib"):
+        h.update((spice.LIB / lib).read_bytes())
+    return h.hexdigest()[:20]
+
+
+def sink_reference(p: FE) -> float:
+    """The sinks' base reference at which they take exactly the JFETs' and the bootstrap's current, so that
+    no DC current flows in R_F and the outputs sit at their sources, e = [(v_oa - v_sa) + (v_ob - v_sb)] / 2
+    = 0 (Section 4.2 of the note): the adjustment a build makes once, here by secant steps between
+    operating points at zero input and 27 C, from V_M + V_RT + v_be_sink and 50 mV above, until
+    |e| < 1 uV.  The inputs are tied through 1 ohm (DC as with 1 mOhm), and abstol is 1e-12 A for a deck
+    whose operating point falls back to the transient op.  Cached by circuit (_ref_key)."""
+    key = _ref_key(p)
+    if key in _REF:
+        return _REF[key]["v_ref"]
+    disk = json.loads(REF_FILE.read_text(encoding="utf-8")) if REF_FILE.exists() else {}
+    if key in disk:
+        _REF[key] = disk[key]
+        return disk[key]["v_ref"]
+    q = replace(p, cm_servo=False, r_in=1.0)
+    ctl = ".control\n" + spice.WR + "op\nprint v(oa) v(ob) v(sa) v(sb)\n.endc\n"
+
+    def e_at(x: float, k: int) -> float:
+        text = deck(replace(q, v_ref_sink=x), f"sink reference {p.name} {x:.9g}", SRC_DM, ctl)
+        f = spice.run(f"sink_ref/{p.name}/{k}", text)
+        if spice.op_fallback(f):
+            f = spice.run(f"sink_ref/{p.name}/{k}", text.replace("abstol=1e-15", "abstol=1e-12"))
+            if spice.op_fallback(f):
+                raise RuntimeError(f"{p.name}: the operating point at a sink reference of {x:.4f} V fell back")
+        v = {n: spice.printed(f, f"v({n})") for n in ("oa", "ob", "sa", "sb")}
+        return ((v["oa"] - v["sa"]) + (v["ob"] - v["sb"])) / 2
+
+    design = p.vm + p.v_sink + p.v_be_sink
+    x0, x1 = design, design + 0.05
+    e0, e1 = e_at(x0, 0), e_at(x1, 1)
+    k = 2
+    while abs(e1) > 1e-6 and k < 12:
+        x0, e0, x1 = x1, e1, x1 - e1 * (x1 - x0) / (e1 - e0)
+        e1 = e_at(x1, k)
+        k += 1
+    if abs(e1) > 1e-6:
+        raise RuntimeError(f"{p.name}: the sink reference did not converge (e = {e1:.3g} V at {x1:.6f} V)")
+    rec = dict(v_ref=x1, e=e1, operating_points=k, case=p.name, design_value=design)
+    _REF[key] = rec
+    disk = json.loads(REF_FILE.read_text(encoding="utf-8")) if REF_FILE.exists() else {}
+    disk[key] = rec
+    models._atomic_write(REF_FILE, json.dumps(disk, indent=1, sort_keys=True), "utf-8")
+    return x1
 
 
 def check_op(p: FE) -> dict:
@@ -283,7 +398,7 @@ def check_loop(p: FE, mode: str = "dm") -> dict:
         opn = blocks.opn("OPN_FE", **p.opn_kw) if p.opamp == "OPN" else ""
         dk = (f"* loop {p.name} {mode} {inj}\n{spice.OPTIONS}.options rshunt=1e12\n{spice.lib('jfets.lib')}"
               f"{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}{opn}{blocks.COMMON}"
-              "VA ina 0 DC 0\nRIA ina ga 1m rnl\nRIB ina gb 1m rnl\n" + text +
+              + ties("VA ina 0 DC 0\nRIA ina ga 1m rnl\nRIB ina gb 1m rnl\n", p) + text +
               ".control\n" + spice.WR + "ac dec 40 1k 2g\nwrdata loop.txt v(oa) v(fa) i(VJa)\n.endc\n.end\n")
         f = spice.run(f"fe/{p.name}/loop_{mode}_{inj}", dk)
         res[inj] = spice.read_table(f / "loop.txt")
@@ -331,6 +446,24 @@ def _margins(fr, t) -> dict:
                 gm_db=min((g["gm_db"] for g in gms), default=float("nan")))
 
 
+def loop_out_deck(p: FE, mode: str, inj: str, control: str) -> str:
+    """check_loop_out's deck for one injection (inj 'v' or 'i'), with the given control block: both gates
+    tied to ground (through p.r_in), and each op amp's output pin broken by a voltage source VJx (DC 0) with
+    a current source IJx (DC 0) into its output node; side b's injection in antiphase in 'dm' mode."""
+    sgn = -1 if mode == "dm" else 1
+    text = netlist(p)
+    for x, s in (("a", 1), ("b", sgn)):
+        old = f"XU{x} vref c{x} o{x} {p.oa_rails} {opamp_name(p)}"
+        assert old in text, old
+        text = text.replace(old, f"XU{x} vref c{x} u{x} {p.oa_rails} {opamp_name(p)}\n"
+                                 f"VJ{x} u{x} o{x} DC 0 AC {s if inj == 'v' else 0}\n"
+                                 f"IJ{x} 0 o{x} DC 0 AC {s if inj == 'i' else 0}")
+    opn = blocks.opn("OPN_FE", **p.opn_kw) if p.opamp == "OPN" else ""
+    return (f"* loop at op-amp output {p.name} {mode} {inj}\n{spice.OPTIONS}.options rshunt=1e12\n"
+            f"{spice.lib('jfets.lib')}{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}{opn}{blocks.COMMON}"
+            + ties("VA ina 0 DC 0\nRIA ina ga 1m rnl\nRIB ina gb 1m rnl\n", p) + text + control + ".end\n")
+
+
 def check_loop_out(p: FE, mode: str = "dm") -> dict:
     """Return ratio at the op amp's output pin, by Middlebrook's double injection: each op amp's
     output (driving C_I, C_X and R_F) is the one point that both the outer loop (through the
@@ -339,20 +472,9 @@ def check_loop_out(p: FE, mode: str = "dm") -> dict:
     outer loop with the local loop closed, and cannot see a local-loop instability.  In 'dm' mode
     side b is injected in antiphase, in 'cm' mode in phase."""
     res = {}
-    sgn = -1 if mode == "dm" else 1
     for inj in ("v", "i"):
-        text = netlist(p)
-        for x, s in (("a", 1), ("b", sgn)):
-            old = f"XU{x} vref c{x} o{x} {p.oa_rails} {opamp_name(p)}"
-            assert old in text, old
-            text = text.replace(old, f"XU{x} vref c{x} u{x} {p.oa_rails} {opamp_name(p)}\n"
-                                     f"VJ{x} u{x} o{x} DC 0 AC {s if inj == 'v' else 0}\n"
-                                     f"IJ{x} 0 o{x} DC 0 AC {s if inj == 'i' else 0}")
-        opn = blocks.opn("OPN_FE", **p.opn_kw) if p.opamp == "OPN" else ""
-        dk = (f"* loop at op-amp output {p.name} {mode} {inj}\n{spice.OPTIONS}.options rshunt=1e12\n"
-              f"{spice.lib('jfets.lib')}{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}{opn}{blocks.COMMON}"
-              "VA ina 0 DC 0\nRIA ina ga 1m rnl\nRIB ina gb 1m rnl\n" + text +
-              ".control\n" + spice.WR + "ac dec 50 1k 3g\nwrdata loop.txt v(ua) v(oa) i(VJa)\n.endc\n.end\n")
+        dk = loop_out_deck(p, mode, inj, ".control\n" + spice.WR +
+                           "ac dec 50 1k 3g\nwrdata loop.txt v(ua) v(oa) i(VJa)\n.endc\n")
         f = spice.run(f"fe/{p.name}/loopout_{mode}_{inj}", dk)
         res[inj] = spice.read_table(f / "loop.txt")
     fr = res["v"]["frequency"]

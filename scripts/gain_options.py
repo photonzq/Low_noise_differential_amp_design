@@ -17,7 +17,12 @@ For each case: the complete loop's margins (frontend.check_loop_out), the front 
 bandwidth, its input-referred noise, and that noise split into groups of generators
 (frontend.noise_groups) at 10 Hz, 10 kHz, 1 MHz and 10 MHz.  'weight' is the input-referred
 weight of a noise current injected at a summing node, 1/g_m + R_F/G per side (Eq. (9) of the
-note).
+note).  Each case is evaluated through frontend.op_checked: if the operating point of any of its
+decks falls back to ngspice's transient op, the case is evaluated again with abstol = 1e-12 A (then
+1-ohm ties); the entry records the step that held (op_how) and the decks that fell back (op_note).
+Both R_F-route variants at a gain of 20 need it: with abstol = 1e-15 A the operating points of their
+loop decks fall back to a state with the op amps at -10 V and the input gates conducting, and the
+loop gain is near zero at every frequency (Section 5.1 of the note; op_pitfall.py).
 
 Writes ../sim/results/fe_gain_scan.json (the R_G route, in the format Table 6b was made from) and
 ../sim/results/fe_gain_options.json (every case, with the noise split).
@@ -52,12 +57,14 @@ def margins(p: F.FE) -> dict:
 
 def noise_checked(p: F.FE, ac: dict) -> tuple[dict, np.ndarray, str]:
     """frontend.check_noise, with a check of its operating point: the noise run's own gain
-    (onoise / inoise) must match the AC run's at 1 kHz within 5 %.  For one case here (R_F route,
-    gain 30) ngspice's operating point for the noise deck went astray: Kirchhoff's current law at
-    the bootstrap node failed by R_UP's 1.5 mA, i.e. the 1 uF bootstrap capacitors were still
-    uncharged, as in a transient-based operating point; the op amps sat at the negative rail and
-    the JFETs' gates conducted.  The run is then repeated with .nodeset from the AC deck's
-    operating point."""
+    (onoise / inoise) must match the AC run's at 1 kHz within 5 %.  With the servo of the note's
+    Appendix B in the netlists, ngspice's operating point for the noise deck of one case here (R_F
+    route, gain 30) went astray: Kirchhoff's current law at the bootstrap node failed by R_UP's
+    1.5 mA, i.e. the 1 uF bootstrap capacitors were still uncharged, as in a transient-based
+    operating point; the op amps sat at the negative rail and the JFETs' gates conducted (it was
+    ngspice's transient-op fallback; op_pitfall.py reproduces it).  A run that fails the check is
+    repeated with .nodeset from the AC deck's operating point.  Without the servo every noise run
+    here passes the check directly ('direct')."""
     fstop = 100e6
     nz = F.check_noise(p, fstop)
     fr = nz["f"]
@@ -70,8 +77,8 @@ def noise_checked(p: F.FE, ac: dict) -> tuple[dict, np.ndarray, str]:
 
     if consistent(nz["nz"]):
         return nz, g_ac, "direct"
-    # (A .nodeset that also fixes the servo and sink nodes, vsink, nint, ea and eb, was tried: it made
-    # the gain-30 R_F-route case fail, which this one converges.)
+    # (A .nodeset that also fixed the sink nodes, vsink, ea and eb, and the servo's integrator, which the
+    # front ends had then, was tried: it made the gain-30 R_F-route case fail, which this one converged.)
     op = F.check_op(p)
     v = {k[2:-1]: val for k, val in op.items() if k.startswith("v(")}
     nodes = dict(sa=v["sa"], sb=v["sb"], ca=v["ca"], cb=v["cb"], oa=v["oa"], ob=v["ob"], ba=v["ba"], bb=v["ba"])
@@ -133,12 +140,17 @@ def main():
     models.prepare()
     res, scan = {}, {}
     for label, (p, noise) in cases().items():
-        r = evaluate(p, noise)
+        # a noise deck that noise_checked reran from .nodeset has been handled there
+        r, how, note = F.op_checked(evaluate, p, noise,
+                                    keep=lambda r_, p=p: {f"fe/{p.name}/noise"} if r_.get("noise_op") == "nodeset" else set())
+        r.update(op_how=how, op_note=note)
         res[label] = r
         lp = r["loop"]
         line = (f"{label}: R_F {p.rf:.1f}, R_G {p.rg:.2f}, C_I {p.ci * 1e12:.2f}, C_X {p.cx * 1e12:.2f}, "
                 f"C_node {p.cnode * 1e12:.0f} pF, k {r['k']:.3f}, weight {r['weight']:.1f} ohm, beta_CM {r['beta_cm']:.3f}\n"
                 f"    DM {lp['dm']}  CM {lp['cm']}")
+        if note:
+            line += f"\n    operating point: {note}; evaluated with {how}"
         if noise:
             e = r["en"]
             line += (f"\n    f3dB {r['f3db'] / 1e6:.1f} MHz; noise 10 Hz {e['10']:.2f}, 10 kHz {e['10000.0']:.3f}, "

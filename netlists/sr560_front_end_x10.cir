@@ -1,4 +1,4 @@
-* SR560 front end, redrawn from SRS sheet 560_1F (manual Rev. 2.8), K102 at x10; NPD5564 as the
+* SR560 front end, redrawn from SRS sheet 560_1F (manual Rev. 3.1), K102 at x10; NPD5564 as the
 * recalibrated 2N5564 card; OP37 and LF411 behavioural.  Section 2.1 of the note.
 .options reltol=1e-4 abstol=1e-15 vntol=1e-9 gmin=1e-14 itl1=500 itl4=200
 .include "../sim/models/_lib/jfets.lib"
@@ -109,6 +109,7 @@ R130 tail sv 100
 R122 sv m10 1k
 VP p10 0 DC 10
 VM m10 0 DC -10
+.nodeset v(ref)=6.2 v(mid)=6.2 v(da)=6.2 v(db)=6.2 v(vtop)=8.5
 .control
 set wr_singlescale
 set wr_vecnames

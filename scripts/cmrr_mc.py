@@ -26,6 +26,8 @@ directly (0 ohm); H100 and L200 with the input-network capacitors trimmed (0.1 %
 Measure: CMRR(f) = 20 log10(|H_dm(f)| / |H_cm(f)|) at the output, H_dm the response to A = +1/2,
 B = -1/2 and H_cm to A = B = 1; per case the median, the 10th percentile and the worst over the
 trials at the frequencies FREQ, and the rms output DC offset sqrt(mean(V_out,dc^2)).
+Each trial's sinks' reference is adjusted as a build's would be (adjust; frontend.sink_reference), and
+recorded with the trial (sink_reference: seed, reference, residual e).
 
 The R_UP test (Section 6.4 of the note): R_UP feeds the bootstrap from +15 V, so the bootstrap
 current changes with the input common mode by dI_BS = -dV_CM / R_UP; through R_BS this moves the
@@ -164,12 +166,48 @@ def ideal_bootstrap(net: str, s: chain.Setting) -> str:
     return new
 
 
+def adjust(net: str, src: str, label: str, seed: int) -> tuple[str, float, float]:
+    """Each trial is a front end of its own, and a build adjusts its sinks' reference once, as
+    frontend.sink_reference does for the nominal circuit: VSNK moved by secant steps between operating
+    points until the outputs' mean sits at the sources' mean, |e| < 1 uV, e = [(v_oa - v_sa) + (v_ob -
+    v_sb)] / 2.  An operating point that falls back to the transient op is solved again with abstol =
+    1e-12 A.  Returns the netlist with the trial's reference, the reference and e there."""
+    m = re.search(r"^VSNK vsink0 0 DC (\S+)$", net, flags=re.M)
+    assert m, "VSNK line not found"
+
+    def e_at(x: float, k: int) -> float:
+        deck = (f"* cmrr mc sink reference {seed} {k}\n{spice.OPTIONS}.options rshunt=1e12\n{spice.lib('jfets.lib')}"
+                f"{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}.model rnl r(noisy=0)\n{src}"
+                f"{net.replace(m.group(0), f'VSNK vsink0 0 DC {x:.9g}')}"
+                ".control\n" + spice.WR + "op\nprint v(oa) v(ob) v(sa) v(sb)\n.endc\n.end\n")
+        f = spice.run(f"cmrr_mc/{label}/{seed}_ref{k}", deck)
+        if spice.op_fallback(f):
+            f = spice.run(f"cmrr_mc/{label}/{seed}_ref{k}", deck.replace("abstol=1e-15", "abstol=1e-12"))
+            if spice.op_fallback(f):
+                raise RuntimeError(f"seed {seed}: the operating point at a sink reference of {x:.4f} V fell back")
+        v = {n: spice.printed(f, f"v({n})") for n in ("oa", "ob", "sa", "sb")}
+        return ((v["oa"] - v["sa"]) + (v["ob"] - v["sb"])) / 2
+
+    x0 = float(m.group(1))
+    x1 = x0 + 0.01
+    e0, e1 = e_at(x0, 0), e_at(x1, 1)
+    k = 2
+    while abs(e1) > 1e-6 and k < 10:
+        x0, e0, x1 = x1, e1, x1 - e1 * (x1 - x0) / (e1 - e0)
+        e1 = e_at(x1, k)
+        k += 1
+    if abs(e1) > 1e-6:
+        raise RuntimeError(f"seed {seed}: the sink reference did not converge (e = {e1:.3g} V)")
+    return net.replace(m.group(0), f"VSNK vsink0 0 DC {x1:.9g}"), x1, e1
+
+
 def run_trial(label: str, s: chain.Setting, seed: int, da: str, only: str = "", rs: float = 50.0,
               cnet: float = 0.025, rup: str = "R_UP") -> dict:
     rng = np.random.default_rng(seed)
     net = perturb(chain.netlist(s), s, rng, da, only, cnet)
     if rup == "ideal":
         net = ideal_bootstrap(net, s)
+    net, v_ref, e_ref = adjust(net, sources(rs)[0], label, seed)
     res = {}
     for kind, src in zip(("dm", "cm"), sources(rs)):
         deck = (f"* cmrr mc {s.tag} {seed} {kind}\n{spice.OPTIONS}.options rshunt=1e12\n{spice.lib('jfets.lib')}"
@@ -182,7 +220,7 @@ def run_trial(label: str, s: chain.Setting, seed: int, da: str, only: str = "", 
             res["vout_dc"] = spice.printed(f, "v(out)")
     fr = res["dm"][0]
     cmrr = 20 * np.log10(np.abs(res["dm"][1]) / np.abs(res["cm"][1]))
-    return dict(f=fr, cmrr=cmrr, vout_dc=res["vout_dc"])
+    return dict(f=fr, cmrr=cmrr, vout_dc=res["vout_dc"], v_ref=v_ref, e_ref=e_ref)
 
 
 def _worker(q, case, seed):
@@ -195,7 +233,7 @@ def _worker(q, case, seed):
         q.put(("error", (lines[1] if len(lines) > 1 else lines[0])[:120]))
 
 
-def guarded_trial(case: dict, seed: int, timeout: float = 120.0):
+def guarded_trial(case: dict, seed: int, timeout: float = 240.0):
     """One trial in a child process: a trial whose operating point does not converge can keep
     ngspice's dynamic gmin stepping busy for hours (seed 5 of L200 with unsorted JFE150 did), and
     the shared library cannot be interrupted from Python.  Returns (result or None, message)."""
@@ -244,6 +282,7 @@ def main(args):
             continue
         rows = []
         failed = []
+        refs = []
         for seed in range(nt):
             r, msg = guarded_trial(c, seed)
             if r is None:                      # no DC solution: counted, reported
@@ -251,6 +290,7 @@ def main(args):
                 print(f"{label} seed {seed}: failed ({msg})", flush=True)
                 continue
             rows.append([spice.at(r["f"], r["cmrr"], f0) for f0 in FREQ] + [r["vout_dc"]])
+            refs.append([seed, r["v_ref"], r["e_ref"]])
         a = np.array(rows)
         extra = dict(only=c["only"], bootstrap_feed=("ideal current source I_BS" if c["rup"] == "ideal"
                                                      else "R_UP")) if label in RUP_CASES else {}
@@ -259,7 +299,7 @@ def main(args):
                           p10=np.percentile(a[:, :-1], 10, axis=0).tolist(),
                           worst=a[:, :-1].min(axis=0).tolist(),
                           vout_dc_rms=float(np.sqrt(np.mean(a[:, -1] ** 2))),
-                          all=a.tolist())
+                          all=a.tolist(), sink_reference=refs)
         print(f"{label}: CMRR median " + " ".join(f"{f0:g}:{v:.0f}" for f0, v in zip(FREQ, out[label]['median'])))
         print(f"{label}: CMRR 10 %   " + " ".join(f"{f0:g}:{v:.0f}" for f0, v in zip(FREQ, out[label]['p10'])))
         print(f"{label}: output DC offset rms {out[label]['vout_dc_rms']:.3f} V at gain {s.gain:.0f}", flush=True)

@@ -16,11 +16,7 @@ VM vm 0 DC -15
 VREF vref0 0 DC 9
 RREF vref0 vref 1k rnl
 CREF vref 0 10u
-BERR nerr 0 V=(V(oa)+V(ob)-V(sa)-V(sb))/2
-GINT 0 nint nerr 0 1e-6
-CINT nint 0 1u
-RINT nint 0 1e12 rnl
-BSNK vsink0 0 V=max(min(-12.34-V(nint), -10), -14)
+VSNK vsink0 0 DC -12.0599721
 RSNK vsink0 vsink 1k rnl
 CSNK vsink 0 10u
 * --- side a

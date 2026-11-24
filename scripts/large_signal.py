@@ -23,10 +23,20 @@
   psrr      the output's response to 1 V AC on the +15 V and on the -15 V rail, referred to the
             input: 20 log10(|v_out| / G) (dB below 1 V per volt of ripple) - the circuit alone, with
             ideal references
-Every transient tries, in order, Gear with abstol 1e-12 A, trapezoidal with abstol 1e-12 A, Gear
-with itl4 = 1000 and reltol 2e-4, and last Gear with the inputs driven from 50 ohm (the bench of
-osc_check.py); the one that ran is printed, and a step entry records bench = "50 ohm sources and
-input network" when only the last one ran.
+Every transient tries, in order (TRIES), Gear with abstol 1e-12 A, Gear with the KLU solver and
+abstol 1e-11 A, the same with reltol 3e-4, trapezoidal with abstol 1e-12 A, Gear with abstol 1e-11 A,
+Gear with itl4 = 1000 and reltol 2e-4, and last the inputs driven from 50 ohm (the bench of
+osc_check.py) with Gear, then with KLU as above (BENCH_50_OPTIONS; L's steps run only there); a run
+whose operating point fell back counts as failed (spice.check_dc); the one that
+ran is printed and recorded (LAST_TRY), and a step entry records bench = "50 ohm sources and input
+network" when only the last one ran.  The sets with abstol 1e-11 A were added when the sinks'
+reference became a fixed voltage (no servo): several decks then stopped with "timestep too small" in
+an input JFET within their first steps with Gear and trapezoidal integration, a failure of ngspice's
+default solver (Sparse 1.3) on these matrices, not of the circuit.  Where Gear runs, KLU gives the
+same result to 4-5 digits; KLU comes before trapezoidal integration, which where Gear stops can
+differ by up to 0.9 dB (H at 1 MHz and 1 Vpp).  L at 10 MHz runs only with KLU at reltol 3e-4 (or
+1e-3; the same THD to 4 digits, also with a 4 times finer step), and gives 0.0072 % where Sparse with
+the servo in the netlist gave 0.0100 % (Sparse does not run that deck with the finer step).
 Writes ../sim/results/large_signal.json.
 Usage: python large_signal.py [H100 L1000] [thd step overload psrr] [options]
 
@@ -47,7 +57,10 @@ results equal the archive exactly, else as <name>_regen.json, and every differen
         gain of 1000, LM7171 in S2, the first design's sinks; before the model recalibration of
         22 November 2026 the 1 V step failed on every bench and the 10 V step ran only on the 50-ohm
         bench (large_signal_log_L1000_step.txt); in the re-run with the recalibrated models both ran
-        on the 50-ohm bench (large_signal_repro_L1000_step_log.txt), and that result is the archive
+        on the 50-ohm bench (large_signal_repro_L1000_step_log.txt), and that result is the archive.
+        Without the servo, L's steps with its adopted 6 V sinks run too (python large_signal.py L1000
+        step: the 50-ohm bench with KLU), and the note quotes those; this file is their cross-check
+        (the same to 0.01 ns)
   python large_signal.py repro THS4031      large_signal_THS4031.json: H at a gain of 100 (thd, step,
         overload, psrr) and L at 1000 (thd) with the THS4031 in S2, the S2 of chain.py before
         da_compare.py chose the LM7171, and the first design's sinks (large_signal_log_L1000.txt,
@@ -56,7 +69,7 @@ results equal the archive exactly, else as <name>_regen.json, and every differen
 The numerical floor of the THD measurement (Section 6.5 of the note):
   python large_signal.py floor   writes ../sim/results/large_signal_floor.json with
     linear_reference   the THD measurement above, with the same tran command, global options and
-                       each of the first three option sets, on a purely linear reference: the same
+                       each option set of FLOOR_OPTIONS, on a purely linear reference: the same
                        sine sources (a = V_pp / (2 G)) into an ideal amplifier of the chain's gain G
                        (E source) and one RC low-pass at the chain's -3 dB frequency f_c
                        (chain_ac.json: H_LN_100 for H, L_1000 for L), R = 1 k, C = 1 / (2 pi R f_c);
@@ -102,8 +115,13 @@ CASES = {"H100": ("H_LN", 100), "L1000": ("L", 1000)}
 # 1 milliohm of the AC benches): with abstol = 1e-15 A a milliohm asks ngspice to resolve about
 # 1e-18 V, and transients stopped with "timestep too small" at the gate nodes.
 TRAN_OPTIONS = ".options abstol=1e-12 method=gear\n"
-TRIES = [TRAN_OPTIONS, ".options abstol=1e-12\n", ".options abstol=1e-12 method=gear itl4=1000 reltol=2e-4\n",
-         "50ohm"]
+KLU_OPTIONS = ".options abstol=1e-11 method=gear klu\n"      # the KLU direct solver instead of Sparse 1.3
+KLU_RELTOL = ".options abstol=1e-11 method=gear klu reltol=3e-4\n"   # L at 10 MHz: KLU needs reltol 3e-4
+TRAP_OPTIONS = ".options abstol=1e-12\n"                     # trapezoidal, ngspice's default method
+TRIES = [TRAN_OPTIONS, KLU_OPTIONS, KLU_RELTOL, TRAP_OPTIONS, ".options abstol=1e-11 method=gear\n",
+         ".options abstol=1e-12 method=gear itl4=1000 reltol=2e-4\n", "50ohm", "50ohm+klu", "50ohm+klu_reltol"]
+# the last resort, the inputs driven from 50 ohm, with Gear and then with KLU (L's steps run only there)
+BENCH_50_OPTIONS = {"50ohm": TRAN_OPTIONS, "50ohm+klu": KLU_OPTIONS, "50ohm+klu_reltol": KLU_RELTOL}
 BENCH_50 = "50 ohm sources and input network"
 THD_POINTS = ((1e3, 1), (1e3, 10), (1e5, 1), (1e5, 10), (1e6, 1), (1e6, 10), (1e7, 1))
 LAST_TRY: dict[str, str] = {}          # tag -> the option set that ran (TRIES), for the records
@@ -116,13 +134,15 @@ def tran(s: chain.Setting, tag: str, src: str, tstop: float, tstep: float, save=
     # options and ran with another; the options that ran are recorded in the run log
     for k, opt in enumerate(TRIES):
         try:
-            if opt == "50ohm":
+            if opt.startswith("50ohm"):
                 # last resort: the inputs driven from 50 ohm (the chain's netlist already contains
                 # the input network), the bench on which osc_check.py ran every front end cleanly
                 src2 = src.replace(" 1 rnl", " 50 rnl")
-                f = spice.run(f"large/{tag}", chain.deck(s, f"large {tag}", TRAN_OPTIONS + src2, ctl))
+                f = spice.check_dc(spice.run(f"large/{tag}", chain.deck(s, f"large {tag}",
+                                                                        BENCH_50_OPTIONS[opt] + src2, ctl)))
             else:
-                f = spice.run(f"large/{tag}", chain.deck(s, f"large {tag}", opt + src, ctl))
+                # a run whose operating point fell back is not accepted (spice.check_dc)
+                f = spice.check_dc(spice.run(f"large/{tag}", chain.deck(s, f"large {tag}", opt + src, ctl)))
             if k:
                 print(f"  ({tag}: ran with '{opt.strip()}')", flush=True)
             LAST_TRY[tag] = opt.strip()
@@ -193,7 +213,7 @@ def step_source(s_gain: float, vstep: float) -> str:
 def step_run(s: chain.Setting, tag: str, vstep: float) -> dict:
     d = tran(s, tag, step_source(s.gain, vstep), 4e-6, 0.2e-9, "v(out)")
     res = dict(vstep=vstep, **step_metrics(d["time"], d["v(out)"]))
-    if LAST_TRY.get(tag) == "50ohm":
+    if LAST_TRY.get(tag, "").startswith("50ohm"):
         res["bench"] = BENCH_50
     return res
 
@@ -223,6 +243,9 @@ def psrr_run(s: chain.Setting, tag: str) -> dict:
         val = "15" if rail == "VP" else "-15"
         text = text.replace(f"{rail} {rail.lower()} 0 DC {val}\n", f"{rail} {rail.lower()} 0 DC {val} AC 1\n")
         f = spice.run(f"large/{tag}_psrr_{rail}", text)
+        if spice.op_fallback(f):      # as frontend.op_checked: the operating point again with abstol 1e-12 A
+            f = spice.check_dc(spice.run(f"large/{tag}_psrr_{rail}", text.replace("abstol=1e-15", "abstol=1e-12")))
+            out[f"{rail}_options"] = "abstol = 1e-12 A (with 1e-15 A the operating point fell back)"
         d = spice.read_table(f / "ac.txt")
         fr, h = d["frequency"], np.abs(d["v(out)"]) / s.gain
         out[rail] = {str(f0): float(20 * np.log10(spice.at(fr, h, f0))) for f0 in (100, 1e3, 1e4, 1e5, 1e6, 1e7)}
@@ -254,7 +277,12 @@ def run_suite(names, what, res: dict, prefix: str = "", save=None) -> dict:
         if "thd" in what:
             rows = []
             for f0, vpp in THD_POINTS:
-                x = thd_run(s, f"{prefix}{name}_thd_{f0:g}_{vpp:g}", f0, vpp)
+                try:
+                    x = thd_run(s, f"{prefix}{name}_thd_{f0:g}_{vpp:g}", f0, vpp)
+                except RuntimeError as e:          # every option set failed: record it, go on
+                    rows.append(dict(f0=f0, vout_pp=vpp, failed=str(e).splitlines()[1][:160]))
+                    print(f"{name} THD {f0:>8g} Hz {vpp:>3g} Vpp failed: {rows[-1]['failed']}", flush=True)
+                    continue
                 rows.append(x)
                 print(f"{name} THD {f0:>8g} Hz {vpp:>3g} Vpp: {x['thd'] * 100:.4f} %  (H2 {20 * math.log10(x['h2'] + 1e-20):.0f} dBc, "
                       f"H3 {20 * math.log10(x['h3'] + 1e-20):.0f} dBc, fundamental {x['fund_pp']:.3f} Vpp)", flush=True)
@@ -359,7 +387,10 @@ def repro(which: str) -> None:
 # ---------------------------------------------------------------------------------------------
 # the floor of the THD measurement
 # ---------------------------------------------------------------------------------------------
-FLOOR_OPTIONS = {"gear": TRIES[0], "trap": TRIES[1], "gear_itl4_reltol2e-4": TRIES[2]}
+# the floor study's option sets, by name (the first three of TRIES when the study was made, and KLU)
+FLOOR_OPTIONS = {"gear": ".options abstol=1e-12 method=gear\n", "trap": ".options abstol=1e-12\n",
+                 "gear_itl4_reltol2e-4": ".options abstol=1e-12 method=gear itl4=1000 reltol=2e-4\n",
+                 "gear_klu_abstol1e-11": KLU_OPTIONS}
 
 
 def linear_reference(case: str, f0: float, vpp: float, optname: str, gain: float, fc: float) -> dict:
@@ -371,7 +402,7 @@ def linear_reference(case: str, f0: float, vpp: float, optname: str, gain: float
             + thd_source(gain, f0, vpp) +
             f"EG x 0 ga gb {gain:.9g}\nRF x out 1k\nCF out 0 {c:.6g}\n.control\n" + spice.WR +
             f"tran {tstep:g} {tstop:g} 0 {tstep:g}\nwrdata tran.txt v(out)\n.endc\n.end\n")
-    f = spice.run(f"large/{tag}", deck)
+    f = spice.check_dc(spice.run(f"large/{tag}", deck))
     d = spice.read_table(f / "tran.txt")
     t, v = d["time"], d["v(out)"]
     m = t >= 3 / f0
@@ -412,10 +443,11 @@ def grid_interpolation(case: str, f0: float, vpp: float) -> dict | None:
                 chain=thd_measure(t, v, f0))
 
 
-SETTINGS_VARIANTS = {"gear": (TRIES[0], 400), "trap": (TRIES[1], 400),
+SETTINGS_VARIANTS = {"gear": (TRAN_OPTIONS, 400), "trap": (TRAP_OPTIONS, 400),
                      "gear_reltol2e-5": (".options abstol=1e-12 method=gear reltol=2e-5\n", 400),
                      "gear_reltol1e-5_abstol1e-11": (".options abstol=1e-11 method=gear reltol=1e-5\n", 400),
-                     "gear_tmax_T_1600": (TRIES[0], 1600)}
+                     "gear_tmax_T_1600": (TRAN_OPTIONS, 1600),
+                     "gear_klu_abstol1e-11": (KLU_OPTIONS, 400)}
 SETTINGS_POINTS = ((1e3, 1), (1e5, 1), (1e6, 1))
 
 
@@ -423,7 +455,7 @@ def thd_run_fixed(s: chain.Setting, tag: str, f0: float, vout_pp: float, opt: st
     """thd_run with one option set and tmax = T / per_period, no fallback."""
     tstep = 1 / f0 / per_period
     ctl = (".control\n" + spice.WR + f"tran {tstep:g} {7 / f0:g} 0 {tstep:g}\nwrdata tran.txt v(out)\n.endc\n")
-    f = spice.run(f"large/{tag}", chain.deck(s, f"large {tag}", opt + thd_source(s.gain, f0, vout_pp), ctl))
+    f = spice.check_dc(spice.run(f"large/{tag}", chain.deck(s, f"large {tag}", opt + thd_source(s.gain, f0, vout_pp), ctl)))
     d = spice.read_table(f / "tran.txt")
     return dict(f0=f0, vout_pp=vout_pp, **thd_measure(d["time"], d["v(out)"], f0))
 

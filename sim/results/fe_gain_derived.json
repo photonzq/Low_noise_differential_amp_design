@@ -18,7 +18,7 @@
   "bootstrap (R_BS, R_UP)": 0.0019305113325196333,
   "drain-side R_D": 0.11256364456885946,
   "current sinks": 0.15942084508550403,
-  "loop op amps": 0.025191123359601525
+  "loop op amps": 0.025191123359592216
  },
  "ratio gain 20 / gain 100": {
   "input JFETs": 1.0000000363766335,
@@ -28,7 +28,7 @@
   "bootstrap (R_BS, R_UP)": 4.989963401998228,
   "drain-side R_D": 1.5238516545492398,
   "current sinks": 4.991031219507555,
-  "loop op amps": 1.5237412391729057
+  "loop op amps": 1.52374123917265
  },
  "white rise, gain 20 and 30": [
   0.34926613804709494,

@@ -253,7 +253,7 @@ def compose(*edits):
 
 
 # Parts of the SR560's documentation that the reproduction's netlist does not follow (manual
-# Rev. 2.8): C406 = 82 pF from U403's output (pin 6) to its inverting input, drawn on sheet
+# Rev. 3.1): C406 = 82 pF from U403's output (pin 6) to its inverting input, drawn on sheet
 # 560_4F (PDF p. 50) and listed as 82P in the parts list (PDF p. 36), is not in
 # sr560_chain.netlist; C301 is drawn as 6.8 pF on sheet 560_3F (PDF p. 49), as modelled, but
 # listed as 47P (5-00017-501, the part number of the 47 pF C401) in the parts list (PDF p. 35).

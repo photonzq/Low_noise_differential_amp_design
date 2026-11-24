@@ -5,7 +5,7 @@ direct readouts of a results file are listed as well where the text quotes them,
 holds the whole range.  Writes ../sim/results/numbers_s1_3.json and prints "quantity | value | source".
 
 Inputs (../sim/results/): chain_noise.json, chain_ac.json, sr560_chain.json, sr560_frontend.json,
-noise_vs_source.json, osc_check.json, lv_option_range.json, zin_numbers.json, cmrr_mc.json,
+sr560_variants.json, noise_vs_source.json, osc_check.json, lv_option_range.json, zin_numbers.json, cmrr_mc.json,
 large_signal.json, model_defects.json, noise_theory.json, jfet_calibration.json,
 jfet_model_check.json, jfet_table3.json, curves_noise.npz; and jfet_data.JFETS (the survey values of
 Table 3, each with its data-sheet page in ../refs/datasheets/jfet/survey_*.md).
@@ -49,6 +49,20 @@ Formulas (e: input noise density; f_3dB: -3 dB bandwidth; G: total gain):
   (12) ratios and ranges quoted from results files (model_defects.json, jfet_table3.json, chain_ac.json,
                            osc_check.json, lv_option_range.json, zin_numbers.json, cmrr_mc.json) are
                            read out and rounded once
+  (13)-(18) the SR560 models of sr560_variants.py (Section 2.2): (13) the corrected model's noise against
+                           the model as drawn, max |e_c / e_a - 1|; (14) Table 1 for the LSK389B model, as
+                           (5); (15) the LSK389B per device, e = e_JFETs / sqrt(2) from the front end's
+                           noise groups, against its calibration point (jfet_calibration.json) and
+                           against the change Cordell measured from 2 to 4 mA; the weight of the drain
+                           loads and the OP37, (g_N / (1 + g_N R113)) / (g_L / (1 + g_L R113)) with each
+                           JFET's g_m at the operating point; (16) e_model / e_measured - 1 against a
+                           user's two units (4.0 nV/rtHz with the NPD5564, 3.5 with the LSK389B, 1 kHz,
+                           gain 1000; EEVblog forum, 18 March 2024); (17) the summary's ratios against the
+                           corrected models with the values it quotes; (18) the CMRR against the offset
+                           trim (check_cmrr_trim), the current split 6.2 V / 75 kOhm - 6.2 V / 100 kOhm and
+                           the trim 6.2 V (1 - 75/100) for equal currents, the first version's failed trim
+                           VTRIM = -v0 / (v1 - v0) with v1 from the transient-op fallback, and that
+                           version's CMRR against the untrimmed chain; the operating-point checks
 Usage: python numbers_s1_3.py
 """
 from __future__ import annotations
@@ -83,6 +97,18 @@ JFE2140_IG_3V9 = 1e-12           # JFE2140 gate current at V_DS = 3.9 V (H's inp
                                  # 1 pA, read off SLPS730B Fig. 6-6 (0.7-0.9 pA at 4 V for 1-10 mA); p. 5:
                                  # 1 pA typ, 10 pA max at V_DS = 2 V
 N_H, N_L = 2, 12                 # JFETs per side (Section 4.2)
+# SR560 (Section 2.2)
+EEV_NPD5564, EEV_LSK389B = 4.0e-9, 3.5e-9   # a user's two units, 1 kHz, gain 1000, after the manual's CMRR and
+                                 # offset adjustments (Audio Precision APx515): EEVblog forum, "SR560 Low noise
+                                 # amp -- Noise Calculation", 18 March 2024 (refs/benchmark/README.md); a user
+                                 # report, not an SRS document
+CORDELL_LSK389 = (1.17e-9, 1.11e-9)  # LSK389 application note Rev A4, Table 1 (p. 5): a two-stage amplifier's
+                                 # input noise at 2 and 4 mA (refs/datasheets/jfet/survey_TI_LIS_Toshiba_onsemi.md)
+R113 = 110.0                     # SR560 sheet 560_1F: source resistor of JFET A
+VREF_SR560, R120, R121 = 6.2, 100e3, 75e3   # the drains' 6.2 V; R120 drain B to ground; R121 drain A to P103
+SR560_CMRR_FIRST_VERSION = (104.966, 102.534, 86.4653, 67.671, 61.649)   # sr560_chain.json cmrr_ideal_matching
+                                 # as committed in f1bea76 (10 Hz, 1 kHz, 10 kHz, 100 kHz, 1 MHz), from a trim
+                                 # whose second deck had fallen back to ngspice's transient op
 
 
 def load(name: str):
@@ -379,10 +405,149 @@ def section1_and_3(out: dict) -> None:
         "jfet_calibration.json LSBF862 (RX clipped at 0)")
 
 
+SR560_MODELS = ("corrected", "corrected_lsk389b")
+
+
+def sr560_models(out: dict) -> None:
+    """(6) The two further SR560 models of sr560_variants.py (Section 2.2): the corrected netlist and
+    op-amp dynamics, and the same with the LSK389B of newer units; their noise, bandwidth, CMRR and
+    front end, and the summary's ratios against them (the as-drawn model is summary_and_section2's)."""
+    v = load("sr560_variants.json")
+    cn, ca = load("chain_noise.json"), load("chain_ac.json")
+    e_h1k, e_l1k = cn["H_LN_1000"]["en"]["1000.0"], cn["L_1000"]["en"]["1000.0"]
+    for m in SR560_MODELS:
+        r = v["models"][m]
+        n, src = r["noise"], f"sr560_variants.json models.{m}"
+        e1k, ew, e10 = (n["LN_1000"]["en"][k] for k in ("1000.0", "100000.0", "10"))
+        put(out, f"SR560_{m}_e_1kHz_white_10Hz_G1000_nV", [e1k * 1e9, ew * 1e9, e10 * 1e9],
+            f"{src}.noise.LN_1000.en (1 kHz, 100 kHz, 10 Hz)")
+        put(out, f"SR560_{m}_noise_1kHz_100kHz_nV", {k: [x["en"]["1000.0"] * 1e9, x["en"]["100000.0"] * 1e9]
+                                                     for k, x in n.items()}, f"{src}.noise.*.en (Table 1)")
+        put(out, f"SR560_{m}_over_H_L_1kHz", [e1k / e_h1k, e1k / e_l1k], f"(6) {src} LN_1000 at 1 kHz / chain_noise.json")
+        f3 = {g: a["f3db"] / 1e6 for g, a in r["ac"].items()}
+        put(out, f"SR560_{m}_f3dB_MHz", [min(f3.values()), max(f3.values())], f"{src}.ac.*.f3db")
+        put(out, f"SR560_{m}_f3dB_G100_G1000_MHz", [f3["100"], f3["1000"]], f"{src}.ac['100', '1000'].f3db")
+        put(out, f"SR560_{m}_dB_1MHz", [min(a["db_1M"] for a in r["ac"].values()), max(a["db_1M"] for a in r["ac"].values())],
+            f"{src}.ac.*.db_1M")
+        put(out, f"SR560_{m}_peaking_dB_max", max(a["peak_db"] for a in r["ac"].values()), f"{src}.ac.*.peak_db")
+        put(out, f"BW_ratio_H_G100_L_G1000_over_SR560_{m}",
+            [ca["H_LN_100"]["f3db"] / (f3["100"] * 1e6), ca["L_1000"]["f3db"] / (f3["1000"] * 1e6)],
+            f"(6) chain_ac.json H_LN_100, L_1000 f3db / {src}.ac['100', '1000'].f3db")
+        put(out, f"SR560_{m}_CMRR_dB_10_1k_10k_100k_1M", list(r["cmrr_ideal_matching"].values()),
+            f"{src}.cmrr_ideal_matching")
+        fe = r["frontend_x10"]
+        put(out, f"SR560_{m}_FE_gain_f3dBMHz_CMRR1k", [fe["gain_1k"], fe["f3db"] / 1e6, fe["cmrr_db_1k"]],
+            f"{src}.frontend_x10 (gain_1k, f3db, cmrr_db_1k)")
+        put(out, f"SR560_{m}_FE_en_1k_100k_nV", [fe["en_in"]["1000.0"] * 1e9, fe["en_in"]["100000.0"] * 1e9],
+            f"{src}.frontend_x10.en_in")
+        put(out, f"SR560_{m}_FE_groups_1k_nV", {g: x * 1e9 for g, x in fe["groups_1k"].items()},
+            f"{src}.frontend_x10.groups_1k")
+    # (13) the corrected model's noise against the model as drawn (the corrections change only the dynamics)
+    sr = load("sr560_chain.json")
+    nc = v["models"]["corrected"]["noise"]
+    dmax = max(abs(nc[k]["en"][fk] / sr["noise"][k]["en"][fk] - 1) for k in nc for fk in ("1000.0", "100000.0", "10"))
+    put(out, "SR560_corrected_vs_as_drawn_noise_max_rel_diff", dmax,
+        "(13) max |e_corrected / e_as_drawn - 1| over every gain of both modes at 10 Hz, 1 kHz, 100 kHz")
+    # (14) Table 1 for the LSK389B model: d = e_model(1 kHz) / e_manual - 1, as (5)
+    nl = v["models"]["corrected_lsk389b"]["noise"]
+    cols = {"LN": [1, 2, 5, 10, 20, 50, (100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000)],
+            "HDR": [10, 20, 50, 100, 200, 500, 1000, 2000]}
+    dl = {}
+    for mode, cs in cols.items():
+        for c in cs:
+            gs = c if isinstance(c, tuple) else (c,)
+            e = [nl[f"{mode}_{g}"]["en"]["1000.0"] * 1e9 for g in gs]
+            w = [nl[f"{mode}_{g}"]["en"]["100000.0"] * 1e9 for g in gs]
+            man = nl[f"{mode}_{gs[0]}"]["manual"]
+            key = f"{mode}_{gs[0]}" + (f"-{gs[-1]}" if len(gs) > 1 else "")
+            dl[key] = dict(e_1k=[min(e), max(e)], e_100k=[min(w), max(w)], manual=man,
+                           d_pc=[100 * (min(e) / man - 1), 100 * (max(e) / man - 1)])
+    out["table1_lsk389b"] = dl
+    for k, x in dl.items():
+        put(out, f"Table1_LSK389B_{k}", x["e_1k"] + x["e_100k"] + x["d_pc"],
+            "(14) sr560_variants.json corrected_lsk389b noise: e(1 kHz) min, max; e(100 kHz) min, max (nV/rtHz); d min, max (%)")
+    within = [k for k, x in dl.items() if max(abs(d) for d in x["d_pc"]) <= 30]
+    put(out, "Table1_LSK389B_columns_within_30pc", [len(within), len(dl)], "(14) count of |d| <= 30 %")
+    put(out, "Table1_LSK389B_exceptions", {k: dl[k]["d_pc"] for k in dl if k not in within}, "(14)")
+    # (15) the LSK389B in the front end: per device, its g_m, and the weight of the drain loads and OP37
+    fl, fn = v["models"]["corrected_lsk389b"]["frontend_x10"], v["models"]["corrected"]["frontend_x10"]
+    cal = load("jfet_calibration.json")["LSK389B_LIS"]
+    e_dev = fl["groups_1k"]["input JFETs"] / math.sqrt(2)
+    put(out, "SR560_LSK389B_per_device_1kHz_nV_and_at_calibration", [e_dev * 1e9, cal["en_achieved_at_f_w"] * 1e9,
+                                                                    e_dev / cal["en_achieved_at_f_w"] - 1],
+        "(15) frontend_x10.groups_1k['input JFETs'] / sqrt(2) (4.5 mA, V_DS 5.9 V); jfet_calibration.json "
+        "LSK389B_LIS en_achieved_at_f_w (1 kHz, 2 mA, 10 V); ratio - 1")
+    put(out, "Cordell_LSK389_2mA_4mA_nV_change", [CORDELL_LSK389[0] * 1e9, CORDELL_LSK389[1] * 1e9,
+                                                 CORDELL_LSK389[1] / CORDELL_LSK389[0] - 1],
+        "LSK389 application note Rev A4, Table 1 (p. 5): 1.17 and 1.11 nV/rtHz at 2 and 4 mA; ratio - 1")
+    put(out, "SR560_LSK389B_RX_ohm_and_its_noise_nV", [cal["rx"], math.sqrt(4 * spice.KT * cal["rx"]) * 1e9],
+        "jfet_calibration.json LSK389B_LIS rx; sqrt(4kT RX)")
+    ga, gn = fl["op"]["@j.xja.j1[gm]"], fn["op"]["@j.xja.j1[gm]"]
+    geff = (gn / (1 + gn * R113)) / (ga / (1 + ga * R113))
+    rl = [fl["groups_1k"][g] / fn["groups_1k"][g] for g in ("drain loads R131, R117", "U102 (OP37)")]
+    put(out, "SR560_gm_2N5564_LSK389B_mS_and_load_weight", [gn * 1e3, ga * 1e3, geff] + rl,
+        "(15) frontend_x10.op @j.xja.j1[gm] (2N5564, LSK389B); (g_N/(1 + g_N R113)) / (g_L/(1 + g_L R113)), "
+        "R113 = 110 ohm; simulated ratios LSK389B/NPD5564 of the drain loads' and the OP37's shares")
+    # (16) a user's two units (EEVblog forum, 18 March 2024; refs/benchmark/README.md), gain 1000, 1 kHz
+    put(out, "EEVblog_units_vs_models_pc", [100 * (fn_e / m - 1) for fn_e, m in
+                                           ((v["models"]["corrected"]["noise"]["LN_1000"]["en"]["1000.0"], EEV_NPD5564),
+                                            (nl["LN_1000"]["en"]["1000.0"], EEV_LSK389B))],
+        "(16) e_model(1 kHz, G 1000) / e_measured - 1: NPD5564 model / 4.0 nV, LSK389B model / 3.5 nV")
+    # (17) the summary's ratios against the corrected models, with the values it quotes (checked roundings)
+    e_l = nl["LN_1000"]["en"]["1000.0"]
+    assert round(e_l * 1e9, 2) == 3.23
+    put(out, "SR560_LSK389B_over_H_L_1kHz_quoted", [3.23 / 1.11, 3.23 / 0.43], "(17) 3.23 / 1.11, 3.23 / 0.43")
+    fc = {m: v["models"][m]["ac"] for m in SR560_MODELS}
+    q = {m: (round(fc[m]["100"]["f3db"] / 1e6, 2), round(fc[m]["1000"]["f3db"] / 1e6, 2)) for m in SR560_MODELS}
+    assert q == {"corrected": (1.04, 1.04), "corrected_lsk389b": (1.09, 1.09)}, q
+    put(out, "BW_ratio_H_L_over_corrected_models_quoted", [14.82 / 1.09, 14.82 / 1.04, 16.5 / 1.09, 16.5 / 1.04],
+        "(17) 14.82 / 1.09, 14.82 / 1.04 (H, G 100); 16.5 / 1.09, 16.5 / 1.04 (L, G 1000)")
+    # (18) the CMRR against the offset trim (check_cmrr_trim) and the failed trim of the first version
+    ct = v["check_cmrr_trim"]
+    for k in ("trimmed", "vtrim_0V"):
+        x = ct[k]
+        put(out, f"SR560_CMRR_trim_{k}", [x["vtrim"], x["id_a_minus_b"] * 1e6, 100 * x["gm_a_over_b_minus_1"],
+                                          (x["op"]["v(sa)"] - x["op"]["v(sb)"]) * 1e3] + list(x["cmrr"].values()),
+            f"sr560_variants.json check_cmrr_trim.{k}: VTRIM (V), I_D(A) - I_D(B) (uA), g_m(A)/g_m(B) - 1 (%), "
+            "v(sa) - v(sb) (mV), CMRR at 10 Hz, 1 kHz, 10 kHz, 100 kHz, 1 MHz (dB)")
+    put(out, "SR560_trim_split_closed_form", [(VREF_SR560 / R121 - VREF_SR560 / R120) * 1e6, VREF_SR560 * (1 - R121 / R120)],
+        "(18) 6.2 V / 75 kOhm - 6.2 V / 100 kOhm (uA, VTRIM = 0); VTRIM for equal currents, 6.2 V (1 - 75/100)")
+    co = v["check_operating_point"]
+    v0, v1 = ct["vtrim_0V"]["op"]["v(out)"], co["one_mohm_without_nodeset"]["v"]["out"]
+    v1_true = co["one_ohm_without_nodeset"]["v"]["out"]
+    put(out, "SR560_failed_trim_VTRIM_mV", [-v0 / (v1 - v0) * 1e3, -v0 / (v1_true - v0) * 1e3],
+        "(18) -v0 / (v1 - v0): v0 = v(out) at VTRIM 0 (check_cmrr_trim), v1 = v(out) at VTRIM 1 V from the "
+        "fallback (check_operating_point one_mohm_without_nodeset) and from the DC solution (one_ohm_...)")
+    fe_gain = load("sr560_frontend.json")["sr560_x10_2N5564"]["gain_1k"]
+    put(out, "SR560_trim_secant_G1000",
+        [v0 * 1e3, v1_true * 1e3, (v1_true - v0) * 1e3, ct["trimmed"]["vtrim"], ct["trimmed"]["op"]["v(out)"] * 1e6,
+         ct["trimmed"]["op"]["v(out)"] / fe_gain * 1e6, co["trimmed_continuation"]["v"]["out50"] * 1e3],
+        "(18) the trim at a gain of 1000 (sr560_chain.trimmed): v(out) at VTRIM = 0 and 1 V (mV), slope (mV/V), "
+        "VTRIM = -v0/(v1 - v0) (V), v(out) there (uV) and referred to the input through the front end's gain "
+        "(uV), v(out50) there (mV)")
+    put(out, "SR560_first_version_CMRR_minus_untrimmed_dB",
+        [a - b for a, b in zip(SR560_CMRR_FIRST_VERSION, ct["vtrim_0V"]["cmrr"].values())],
+        "(18) the first version's sr560_chain.json cmrr_ideal_matching (commit f1bea76) - check_cmrr_trim.vtrim_0V")
+    for k in ("one_mohm_without_nodeset", "one_mohm_abstol_1e-12_without_nodeset", "one_ohm_without_nodeset",
+              "with_nodeset", "nodeset_at_fallback_state", "trimmed_generic_nodeset", "trimmed_continuation"):
+        x = co[k]
+        put(out, f"SR560_op_check_{k}", [x["fallback"], x["v"]["ref"], x["v"]["da"], x["v"]["out"], x["v"]["out50"]],
+            f"sr560_variants.json check_operating_point.{k}: fallback, v(ref), v(da), v(out), v(out50)")
+    put(out, "SR560_variants_check_as_drawn_max_rel_diff", v["check_as_drawn"]["max_abs_rel_diff"],
+        "sr560_variants.json check_as_drawn (the code without an edit against sr560_chain.json)")
+    put(out, "SR560_variants_check_corrected_vs_bw_rel_diff",
+        {g: x["rel_diff"] for g, x in v["check_corrected_vs_bw"].items()},
+        "sr560_variants.json check_corrected_vs_bw (against sr560_bw_check.json f_datasheet_add_C406_C301_47p)")
+    fe0 = load("sr560_frontend.json")["sr560_x10_2N5564"]
+    put(out, "SR560_FE_groups_1k_nV", {g: x * 1e9 for g, x in fe0["groups_1k"].items()},
+        "sr560_frontend.json sr560_x10_2N5564.groups_1k (as drawn)")
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     out: dict = {}
     summary_and_section2(out)
+    sr560_models(out)
     section1_and_3(out)
     (R / "numbers_s1_3.json").write_text(json.dumps(out, indent=1), encoding="utf-8", newline="\n")
     w = max(len(k) for k, _, _ in ROWS)

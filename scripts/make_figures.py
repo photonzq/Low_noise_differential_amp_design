@@ -10,6 +10,8 @@
   fig_input_admittance     effective input capacitance and parallel resistance; source peaking
   fig_noise_breakdown      noise spectra of H10, H100, L200 with their contributions
   fig_noise_vs_source      noise figure against source resistance
+  fig_nf_map               noise figure against source resistance and frequency, side by side with
+                           the SR560 data sheet's plot, and the differences from it
   fig_frequency_response   the chain at every gain
   fig_cmrr                 CMRR (Monte Carlo) against frequency, with the SR560 and NF 5307
   fig_large_signal         distortion and steps
@@ -188,49 +190,64 @@ def fig_noise_vs_capacitance():
 
 
 def fig_sr560_benchmark():
+    """The SR560 benchmark of Section 2.2: (a) input noise at 1 kHz against the gain, (b) input noise
+    spectra at a gain of 1000, (c) frequency response.  One legend for the three panels, below them
+    (the panels are too narrow for legends of their own to stay clear of the curves), so each SR560
+    model keeps one style in every panel: as drawn grey (dashed in (a): its 100 kHz level), corrected
+    purple dashed (only in (c): its noise is the model's as drawn to within 0.2 %,
+    numbers_s1_3.json), corrected with the LSK389B of newer units brown (sr560_variants.py)."""
+    from matplotlib.lines import Line2D
     sr = json.loads((R / "sr560_chain.json").read_text(encoding="utf-8"))
     new = json.loads((R / "chain_noise.json").read_text(encoding="utf-8"))
-    fig, axs = plt.subplots(1, 3, figsize=(7.2, 2.7), constrained_layout=True)
+    sv = json.loads((R / "sr560_variants.json").read_text(encoding="utf-8"))["models"]
+    st = dict(manual=dict(ls="none", marker="o", ms=4, mfc="white", mec=C["neutral"]),
+              drawn=dict(color=C["grey_accent"]), drawn_100k=dict(color=C["grey_accent"], ls=PS.DASHED),
+              corrected=dict(color=C["purple_accent"], ls=PS.DASHED), lsk=dict(color=C["brown_accent"]),
+              H=dict(color=C["primary"]), L=dict(color=C["warm_accent"]))
+    fig, axs = plt.subplots(1, 3, figsize=(7.2, 3.1), constrained_layout=True)
     ax = axs[0]
     rows = [v for v in sr["noise"].values() if v["mode"] == "LN"]
     g = np.array([v["gain"] for v in rows])
-    ax.plot(g, [v["manual"] for v in rows], "o", ms=4, mfc="white", mec=C["neutral"], label="SR560 manual")
-    ax.plot(g, [v["en"]["1000.0"] * 1e9 for v in rows], color=C["grey_accent"], label="SR560 model, 1 kHz")
-    ax.plot(g, [v["en"]["100000.0"] * 1e9 for v in rows], color=C["grey_accent"], ls=PS.DASHED,
-            label="SR560 model, 100 kHz")
-    for mode, col, lab in (("H_LN", C["primary"], "new, H"), ("L", C["warm_accent"], "new, L")):
+    ax.plot(g, [v["manual"] for v in rows], **st["manual"])
+    ax.plot(g, [v["en"]["1000.0"] * 1e9 for v in rows], **st["drawn"])
+    ax.plot(g, [v["en"]["100000.0"] * 1e9 for v in rows], **st["drawn_100k"])
+    lrows = [v for v in sv["corrected_lsk389b"]["noise"].values() if v["mode"] == "LN"]
+    ax.plot([v["gain"] for v in lrows], [v["en"]["1000.0"] * 1e9 for v in lrows], **st["lsk"])
+    for mode, key in (("H_LN", "H"), ("L", "L")):
         pts = sorted((int(k.split("_")[-1]), v["en"]["1000.0"] * 1e9) for k, v in new.items()
                      if k.startswith(mode + "_"))
-        ax.plot([p[0] for p in pts], [p[1] for p in pts], "-o", ms=3, color=col, label=lab)
+        ax.plot([p[0] for p in pts], [p[1] for p in pts], marker="o", ms=3, **st[key])
     _log_axes(ax)
     ax.set_xlabel("Gain")
     ax.set_ylabel(r"Input noise at 1 kHz (nV/$\sqrt{\mathrm{Hz}}$)")
-    ax.legend(fontsize=PS.FONT_SIZE - 1.5)
     PS.panel_label(ax, "a")
     ax = axs[1]
     d = np.load(R / "sr560_chain_noise_LN_1000.npz")
-    ax.plot(d["f"], d["inn"] * 1e9, color=C["grey_accent"], label="SR560 model (G 1000)")
+    ax.plot(d["f"], d["inn"] * 1e9, **st["drawn"])
+    d = np.load(R / "sr560_variants_corrected_lsk389b_noise_LN_1000.npz")
+    ax.plot(d["f"], d["inn"] * 1e9, **st["lsk"])
     # the SR560 manual's typical curve (printed p. 20, read by eye)
-    ax.plot([1, 2, 3, 5, 10, 20, 50, 100, 200, 500, 1000], [42, 35, 28, 19, 11, 9, 7.5, 6.5, 5.8, 5.2, 5.0], "o",
-            ms=3.5, mfc="white", mec=C["neutral"], label="SR560 manual, typical")
+    ax.plot([1, 2, 3, 5, 10, 20, 50, 100, 200, 500, 1000], [42, 35, 28, 19, 11, 9, 7.5, 6.5, 5.8, 5.2, 5.0],
+            **{**st["manual"], "ms": 3.5})
     cn = np.load(R / "curves_noise.npz")
-    ax.plot(cn["chain_H_LN_1000_f"], cn["chain_H_LN_1000_inn"] * 1e9, color=C["primary"], label="new, H (G 1000)")
-    ax.plot(cn["chain_L_1000_f"], cn["chain_L_1000_inn"] * 1e9, color=C["warm_accent"], label="new, L (G 1000)")
+    ax.plot(cn["chain_H_LN_1000_f"], cn["chain_H_LN_1000_inn"] * 1e9, **st["H"])
+    ax.plot(cn["chain_L_1000_f"], cn["chain_L_1000_inn"] * 1e9, **st["L"])
     _log_axes(ax)
     ax.set_xlim(0.1, 3e7)
     ax.set_ylim(0.2, 300)
     ax.set_xlabel("Frequency (Hz)")
     ax.set_ylabel(r"Input noise (nV/$\sqrt{\mathrm{Hz}}$)")
-    ax.legend(fontsize=PS.FONT_SIZE - 1.5)
     PS.panel_label(ax, "b")
     ax = axs[2]
-    d = np.load(R / "sr560_chain_ac_100.npz")
-    m = np.abs(d["h"])
-    ax.plot(d["f"], 20 * np.log10(m / spice.at(d["f"], m, 1e3)), color=C["grey_accent"], label="SR560, G 100")
+    for name, key, z in (("sr560_chain_ac_100", "drawn", 2), ("sr560_variants_corrected_lsk389b_ac_100", "lsk", 2),
+                         ("sr560_variants_corrected_ac_100", "corrected", 3)):   # the dashed curve on top
+        d = np.load(R / f"{name}.npz")
+        m = np.abs(d["h"])
+        ax.plot(d["f"], 20 * np.log10(m / spice.at(d["f"], m, 1e3)), zorder=z, **st[key])
     ca = np.load(R / "curves_ac.npz")
-    for key, col, lab in (("H_LN_100", C["primary"], "H, G 100"), ("L_1000", C["warm_accent"], "L, G 1000")):
-        f, h = ca[key + "_f"], np.abs(ca[key + "_h"])
-        ax.plot(f, 20 * np.log10(h / spice.at(f, h, 1e3)), color=col, label=lab)
+    for name, key in (("H_LN_100", "H"), ("L_1000", "L")):
+        f, h = ca[name + "_f"], np.abs(ca[name + "_h"])
+        ax.plot(f, 20 * np.log10(h / spice.at(f, h, 1e3)), **st[key])
     ax.set_xscale("log")
     ax.xaxis.set_major_formatter(LogFormatterMathtext())
     ax.set_xlim(1e3, 1e8)
@@ -238,8 +255,12 @@ def fig_sr560_benchmark():
     ax.axhline(-3, color=C["annotation"], lw=0.6, ls=":")
     ax.set_xlabel("Frequency (Hz)")
     ax.set_ylabel("Response (dB)")
-    ax.legend(fontsize=PS.FONT_SIZE - 1.5, loc="lower left")
     PS.panel_label(ax, "c")
+    labels = dict(manual="SR560 manual", drawn="SR560 model as drawn", drawn_100k="as drawn, 100 kHz (a)",
+                  corrected="corrected (c)", lsk="corrected, with LSK389B", H="new design, H", L="new design, L")
+    handles = [Line2D([], [], label=labels[k], **st[k]) for k in labels]
+    fig.legend(handles=handles, loc="outside lower center", ncol=4, fontsize=PS.FONT_SIZE - 1.5,
+               columnspacing=1.6)
     return PS.export(fig, "fig_sr560_benchmark")
 
 
@@ -396,6 +417,132 @@ def fig_noise_vs_source():
     return PS.export(fig, "fig_noise_vs_source")
 
 
+def _label_lines(ax, lines, color, x_lo: float = 2e3, x_hi: float = 50.0, y_max: float = 10 ** 7.7) -> None:
+    """Contour labels placed as the SR560 data sheet places its own: each level where it crosses x_lo, on its
+    lowest crossing (the low-resistance branch), and where it crosses x_hi twice, on the higher crossing (the
+    high-resistance branch of a closed or open loop) if below y_max; on white, along the line.  lines: (level,
+    array of (x, y) in data coordinates) for every piece of every contour.  Call after the layout is final: the
+    angles are computed in screen space."""
+    box = dict(facecolor="white", edgecolor="none", pad=0.2)
+    for lev in sorted({lv for lv, _ in lines}):
+        for xt, pick, need_two in ((x_lo, min, False), (x_hi, max, True)):
+            t0 = math.log10(xt)
+            hits = []
+            for lv, xy in lines:
+                if lv != lev:
+                    continue
+                lx, ly = np.log10(xy[:, 0]), np.log10(xy[:, 1])
+                for i in np.flatnonzero((lx[:-1] - t0) * (lx[1:] - t0) <= 0):
+                    if lx[i + 1] != lx[i]:
+                        y = ly[i] + (t0 - lx[i]) / (lx[i + 1] - lx[i]) * (ly[i + 1] - ly[i])
+                        if all(abs(y - h[0]) > 1e-3 for h in hits):      # a vertex on the line: one crossing
+                            hits.append((y, xy[i], xy[i + 1]))
+            if not hits or (need_two and len(hits) < 2):
+                continue
+            y, p0, p1 = pick(hits, key=lambda h: h[0])
+            if need_two and y > math.log10(y_max):
+                continue
+            (a0, b0), (a1, b1) = ax.transData.transform([p0, p1])
+            ang = math.degrees(math.atan2(b1 - b0, a1 - a0))
+            ang = ang - 180 if ang > 90 else ang + 180 if ang < -90 else ang
+            ax.text(xt, 10 ** y, f"{lev:g}", color=color, fontsize=PS.FONT_SIZE - 2.5, ha="center", va="center",
+                    rotation=ang, rotation_mode="anchor", bbox=box, zorder=4)
+
+
+def fig_nf_map():
+    """Noise-figure maps in the format of the SR560 data sheet's plot (p. 3), side by side: the same axes
+    (extended to 10 MHz), the same contour levels and the same label positions, the source at 290 K.
+    First column, the SR560: (a) the data sheet's contours as read from its PDF (sr560_nf_datasheet.json), and the
+    reproduction (d) as drawn, with the NPD5564, and (g) corrected, with the LSK389B.  (b) H and (c) L at a gain of
+    1000.  The simulated maps (nf_map.npz) are drawn from their two-port fits, which reproduce the 41 runs within
+    2e-5 dB (0.003 dB for the LSK389B model) from 1 Hz to 10 MHz.  (e) H, (f) L, (h) the NPD5564 and (i) the LSK389B
+    reproduction minus the data sheet, which is drawn there from the two-port fit of its contours (within 0.03 dB
+    of them), on the data sheet's range.  SR560 maps in the warm accent, the new design's in the primary colour, as
+    the difference scale (blue: below the data sheet)."""
+    from matplotlib.colors import BoundaryNorm
+    from matplotlib.ticker import LogLocator, NullFormatter
+    d = np.load(R / "nf_map.npz")
+    ds = json.loads((R / "sr560_nf_datasheet.json").read_text(encoding="utf-8"))
+    levels = ds["levels_db"]
+    k_b, t0 = 1.380649e-23, 290.0
+    r = 10 ** np.linspace(0, 8, 401)
+
+    def nf(coef):                                   # rows: r, columns: the coefficients' frequencies
+        va2 = coef[0][None, :] + r[:, None] * coef[1][None, :] + r[:, None] ** 2 * coef[2][None, :]
+        return 10 * np.log10(1 + va2 / (4 * k_b * t0 * r[:, None]))
+
+    lf_ds = np.array(ds["two_port_fit"]["log10_f"])
+    nf_ds = nf(np.array([ds["two_port_fit"][k] for k in ("S_e", "S_x", "S_i")]))
+    dlev = [-25, -15, -10, -6, -3, -1, -0.3, -0.1, 0.1, 0.3, 1, 3, 6, 10, 15, 25]
+    norm = BoundaryNorm(dlev, PS.MUTED_CLASSIC_CMAP.N)
+    fig, axs = plt.subplots(3, 3, figsize=(7.0, 7.2), sharex=True, sharey=True, constrained_layout=True)
+    for ax in axs.flat:
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ax.set_xlim(1, 1e7)
+        ax.set_ylim(1, 1e8)
+        ax.xaxis.set_major_locator(LogLocator(base=100.0, numticks=10))
+        ax.xaxis.set_minor_locator(LogLocator(base=10.0, numticks=10))
+        ax.xaxis.set_minor_formatter(NullFormatter())
+        ax.yaxis.set_major_locator(LogLocator(base=100.0, numticks=10))
+        ax.yaxis.set_minor_locator(LogLocator(base=10.0, numticks=10))
+        ax.yaxis.set_minor_formatter(NullFormatter())
+        ax.xaxis.set_major_formatter(LogFormatterMathtext())
+        ax.yaxis.set_major_formatter(LogFormatterMathtext())
+
+    def beyond(ax):
+        ax.axvspan(1e6, 1e7, color=C["annotation"], alpha=0.15, lw=0)
+        ax.text(3.2e6, 1e4, "beyond the\ndata sheet's plot", rotation=90, ha="center", va="center",
+                fontsize=PS.FONT_SIZE - 2, color=C["annotation"])
+
+    # (a) the data sheet, as published
+    ax = axs[0, 0]
+    sheet = [(c["level_db"], 10 ** np.array(c["points"])) for c in ds["contours"]]
+    for _, xy in sheet:
+        ax.plot(xy[:, 0], xy[:, 1], color=C["warm_accent"], lw=0.9)
+    beyond(ax)
+    ax.set_title("SR560 data sheet (p. 3)", fontsize=PS.FONT_SIZE)
+    maps = {ax: (sheet, C["warm_accent"])}
+    # (b) H, (c) L, (d, g) the SR560 reproduction: simulated
+    for ax, key, col, title in ((axs[0, 1], "H", C["primary"], "H"),
+                                (axs[0, 2], "L", C["primary"], "L"),
+                                (axs[1, 0], "SR560", C["warm_accent"], "SR560 reproduction, NPD5564"),
+                                (axs[2, 0], "SR560_LSK389B", C["warm_accent"], "SR560 reproduction, LSK389B")):
+        f = d[f"f_{key}"]
+        sel = (f >= 1 - 1e-9) & (f <= 1e7 * (1 + 1e-9))
+        cs = ax.contour(f[sel], r, nf(d[f"coef_{key}"][:, sel]), levels=levels, colors=col, linewidths=0.9)
+        maps[ax] = ([(lv, seg) for lv, segs in zip(cs.levels, cs.allsegs) for seg in segs], col)
+        ax.axvline(1e6, color=C["annotation"], lw=0.6, ls=":")
+        ax.set_title(title if key.startswith("SR560") else f"{title} (simulated)", fontsize=PS.FONT_SIZE)
+    # (e) H, (f) L, (h, i) the two reproductions minus the data sheet, on its range
+    for ax, key, title in ((axs[1, 1], "H", "H"), (axs[1, 2], "L", "L"),
+                           (axs[2, 1], "SR560", "NPD5564"),
+                           (axs[2, 2], "SR560_LSK389B", "LSK389B")):
+        f = d[f"f_{key}"]
+        idx = [int(np.flatnonzero(np.abs(np.log10(f) - x) < 1e-6)[0]) for x in lf_ds]
+        im = ax.contourf(10 ** lf_ds, r, nf(d[f"coef_{key}"][:, idx]) - nf_ds, levels=dlev,
+                         cmap=PS.MUTED_CLASSIC_CMAP, norm=norm, extend="both")
+        beyond(ax)
+        ax.set_title(f"{title} minus data sheet", fontsize=PS.FONT_SIZE)
+    for ax in axs[2]:
+        ax.set_xlabel("Frequency (Hz)")
+    for ax in axs[:, 0]:
+        ax.set_ylabel(r"Source resistance at 290 K ($\Omega$)")
+    cb = fig.colorbar(im, ax=axs[1:, 1:], location="right", shrink=0.9, pad=0.01, ticks=dlev)
+    cb.set_label("Difference in noise figure (dB)")
+    cb.ax.tick_params(labelsize=PS.FONT_SIZE - 1.5)
+    cb.ax.set_yticklabels([f"{v:g}" for v in dlev])
+    for ax, lab in zip(axs.flat, "abcdefghi"):
+        PS.panel_label(ax, lab)
+    # the layout is final now (the labels stay inside the axes): freeze it, so that the labels' angles,
+    # computed in screen space, are those of the saved figure
+    fig.canvas.draw()
+    fig.set_layout_engine("none")
+    for ax, (lines, col) in maps.items():
+        _label_lines(ax, lines, col)
+    return PS.export(fig, "fig_nf_map")
+
+
 def fig_frequency_response():
     d = np.load(R / "curves_ac.npz")
     fig, axs = plt.subplots(1, 2, figsize=(7.0, 2.9), constrained_layout=True)
@@ -519,9 +666,9 @@ def fig_large_signal():
     ax.legend(fontsize=PS.FONT_SIZE - 2, loc="upper left")
     PS.panel_label(ax, "c")
     ax = axs[3]
-    # H from its run with the THS4031 in S2 (with the LM7171 the transient does not converge, Section 6.5
-    # of the note), L from overload_curves.npz (LM7171 in S2); both release the overload at 22.01 us
-    for name, fname, pre, col in (("H100", "overload_curves_H100_THS4031.npz", "", C["primary"]),
+    # H and L from overload_curves.npz (LM7171 in S2, 50-ohm sources; both run with the KLU solver,
+    # overload_detail.py); both release the overload at 22.01 us
+    for name, fname, pre, col in (("H100", "overload_curves.npz", "H100_", C["primary"]),
                                   ("L1000", "overload_curves.npz", "L1000_", C["warm_accent"])):
         f = R / fname
         if not f.exists():

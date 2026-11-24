@@ -35,7 +35,7 @@ the range).  From the operating point at V_CM = 0 (gate at 0 V):
     |V_GS2| = V(d) - V(b)                cascode (N-JFET, gate on the bootstrap node b)
     V_DS1  = V(d) - V(s) = V_BS + |V_GS2|
     V_DS2  = V(c) - V(d)                 the cascode's own V_DS; V(c) is held at V_ref by the op amp
-    V_O    = V(o) = V_CM + V_GS1         the common-mode servo leaves no DC current in R_F
+    V_O    = V(o) = V_CM + V_GS1         the adjusted sink reference leaves no DC current in R_F
 The stack g -> s -> b -> d follows the input, c does not.  A differential output V_od at the front
 end's gain G puts V_CM +- V_od / (2G) on the gates and V_CM + V_GS1 +- V_od / 2 on the outputs.
     upper limit, cascode:  V_DS2 >= V_DS,sat2 + V_od / (2G),  V_DS,sat2 = sqrt(I_D / beta_2)

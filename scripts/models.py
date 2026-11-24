@@ -139,6 +139,24 @@ def default_parts() -> None:
              src="Vishay 2N5564 data sheet 70254 Rev. E: C_iss/C_rss p. 2; noise vs frequency p. 5 "
                  "(read by eye, interpolated to 4.5 mA)"),
         "Linear Systems 2N5564 card (LTspice standard.jft), recalibrated")
+    # The front-end pair of newer SR560s: a teardown of two units of different serial numbers found
+    # an LSK389B in the newer one and the NPD5564 in the older (EEVblog forum, "SR560 Low noise amp --
+    # Noise Calculation", 18 March 2024); SRS's manual (Rev. 3.1, 4/2023) still lists the NPD5564.
+    # Card: Linear Systems' "Updated LSK389 A/B/C/D" SPICE model, Rev 2 (2026-05-18), B grade, as
+    # published (ISR, NR, ALPHA, VK, M and MFG dropped for ngspice).  Targets: LSK389 data sheet
+    # Doc 201122 Rev A27 (2023-06-23), p. 2, typical: e_n 1.6 and 3.2 nV/rtHz at 1 kHz and 10 Hz
+    # (V_DS 10 V, I_D 2 mA); C_iss 25 pF (V_DS 10 V, V_GS 0) and C_rss 5.5 pF (V_DG 10 V, I_D 0),
+    # both fitted here at V_GS = 0 and V_DS = 10 V.  The 1 kHz value is taken as the white level,
+    # as for the JFE150 and JFE2140 (the fitted 1/f then adds 1.5 % at 1 kHz).
+    add("LSK389B_LIS", " ".join(DROP.sub("", "VTO=-0.702 VTOTC=-2.5m BETA=23.7m BETATCE=-0.5 LAMBDA=10.2m "
+        "RD=2 RS=2 IS=67.4p ISR=674p N=1 NR=2 XTI=3 CGS=19.5p CGD=5.5p PB=1.0 FC=0.5 ALPHA=1e-4 VK=0 M=0.4 "
+        "KF=8.2e-18 AF=1 MFG=Linear_Systems").split()),
+        dict(ciss=25e-12, crss=5.5e-12, vds_c=10.0, id=2e-3, vds=10.0, en_w=1.6e-9, f_w=1e3, en_lf=3.2e-9,
+             f_lf=10.0,
+             src="Linear Systems LSK389 data sheet Doc 201122 Rev A27 (2023-06-23), p. 2, typ: e_n 1.6/3.2 "
+                 "nV/rtHz at 1 kHz/10 Hz (V_DS 10 V, I_D 2 mA); C_iss 25 pF (V_DS 10 V, V_GS 0), C_rss 5.5 pF "
+                 "(V_DG 10 V, I_D 0)"),
+        "Linear Systems updated LSK389B card, Rev 2 (2026-05-18)")
     # the C_rss targets of the JFE150 and JFE2140 are pixel readings of their data sheets' figures,
     # archived as scripts/ti_plot_check.py (sim/results/ti_plot_check.json)
     ti = VENDOR_JFET / "TI"

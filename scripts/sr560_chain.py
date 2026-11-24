@@ -1,4 +1,4 @@
-"""The complete SR560 signal path reproduced in ngspice from its schematics (manual Rev. 2.8, sheets
+"""The complete SR560 signal path reproduced in ngspice from its schematics (manual Rev. 3.1, sheets
 560_1F, 560_2F, 560_3F and 560_4F), as the benchmark for the new design.
 
 Path (schematic references):
@@ -94,6 +94,8 @@ class SRSetting:
     f1: tuple | None = None
     f2: tuple | None = None
     vtrim: float = 0.0
+    nodeset: str | None = None   # the decks' .nodeset: None FE.NODESET, "" none, else this line
+                                 # (trimmed(): the trimmed state's solution)
 
     @property
     def nominal(self) -> float:
@@ -181,11 +183,49 @@ RL out50 0 1Meg
 
 def deck(s: SRSetting, title: str, src: str, control: str) -> str:
     return (f"* {title}\n{spice.OPTIONS}{spice.lib('jfets.lib')}{FE.OP37}{FE.LF411}{LT1028}{LF356}"
-            f"{blocks.COMMON}{src}{netlist(s)}{control}.end\n")
+            f"{blocks.COMMON}{src}{netlist(s)}{FE.NODESET if s.nodeset is None else s.nodeset}{control}.end\n")
 
 
-SRC_DM = "VA ina0 0 DC 0 AC 0.5\nVB inb0 0 DC 0 AC -0.5\nRSA ina0 ina 1m rnl\nRSB inb0 inb 1m rnl\n"
-SRC_CM = "VA ina0 0 DC 0 AC 1\nRSA ina0 ina 1m rnl\nRSB ina0 inb 1m rnl\n"
+def all_nodes(folder) -> str:
+    """A .nodeset line with the top-level node voltages that a deck's 'print all' wrote to its log
+    (the deck's operating point; subcircuit-internal nodes are left out, so that the line also fits
+    decks whose op-amp models differ, as in sr560_bw_check.py)."""
+    import re
+    log = (folder / "run.log").read_text(encoding="utf-8")
+    pairs = [(n, v) for n, v in re.findall(r"stdout ([A-Za-z0-9_.]+) = ([-+0-9.eE]+)", log) if "." not in n]
+    return ".nodeset " + " ".join(f"v({n})={v}" for n, v in pairs) + "\n"
+
+
+# the last converged trimmed state of each (runs folder, front-end position): a starting point for the
+# next setting's trim decks, whose front end is the same
+_ANCHOR: dict = {}
+
+
+def _op(name: str, make_text, starts: list, edit):
+    """Run the deck make_text(nodeset) from each starting point in turn (a .nodeset line; None for
+    FE.NODESET, "" for none) until ngspice's operating point does not fall back to the transient op;
+    an error if it falls back, or the run fails, from every one."""
+    seen, last = [], ""
+    for ns in starts:
+        if ns in seen:
+            continue
+        seen.append(ns)
+        text = make_text(ns)
+        try:
+            f = spice.run(name, edit(text) if edit else text)
+        except RuntimeError as e:          # e.g. a .nodeset node that this deck does not have
+            last = str(e).splitlines()[-1][:200]
+            continue
+        if not spice.op_fallback(f):
+            return f
+        last = "fell back to the transient op"
+    raise RuntimeError(f"{name}: no starting point gave an operating point ({last})")
+
+
+# the sources reach the inputs through 1 ohm, noiseless (sr560_frontend.NODESET: 1 mOhm with
+# abstol = 1e-15 A made ngspice's operating point fail on some decks)
+SRC_DM = "VA ina0 0 DC 0 AC 0.5\nVB inb0 0 DC 0 AC -0.5\nRSA ina0 ina 1 rnl\nRSB inb0 inb 1 rnl\n"
+SRC_CM = "VA ina0 0 DC 0 AC 1\nRSA ina0 ina 1 rnl\nRSB ina0 inb 1 rnl\n"
 
 
 def allocate(g: int, mode: str = "LN") -> SRSetting:
@@ -229,30 +269,49 @@ MANUAL = {"LN": {1: 60, 2: 40, 5: 25, 10: 13, 20: 11, 50: 10, 100: 4, 200: 4, 50
           "HDR": {10: 25, 20: 25, 50: 25, 100: 20, 200: 18, 500: 15, 1000: 15, 2000: 10}}
 
 
-def trimmed(s: SRSetting, g: float | None = None, runs: str = "sr560_chain") -> SRSetting:
+def trimmed(s: SRSetting, g: float | None = None, runs: str = "sr560_chain", edit=None) -> SRSetting:
     """The setting with the front-end offset trim P103 set to null the front end's output (the
     adjustment of the manual's offset procedure) and, if g is given, the vernier code scaled so
     that the gain is the nominal g (the calibration the manual describes: the switched stages'
     lowest setting is 1.04, not 1, so the uncalibrated gains run up to 20 % high).  runs: the
     folder under ../sim/runs/ for the two operating-point decks (another script passes its own,
-    so that this script's archived decks are not rewritten)."""
+    so that this script's archived decks are not rewritten); edit: as in run_ac.
+    The operating points start from converged ones (continuation): each deck is tried from the
+    solution of the previous deck (VTRIM = 0 -> 1 V -> the trimmed state), then from the last
+    converged trimmed state of the same runs folder and front-end position (_ANCHOR), then from
+    those of the other runs folders (other models) with the same front-end position, then from
+    FE.NODESET, then from none; the returned setting carries the trimmed state's solution as its .nodeset, so that
+    every analysis deck starts there.  From FE.NODESET alone, ngspice's gmin and source stepping
+    fail on some of these decks, and its transient-op fallback returns a state that is not a DC
+    solution (sr560_variants.json, check_operating_point); _op tries the next starting point when
+    that happens and stops with an error if every one falls back."""
     import dataclasses
     v = []
-    src = "VA ina0 0 DC 0\nRSA ina0 ina 1m rnl\nRSB ina0 inb 1m rnl\n"
+    src = "VA ina0 0 DC 0\nRSA ina0 ina 1 rnl\nRSB ina0 inb 1 rnl\n"
+    ctl = ".control\nop\nprint v(out)\nprint all\n.endc\n"
+    key = (runs, s.fe10)
+    others = [ns for (r, fe), ns in reversed(list(_ANCHOR.items())) if fe == s.fe10 and r != runs]
+    starts = ([_ANCHOR[key]] if key in _ANCHOR else []) + others + [None, ""]
     for vt in (0.0, 1.0):
-        s2 = dataclasses.replace(s, vtrim=vt)
-        f = spice.run(f"{runs}/{s.tag}/trim{vt:g}",
-                      deck(s2, "trim", src, ".control\nop\nprint v(out)\n.endc\n"))
+        f = _op(f"{runs}/{s.tag}/trim{vt:g}",
+                lambda ns, vt=vt: deck(dataclasses.replace(s, vtrim=vt, nodeset=ns), "trim", src, ctl), starts, edit)
         v.append(spice.printed(f, "v(out)"))
+        starts = [all_nodes(f)] + starts
     vt = -v[0] / (v[1] - v[0])
     dac = s.dac * g / s.nominal if g else s.dac
-    return dataclasses.replace(s, vtrim=vt, dac=dac)
+    f = _op(f"{runs}/{s.tag}/trimmed",
+            lambda ns: deck(dataclasses.replace(s, vtrim=vt, dac=dac, nodeset=ns), "trimmed", src, ctl), starts, edit)
+    _ANCHOR[key] = all_nodes(f)
+    return dataclasses.replace(s, vtrim=vt, dac=dac, nodeset=_ANCHOR[key])
 
 
-def run_noise(s: SRSetting) -> dict:
-    f = spice.run(f"sr560_chain/{s.tag}/noise",
-                  deck(s, f"sr560 noise {s.tag}", "VIN ina0 0 DC 0 AC 1\nRSA ina0 ina 1m rnl\nRSB 0 inb 1m rnl\n",
-                       spice.noise_control("out50", "VIN", 0.1, 30e6, 20)))
+def run_noise(s: SRSetting, runs: str = "sr560_chain", edit=None) -> dict:
+    """Input-referred noise at out50 (runs, edit: as in run_ac)."""
+    import dataclasses
+    f = _op(f"{runs}/{s.tag}/noise",
+            lambda ns: deck(dataclasses.replace(s, nodeset=ns), f"sr560 noise {s.tag}",
+                            "VIN ina0 0 DC 0 AC 1\nRSA ina0 ina 1 rnl\nRSB 0 inb 1 rnl\n",
+                            spice.noise_control("out50", "VIN", 0.1, 30e6, 20)), [s.nodeset, None, ""], edit)
     nz = spice.read_noise(f)
     fr, inn = nz["frequency"], nz["inoise_spectrum"]
     return dict(f=fr, inn=inn, en={str(f0): spice.at(fr, inn, f0) for f0 in (1, 10, 100, 1e3, 1e4, 1e5)})
@@ -262,9 +321,10 @@ def run_ac(s: SRSetting, src=SRC_DM, tag="ac", runs: str = "sr560_chain", edit=N
     """AC response at out50.  runs: the folder under ../sim/runs/ (as in trimmed()); edit: an
     optional function applied to the deck text before it is run (sr560_bw_check.py uses it to
     swap op-amp models).  The defaults reproduce this script's own runs."""
+    import dataclasses
     ctl = ".control\n" + spice.WR + "op\nprint v(out50)\nac dec 40 1 100meg\nwrdata ac.txt v(out50)\n.endc\n"
-    text = deck(s, f"sr560 {tag} {s.tag}", src, ctl)
-    f = spice.run(f"{runs}/{s.tag}/{tag}", edit(text) if edit else text)
+    f = _op(f"{runs}/{s.tag}/{tag}", lambda ns: deck(dataclasses.replace(s, nodeset=ns), f"sr560 {tag} {s.tag}", src, ctl),
+            [s.nodeset, None, ""], edit)
     d = spice.read_table(f / "ac.txt")
     return dict(f=d["frequency"], h=d["v(out50)"])
 

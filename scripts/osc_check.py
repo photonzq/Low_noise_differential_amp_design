@@ -7,7 +7,8 @@ high-frequency noise gain near 1 + C_node / (C_I + C_X), below its minimum stabl
 oscillation near 280-290 MHz with about 1 V peak-to-peak at each output, in common mode.
 
 Measures, for each saved node voltage v(t) (v(oa), v(ob), v(ca), v(sa)) and for the outputs'
-common and differential parts  v_cm = (v(oa) + v(ob)) / 2,  v_dm = v(oa) - v(ob):
+common and differential parts  v_cm = (v(oa) + v(ob)) / 2,  v_dm = v(oa) - v(ob)  (and for v_cm also
+window_mean_minus_start, its mean over the window minus its value at t = 0, the operating point):
     window   0.3 us < t <= 1 us  (the start from the operating point excluded)
     pkpk   = max v - min v  over the window
     f_dom  = k_max / T_w,  k_max = argmax_{k >= 1} |sum_n w_n (v_n - <v>) exp(-2 pi j k n / N)|
@@ -17,7 +18,10 @@ common and differential parts  v_cm = (v(oa) + v(ob)) / 2,  v_dm = v(oa) - v(ob)
 
 Benches (the source network of the run):
     network   both inputs driven from 50-ohm sources through the input network of chain.INPUT_NET
-              (C_P, R_Z + C_Z per input), with Gear integration and abstol = 1e-12 A, as in use
+              (C_P, R_Z + C_Z per input), with Gear integration and abstol = 1e-12 A, as in use; a
+              run that stops with "timestep too small" is repeated with Gear and the KLU solver at
+              abstol = 1e-11 A, then with trapezoidal integration, then with Gear at abstol =
+              1e-11 A (run, RETRIES; the order of large_signal.TRIES)
     ties      both inputs tied to ground through 1 milliohm, the global options only (trapezoidal):
               the bench of the first runs, H100_cnode0p ... H100_cnode150p of osc_check.json (gates
               tied through 1 milliohm, with abstol = 1e-15 A, ask ngspice to resolve about 1e-18 V
@@ -88,27 +92,53 @@ def swing(t: np.ndarray, v: np.ndarray) -> dict:
     return dict(pkpk=float(np.ptp(v[m])), f_dom=float(fr[k]))
 
 
+# on the network bench, a run that stops with "timestep too small" is repeated with these options in
+# turn, each in its own folder (osc/<name>_<suffix>): (suffix, options, label)
+RETRIES = (("klu_abstol1e-11", ".options abstol=1e-11 method=gear klu\n", "Gear with the KLU solver and abstol = 1e-11 A"),
+           ("trap", ".options abstol=1e-12 method=trap\n", "trapezoidal"),
+           ("gear_abstol1e-11", ".options abstol=1e-11 method=gear\n", "Gear with abstol = 1e-11 A"))
+
+
+def _stop(e: Exception) -> str:
+    m = re.search(r"time = ([-+0-9.eE]+)", str(e))
+    return f" at {float(m.group(1)) * 1e9:.0f} ns" if m else ""
+
+
 def run(p: F.FE, bench: str = "network") -> dict:
     """One transient of the front end p on the given bench; the measures of the module docstring.
     On the network bench, a run that Gear integration stops with "timestep too small" is repeated
-    with trapezoidal integration in its own folder (osc/<name>_trap), and the entry records it
-    ('integration'); a failure of that run too is raised."""
+    with Gear and the KLU solver at abstol = 1e-11 A (osc/<name>_klu_abstol1e-11), then with
+    trapezoidal integration (osc/<name>_trap), then with Gear at abstol = 1e-11 A
+    (osc/<name>_gear_abstol1e-11; RETRIES); the entry records the run used and where the others
+    stopped ('integration').  A failure of the last one too is raised."""
     global TRAN_OPTIONS
     ctl = ".control\n" + spice.WR + f"tran 0.05n 1u 0 0.05n\nwrdata tran.txt {NODES}\n.endc\n"
     integration = None
+
+    def retryable(e: Exception) -> bool:      # a numerical stop, or a start from the transient-op fallback
+        return "timestep too small" in str(e).lower() or "fell back to the transient op" in str(e)
+
+    def why(e: Exception) -> str:
+        return "operating point fell back" if "fell back" in str(e) else f"'timestep too small'{_stop(e)}"
     try:
-        f = spice.run(f"osc/{p.name}", F.deck(p, f"osc {p.name}", source(p, bench), ctl))
+        f = spice.check_dc(spice.run(f"osc/{p.name}", F.deck(p, f"osc {p.name}", source(p, bench), ctl)))
     except RuntimeError as e:
-        if bench != "network" or "timestep too small" not in str(e).lower():
+        if bench != "network" or not retryable(e):
             raise
-        m = re.search(r"time = ([-+0-9.eE]+)", str(e))
-        saved, TRAN_OPTIONS = TRAN_OPTIONS, TRAN_OPTIONS.replace("method=gear", "method=trap")
-        try:
-            f = spice.run(f"osc/{p.name}_trap", F.deck(p, f"osc {p.name}, trapezoidal", source(p, bench), ctl))
-        finally:
-            TRAN_OPTIONS = saved
-        integration = ("trapezoidal: Gear stopped with 'timestep too small'"
-                       + (f" at {float(m.group(1)) * 1e9:.0f} ns" if m else ""))
+        stops = [f"Gear stopped with {why(e)}"]
+        for sfx, opts, label in RETRIES:
+            saved, TRAN_OPTIONS = TRAN_OPTIONS, opts
+            try:
+                f = spice.check_dc(spice.run(f"osc/{p.name}_{sfx}",
+                                             F.deck(p, f"osc {p.name}, {label}", source(p, bench), ctl)))
+                integration = f"{label}: " + ", ".join(stops)
+                break
+            except RuntimeError as e2:
+                if not retryable(e2) or sfx == RETRIES[-1][0]:
+                    raise
+                stops.append(f"{label} with {why(e2)}")
+            finally:
+                TRAN_OPTIONS = saved
     d = spice.read_table(f / "tran.txt")
     t = d["time"]
     out = {n: swing(t, d[n]) for n in NODES.split()}
@@ -116,6 +146,11 @@ def run(p: F.FE, bench: str = "network") -> dict:
     out["dm_out"] = swing(t, d["v(oa)"] - d["v(ob)"])
     m = t > T_SKIP
     out["f_res"] = float(1 / (t[m][-1] - t[m][0]))
+    # how far the outputs' common mode moved from the operating point (t = 0) to the window's mean: with no
+    # input a run should stay at its start; ngspice's default solver shifts H's outputs by about 1 mV in
+    # the first nanoseconds, the KLU solver does not (the note's Appendix A)
+    cm = (d["v(oa)"] + d["v(ob)"]) / 2
+    out["cm_out"]["window_mean_minus_start"] = float(np.mean(cm[m]) - cm[0])
     if integration:
         out["integration"] = integration
     return out
@@ -148,7 +183,9 @@ def main(args):
             for n in NODES.split() + ["cm_out", "dm_out"]:
                 print(f"  {n:7s} {r[n]['pkpk'] * 1e3:10.4f} mV pk-pk, dominant {r[n]['f_dom'] / 1e6:7.2f} MHz",
                       flush=True)
-            print(f"  (frequency resolution {r['f_res'] / 1e6:.2f} MHz)", flush=True)
+            print(f"  (frequency resolution {r['f_res'] / 1e6:.2f} MHz; outputs' common mode moved "
+                  f"{r['cm_out']['window_mean_minus_start'] * 1e3:+.4f} mV from the start"
+                  + (f"; {r['integration']}" if r.get("integration") else "") + ")", flush=True)
         except RuntimeError as e:
             lines = str(e).splitlines()
             r = dict(failed=(lines[1] if len(lines) > 1 else lines[0])[:160])

@@ -3,8 +3,8 @@ the netlists the simulations use (schematics.check_geometry / check_netlist).
 
 Sheets (PNG at 600 dpi and PDF, in ../figures/):
   schematic_front_end_H   one side of the current-feedback front end with the H values (side b is
-                          identical; R_G and the cross-coupled C_X join the sides), the common-mode
-                          servo as a block
+                          identical; R_G and the cross-coupled C_X join the sides), the sinks' base
+                          reference as an off-sheet net
   schematic_front_end_L   the same with the L values
   schematic_chain         difference amplifier, filters, gain stages and output driver
   schematic_sr560         the SR560's front end as read from its schematic (x10 position)
@@ -125,7 +125,7 @@ def sheet_front_end(case: str) -> tuple[Sch, dict, list]:
     r_t = p.v_sink / (p.n * p.id + p.i_bs)
     S.R("RTa", r_t, Q.emitter, (Q.emitter[0], Q.emitter[1] - 1.6), side="right")
     S.rail((Q.emitter[0], Q.emitter[1] - 1.6), p.vm, "vm")
-    S.offsheet((Q.base[0] - 1.6, Q.base[1]), "vsink", side="left", text="vsink (CM servo)")
+    S.offsheet((Q.base[0] - 1.6, Q.base[1]), "vsink", side="left", text="vsink (sink reference)")
     S.wire((Q.base[0] - 1.6, Q.base[1]), Q.base)
     S.text((-0.2, -3.1), f"Front end {case[0]}: {p.n} × {p.jfet} per side at {p.id * 1e3:g} mA; "
                          f"gain 1 + 2 R_F / R_G = {p.gain:.4g}", ha="left", va="center")
@@ -214,7 +214,7 @@ def _fe_half(S: Sch, p, x: str, Y, fl: bool) -> dict:
     y_rt = Q.emitter[1] + (1.6 if fl else -1.6)
     S.R(f"RT{x}", r_t, Q.emitter, (Q.emitter[0], y_rt), side="right")
     S.rail((Q.emitter[0], y_rt), p.vm, "vm", up=fl)
-    S.offsheet((Q.base[0] - 1.6, Q.base[1]), "vsink", side="left", text="vsink (CM servo)")
+    S.offsheet((Q.base[0] - 1.6, Q.base[1]), "vsink", side="left", text="vsink (sink reference)")
     S.wire((Q.base[0] - 1.6, Q.base[1]), Q.base)
     return dict(xo=xo, src=P(xo, ysa), out=P(xo, 8.9), cx_end=P(6.2, ycx))
 
@@ -642,7 +642,7 @@ def sheet_topology() -> ss.Sheet:
     S.vsource((xj, ys - 3.7), (xj, ys - 2.3), text="$e_{n,RG/2}$", side="left")
     S.ground((xj, ys - 3.7))
 
-    # (c) a current sink's noise generators: base at AC ground (the servo's filter), so for noise
+    # (c) a current sink's noise generators: base at AC ground (the reference's filter), so for noise
     # the transistor is a common-base stage from its emitter node to its collector (the source node)
     S.text((12.2, -2.6 + dy), "(c)", ha="left", va="center")
     bq = (14.6, -8.6 + dy)

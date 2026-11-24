@@ -1,25 +1,18 @@
-L1000 THD     1000 Hz   1 Vpp: 0.0001 %  (H2 -126 dBc, H3 -132 dBc, fundamental 1.001 Vpp)
-  (L1000_thd_1000_10: ran with '.options abstol=1e-12 method=gear itl4=1000 reltol=2e-4')
-L1000 THD     1000 Hz  10 Vpp: 0.0002 %  (H2 -117 dBc, H3 -121 dBc, fundamental 10.015 Vpp)
-L1000 THD   100000 Hz   1 Vpp: 0.0001 %  (H2 -134 dBc, H3 -121 dBc, fundamental 1.001 Vpp)
-L1000 THD   100000 Hz  10 Vpp: 0.0025 %  (H2 -114 dBc, H3 -94 dBc, fundamental 10.015 Vpp)
-L1000 THD    1e+06 Hz   1 Vpp: 0.0009 %  (H2 -112 dBc, H3 -102 dBc, fundamental 1.001 Vpp)
-L1000 THD    1e+06 Hz  10 Vpp: 0.0216 %  (H2 -95 dBc, H3 -77 dBc, fundamental 10.010 Vpp)
-  (L1000_thd_1e+07_1: ran with '.options abstol=1e-12')
-L1000 THD    1e+07 Hz   1 Vpp: 0.0396 %  (H2 -87 dBc, H3 -68 dBc, fundamental 0.919 Vpp)
-Traceback (most recent call last):
-  File "<root>\scripts\large_signal.py", line 172, in <module>
-    main(sys.argv[1:])
-    ~~~~^^^^^^^^^^^^^^
-  File "<root>\scripts\large_signal.py", line 149, in main
-    r["step"] = [step_run(s, f"{name}_step_{v:g}", v) for v in (1.0, 10.0)]
-                 ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<root>\scripts\large_signal.py", line 76, in step_run
-    d = tran(s, tag, src, 4e-6, 0.2e-9, "v(out)")
-  File "<root>\scripts\large_signal.py", line 43, in tran
-    f = spice.run(f"large/{tag}", chain.deck(s, f"large {tag}", opt + src, ctl))
-  File "<root>\scripts\spice.py", line 68, in run
-    raise RuntimeError(f"ngspice reported problems in {name}:\n" + "\n".join(bad[:12]))
-RuntimeError: ngspice reported problems in large/L1000_step_1:
-stderr doAnalyses: TRAN:  Timestep too small; time = 1.8447e-07, timestep = 2.5e-22: trouble with xja7:jfe150_m-instance j.xja7.j1
-stderr tran simulation(s) aborted
+L1000 THD     1000 Hz   1 Vpp: 0.0001 %  (H2 -126 dBc, H3 -131 dBc, fundamental 1.001 Vpp)
+L1000 THD     1000 Hz  10 Vpp: 0.0002 %  (H2 -118 dBc, H3 -121 dBc, fundamental 10.013 Vpp)
+  (L1000_thd_100000_1: ran with '.options abstol=1e-11 method=gear klu')
+L1000 THD   100000 Hz   1 Vpp: 0.0001 %  (H2 -138 dBc, H3 -121 dBc, fundamental 1.001 Vpp)
+L1000 THD   100000 Hz  10 Vpp: 0.0025 %  (H2 -115 dBc, H3 -95 dBc, fundamental 10.013 Vpp)
+  (L1000_thd_1e+06_1: ran with '.options abstol=1e-11 method=gear klu')
+L1000 THD    1e+06 Hz   1 Vpp: 0.0008 %  (H2 -125 dBc, H3 -101 dBc, fundamental 1.001 Vpp)
+  (L1000_thd_1e+06_10: ran with '.options abstol=1e-11 method=gear klu')
+L1000 THD    1e+06 Hz  10 Vpp: 0.0235 %  (H2 -98 dBc, H3 -76 dBc, fundamental 10.007 Vpp)
+  (L1000_thd_1e+07_1: ran with '.options abstol=1e-11 method=gear klu reltol=3e-4')
+L1000 THD    1e+07 Hz   1 Vpp: 0.0072 %  (H2 -92 dBc, H3 -83 dBc, fundamental 0.916 Vpp)
+  (L1000_overload: ran with '50ohm+klu')
+L1000 overload x3: recovery 0.15 us, output during 11.36 V
+L1000 PSRR (input-referred, dB): {'VP': {'100': -117.10109648928625, '1000.0': -117.09910928371858, '10000.0': -116.86318106267194, '100000.0': -108.9064956594641, '1000000.0': -89.62173850228831, '10000000.0': -69.62104529874102}, 'VM': {'100': -120.27142444728437, '1000.0': -120.28360875864215, '10000.0': -120.21829195505725, '100000.0': -116.25872847619132, '1000000.0': -98.43709212745038, '10000000.0': -78.05311609991567}}
+  (L1000_step_1: ran with '50ohm+klu')
+L1000 step 1 V: rise 33.8 ns, overshoot 4.7 %, settle 1 % 105 ns, 0.1 % 163 ns, slew 28 V/us
+  (L1000_step_10: ran with '50ohm+klu')
+L1000 step 10 V: rise 33.8 ns, overshoot 4.7 %, settle 1 % 106 ns, 0.1 % 163 ns, slew 275 V/us

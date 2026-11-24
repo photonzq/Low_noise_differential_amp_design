@@ -80,11 +80,11 @@ def main():
     # SR560
     fe = SF.front_end(True)
     deck = (f"* sr560 front end\n{spice.OPTIONS}{spice.lib('jfets.lib')}{SF.OP37}{SF.LF411}{blocks.COMMON}"
-            "VIN ina 0 DC 0 AC 1\nVB inb 0 DC 0\n" + fe +
+            "VIN ina 0 DC 0 AC 1\nVB inb 0 DC 0\n" + fe + SF.NODESET +
             ".control\nset wr_singlescale\nset wr_vecnames\nop\nac dec 40 1 100meg\nwrdata ac.txt v(out)\n"
             "noise v(out) VIN dec 20 1 10meg\nsetplot noise2\nprint onoise_total\n.endc\n.end\n")
     files.append(write("sr560_front_end_x10.cir",
-                       "SR560 front end, redrawn from SRS sheet 560_1F (manual Rev. 2.8), K102 at x10; NPD5564 as the\n"
+                       "SR560 front end, redrawn from SRS sheet 560_1F (manual Rev. 3.1), K102 at x10; NPD5564 as the\n"
                        "recalibrated 2N5564 card; OP37 and LF411 behavioural.  Section 2.1 of the note.", deck))
     s = SC.allocate(1000, "LN") if hasattr(SC, "allocate") else None
     if s is not None and hasattr(SC, "deck"):
@@ -101,6 +101,8 @@ def main():
         out = spice.ng().run_deck(f)
         bad = [ln for ln in re.split(r"(?=std(?:out|err) )", out) if spice.ERRORS.search(ln)
                and "warning" not in ln.lower()]
+        if "Transient op" in out:     # gmin and source stepping failed: not a DC solution (note, Appendix)
+            bad.append("the operating point is ngspice's transient-op fallback")
         m = re.findall(r"inoise_total\s*=\s*([-+0-9.eE]+)", out)
         print(f"{f.name}: {'ran' if not bad else 'PROBLEMS: ' + bad[0][:120]}"
               + (f", output noise {float(m[-1]) * 1e3:.3g} mV rms (1 Hz to the sweep end)" if m else ""))

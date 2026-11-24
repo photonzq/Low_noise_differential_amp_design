@@ -1,25 +1,27 @@
 """Overload and recovery in detail (Section 6.5 of the note): a differential input step of three
 times full scale (30 V at the output) held for 20 us, then removed, with the inputs driven from
 50-ohm sources through the input network.  Saves the output and the front end's internal nodes
-(outputs oa/ob, source nodes sa/sb, summing nodes ca/cb, the common-mode servo's integrator nint)
+(outputs oa/ob, source nodes sa/sb, summing nodes ca/cb)
 so that the note can say which stage saturates, what the front end does meanwhile, and how each
 node recovers.  Recovery: the last time after the input returns at which the output is more than
-1 % of full scale (0.1 V) away from its final value.  The 1-ohm bench of large_signal.py did not
-converge for H at a gain of 100 with the LM7171 in S2.
+1 % of full scale (0.1 V) away from its final value.  With ngspice's default solver (Sparse 1.3) H at
+a gain of 100 with the LM7171 in S2 did not converge on any bench; with the KLU solver (ATTEMPTS) it
+does, and so does L.
 
 Writes the overload entries of ../sim/results/large_signal.json and ../sim/results/overload_curves.npz.
-With the LM7171 in S2 the H transient stopped with "timestep too small" in an input JFET at the
-onset of the overload in the attempts that ran (the slower ones were stopped); `--h-ths4031` runs
-the H case with the THS4031 in S2 instead, which converges.
+Without the servo both H and L stop with Gear and the default solver at the onset of the overload, and
+run with the second attempt (KLU, abstol 1e-11 A).  `--h-ths4031` runs the H case with the THS4031 in S2
+and 1-ohm sources, the comparison kept from when the LM7171 version did not converge.
 Usage: python overload_detail.py [H100] [L1000]      or      python overload_detail.py --h-ths4031
 
 `numbers` (no simulation): every number of Section 6.5 on the overloads, from the archived curves
-  H: overload_curves_H100_THS4031.npz (THS4031 in S2, 1-ohm sources); L: the L1000_* curves of
-     overload_curves.npz (LM7171 in S2, 50-ohm sources, this script's L1000 run).  overload_curves.npz
-     holds only the cases whose run converged in the last call (in the re-run of 22 November 2026, L;
-     every H attempt with the LM7171 failed).
+  H: the H100_* curves of overload_curves.npz (LM7171 in S2, 50-ohm sources, this script's run), and for
+     comparison overload_curves_H100_THS4031.npz (THS4031 in S2, 1-ohm sources; key H100_THS4031);
+  L: the L1000_* curves of overload_curves.npz (LM7171 in S2, 50-ohm sources).  overload_curves.npz
+     holds only the cases whose run converged in the last call (in the re-run of 22 November 2026, L
+     only; in the re-run without the servo of 23 November 2026, both).
   The input: a differential step of 3 x full scale, v_in = 3 * 10 V / G (G the chain's gain), i.e.
-  +/- v_in / 2 at the two gates (1-ohm sources: the gate follows its source), from t_on = 2 us
+  +/- v_in / 2 at the two gates (the gate follows its source; 50 ohm into the input network), from t_on = 2 us
   (10 ns edge) to t_off = 22.01 us (10 ns edge).  Windows: rest t < 1.9 us, during 15-20 us,
   final t > 38 us; x_rest, x_during, x_final are the means of a node over them.
     recovery            t_rec = last t > t_off with |v_out - v_out,final| > 0.1 V (1 % of 10 V), - t_off;
@@ -39,12 +41,13 @@ Usage: python overload_detail.py [H100] [L1000]      or      python overload_det
     JFET current        from the summing node: dI = -(v_c,during - v_c,rest) / R_D (R_D carries the
                         JFETs' current once the op amp's integrator is clipped); small-signal
                         estimate dI = g_m dV_GS with g_m of one side (fe_gain_derived.json)
-    servo               error e = (v_oa + v_ob - v_sa - v_sb) / 2 during the overload; rate
-                        de_int/dt = G_INT e / C_INT (G_INT 1 uS, C_INT 1 uF, frontend.netlist);
-                        the integrator's change over the run (v(nint) final - rest) against the
-                        integral of G_INT e / C_INT dt; after an overload of 1 s the sinks' reference
-                        moves by G_INT e (1 s) / C_INT and the outputs' common mode by (R_F / R_T) that,
-                        and the servo loop's time constant is tau = (C_INT / G_INT) (R_T / R_F)
+    servo               the front ends have none (a fixed, adjusted reference); what a servo of the sinks'
+                        reference (Appendix B of the note: G_INT 1 uS into C_INT 1 uF) would do: the
+                        error it would see, e = (v_oa + v_ob - v_sa - v_sb) / 2 during the overload; its
+                        rate G_INT e / C_INT and its change over the run, the integral of G_INT e / C_INT dt;
+                        after an overload of 1 s the sinks' reference would move by G_INT e (1 s) / C_INT and
+                        the outputs' common mode by (R_F / R_T) that, and the servo loop's time constant
+                        would be tau = (C_INT / G_INT) (R_T / R_F)
     bootstrap           tau_BS = R_BS C_BS
     larger overloads    with the op amps clipped, the source nodes follow the divider R_F - R_G - R_F:
                         v_s,d = (v_oa - v_ob) R_G / (2 R_F + R_G), so dV_GS ~ (v_in - v_s,d) / 2 per side
@@ -64,12 +67,16 @@ import large_signal as L
 import models
 import spice
 
-NODES = "v(out) v(oa) v(ob) v(da) v(sa) v(sb) v(ca) v(cb) v(nint)"
+NODES = "v(out) v(oa) v(ob) v(da) v(sa) v(sb) v(ca) v(cb)"
 
 
 # attempts, in order: (options, input edge time, largest time step); each runs in a child process
-# with a time limit, since a transient that struggles can take hours in the shared library
+# with a time limit, since a transient that struggles can take hours in the shared library.  The
+# second and third (the KLU solver, abstol 1e-11 A) are large_signal.TRIES' sets for the decks that
+# stop within their first steps without the servo.
 ATTEMPTS = [(".options abstol=1e-12 method=gear\n", "10n", "2n"),
+            (".options abstol=1e-11 method=gear klu\n", "10n", "2n"),
+            (".options abstol=1e-11 method=gear\n", "10n", "2n"),
             (".options abstol=1e-12 method=gear reltol=1e-3\n", "10n", "2n"),
             (".options abstol=1e-12 reltol=1e-3\n", "10n", "1n"),
             (".options abstol=1e-12 method=gear\n", "100n", "2n"),
@@ -85,7 +92,7 @@ def run(name: str, k: int = 0) -> dict:
            f"VB inb 0 DC 0 PULSE(0 {-amp / 2:g} 2u {edge} {edge} 20u 100u)\n"
            "RIA ina ga 50 rnl\nRIB inb gb 50 rnl\n")
     ctl = ".control\n" + spice.WR + f"tran {tmax} 40u 0 {tmax}\nwrdata tran.txt {NODES}\n.endc\n"
-    f = spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl))
+    f = spice.check_dc(spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl)))
     d = spice.read_table(f / "tran.txt")
     t, v = d["time"], d["v(out)"]
     vfin = float(np.mean(v[t > 38e-6]))
@@ -101,8 +108,7 @@ def run(name: str, k: int = 0) -> dict:
                oa_ob_during=[float(np.mean(d["v(oa)"][mid])), float(np.mean(d["v(ob)"][mid]))],
                sa_sb_during=[float(np.mean(d["v(sa)"][mid])), float(np.mean(d["v(sb)"][mid]))],
                ca_cb_during=[float(np.mean(d["v(ca)"][mid])), float(np.mean(d["v(cb)"][mid]))],
-               ca_cb_before=[float(np.mean(d["v(ca)"][t < 1.9e-6])), float(np.mean(d["v(cb)"][t < 1.9e-6]))],
-               servo_change_mV=float(1e3 * (np.mean(d["v(nint)"][t > 38e-6]) - np.mean(d["v(nint)"][t < 1.9e-6]))))
+               ca_cb_before=[float(np.mean(d["v(ca)"][t < 1.9e-6])), float(np.mean(d["v(cb)"][t < 1.9e-6]))])
     for node in ("oa", "ob", "ca", "cb", "sa", "sb"):
         x = d[f"v({node})"]
         x0 = float(np.mean(x[t < 1.9e-6]))
@@ -173,78 +179,91 @@ def numbers() -> dict:
     res = {}
     gm_side = json.loads((spice.RESULTS / "fe_gain_derived.json").read_text(encoding="utf-8"))[
         "g_m one side from the operating point (S)"]
-    # ---- H, gain 100, THS4031 in S2
-    d = np.load(spice.RESULTS / "overload_curves_H100_THS4031.npz")
-    t = d["time"]
-    w = _windows(t)
-    mean = {n: {k: float(np.mean(d[f"v({n})"][w[k]])) for k in ("rest", "during", "final")}
-            for n in ("out", "oa", "ob", "da", "sa", "sb", "ca", "cb", "nint")}
-    mode, g = L.CASES["H100"]
-    s = chain.allocate(g, mode)
-    p = F.CASES[s.fe]
-    v_in = 3 * FS / s.gain
-    rec = _settle(t, d["v(out)"], mean["out"]["final"], 0.01 * FS)
-    h = dict(source="overload_curves_H100_THS4031.npz (THS4031 in S2, 1-ohm sources)", gain=s.gain,
-             input_step_V=v_in, gate_step_V=[v_in / 2, -v_in / 2], means=mean, recovery_us=rec * 1e6)
-    h["output_ramp"] = _ramp(t, d["v(out)"], w, rec)
-    h["output_during_V"] = mean["out"]["during"]
-    h["output_max_V"], h["output_min_V"] = float(d["v(out)"].max()), float(d["v(out)"].min())
-    h["S2_out_during_V"] = mean["da"]["during"]
-    oa, ob, a = d["v(oa)"], d["v(ob)"], w["after"]
-    ia, ib = int(np.argmin(oa[a])), int(np.argmax(ob[a]))
-    h["opamp_outputs"] = dict(
-        oa_during_V=mean["oa"]["during"], ob_during_V=mean["ob"]["during"],
-        difference_during_V=mean["oa"]["during"] - mean["ob"]["during"],
-        oa_min_after_V=float(oa[a][ia]), oa_min_after_from_rest_V=float(oa[a][ia] - mean["oa"]["rest"]),
-        oa_min_after_at_ns=float((t[a][ia] - T_OFF) * 1e9),
-        ob_max_after_V=float(ob[a][ib]), ob_max_after_from_rest_V=float(ob[a][ib] - mean["ob"]["rest"]),
-        ob_max_after_at_ns=float((t[a][ib] - T_OFF) * 1e9),
-        oa_max_V=float(oa.max()), ob_min_V=float(ob.min()),
-        dev_at_0p2us_mV=[1e3 * (float(np.interp(T_OFF + 0.2e-6, t, x)) - mean[n]["rest"])
-                         for n, x in (("oa", oa), ("ob", ob))],
-        within_12mV_after_us=[_settle(t, x, mean[n]["rest"], 0.012) * 1e6 for n, x in (("oa", oa), ("ob", ob))],
-        within_10mV_after_us=[_settle(t, x, mean[n]["rest"], 0.010) * 1e6 for n, x in (("oa", oa), ("ob", ob))])
-    dvg = {"a": v_in / 2, "b": -v_in / 2}
-    src = {}
-    for x in "ab":
-        dvs = mean[f"s{x}"]["during"] - mean[f"s{x}"]["rest"]
-        dvc = mean[f"c{x}"]["during"] - mean[f"c{x}"]["rest"]
-        r_d = (p.vp - p.vref) / (p.n * p.id)
-        sx, cx = d[f"v(s{x})"], d[f"v(c{x})"]
-        src[x] = dict(dv_source_V=dvs, dv_gate_V=dvg[x], dV_GS_V=dvg[x] - dvs,
-                      source_max_dev_V=float(np.max(np.abs(sx - mean[f"s{x}"]["rest"]))),
-                      summing_rest_V=mean[f"c{x}"]["rest"], summing_during_V=mean[f"c{x}"]["during"],
-                      dv_summing_V=dvc, R_D=r_d, dI_from_R_D_mA=-dvc / r_d * 1e3,
-                      dI_gm_estimate_mA=gm_side * (dvg[x] - dvs) * 1e3,
-                      summing_extremes_V=[float(cx.min()), float(cx.max())],
-                      summing_within_10mV_after_us=_settle(t, cx, mean[f"c{x}"]["rest"], 0.010) * 1e6,
-                      source_within_10mV_after_us=_settle(t, sx, mean[f"s{x}"]["rest"], 0.010) * 1e6)
-    h["sides"] = src
-    h["V_GS_rest_V"] = -mean["sa"]["rest"]
-    h["g_m_one_side_S"] = gm_side
-    err = (oa + ob - d["v(sa)"] - d["v(sb)"]) / 2
-    g_int, c_int = 1e-6, 1e-6
-    r_t = p.v_sink / (p.n * p.id + p.i_bs)
-    e_dur = float(np.mean(err[w["during"]]))
-    integral = float(np.trapezoid(g_int * err / c_int, t))
-    h["servo"] = dict(outputs_mean_during_V=(mean["oa"]["during"] + mean["ob"]["during"]) / 2,
-                      sources_mean_during_V=(mean["sa"]["during"] + mean["sb"]["during"]) / 2,
-                      error_during_V=e_dur, rate_V_per_s=g_int * e_dur / c_int,
-                      nint_change_uV=(mean["nint"]["final"] - mean["nint"]["rest"]) * 1e6,
-                      nint_change_from_error_integral_uV=integral * 1e6,
-                      after_1s_reference_V=g_int * e_dur * 1.0 / c_int, R_F=p.rf, R_T=r_t,
-                      after_1s_output_cm_V=g_int * e_dur * 1.0 / c_int * p.rf / r_t,
-                      loop_time_constant_s=(c_int / g_int) * r_t / p.rf)
-    r_bs = p.vbs / p.i_bs
-    h["bootstrap_time_constant_ms"] = r_bs * p.c_bs * 1e3
-    v_sd = h["opamp_outputs"]["difference_during_V"] * p.rg / (2 * p.rf + p.rg)
-    h["larger_overloads"] = dict(
-        source_difference_with_clipped_outputs_V=v_sd,
-        dV_GS_estimate_at_3x_V=(v_in - v_sd) / 2,
-        dV_GS_estimate_at_10x_V=(10 * FS / s.gain - v_sd) / 2,
-        input_for_zero_gate_bias_V=2 * abs(h["V_GS_rest_V"]) + v_sd,
-        overdrive_for_zero_gate_bias=(2 * abs(h["V_GS_rest_V"]) + v_sd) / (FS / s.gain))
-    res["H100"] = h
+    # ---- H, gain 100: the LM7171 in S2 (the note's numbers; this script's run, 50-ohm sources, the KLU
+    # solver) and, for comparison, the THS4031 in S2 (overload_curves_H100_THS4031.npz, 1-ohm sources)
+    dd = np.load(spice.RESULTS / "overload_curves.npz")
+    h_sets = {"H100": ({k[len("H100_"):]: dd[k] for k in dd.files if k.startswith("H100_")},
+                       "overload_curves.npz, H100_* (LM7171 in S2, 50-ohm sources, the KLU solver)"),
+              "H100_THS4031": (np.load(spice.RESULTS / "overload_curves_H100_THS4031.npz"),
+                               "overload_curves_H100_THS4031.npz (THS4031 in S2, 1-ohm sources)")}
+    for key, (d, source) in h_sets.items():
+        t = d["time"]
+        w = _windows(t)
+        mean = {n: {k: float(np.mean(d[f"v({n})"][w[k]])) for k in ("rest", "during", "final")}
+                for n in ("out", "oa", "ob", "da", "sa", "sb", "ca", "cb")}
+        mode, g = L.CASES["H100"]
+        s = chain.allocate(g, mode)
+        p = F.CASES[s.fe]
+        v_in = 3 * FS / s.gain
+        rec = _settle(t, d["v(out)"], mean["out"]["final"], 0.01 * FS)
+        h = dict(source=source, gain=s.gain,
+                 input_step_V=v_in, gate_step_V=[v_in / 2, -v_in / 2], means=mean, recovery_us=rec * 1e6)
+        h["output_ramp"] = _ramp(t, d["v(out)"], w, rec)
+        h["output_during_V"] = mean["out"]["during"]
+        h["output_max_V"], h["output_min_V"] = float(d["v(out)"].max()), float(d["v(out)"].min())
+        # the output's undershoot below its final value after the release (as for L below)
+        rel_h = d["v(out)"][w["after"]] - mean["out"]["final"]
+        t_h = t[w["after"]]
+        iu = int(np.argmin(rel_h))
+        bu = np.where(rel_h < -0.1)[0]
+        h["undershoot"] = dict(depth_V=float(rel_h[iu]), at_ns=float((t_h[iu] - T_OFF) * 1e9),
+                               beyond_minus_0p1V_duration_ns=float((t_h[bu[-1]] - t_h[bu[0]]) * 1e9) if len(bu) else 0.0,
+                               overshoot_after_V=float(rel_h[iu:].max()))
+        h["S2_out_during_V"] = mean["da"]["during"]
+        oa, ob, a = d["v(oa)"], d["v(ob)"], w["after"]
+        ia, ib = int(np.argmin(oa[a])), int(np.argmax(ob[a]))
+        h["opamp_outputs"] = dict(
+            oa_during_V=mean["oa"]["during"], ob_during_V=mean["ob"]["during"],
+            difference_during_V=mean["oa"]["during"] - mean["ob"]["during"],
+            oa_min_after_V=float(oa[a][ia]), oa_min_after_from_rest_V=float(oa[a][ia] - mean["oa"]["rest"]),
+            oa_min_after_at_ns=float((t[a][ia] - T_OFF) * 1e9),
+            ob_max_after_V=float(ob[a][ib]), ob_max_after_from_rest_V=float(ob[a][ib] - mean["ob"]["rest"]),
+            ob_max_after_at_ns=float((t[a][ib] - T_OFF) * 1e9),
+            oa_max_V=float(oa.max()), ob_min_V=float(ob.min()),
+            dev_at_0p2us_mV=[1e3 * (float(np.interp(T_OFF + 0.2e-6, t, x)) - mean[n]["rest"])
+                             for n, x in (("oa", oa), ("ob", ob))],
+            within_12mV_after_us=[_settle(t, x, mean[n]["rest"], 0.012) * 1e6 for n, x in (("oa", oa), ("ob", ob))],
+            within_10mV_after_us=[_settle(t, x, mean[n]["rest"], 0.010) * 1e6 for n, x in (("oa", oa), ("ob", ob))])
+        dvg = {"a": v_in / 2, "b": -v_in / 2}
+        src = {}
+        for x in "ab":
+            dvs = mean[f"s{x}"]["during"] - mean[f"s{x}"]["rest"]
+            dvc = mean[f"c{x}"]["during"] - mean[f"c{x}"]["rest"]
+            r_d = (p.vp - p.vref) / (p.n * p.id)
+            sx, cx = d[f"v(s{x})"], d[f"v(c{x})"]
+            src[x] = dict(dv_source_V=dvs, dv_gate_V=dvg[x], dV_GS_V=dvg[x] - dvs,
+                          source_max_dev_V=float(np.max(np.abs(sx - mean[f"s{x}"]["rest"]))),
+                          summing_rest_V=mean[f"c{x}"]["rest"], summing_during_V=mean[f"c{x}"]["during"],
+                          dv_summing_V=dvc, R_D=r_d, dI_from_R_D_mA=-dvc / r_d * 1e3,
+                          dI_gm_estimate_mA=gm_side * (dvg[x] - dvs) * 1e3,
+                          summing_extremes_V=[float(cx.min()), float(cx.max())],
+                          summing_within_10mV_after_us=_settle(t, cx, mean[f"c{x}"]["rest"], 0.010) * 1e6,
+                          source_within_10mV_after_us=_settle(t, sx, mean[f"s{x}"]["rest"], 0.010) * 1e6)
+        h["sides"] = src
+        h["V_GS_rest_V"] = -mean["sa"]["rest"]
+        h["g_m_one_side_S"] = gm_side
+        err = (oa + ob - d["v(sa)"] - d["v(sb)"]) / 2
+        g_int, c_int = 1e-6, 1e-6
+        r_t = p.v_sink / (p.n * p.id + p.i_bs)
+        e_dur = float(np.mean(err[w["during"]]))
+        integral = float(np.trapezoid(g_int * err / c_int, t))
+        h["servo"] = dict(outputs_mean_during_V=(mean["oa"]["during"] + mean["ob"]["during"]) / 2,
+                          sources_mean_during_V=(mean["sa"]["during"] + mean["sb"]["during"]) / 2,
+                          error_during_V=e_dur, rate_V_per_s=g_int * e_dur / c_int,
+                          integrator_change_uV=integral * 1e6,
+                          after_1s_reference_V=g_int * e_dur * 1.0 / c_int, R_F=p.rf, R_T=r_t,
+                          after_1s_output_cm_V=g_int * e_dur * 1.0 / c_int * p.rf / r_t,
+                          loop_time_constant_s=(c_int / g_int) * r_t / p.rf)
+        r_bs = p.vbs / p.i_bs
+        h["bootstrap_time_constant_ms"] = r_bs * p.c_bs * 1e3
+        v_sd = h["opamp_outputs"]["difference_during_V"] * p.rg / (2 * p.rf + p.rg)
+        h["larger_overloads"] = dict(
+            source_difference_with_clipped_outputs_V=v_sd,
+            dV_GS_estimate_at_3x_V=(v_in - v_sd) / 2,
+            dV_GS_estimate_at_10x_V=(10 * FS / s.gain - v_sd) / 2,
+            input_for_zero_gate_bias_V=2 * abs(h["V_GS_rest_V"]) + v_sd,
+            overdrive_for_zero_gate_bias=(2 * abs(h["V_GS_rest_V"]) + v_sd) / (FS / s.gain))
+        res[key] = h
     # ---- L, gain 1000, LM7171 in S2
     d = np.load(spice.RESULTS / "overload_curves.npz")
     t = d["L1000_time"]
@@ -298,7 +317,7 @@ def print_numbers(r: dict) -> None:
     sv = h["servo"]
     print(f"  V_GS at rest {h['V_GS_rest_V']:+.4f} V; servo: outputs' mean {sv['outputs_mean_during_V']:+.4f} V, sources' mean "
           f"{sv['sources_mean_during_V']:+.4f} V, error {sv['error_during_V']:+.4f} V, rate {sv['rate_V_per_s']:+.4f} V/s, "
-          f"integrator change {sv['nint_change_uV']:+.2f} uV (integral of the error {sv['nint_change_from_error_integral_uV']:+.2f} uV)")
+          f"a servo's integrator would change by {sv['integrator_change_uV']:+.2f} uV over the run")
     print(f"  after 1 s: reference {sv['after_1s_reference_V']:+.4f} V, outputs' CM {sv['after_1s_output_cm_V']:+.4f} V "
           f"(R_F/R_T = {sv['R_F']:.0f}/{sv['R_T']:.2f}), servo time constant {sv['loop_time_constant_s']:.3f} s; "
           f"bootstrap R_BS C_BS {h['bootstrap_time_constant_ms']:.2f} ms")
@@ -306,6 +325,13 @@ def print_numbers(r: dict) -> None:
     print(f"  larger overloads: v_s,d with clipped outputs {lg['source_difference_with_clipped_outputs_V']:.4f} V; dV_GS ~ "
           f"{lg['dV_GS_estimate_at_3x_V'] * 1e3:.1f} mV at 3x, {lg['dV_GS_estimate_at_10x_V'] * 1e3:.1f} mV at 10x; zero gate bias at "
           f"{lg['input_for_zero_gate_bias_V']:.3f} V ({lg['overdrive_for_zero_gate_bias']:.2f} x full scale)")
+    hu = h["undershoot"]
+    print(f"  undershoot {hu['depth_V']:+.4f} V at {hu['at_ns']:.1f} ns, more than 0.1 V below the final value for "
+          f"{hu['beyond_minus_0p1V_duration_ns']:.1f} ns, then {hu['overshoot_after_V']:+.4f} V")
+    t31 = r.get("H100_THS4031")
+    if t31:
+        print(f"H with the THS4031 in S2 ({t31['source']}): recovery to 0.1 V {t31['recovery_us']:.4f} us, output during "
+              f"{t31['output_during_V']:.4f} V, 10-90 % slope {t31['output_ramp']['slope_10_90_V_us']:.1f} V/us")
     u, rp = lo["undershoot"], lo["output_ramp"]
     print(f"L, gain {lo['gain']:.4g} ({lo['source']}): output during {lo['output_during_V']:.4f} V, front end's outputs "
           f"{lo['fe_out_during_V']:.4f} V apart, S2 output {lo['S2_out_during_V']:.4f} V; recovery {lo['recovery_us']:.4f} us")

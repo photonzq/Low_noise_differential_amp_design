@@ -1,19 +1,17 @@
 repro L1000_step: S2 LM7171, L sinks MMBT3904 at 2 V
-  (repro_L1000_step/L1000_step_1: ran with '50ohm')
-L1000 step 1 V: rise 33.8 ns, overshoot 4.65 %, settle 1 % 106 ns, 0.1 % 163 ns, slew 28.4 V/us (50 ohm sources and input network)
-  (repro_L1000_step/L1000_step_10: ran with '50ohm')
+  (repro_L1000_step/L1000_step_1: ran with '50ohm+klu')
+L1000 step 1 V: rise 33.8 ns, overshoot 4.65 %, settle 1 % 105 ns, 0.1 % 163 ns, slew 28.4 V/us (50 ohm sources and input network)
+  (repro_L1000_step/L1000_step_10: ran with '50ohm+klu')
 L1000 step 10 V: rise 33.8 ns, overshoot 4.67 %, settle 1 % 106 ns, 0.1 % 163 ns, slew 275.0 V/us (50 ohm sources and input network)
-large_signal_L1000_step.json: 13 values differ from the archive; the rerun is in large_signal_L1000_step_regen.json
-  [0]/failed: archive 'stderr doAnalyses: TRAN:  Timestep too small; time = 1.97494e-06, timestep = 2.5e-22: trouble with xja1:jfe150_m-instance j.xja1.j1', rerun '<missing>'
-  [0]/dv: archive '<missing>', rerun 1.001319517672838
-  [0]/rise_ns: archive '<missing>', rerun np.float64(33.8)
-  [0]/overshoot: archive '<missing>', rerun 0.04652132707679413
-  [0]/settle_ns_0p1: archive '<missing>', rerun 162.75049999999996
-  [0]/settle_ns_1: archive '<missing>', rerun 105.62550000000006
-  [0]/slew_v_us: archive '<missing>', rerun 28.397069999997907
-  [0]/bench: archive '<missing>', rerun '50 ohm sources and input network'
-  [1]/dv: archive 10.013119060210876, rerun 10.013119302352566  (relative +2.42e-08)
-  [1]/overshoot: archive 0.04940430429282494, rerun 0.046683127416383696  (relative -5.51e-02)
-  [1]/settle_ns_0p1: archive 163.87399999999994, rerun 162.8109000000001  (relative -6.49e-03)
-  [1]/settle_ns_1: archive 106.29900000000012, rerun 105.63590000000009  (relative -6.24e-03)
-  [1]/slew_v_us: archive 274.7006449999794, rerun 274.9979000002705  (relative +1.08e-03)
+large_signal_L1000_step.json: 11 values differ from the archive; the rerun is in large_signal_L1000_step_regen.json
+  [0]/dv: archive 1.001319517672838, rerun 1.0013195502827368  (relative +3.26e-08)
+  [0]/rise_ns: archive 33.8, rerun np.float64(33.80000000000021)  (relative +6.22e-15)
+  [0]/overshoot: archive 0.04652132707679413, rerun 0.04652131599632381  (relative -2.38e-07)
+  [0]/settle_ns_0p1: archive 162.75049999999996, rerun 162.64150000000012  (relative -6.70e-04)
+  [0]/settle_ns_1: archive 105.62550000000006, rerun 105.44150000000006  (relative -1.74e-03)
+  [0]/slew_v_us: archive 28.397069999997907, rerun 28.396844999997885  (relative -7.92e-06)
+  [1]/dv: archive 10.013119302352566, rerun 10.013119320160001  (relative +1.78e-09)
+  [1]/overshoot: archive 0.046683127416383696, rerun 0.046683062979072654  (relative -1.38e-06)
+  [1]/settle_ns_0p1: archive 162.8109000000001, rerun 162.83290000000008  (relative +1.35e-04)
+  [1]/settle_ns_1: archive 105.63590000000009, rerun 105.6329  (relative -2.84e-05)
+  [1]/slew_v_us: archive 274.9979000002705, rerun 274.99805499997933  (relative +5.64e-07)

@@ -5,9 +5,9 @@
     7.805565199999999,
     7.0396369817659314,
     0.4052596148119727,
-    3.3342030126631537,
+    3.334203012663155,
     0.28303325148884795,
-    0.0792677325115181,
+    0.07926773329872938,
     0.04072821346957722
    ],
    "text": "7.81 | 7.04 | 0.41 | 3.33 | 0.28 | 0.08 | 0.04",
@@ -18,7 +18,7 @@
     2.6683718,
     2.395852376638641,
     0.4052497991572901,
-    1.06151909083207,
+    1.061519090832072,
     0.28303235256033366,
     0.07926581259484897,
     0.040727227005432645
@@ -31,9 +31,9 @@
     1.0955645,
     0.9593260301730246,
     0.4048928892044639,
-    0.16707661226137932,
+    0.16707661226660359,
     0.28299961703038695,
-    0.07919600269972932,
+    0.07919600348622831,
     0.0406913580743752
    ],
    "text": "1.10 | 0.96 | 0.40 | 0.17 | 0.28 | 0.08 | 0.04",
@@ -44,7 +44,7 @@
     1.0731252999999998,
     0.9336312782032131,
     0.40488783358612157,
-    0.1669834512398099,
+    0.1669834512398466,
     0.2829998399997324,
     0.07920010512789512,
     0.040682757107066855
@@ -57,7 +57,7 @@
     1.4990478,
     0.9334535726069763,
     0.4045179241727043,
-    1.0595534041895773,
+    1.0595534041895882,
     0.28303318186647275,
     0.07962956330223013,
     0.039848001399899045
@@ -70,9 +70,9 @@
     3.7061908999999997,
     2.395852269157597,
     1.2174413771155665,
-    2.3107468948287746,
+    2.310746894828772,
     0.6161241000259332,
-    0.7894269952616392,
+    0.7894270031009313,
     0.4056111073302984
    ],
    "text": "3.71 | 2.40 | 1.22 | 2.31 | 0.62 | 0.79 | 0.41",
@@ -83,7 +83,7 @@
     1.9235632,
     0.9593260479150181,
     1.2151932117432627,
-    0.3633137752390877,
+    0.3633137752390729,
     0.615440367888167,
     0.7879692146505398,
     0.40486209315740884
@@ -109,9 +109,9 @@
     2.3292121999999997,
     2.125947478560964,
     0.20228236330909857,
-    0.9242597461560079,
+    0.924259746156705,
     0.08823123011493392,
-    0.03939001466670036,
+    0.039390019914125426,
     0.01430365581227163
    ],
    "text": "2.33 | 2.13 | 0.20 | 0.92 | 0.09 | 0.04 | 0.01",
@@ -122,9 +122,9 @@
     0.8319705900000001,
     0.7406171649804839,
     0.2022781670122254,
-    0.3039487777537723,
+    0.3039487777356649,
     0.08823076092267071,
-    0.0393891985002697,
+    0.03938920374758603,
     0.014303359438588896
    ],
    "text": "0.83 | 0.74 | 0.20 | 0.30 | 0.09 | 0.04 | 0.01",
@@ -135,9 +135,9 @@
     0.41311487,
     0.33419831755385127,
     0.20212592911419627,
-    0.09261080738938213,
+    0.09261080733000972,
     0.08821379140396311,
-    0.03935955332426673,
+    0.0393595585676342,
     0.014292594141635069
    ],
    "text": "0.41 | 0.33 | 0.20 | 0.09 | 0.09 | 0.04 | 0.01",
@@ -148,9 +148,9 @@
     0.50374685,
     0.32760789444478916,
     0.20194785979003746,
-    0.30978477674602917,
+    0.30978477670960447,
     0.08822916034024804,
-    0.03968680928263375,
+    0.03968681442827865,
     0.013951209424036486
    ],
    "text": "0.50 | 0.33 | 0.20 | 0.31 | 0.09 | 0.04 | 0.01",
@@ -182,7 +182,7 @@
     ],
     [
      "current sinks",
-     0.7879638549132553
+     0.7879638627380183
     ],
     [
      "drain-side R_D",
@@ -194,7 +194,7 @@
     ],
     [
      "loop op amps",
-     0.2911486151312081
+     0.29114861513118934
     ],
     [
      "bootstrap (R_BS, R_UP)",
@@ -240,9 +240,9 @@
  "table8a": {
   "H10 | MMBT3904, 2 V (adopted)": {
    "value": {
-    "sinks": 0.7879638549132553,
+    "sinks": 0.7879638627380183,
     "R_T": 0.6547323319226875,
-    "transistor": 0.4384205859501096,
+    "transistor": 0.4384206000133872,
     "en_10k": 1.8997418000000001,
     "en_10": 3.7061908999999997,
     "en_10M": 2.9388946000000002,
@@ -253,9 +253,9 @@
   },
   "H10 | MMBT3904, 4 V": {
    "value": {
-    "sinks": 0.6190581991911839,
+    "sinks": 0.6190582084364409,
     "R_T": 0.46649907558518705,
-    "transistor": 0.40695413312067175,
+    "transistor": 0.40695414718454687,
     "en_10k": 1.8361723,
     "en_10": 3.673928,
     "en_10M": 2.8984087,
@@ -266,22 +266,22 @@
   },
   "H10 | MMBT3904, 6 V": {
    "value": {
-    "sinks": 0.555515039299837,
+    "sinks": 0.5555150597322064,
     "R_T": 0.3817872941191391,
-    "transistor": 0.4035287114165304,
+    "transistor": 0.4035287395446113,
     "en_10k": 1.8157472,
     "en_10": 3.6637348,
     "en_10M": 2.8855741,
-    "vcm_min": -8.788417299999999
+    "vcm_min": -8.7884163
    },
    "text": "0.56 (0.38 / 0.40) | 1.82 / 3.66 / 2.89 | V_CM,min \u22128.8 V | 103 mW",
    "source": "sink_options.json, 10 kHz unless stated"
   },
   "H10 | BC817-25, 2 V": {
    "value": {
-    "sinks": 0.7001314109809978,
+    "sinks": 0.7001314156703029,
     "R_T": 0.660069798074624,
-    "transistor": 0.2334349037996847,
+    "transistor": 0.23343491786411846,
     "en_10k": 1.8651093,
     "en_10": 3.6885634,
     "en_10M": 2.922129,
@@ -305,22 +305,22 @@
   },
   "H10 | BC817-25, 6 V": {
    "value": {
-    "sinks": 0.4457367003573551,
+    "sinks": 0.4457367074616369,
     "R_T": 0.3846967081466137,
-    "transistor": 0.2251436181343404,
+    "transistor": 0.2251436321993141,
     "en_10k": 1.7852948,
     "en_10": 3.6487402,
     "en_10M": 2.8723267,
-    "vcm_min": -8.824452299999999
+    "vcm_min": -8.824450299999999
    },
    "text": "0.45 (0.38 / 0.23) | 1.79 / 3.65 / 2.87 | V_CM,min \u22128.8 V | 103 mW",
    "source": "sink_options.json, 10 kHz unless stated"
   },
   "H10 | JFE150, 6 V": {
    "value": {
-    "sinks": 0.37765792451630137,
+    "sinks": 0.3776579247848344,
     "R_T": 0.36781820651775265,
-    "transistor": 0.07212638774389243,
+    "transistor": 0.07212638914994707,
     "en_10k": 1.7691831,
     "en_10": 3.6455579,
     "en_10M": 2.8553659999999996,
@@ -331,9 +331,9 @@
   },
   "H10 | R_F 250 ohm for this range (MMBT3904, 2 V)": {
    "value": {
-    "sinks": 0.39526853443106846,
+    "sinks": 0.3952685422813421,
     "R_T": 0.3284352326955762,
-    "transistor": 0.21992615177710778,
+    "transistor": 0.21992616588623526,
     "en_10k": 1.4446969,
     "en_10": 3.0872881999999997,
     "en_10M": 3.4364749000000003,
@@ -342,8 +342,90 @@
    "text": "0.40 (0.33 / 0.22) | 1.44 / 3.09 / 3.44 | V_CM,min \u221212.8 V | 148 mW",
    "source": "sink_options.json, 10 kHz unless stated"
   },
+  "H100 | MMBT3904, 2 V (adopted): front end at 10 kHz | f3dB | margins | source node | ties": {
+   "value": {
+    "en_10k": 1.0707259,
+    "f3db": 15030739.168216696,
+    "v_sa": 0.3551963,
+    "r_in": 0.001,
+    "op_note": ""
+   },
+   "text": "1.07 | 15.0 MHz | DM 59.9 deg, 19.0 dB; CM 56.8 deg, 8.4 dB | 0.355 V | 0.001 ohm",
+   "source": "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)"
+  },
+  "H100 | MMBT3904, 4 V: front end at 10 kHz | f3dB | margins | source node | ties": {
+   "value": {
+    "en_10k": 1.0696048,
+    "f3db": 15030839.989869568,
+    "v_sa": 0.3551963,
+    "r_in": 0.001,
+    "op_note": ""
+   },
+   "text": "1.07 | 15.0 MHz | DM 59.9 deg, 19.0 dB; CM 56.8 deg, 8.4 dB | 0.355 V | 0.001 ohm",
+   "source": "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)"
+  },
+  "H100 | MMBT3904, 6 V: front end at 10 kHz | f3dB | margins | source node | ties": {
+   "value": {
+    "en_10k": 1.0692525,
+    "f3db": 15031109.201529488,
+    "v_sa": 0.3551963,
+    "r_in": 0.001,
+    "op_note": ""
+   },
+   "text": "1.07 | 15.0 MHz | DM 59.9 deg, 19.0 dB; CM 56.8 deg, 8.4 dB | 0.355 V | 0.001 ohm",
+   "source": "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)"
+  },
+  "H100 | BC817-25, 2 V: front end at 10 kHz | f3dB | margins | source node | ties": {
+   "value": {
+    "en_10k": 1.0701102,
+    "f3db": 15034033.633674948,
+    "v_sa": 0.3551963,
+    "r_in": 0.001,
+    "op_note": ""
+   },
+   "text": "1.07 | 15.0 MHz | DM 59.9 deg, 19.0 dB; CM 56.8 deg, 8.4 dB | 0.355 V | 0.001 ohm",
+   "source": "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)"
+  },
+  "H100 | BC817-25, 4 V: front end at 10 kHz | f3dB | margins | source node | ties": {
+   "value": {
+    "en_10k": 1.0690789,
+    "f3db": 15034834.545424925,
+    "v_sa": 0.3551963,
+    "r_in": 0.001,
+    "op_note": ""
+   },
+   "text": "1.07 | 15.0 MHz | DM 59.9 deg, 19.0 dB; CM 56.8 deg, 8.4 dB | 0.355 V | 0.001 ohm",
+   "source": "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)"
+  },
+  "H100 | BC817-25, 6 V: front end at 10 kHz | f3dB | margins | source node | ties": {
+   "value": {
+    "en_10k": 1.0687342,
+    "f3db": 15035843.119007684,
+    "v_sa": 0.3551963,
+    "r_in": 0.001,
+    "op_note": ""
+   },
+   "text": "1.07 | 15.0 MHz | DM 59.9 deg, 19.0 dB; CM 56.8 deg, 8.4 dB | 0.355 V | 0.001 ohm",
+   "source": "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)"
+  },
+  "H100 | JFE150, 6 V: front end at 10 kHz | f3dB | margins | source node | ties": {
+   "value": {
+    "en_10k": 1.0684644,
+    "f3db": 15032967.648613315,
+    "v_sa": 0.3551963,
+    "r_in": 0.001,
+    "op_note": ""
+   },
+   "text": "1.07 | 15.0 MHz | DM 59.9 deg, 19.0 dB; CM 56.8 deg, 8.4 dB | 0.355 V | 0.001 ohm",
+   "source": "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)"
+  },
+  "H100: the loop margins are the same in every sink variant": {
+   "value": true,
+   "text": "True",
+   "source": "sink_options.json H100 | *.loop"
+  },
   "bound, gain 10: sqrt(e_tot^2 - e_sinks^2)": {
-   "value": 1.7286213784451132,
+   "value": 1.7286213748783226,
    "text": "1.73",
    "source": "sink_options.json H10 adopted, 10 kHz"
   },
@@ -448,7 +530,7 @@
     19.898144,
     16.614409000000002,
     16.407137,
-    9.446783400000001
+    9.4467835
    ],
    "text": "9.4\u201320",
    "source": "sr560_chain.json noise.HDR_*"
@@ -483,23 +565,23 @@
    "source": "da_compare.json noise_H_HR"
   },
   "L1000 10 MHz 1 Vpp, S2 THS4031, sinks MMBT3904, 2 V across R_T (%)": {
-   "value": 0.037601210480999306,
-   "text": "0.0376",
+   "value": 0.03726688107091119,
+   "text": "0.0373",
    "source": "large_signal_floor.json L1000_10MHz_1Vpp"
   },
   "L1000 10 MHz 1 Vpp, S2 THS4031, sinks PZT3904, 6 V across R_T (%)": {
-   "value": 0.03690722119636297,
-   "text": "0.0369",
+   "value": 0.037745317513611626,
+   "text": "0.0377",
    "source": "large_signal_floor.json L1000_10MHz_1Vpp"
   },
   "L1000 10 MHz 1 Vpp, S2 LM7171, sinks MMBT3904, 2 V across R_T (%)": {
-   "value": 0.007246738778267644,
+   "value": 0.007159735101264196,
    "text": "0.0072",
    "source": "large_signal_floor.json L1000_10MHz_1Vpp"
   },
   "L1000 10 MHz 1 Vpp, S2 LM7171, sinks PZT3904, 6 V across R_T (%)": {
-   "value": 0.009964701868644071,
-   "text": "0.0100",
+   "value": 0.007171920871984447,
+   "text": "0.0072",
    "source": "large_signal_floor.json L1000_10MHz_1Vpp"
   },
   "floor: linear reference, dBc (max / min)": {
@@ -512,242 +594,250 @@
   },
   "floor: chain settings that stopped": {
    "value": [
-    "gear_reltol1e-5_abstol1e-11 at 100000 Hz"
+    "gear at 1000 Hz",
+    "gear_reltol2e-5 at 1000 Hz",
+    "gear_reltol1e-5_abstol1e-11 at 1000 Hz",
+    "gear_tmax_T_1600 at 1000 Hz",
+    "trap at 100000 Hz",
+    "gear_reltol2e-5 at 100000 Hz",
+    "gear_reltol1e-5_abstol1e-11 at 100000 Hz",
+    "gear at 1e+06 Hz",
+    "gear_reltol2e-5 at 1e+06 Hz",
+    "gear_reltol1e-5_abstol1e-11 at 1e+06 Hz",
+    "gear_tmax_T_1600 at 1e+06 Hz"
    ],
-   "text": "gear_reltol1e-5_abstol1e-11 at 100000 Hz",
+   "text": "gear at 1000 Hz; gear_reltol2e-5 at 1000 Hz; gear_reltol1e-5_abstol1e-11 at 1000 Hz; gear_tmax_T_1600 at 1000 Hz; trap at 100000 Hz; gear_reltol2e-5 at 100000 Hz; gear_reltol1e-5_abstol1e-11 at 100000 Hz; gear at 1e+06 Hz; gear_reltol2e-5 at 1e+06 Hz; gear_reltol1e-5_abstol1e-11 at 1e+06 Hz; gear_tmax_T_1600 at 1e+06 Hz",
    "source": "large_signal_floor.json chain_settings ('failed' entries)"
   },
   "floor: chain settings at 1000 Hz, dBc (range; spread dB)": {
    "value": [
-    -122.05336927412974,
-    -122.04904968855276,
-    -122.05178090003814,
-    -122.04900549034285,
-    -122.05399942004081
+    -122.0256201555187,
+    -122.05111018722712
    ],
-   "text": "\u2212122.0 to \u2212122.1 dBc; spread 0.00 dB",
+   "text": "\u2212122.0 to \u2212122.1 dBc; spread 0.03 dB",
    "source": "large_signal_floor.json chain_settings (5 settings)"
   },
   "floor: chain settings at 100000 Hz, dBc (range; spread dB)": {
    "value": [
-    -121.08505755306113,
-    -121.16653661448026,
-    -121.0953554405964,
-    -121.0385017065961
+    -120.94778120529966,
+    -119.94001199857236,
+    -121.02613376883325
    ],
-   "text": "\u2212121.0 to \u2212121.2 dBc; spread 0.13 dB",
+   "text": "\u2212119.9 to \u2212121.0 dBc; spread 1.09 dB",
    "source": "large_signal_floor.json chain_settings (5 settings)"
   },
   "floor: chain settings at 1e+06 Hz, dBc (range; spread dB)": {
    "value": [
-    -101.17457191948291,
-    -101.21476098985553,
-    -101.22448760972318,
-    -101.26462826361795,
-    -101.22715493498455
+    -100.31641388016101,
+    -101.22328652158798
    ],
-   "text": "\u2212101.2 to \u2212101.3 dBc; spread 0.09 dB",
+   "text": "\u2212100.3 to \u2212101.2 dBc; spread 0.91 dB",
    "source": "large_signal_floor.json chain_settings (5 settings)"
   },
   "floor: largest spread over the settings (dB)": {
-   "value": 0.12803490788417093,
-   "text": "0.1",
+   "value": 1.0861217702608883,
+   "text": "1.1",
    "source": "large_signal_floor.json chain_settings"
   },
   "step 1 V, front_end_alone: overshoot (%) / slew (V/us)": {
    "value": [
-    0.07212359884505459,
-    41.640199999996774
+    0.07212264176086158,
+    41.64069999999679
    ],
    "text": "7.2 % / 42 V/us",
    "source": "chain_extras.json step"
   },
   "step 1 V, chain_fe_out: overshoot (%) / slew (V/us)": {
    "value": [
-    0.07722346246054501,
-    41.19210000004036
+    0.07722420537318664,
+    41.192449999997116
    ],
    "text": "7.7 % / 41 V/us",
    "source": "chain_extras.json step"
   },
   "step 1 V, chain_S2_out: overshoot (%) / slew (V/us)": {
    "value": [
-    0.07742215092469573,
-    41.28799999999691
+    0.07742279007512454,
+    41.2882999999969
    ],
    "text": "7.7 % / 41 V/us",
    "source": "chain_extras.json step"
   },
   "step 1 V, chain_out: overshoot (%) / slew (V/us)": {
    "value": [
-    0.07667002846601156,
-    40.97084999999692
+    0.07667068646997288,
+    40.971299999996894
    ],
    "text": "7.7 % / 41 V/us",
    "source": "chain_extras.json step"
   },
   "step 10 V, front_end_alone: overshoot (%) / slew (V/us)": {
    "value": [
-    0.08726457106364705,
-    394.30510999997097
+    0.08726461117076911,
+    394.3057849999702
    ],
    "text": "8.7 % / 394 V/us",
    "source": "chain_extras.json step"
   },
   "step 10 V, chain_fe_out: overshoot (%) / slew (V/us)": {
    "value": [
-    0.09380842959839208,
-    389.36403999997054
+    0.09380125204984324,
+    389.35656000038284
    ],
    "text": "9.4 % / 389 V/us",
    "source": "chain_extras.json step"
   },
   "step 10 V, chain_S2_out: overshoot (%) / slew (V/us)": {
    "value": [
-    0.09404191428722775,
-    389.96369999997074
+    0.09403920360350337,
+    389.9629499999703
    ],
    "text": "9.4 % / 390 V/us",
    "source": "chain_extras.json step"
   },
   "step 10 V, chain_out: overshoot (%) / slew (V/us)": {
    "value": [
-    0.09312090437915788,
-    311.9144499999767
+    0.09312146956719136,
+    311.9028499999767
    ],
    "text": "9.3 % / 312 V/us",
    "source": "chain_extras.json step"
   },
   "full-power bandwidth, 10 Vpp: SR / (pi 10 V) (MHz)": {
-   "value": 9.928545307857224,
+   "value": 9.928176068389252,
    "text": "9.93",
    "source": "large_signal.json H100 step 10 V"
   },
   "H100 THD 1e+06 Hz 10 Vpp: H3 / H2 (%)": {
    "value": [
-    0.018467348356235026,
-    0.001358786241090167
+    0.01847258755098941,
+    0.0013693797871121248
    ],
    "text": "0.018 / 0.0014",
    "source": "large_signal.json (h2, h3: harmonic / fundamental)"
   },
   "H100 THD 1e+07 Hz 1 Vpp: H3 / H2 (%)": {
    "value": [
-    0.011489646102162599,
-    0.0031646105670481164
+    0.011491533076161308,
+    0.0031624691387696397
    ],
    "text": "0.011 / 0.0032",
    "source": "large_signal.json (h2, h3: harmonic / fundamental)"
   },
+  "H recovery with the THS4031 in S2, 1-ohm sources (us)": {
+   "value": 0.19311600000000034,
+   "text": "0.19",
+   "source": "large_signal_THS4031.json"
+  },
   "H: op-amp clip levels and difference (V)": {
    "value": [
-    13.422281,
-    -12.970390895600001,
-    26.392671895600003
+    13.42232,
+    -12.966020672800001,
+    26.3883406728
    ],
    "text": "+13.4 / \u221213.0; 26.4",
    "source": "overload_numbers.json"
   },
   "H: outputs after the release, min oa / max ob (V; from rest)": {
    "value": [
-    -2.1313094,
-    2.8641725,
-    -2.4865053392386836,
-    2.5089765602777776
+    -2.5767041,
+    3.4186218,
+    -2.93189988,
+    3.06342602
    ],
-   "text": "\u22122.13 / +2.86 (\u22122.49 / +2.51)",
+   "text": "\u22122.58 / +3.42 (\u22122.93 / +3.06)",
    "source": "overload_numbers.json"
   },
   "H: outputs within 12 mV of rest after (us)": {
    "value": [
-    0.18855299999999825,
-    0.18936999999999984
+    0.20072599999999738,
+    0.20072599999999738
    ],
-   "text": "0.19",
+   "text": "0.20",
    "source": "overload_numbers.json"
   },
   "H: output ramp: delay (ns), 10-90 % slope, peak over 5 ns (V/us)": {
    "value": [
-    85.91599999999906,
-    110.79346716955743,
-    267.59283705019214,
-    298.526970951098
+    62.91599999999945,
+    324.75516999016804,
+    356.0648081688569,
+    356.52131944508875
    ],
-   "text": "86 ns, 111 V/us, 268 V/us",
+   "text": "63 ns, 325 V/us, 356 V/us",
    "source": "overload_numbers.json output_ramp"
   },
   "H: dV_GS side a / b (mV)": {
    "value": [
-    0.023512279858071722,
-    -0.00789176362365207
+    0.023395888593150033,
+    -0.008046456801149932
    ],
-   "text": "+23.5 / \u22127.9",
+   "text": "+23.4 / \u22128.0",
    "source": "overload_numbers.json sides"
   },
   "H: JFET current shift dI = -dV_c / R_D, side a / b (mA)": {
    "value": [
-    0.7181979482115253,
-    -0.23395121792180618
+    0.7145703188000052,
+    -0.23857178726666223
    ],
-   "text": "+0.72 / \u22120.23",
+   "text": "+0.71 / \u22120.24",
    "source": "overload_numbers.json sides, R_D 600 ohm"
   },
   "H: g_m dV_GS, side a / b (mA)": {
    "value": [
-    0.8117205037084134,
-    -0.27244939165435533
+    0.8077022980405756,
+    -0.2777899041319538
    ],
-   "text": "+0.81 / \u22120.27",
+   "text": "+0.81 / \u22120.28",
    "source": "overload_numbers.json sides"
   },
   "H: summing nodes rest -> during, a / b (V)": {
    "value": [
-    8.993346880246916,
-    8.562428111320001,
-    9.133717611
+    8.993346900000002,
+    8.56460470872,
+    9.13648997236
    ],
-   "text": "8.99 -> 8.56 / 9.13",
+   "text": "8.99 -> 8.56 / 9.14",
    "source": "overload_numbers.json sides"
   },
   "H: summing nodes within 10 mV after (us)": {
-   "value": 0.11014099999999966,
-   "text": "0.11",
+   "value": 0.11760199999999915,
+   "text": "0.12",
    "source": "overload_numbers.json sides"
   },
   "H: |V_GS| at rest (V)": {
-   "value": 0.35519629903292177,
+   "value": 0.35519629,
    "text": "0.36",
    "source": "overload_numbers.json V_GS_rest_V"
   },
   "H: outputs' mean / sources' mean during the overload (V)": {
    "value": [
-    0.22594505219999927,
-    0.347386040926
+    0.2281496635999991,
+    0.347521574104
    ],
    "text": "+0.23 / +0.35",
    "source": "overload_numbers.json servo"
   },
   "servo: error e (V); rate G_INT e / C_INT (V/s)": {
    "value": [
-    -0.12144098872599991,
-    -0.1214409887259999
+    -0.11937191050400041,
+    -0.11937191050400042
    ],
    "text": "\u22120.12 V; \u22120.12 V/s",
    "source": "overload_numbers.json servo; G_INT 1 uS, C_INT 1 uF (frontend.py)"
   },
-  "servo: change over 20 us (uV), formula / run": {
+  "servo (Appendix B, if used): change over 20 us (uV), formula / error integral": {
    "value": [
-    -2.428819774519998,
-    -2.41000000006375
+    -2.387438210080009,
+    -2.3662690124563377
    ],
-   "text": "\u22122.4 / \u22122.41",
+   "text": "\u22122.4 / \u22122.37",
    "source": "rate x 20 us; overload_numbers.json"
   },
   "servo after 1 s: reference (V), R_F / R_T, outputs' CM (V), tau (s)": {
    "value": [
-    -0.1214409887259999,
+    -0.11937191050400042,
     2.7499999999999996,
-    -0.33396271899649965,
+    -0.32827275388600113,
     0.3636363636363637
    ],
    "text": "\u22120.12 V; 2.75; \u22120.33 V; 0.36 s",
@@ -760,22 +850,32 @@
   },
   "larger overloads: v_s,d (V), dV_GS at 10x (V), zero bias at (V; x full scale)": {
    "value": [
-    0.2639005901846946,
-    0.3680002048581526,
-    0.9742931882505381,
-    9.743896529226422
+    0.2638572822446094,
+    0.36802185882819516,
+    0.9742498622446094,
+    9.7434632262701
    ],
    "text": "0.26; 0.37; 0.97 V (9.7 x)",
    "source": "overload_numbers.json larger_overloads; R_G 10.1, R_F 500 ohm"
   },
+  "H: undershoot (V), time beyond -0.1 V (ns), overshoot after (V), recovery (us)": {
+   "value": [
+    -3.299546586569131,
+    26.330999999998173,
+    0.7275784834308691,
+    0.1645379999999988
+   ],
+   "text": "3.30; 26; 0.73; 0.16",
+   "source": "overload_numbers.json H100"
+  },
   "L: undershoot (V), time beyond -0.1 V (ns), recovery (us), FE outputs apart (V)": {
    "value": [
-    -1.3133277151834473,
-    32.84199999999896,
-    0.15274799999999733,
-    5.999836180685849
+    -1.3133416337451949,
+    32.310999999999765,
+    0.15217400000000056,
+    5.999836179639999
    ],
-   "text": "1.31; 33; 0.15; 6.0",
+   "text": "1.31; 32; 0.15; 6.0",
    "source": "overload_numbers.json L1000"
   }
  },
@@ -1036,12 +1136,12 @@
    "source": "chain_noise.json out_rms_10M"
   },
   "L_200, output 1 Hz - 10 MHz (mV rms)": {
-   "value": 0.2996271795120454,
+   "value": 0.2996271796934924,
    "text": "0.30",
    "source": "chain_noise.json out_rms_10M"
   },
   "L_1000, output 1 Hz - 10 MHz (mV rms)": {
-   "value": 1.4269877269457056,
+   "value": 1.4269877282302244,
    "text": "1.43",
    "source": "chain_noise.json out_rms_10M"
   }
@@ -1326,6 +1426,956 @@
    "source": "noise_vs_source.json nf_db"
   }
  },
+ "s6.2 Figure 14": {
+  "data sheet: largest residual of the tick calibration (pt)": {
+   "value": 0.022516095196465358,
+   "text": "0.02",
+   "source": "sr560_nf_datasheet.json calibration"
+  },
+  "data sheet: two-port fit, largest deviation (decade of R_S | dB)": {
+   "value": [
+    0.00989125944341751,
+    0.02963058873168478
+   ],
+   "text": "0.01 | 0.03",
+   "source": "sr560_nf_datasheet.json two_port_fit"
+  },
+  "data sheet: e_n at 1 MHz (white) | 1 kHz | 10 Hz | 1 Hz (nV/rtHz)": {
+   "value": {
+    "1.0": 43.21537138054412,
+    "10.0": 7.564095688203643,
+    "100.0": 3.9977481374320383,
+    "1000.0": 3.642869732413348,
+    "10000.0": 3.6066460665575804,
+    "100000.0": 3.601508778698542,
+    "1000000.0": 3.6017076695436856
+   },
+   "text": "3.60 | 3.64 | 7.6 | 43",
+   "source": "sr560_nf_datasheet.json model.at"
+  },
+  "data sheet: i_n at low frequencies (fA/rtHz); the resistance with that thermal noise at 290 K (Mohm)": {
+   "value": [
+    1.2693422732185594e-14,
+    99399404.94272494
+   ],
+   "text": "12.7; 99",
+   "source": "sr560_nf_datasheet.json model; R = 4 k T0 / i_n^2"
+  },
+  "data sheet: C of the e_n w C term, 100 kHz to 1 MHz (pF)": {
+   "value": [
+    37.97699592271475,
+    38.17139787883357
+   ],
+   "text": "38",
+   "source": "sr560_nf_datasheet.json model; C = sqrt(i_n^2 - i_n,low^2) / (e_n 2 pi f)"
+  },
+  "simulated (H, L, SR560 as drawn): largest deviation of a run from its two-port fit, 1 Hz to 10 MHz (dB, bound)": {
+   "value": 1.655648418363853e-05,
+   "text": "2e-05",
+   "source": "nf_map.json"
+  },
+  "simulated (SR560 with the LSK389B): the same (dB, bound)": {
+   "value": 0.0027362706705176265,
+   "text": "3e-03",
+   "source": "nf_map.json"
+  },
+  "SR560 models: the 1 ohm run against the archived noise run, largest difference (dB of noise power; both written with 7 digits)": {
+   "value": 0.0,
+   "text": "0",
+   "source": "nf_map.json archived_check"
+  },
+  "simulated at 300.15 K against Table 10: largest difference (dB, bound)": {
+   "value": 1.580096832133615e-06,
+   "text": "2e-06",
+   "source": "nf_map.json table10_check"
+  },
+  "data sheet, 10 Hz": {
+   "value": {
+    "e_n": 7.564095688203643e-09,
+    "i_n": 1.2684011356758133e-14,
+    "corr": 0.015653381584268194,
+    "r_opt": 596348.858058491,
+    "nf_min_db": 0.05252947606407683,
+    "below_0.5dB": [
+     29394.709153517,
+     12098502.443087373
+    ],
+    "below_1dB": [
+     13814.837101987498,
+     25742754.538632486
+    ],
+    "below_3dB": [
+     3590.316903906113,
+     99053083.62073302
+    ]
+   },
+   "text": "3 dB 3600 / 1 dB 14000 ohm (low side); 1 dB 25700000 / 3 dB 99000000 ohm (high side); min 0.05 dB at 600000 ohm; e_n 7.56 nV, i_n 0.0127 pA",
+   "source": "sr560_nf_datasheet.json via nf_map.json datasheet.at"
+  },
+  "data sheet, 1000 Hz": {
+   "value": {
+    "e_n": 3.642869732413348e-09,
+    "i_n": 1.2723882704338421e-14,
+    "corr": 0.010499262772441254,
+    "r_opt": 286301.73800417467,
+    "nf_min_db": 0.025328257099825457,
+    "below_0.5dB": [
+     6798.0073953747715,
+     12057751.693529231
+    ],
+    "below_1dB": [
+     3201.308862824837,
+     25604741.278198965
+    ],
+    "below_3dB": [
+     832.6042883954038,
+     98448550.32246214
+    ]
+   },
+   "text": "3 dB 830 / 1 dB 3200 ohm (low side); 1 dB 25600000 / 3 dB 98000000 ohm (high side); min 0.03 dB at 290000 ohm; e_n 3.64 nV, i_n 0.0127 pA",
+   "source": "sr560_nf_datasheet.json via nf_map.json datasheet.at"
+  },
+  "data sheet, 100000 Hz": {
+   "value": {
+    "e_n": 3.601508778698542e-09,
+    "i_n": 8.696494476565815e-14,
+    "corr": 0.015965504347005856,
+    "r_opt": 41413.33945997919,
+    "nf_min_db": 0.16923549194864007,
+    "below_0.5dB": [
+     6854.368608191309,
+     250214.8313380584
+    ],
+    "below_1dB": [
+     3153.6451127594,
+     543835.6644152649
+    ],
+    "below_3dB": [
+     814.5742659759517,
+     2105473.689587825
+    ]
+   },
+   "text": "3 dB 810 / 1 dB 3200 ohm (low side); 1 dB 544000 / 3 dB 2100000 ohm (high side); min 0.17 dB at 41000 ohm; e_n 3.60 nV, i_n 0.0870 pA",
+   "source": "sr560_nf_datasheet.json via nf_map.json datasheet.at"
+  },
+  "data sheet, 1e+06 Hz": {
+   "value": {
+    "e_n": 3.6017076695436855e-09,
+    "i_n": 8.595206216954371e-13,
+    "corr": 0.0007807449617287639,
+    "r_opt": 4190.36795468523,
+    "nf_min_db": 1.4204338967071308,
+    "below_0.5dB": [],
+    "below_1dB": [],
+    "below_3dB": [
+     847.3753790006309,
+     20721.84775578641
+    ]
+   },
+   "text": "3 dB 850 / 1 dB - ohm (low side); 1 dB - / 3 dB 21000 ohm (high side); min 1.42 dB at 4200 ohm; e_n 3.60 nV, i_n 0.860 pA",
+   "source": "sr560_nf_datasheet.json via nf_map.json datasheet.at"
+  },
+  "H, 10 Hz": {
+   "value": {
+    "e_n": 2.8125075501263927e-09,
+    "i_n": 1.2874837005317227e-14,
+    "corr": 0.0021879321415168287,
+    "r_opt": 218449.95388794784,
+    "nf_min_db": 0.019637012651456107,
+    "below_0.5dB": [
+     4049.533859425079,
+     11784166.773311952
+    ],
+    "below_1dB": [
+     1907.748683750094,
+     25013977.34412553
+    ],
+    "below_3dB": [
+     496.26668399625515,
+     96158746.68207692
+    ]
+   },
+   "text": "3 dB 500 / 1 dB 1900 ohm (low side); 1 dB 25000000 / 3 dB 96000000 ohm (high side); min 0.02 dB at 220000 ohm; e_n 2.81 nV, i_n 0.0129 pA",
+   "source": "nf_map.json H.at"
+  },
+  "H, 1000 Hz": {
+   "value": {
+    "e_n": 1.113913897478523e-09,
+    "i_n": 1.2882282483620944e-14,
+    "corr": 0.0009001600284833206,
+    "r_opt": 86468.67501118674,
+    "nf_min_db": 0.0077824985998861135,
+    "below_0.5dB": [
+     634.9881416499768,
+     11774758.090394754
+    ],
+    "below_1dB": [
+     299.2231588410375,
+     24987476.862215135
+    ],
+    "below_3dB": [
+     77.84405818278904,
+     96048843.4527779
+    ]
+   },
+   "text": "3 dB 78 / 1 dB 300 ohm (low side); 1 dB 25000000 / 3 dB 96000000 ohm (high side); min 0.01 dB at 86000 ohm; e_n 1.11 nV, i_n 0.0129 pA",
+   "source": "nf_map.json H.at"
+  },
+  "H, 100000 Hz": {
+   "value": {
+    "e_n": 1.083630251980852e-09,
+    "i_n": 4.533860925194019e-14,
+    "corr": 0.0021864372841231693,
+    "r_opt": 23900.826908017254,
+    "nf_min_db": 0.026621902958284663,
+    "below_0.5dB": [
+     601.3371354374605,
+     949965.4906086074
+    ],
+    "below_1dB": [
+     283.2238192173304,
+     2016954.3948166403
+    ],
+    "below_3dB": [
+     73.67046133150015,
+     7754119.0398609685
+    ]
+   },
+   "text": "3 dB 74 / 1 dB 280 ohm (low side); 1 dB 2020000 / 3 dB 7800000 ohm (high side); min 0.03 dB at 24000 ohm; e_n 1.08 nV, i_n 0.0453 pA",
+   "source": "nf_map.json H.at"
+  },
+  "H, 1e+06 Hz": {
+   "value": {
+    "e_n": 1.088832352157761e-09,
+    "i_n": 4.3199366401171327e-13,
+    "corr": 0.020043564448600684,
+    "r_opt": 2520.4822266287633,
+    "nf_min_db": 0.25271619136745327,
+    "below_0.5dB": [
+     653.8031037797003,
+     9716.73370472723
+    ],
+    "below_1dB": [
+     291.02965939475644,
+     21828.808335079066
+    ],
+    "below_3dB": [
+     74.53097958599115,
+     85237.45011860473
+    ]
+   },
+   "text": "3 dB 75 / 1 dB 290 ohm (low side); 1 dB 21800 / 3 dB 85000 ohm (high side); min 0.25 dB at 2500 ohm; e_n 1.09 nV, i_n 0.432 pA",
+   "source": "nf_map.json H.at"
+  },
+  "H, 1e+07 Hz": {
+   "value": {
+    "e_n": 1.548340287511163e-09,
+    "i_n": 3.525014923659461e-12,
+    "corr": 0.09610700265058375,
+    "r_opt": 439.24361202527,
+    "nf_min_db": 2.423136217176203,
+    "below_0.5dB": [],
+    "below_1dB": [],
+    "below_3dB": [
+     191.64752428055436,
+     1006.7176783487528
+    ]
+   },
+   "text": "3 dB 190 / 1 dB - ohm (low side); 1 dB - / 3 dB 1000 ohm (high side); min 2.42 dB at 440 ohm; e_n 1.55 nV, i_n 3.53 pA",
+   "source": "nf_map.json H.at"
+  },
+  "L, 10 Hz": {
+   "value": {
+    "e_n": 9.599023162268247e-10,
+    "i_n": 4.0713833277262907e-14,
+    "corr": 0.002359992746807098,
+    "r_opt": 23576.810114877902,
+    "nf_min_db": 0.02119364617718192,
+    "below_0.5dB": [
+     471.7393643191679,
+     1178332.819427231
+    ],
+    "below_1dB": [
+     222.2265955544887,
+     2501347.661859375
+    ],
+    "below_3dB": [
+     57.807326454005334,
+     9615839.536157005
+    ]
+   },
+   "text": "3 dB 58 / 1 dB 220 ohm (low side); 1 dB 2500000 / 3 dB 9600000 ohm (high side); min 0.02 dB at 24000 ohm; e_n 0.960 nV, i_n 0.0407 pA",
+   "source": "nf_map.json L.at"
+  },
+  "L, 1000 Hz": {
+   "value": {
+    "e_n": 4.263315431683447e-10,
+    "i_n": 4.074259655310935e-14,
+    "corr": 0.001074387698211034,
+    "r_opt": 10464.024859402543,
+    "nf_min_db": 0.009420293956335087,
+    "below_0.5dB": [
+     93.01880443610357,
+     1177136.353471865
+    ],
+    "below_1dB": [
+     43.83192192877852,
+     2498083.8493991857
+    ],
+    "below_3dB": [
+     11.402960843839226,
+     9602402.197110292
+    ]
+   },
+   "text": "3 dB 11 / 1 dB 44 ohm (low side); 1 dB 2500000 / 3 dB 9600000 ohm (high side); min 0.01 dB at 10000 ohm; e_n 0.426 nV, i_n 0.0407 pA",
+   "source": "nf_map.json L.at"
+  },
+  "L, 100000 Hz": {
+   "value": {
+    "e_n": 4.175916558387046e-10,
+    "i_n": 1.5683826597465115e-13,
+    "corr": 0.0025564415125025348,
+    "r_opt": 2662.562310566463,
+    "nf_min_db": 0.03546591821893288,
+    "below_0.5dB": [
+     89.35113419205494,
+     79341.33261712278
+    ],
+    "below_1dB": [
+     42.06599242779289,
+     168526.5852176477
+    ],
+    "below_3dB": [
+     10.940602743063828,
+     647975.0909666151
+    ]
+   },
+   "text": "3 dB 11 / 1 dB 42 ohm (low side); 1 dB 169000 / 3 dB 650000 ohm (high side); min 0.04 dB at 2700 ohm; e_n 0.418 nV, i_n 0.157 pA",
+   "source": "nf_map.json L.at"
+  },
+  "L, 1e+06 Hz": {
+   "value": {
+    "e_n": 4.1887229525635217e-10,
+    "i_n": 1.5141106917574634e-12,
+    "corr": 0.023628644495951267,
+    "r_opt": 276.6457548557149,
+    "nf_min_db": 0.338545839185985,
+    "below_0.5dB": [
+     104.09072087458335,
+     735.2516443026763
+    ],
+    "below_1dB": [
+     43.680958798626484,
+     1752.0877696964612
+    ],
+    "below_3dB": [
+     11.045709390187781,
+     6928.7422813853045
+    ]
+   },
+   "text": "3 dB 11 / 1 dB 44 ohm (low side); 1 dB 1750 / 3 dB 6900 ohm (high side); min 0.34 dB at 280 ohm; e_n 0.419 nV, i_n 1.51 pA",
+   "source": "nf_map.json L.at"
+  },
+  "L, 1e+07 Hz": {
+   "value": {
+    "e_n": 5.4388735729719e-10,
+    "i_n": 1.4729716851354512e-11,
+    "corr": 0.20187030785181068,
+    "r_opt": 36.92449507250205,
+    "nf_min_db": 3.4289659391982164,
+    "below_0.5dB": [],
+    "below_1dB": [],
+    "below_3dB": []
+   },
+   "text": "3 dB - / 1 dB - ohm (low side); 1 dB - / 3 dB - ohm (high side); min 3.43 dB at 37 ohm; e_n 0.544 nV, i_n 14.7 pA",
+   "source": "nf_map.json L.at"
+  },
+  "SR560 reproduction, 10 Hz": {
+   "value": {
+    "e_n": 4.770421126138448e-08,
+    "i_n": 1.288368097859331e-14,
+    "corr": 0.03702675495155209,
+    "r_opt": 3702684.9190574265,
+    "nf_min_db": 0.33260096284110496,
+    "below_0.5dB": [
+     1351023.1539525443,
+     10147772.50094181
+    ],
+    "below_1dB": [
+     567922.7598040543,
+     24140387.70790854
+    ],
+    "below_3dB": [
+     143392.78648480674,
+     95610636.67081933
+    ]
+   },
+   "text": "3 dB 140000 / 1 dB 570000 ohm (low side); 1 dB 24100000 / 3 dB 96000000 ohm (high side); min 0.33 dB at 3700000 ohm; e_n 47.7 nV, i_n 0.0129 pA",
+   "source": "nf_map.json SR560.at"
+  },
+  "SR560 reproduction, 1000 Hz": {
+   "value": {
+    "e_n": 5.706590843941774e-09,
+    "i_n": 1.2924866802841975e-14,
+    "corr": 0.004371093504541806,
+    "r_opt": 441520.2826451554,
+    "nf_min_db": 0.03999161439809222,
+    "below_0.5dB": [
+     16693.61540086013,
+     11677527.923460364
+    ],
+    "below_1dB": [
+     7856.74316335801,
+     24811827.99715703
+    ],
+    "below_3dB": [
+     2043.1559046289399,
+     95411299.52211726
+    ]
+   },
+   "text": "3 dB 2000 / 1 dB 7900 ohm (low side); 1 dB 24800000 / 3 dB 95000000 ohm (high side); min 0.04 dB at 440000 ohm; e_n 5.71 nV, i_n 0.0129 pA",
+   "source": "nf_map.json SR560.at"
+  },
+  "SR560 reproduction, 100000 Hz": {
+   "value": {
+    "e_n": 3.183627093905429e-09,
+    "i_n": 1.0026518177313076e-13,
+    "corr": -0.01735462213197961,
+    "r_opt": 31752.070236196225,
+    "nf_min_db": 0.1668676280242429,
+    "below_0.5dB": [
+     5301.046509528842,
+     190187.72283398546
+    ],
+    "below_1dB": [
+     2452.179266193333,
+     411142.03116537223
+    ],
+    "below_3dB": [
+     635.6789301592054,
+     1586011.2966647511
+    ]
+   },
+   "text": "3 dB 640 / 1 dB 2500 ohm (low side); 1 dB 411000 / 3 dB 1600000 ohm (high side); min 0.17 dB at 32000 ohm; e_n 3.18 nV, i_n 0.100 pA",
+   "source": "nf_map.json SR560.at"
+  },
+  "SR560 reproduction, 1e+06 Hz": {
+   "value": {
+    "e_n": 3.157160543409974e-09,
+    "i_n": 3.676741613563142e-13,
+    "corr": 0.0020616388047634527,
+    "r_opt": 8586.843665498593,
+    "nf_min_db": 0.5890369908333754,
+    "below_0.5dB": [],
+    "below_1dB": [
+     2632.6675079830543,
+     28007.29067082326
+    ],
+    "below_3dB": [
+     628.8805388796058,
+     117246.24881392559
+    ]
+   },
+   "text": "3 dB 630 / 1 dB 2600 ohm (low side); 1 dB 28000 / 3 dB 120000 ohm (high side); min 0.59 dB at 8600 ohm; e_n 3.16 nV, i_n 0.368 pA",
+   "source": "nf_map.json SR560.at"
+  },
+  "SR560 reproduction, 1e+07 Hz": {
+   "value": {
+    "e_n": 9.051535946424209e-08,
+    "i_n": 4.849931177302434e-11,
+    "corr": 0.4944922055862469,
+    "r_opt": 1866.3225550055615,
+    "nf_min_db": 29.13969994401078,
+    "below_0.5dB": [],
+    "below_1dB": [],
+    "below_3dB": []
+   },
+   "text": "3 dB - / 1 dB - ohm (low side); 1 dB - / 3 dB - ohm (high side); min 29 dB at 1900 ohm; e_n 90.5 nV, i_n 48.5 pA",
+   "source": "nf_map.json SR560.at"
+  },
+  "SR560_LSK389B reproduction, 10 Hz": {
+   "value": {
+    "e_n": 5.171289729126598e-09,
+    "i_n": 1.2874989445792105e-14,
+    "corr": 0.004016615975938885,
+    "r_opt": 401653.90044779534,
+    "nf_min_db": 0.03610382749754612,
+    "below_0.5dB": [
+     13704.245110808019,
+     11771962.223420884
+    ],
+    "below_1dB": [
+     6451.338641248406,
+     25006570.684953306
+    ],
+    "below_3dB": [
+     1677.803360720798,
+     96153017.40481573
+    ]
+   },
+   "text": "3 dB 1700 / 1 dB 6500 ohm (low side); 1 dB 25000000 / 3 dB 96000000 ohm (high side); min 0.04 dB at 400000 ohm; e_n 5.17 nV, i_n 0.0129 pA",
+   "source": "nf_map.json SR560_LSK389B.at"
+  },
+  "SR560_LSK389B reproduction, 1000 Hz": {
+   "value": {
+    "e_n": 3.2327912304659333e-09,
+    "i_n": 1.3038453782783685e-14,
+    "corr": 0.002404828498145692,
+    "r_opt": 247942.83772624907,
+    "nf_min_db": 0.02285476168081176,
+    "below_0.5dB": [
+     5351.010670320921,
+     11488605.530299215
+    ],
+    "below_1dB": [
+     2520.609014930459,
+     24389205.31331899
+    ],
+    "below_3dB": [
+     655.6695988264631,
+     93760105.53113781
+    ]
+   },
+   "text": "3 dB 660 / 1 dB 2500 ohm (low side); 1 dB 24400000 / 3 dB 94000000 ohm (high side); min 0.02 dB at 250000 ohm; e_n 3.23 nV, i_n 0.0130 pA",
+   "source": "nf_map.json SR560_LSK389B.at"
+  },
+  "SR560_LSK389B reproduction, 100000 Hz": {
+   "value": {
+    "e_n": 3.2077153681228617e-09,
+    "i_n": 1.8707004218786828e-13,
+    "corr": -0.017936187371723443,
+    "r_opt": 17147.135536012007,
+    "nf_min_db": 0.3083912236555665,
+    "below_0.5dB": [
+     5804.79383351371,
+     50651.972408189635
+    ],
+    "below_1dB": [
+     2521.859138183044,
+     116590.2776402513
+    ],
+    "below_3dB": [
+     645.5678013919281,
+     455450.62262462836
+    ]
+   },
+   "text": "3 dB 650 / 1 dB 2500 ohm (low side); 1 dB 117000 / 3 dB 460000 ohm (high side); min 0.31 dB at 17000 ohm; e_n 3.21 nV, i_n 0.187 pA",
+   "source": "nf_map.json SR560_LSK389B.at"
+  },
+  "SR560_LSK389B reproduction, 1e+06 Hz": {
+   "value": {
+    "e_n": 3.2113489518643288e-09,
+    "i_n": 7.371041606451611e-13,
+    "corr": 0.0046967542903737615,
+    "r_opt": 4356.709842817261,
+    "nf_min_db": 1.1293622889849955,
+    "below_0.5dB": [],
+    "below_1dB": [],
+    "below_3dB": [
+     662.8909452885996,
+     28633.549438870603
+    ]
+   },
+   "text": "3 dB 660 / 1 dB - ohm (low side); 1 dB - / 3 dB 29000 ohm (high side); min 1.13 dB at 4400 ohm; e_n 3.21 nV, i_n 0.737 pA",
+   "source": "nf_map.json SR560_LSK389B.at"
+  },
+  "SR560_LSK389B reproduction, 1e+07 Hz": {
+   "value": {
+    "e_n": 3.109694519265105e-07,
+    "i_n": 3.048399569053154e-10,
+    "corr": 0.6058169784050307,
+    "r_opt": 1020.1072558972277,
+    "nf_min_db": 42.78997234349525,
+    "below_0.5dB": [],
+    "below_1dB": [],
+    "below_3dB": []
+   },
+   "text": "3 dB - / 1 dB - ohm (low side); 1 dB - / 3 dB - ohm (high side); min 43 dB at 1000 ohm; e_n 311 nV, i_n 305 pA",
+   "source": "nf_map.json SR560_LSK389B.at"
+  },
+  "1 kHz: (e_n,sheet / e_n,H)^2 | (e_n,H / e_n,L)^2": {
+   "value": [
+    10.695080011443874,
+    6.826660611611435
+   ],
+   "text": "10.7 | 6.8",
+   "source": "nf_map.json datasheet.at, H.at, L.at"
+  },
+  "H minus the data sheet: fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)": {
+   "value": [
+    0.7234964558764354,
+    0.27650354412356454,
+    0.0
+   ],
+   "text": "72 | 28 | 0",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "H minus the data sheet: extremes (dB) at (Hz, ohm)": {
+   "value": [
+    {
+     "value": -14.352997662376865,
+     "f_hz": 1.0,
+     "r_ohm": 1.0
+    },
+    {
+     "value": 0.07125022662842673,
+     "f_hz": 1.4125375446227544,
+     "r_ohm": 100000000.0
+    }
+   ],
+   "text": "\u221214.4 at (1, 1); 0.1 (0.07) at (1.41, 1e+08)",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "H equal to the data sheet at (ohm): 10 Hz | 1 kHz | 100 kHz | 1 MHz": {
+   "value": {
+    "10.0": [
+     3484520.7787689483
+    ],
+    "1000.0": [
+     1842928.630082102
+    ],
+    "100000.0": [],
+    "1000000.0": []
+   },
+   "text": "3500000 | 1800000 | - | -",
+   "source": "nf_map.json vs_datasheet.equal_at_r_ohm"
+  },
+  "L minus the data sheet: fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)": {
+   "value": [
+    0.5738694400594299,
+    0.07809453059708422,
+    0.34803602934348593
+   ],
+   "text": "57 | 8 | 35",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "L minus the data sheet: extremes (dB) at (Hz, ohm)": {
+   "value": [
+    {
+     "value": -23.87417924056662,
+     "f_hz": 1.0,
+     "r_ohm": 1.0
+    },
+    {
+     "value": 7.535460586404275,
+     "f_hz": 1.4125375446227544,
+     "r_ohm": 100000000.0
+    }
+   ],
+   "text": "\u221223.9 at (1, 1); 7.5 (7.54) at (1.41, 1e+08)",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "L equal to the data sheet at (ohm): 10 Hz | 1 kHz | 100 kHz | 1 MHz": {
+   "value": {
+    "10.0": [
+     194880.56776106503
+    ],
+    "1000.0": [
+     93785.4383740515
+    ],
+    "100000.0": [
+     27692.720138655422
+    ],
+    "1000000.0": [
+     2861.8091563356584
+    ]
+   },
+   "text": "190000 | 94000 | 28000 | 2900",
+   "source": "nf_map.json vs_datasheet.equal_at_r_ohm"
+  },
+  "SR560 minus the data sheet: fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)": {
+   "value": [
+    0.22822711280321087,
+    0.24492112132561572,
+    0.5268517658711734
+   ],
+   "text": "23 | 24 | 53",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "SR560 minus the data sheet: extremes (dB) at (Hz, ohm)": {
+   "value": [
+    {
+     "value": -7.371661791424984,
+     "f_hz": 1000000.0,
+     "r_ohm": 100000000.0
+    },
+    {
+     "value": 15.994809044149193,
+     "f_hz": 10.0,
+     "r_ohm": 1.0
+    }
+   ],
+   "text": "\u22127.4 at (1e+06, 1e+08); 16.0 (15.99) at (10, 1)",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "SR560 equal to the data sheet at (ohm): 10 Hz | 1 kHz | 100 kHz | 1 MHz": {
+   "value": {
+    "10.0": [],
+    "1000.0": [],
+    "100000.0": [
+     38240.218382845065
+    ],
+    "1000000.0": []
+   },
+   "text": "- | - | 38000 | -",
+   "source": "nf_map.json vs_datasheet.equal_at_r_ohm"
+  },
+  "SR560_LSK389B minus the data sheet: fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)": {
+   "value": [
+    0.5455783576314731,
+    0.31169715541523507,
+    0.14272448695329185
+   ],
+   "text": "55 | 31 | 14",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "SR560_LSK389B minus the data sheet: extremes (dB) at (Hz, ohm)": {
+   "value": [
+    {
+     "value": -10.285913515569241,
+     "f_hz": 1.0,
+     "r_ohm": 1.0
+    },
+    {
+     "value": 6.871832785807687,
+     "f_hz": 63095.7344480193,
+     "r_ohm": 100000000.0
+    }
+   ],
+   "text": "\u221210.3 at (1, 1); 6.9 (6.87) at (6.31e+04, 1e+08)",
+   "source": "nf_map.json vs_datasheet"
+  },
+  "SR560_LSK389B equal to the data sheet at (ohm): 10 Hz | 1 kHz | 100 kHz | 1 MHz": {
+   "value": {
+    "10.0": [
+     2764245.7053865814
+    ],
+    "1000.0": [
+     639298.9903517918
+    ],
+    "100000.0": [
+     10478.01480997312
+    ],
+    "1000000.0": []
+   },
+   "text": "2800000 | 640000 | 10000 | -",
+   "source": "nf_map.json vs_datasheet.equal_at_r_ohm"
+  },
+  "data sheet: e_n at 1 Hz | 10 Hz | 100 Hz | 1 kHz | 100 kHz (nV/rtHz)": {
+   "value": {
+    "1.0": 43.21537138054412,
+    "10.0": 7.564095688203643,
+    "100.0": 3.9977481374320383,
+    "1000.0": 3.642869732413348,
+    "100000.0": 3.601508778698542
+   },
+   "text": "43.2 | 7.56 | 4.00 | 3.64 | 3.60",
+   "source": "nf_map.json low_frequency.e_n"
+  },
+  "data sheet: 1/f corner f (e^2 - e_w^2) / e_w^2 from 10 Hz | 100 Hz | 1 kHz (Hz)": {
+   "value": {
+    "10.0": 34.11081408183682,
+    "100.0": 23.214524051885622,
+    "1000.0": 23.100571406153172
+   },
+   "text": "34 | 23 | 23",
+   "source": "nf_map.json low_frequency.corner_hz"
+  },
+  "SR560: e_n at 1 Hz | 10 Hz | 100 Hz | 1 kHz | 100 kHz (nV/rtHz)": {
+   "value": {
+    "1.0": 150.55813,
+    "10.0": 47.704211,
+    "100.0": 15.378094,
+    "1000.0": 5.7065909,
+    "100000.0": 3.1836252999999997
+   },
+   "text": "151 | 47.7 | 15.4 | 5.71 | 3.18",
+   "source": "nf_map.json low_frequency.e_n"
+  },
+  "SR560: 1/f corner f (e^2 - e_w^2) / e_w^2 from 10 Hz | 100 Hz | 1 kHz (Hz)": {
+   "value": {
+    "10.0": 2235.274995364304,
+    "100.0": 2233.2492118031364,
+    "1000.0": 2212.9915570508865
+   },
+   "text": "2200 | 2200 | 2200",
+   "source": "nf_map.json low_frequency.corner_hz"
+  },
+  "SR560: the input JFETs' flicker share of the output noise at 10 Hz | 100 Hz | 1 kHz | 10 kHz (%)": {
+   "value": {
+    "10.0": 0.9953699751791618,
+    "100.0": 0.9578400064158824,
+    "1000.0": 0.6955758447132026,
+    "10000.0": 0.1860783745186326
+   },
+   "text": "99.5 | 95.8 | 69.6 | 18.6",
+   "source": "nf_map.json low_frequency"
+  },
+  "SR560_LSK389B: e_n at 1 Hz | 10 Hz | 100 Hz | 1 kHz | 100 kHz (nV/rtHz)": {
+   "value": {
+    "1.0": 13.222834,
+    "10.0": 5.1712898,
+    "100.0": 3.4542675,
+    "1000.0": 3.2327906,
+    "100000.0": 3.2076876999999997
+   },
+   "text": "13.2 | 5.17 | 3.45 | 3.23 | 3.21",
+   "source": "nf_map.json low_frequency.e_n"
+  },
+  "SR560_LSK389B: 1/f corner f (e^2 - e_w^2) / e_w^2 from 10 Hz | 100 Hz | 1 kHz (Hz)": {
+   "value": {
+    "10.0": 15.990437802180871,
+    "100.0": 15.965225099184515,
+    "1000.0": 15.712954744525776
+   },
+   "text": "16 | 16 | 16",
+   "source": "nf_map.json low_frequency.corner_hz"
+  },
+  "SR560_LSK389B: the input JFETs' flicker share of the output noise at 10 Hz | 100 Hz | 1 kHz | 10 kHz (%)": {
+   "value": {
+    "10.0": 0.5969113203329799,
+    "100.0": 0.13378137209352153,
+    "1000.0": 0.015273987815942962,
+    "10000.0": 0.0015493545864866873
+   },
+   "text": "59.7 | 13.4 | 1.5 | 0.2",
+   "source": "nf_map.json low_frequency"
+  },
+  "SR560: the tail servo's share of the output noise, 1 Mohm in input A, input B grounded, at 10 kHz | 100 kHz | 1 MHz (%)": {
+   "value": {
+    "10000.0": 0.408875005992842,
+    "100000.0": 0.9666203099762621,
+    "1000000.0": 0.7906071477080892
+   },
+   "text": "41 | 97 | 79",
+   "source": "nf_map.json tail_servo_share_rs_1e6"
+  },
+  "SR560: the tail servo's share of the output noise, 1 Mohm in input A and from input B to ground, at 10 kHz | 100 kHz | 1 MHz (%)": {
+   "value": {
+    "10000.0": 3.685898741227367e-05,
+    "100000.0": 0.0002992922357346086,
+    "1000000.0": 0.0006585308813695148
+   },
+   "text": "0.00 | 0.03 | 0.07",
+   "source": "nf_map.json balanced_tail_servo_share_rs_1e6"
+  },
+  "SR560_LSK389B: the tail servo's share of the output noise, 1 Mohm in input A, input B grounded, at 10 kHz | 100 kHz | 1 MHz (%)": {
+   "value": {
+    "10000.0": 0.7022650194521752,
+    "100000.0": 0.9794223920092556,
+    "1000000.0": 0.8152479922176846
+   },
+   "text": "70 | 98 | 82",
+   "source": "nf_map.json tail_servo_share_rs_1e6"
+  },
+  "SR560_LSK389B: the tail servo's share of the output noise, 1 Mohm in input A and from input B to ground, at 10 kHz | 100 kHz | 1 MHz (%)": {
+   "value": {
+    "10000.0": 3.629322619990137e-05,
+    "100000.0": 0.00041699056702129835,
+    "1000000.0": 0.000565393559842805
+   },
+   "text": "0.00 | 0.04 | 0.06",
+   "source": "nf_map.json balanced_tail_servo_share_rs_1e6"
+  },
+  "2N5564 card per device: its 1/f corner (kHz); e_n at 10 Hz | 100 Hz | 1 kHz, card / Vishay at 4.5 mA (nV/rtHz) and their ratio": {
+   "value": {
+    "corner": 6910.15625,
+    "card": {
+     "10.0": 33.67192302200752,
+     "100.0": 10.717014509647731,
+     "1000.0": 3.6
+    },
+    "vishay": {
+     "10.0": 10.508953346730106,
+     "100.0": 7.9216582290289805,
+     "1000.0": 3.4442816818735444
+    }
+   },
+   "text": "6.9; 33.7 / 10.5 = 3.20 | 10.7 / 7.9 = 1.35 | 3.6 / 3.4 = 1.05",
+   "source": "CARD_2N5564 (models.py targets), VISHAY_2N5564_EN (data sheet p. 5, survey Section 3.1)"
+  },
+  "Vishay 2N5564 at 10 mA: excess power above the 100 kHz level, 10 Hz over 100 Hz (a 1/f line: 10)": {
+   "value": 1.5611858704793942,
+   "text": "1.6",
+   "source": "VISHAY_2N5564_EN"
+  },
+  "the pair from the card at 10 Hz: sqrt(2) e_card(10 Hz) (nV/rtHz)": {
+   "value": 47.61929020890589,
+   "text": "47.6",
+   "source": "CARD_2N5564"
+  },
+  "SR560 as drawn at 10 Hz with the JFETs of Vishay's curve: sqrt(2 e_V^2 + (1 - share) e^2) (nV/rtHz)": {
+   "value": 15.212255262166092,
+   "text": "15",
+   "source": "nf_map.json SR560.low_frequency, VISHAY_2N5564_EN"
+  },
+  "H, 100000 Hz: i_n | R_Z's sqrt(4kT Re Y_Z) (pA/rtHz); R_Z's share of the output noise with 1 kOhm | 100 kOhm (%)": {
+   "value": {
+    "i_n": 4.533860925194019e-14,
+    "i_rz": 3.793940643681177e-14,
+    "i_bias": 1.2874809471988314e-14,
+    "rza_share_of_output_noise_rs_1000": 0.0012234317677141755,
+    "rza_share_of_output_noise_rs_100000": 0.661742179812692
+   },
+   "text": "0.05 | 0.04; 0 | 66",
+   "source": "nf_map.json input_network"
+  },
+  "H, 1e+06 Hz: i_n | R_Z's sqrt(4kT Re Y_Z) (pA/rtHz); R_Z's share of the output noise with 1 kOhm | 100 kOhm (%)": {
+   "value": {
+    "i_n": 4.3199366401171327e-13,
+    "i_rz": 3.7585645149436736e-13,
+    "i_bias": 1.2874809471988314e-14,
+    "rza_share_of_output_noise_rs_1000": 0.10155640539271076,
+    "rza_share_of_output_noise_rs_100000": 0.7557440460849932
+   },
+   "text": "0.43 | 0.38; 10 | 76",
+   "source": "nf_map.json input_network"
+  },
+  "H, 1e+07 Hz: i_n | R_Z's sqrt(4kT Re Y_Z) (pA/rtHz); R_Z's share of the output noise with 1 kOhm | 100 kOhm (%)": {
+   "value": {
+    "i_n": 3.525014923659461e-12,
+    "i_rz": 2.2239712199082503e-12,
+    "i_bias": 1.2874809471988314e-14,
+    "rza_share_of_output_noise_rs_1000": 0.31161721726447406,
+    "rza_share_of_output_noise_rs_100000": 0.3977050843992566
+   },
+   "text": "3.53 | 2.22; 31 | 40",
+   "source": "nf_map.json input_network"
+  },
+  "L, 100000 Hz: i_n | R_Z's sqrt(4kT Re Y_Z) (pA/rtHz); R_Z's share of the output noise with 1 kOhm | 100 kOhm (%)": {
+   "value": {
+    "i_n": 1.5683826597465115e-13,
+    "i_rz": 1.2200654354803962e-13,
+    "i_bias": 4.0713722372192896e-14,
+    "rza_share_of_output_noise_rs_1000": 0.07468340947583028,
+    "rza_share_of_output_noise_rs_100000": 0.6046373157083205
+   },
+   "text": "0.16 | 0.12; 7 | 60",
+   "source": "nf_map.json input_network"
+  },
+  "L, 1e+06 Hz: i_n | R_Z's sqrt(4kT Re Y_Z) (pA/rtHz); R_Z's share of the output noise with 1 kOhm | 100 kOhm (%)": {
+   "value": {
+    "i_n": 1.5141106917574634e-12,
+    "i_rz": 1.2175243902831646e-12,
+    "i_bias": 4.0713722372192896e-14,
+    "rza_share_of_output_noise_rs_1000": 0.593430753997173,
+    "rza_share_of_output_noise_rs_100000": 0.6465164536088637
+   },
+   "text": "1.51 | 1.22; 59 | 65",
+   "source": "nf_map.json input_network"
+  },
+  "L, 1e+07 Hz: i_n | R_Z's sqrt(4kT Re Y_Z) (pA/rtHz); R_Z's share of the output noise with 1 kOhm | 100 kOhm (%)": {
+   "value": {
+    "i_n": 1.4729716851354512e-11,
+    "i_rz": 1.0231266055906253e-11,
+    "i_bias": 4.0713722372192896e-14,
+    "rza_share_of_output_noise_rs_1000": 0.4747444199083116,
+    "rza_share_of_output_noise_rs_100000": 0.48239716962961493
+   },
+   "text": "14.73 | 10.23; 47 | 48",
+   "source": "nf_map.json input_network"
+  }
+ },
  "table11": {
   "H x10: -3 dB (MHz)": {
    "value": [
@@ -1398,8 +2448,8 @@
   "H x100: db_10M": {
    "value": [
     -0.3745827270943735,
-    -0.37372265464921106,
-    -0.3711677877252622,
+    -0.3737226546531403,
+    -0.37116778773216835,
     -0.36836871951817834
    ],
    "text": "\u22120.37",
@@ -1418,7 +2468,7 @@
   "L: -3 dB (MHz)": {
    "value": [
     16.511698546880947,
-    16.52923801964455,
+    16.529238138123553,
     16.534844336762678,
     16.54989034661535
    ],
@@ -1440,7 +2490,7 @@
     -0.8216470922673789,
     -0.818796908412228,
     -0.8180031182325855,
-    -0.8156030770925613
+    -0.8156030791234702
    ],
    "text": "\u22120.82",
    "source": "chain_ac.json"
@@ -1457,39 +2507,146 @@
   },
   "SR560: -3 dB (MHz)": {
    "value": [
-    0.7948038804621006,
-    0.7428411306871958,
-    0.7292464289536386,
-    0.7285387449701122,
-    0.7299794756867792,
-    0.7493480909914165
+    0.7948058196086265,
+    0.7428427856021828,
+    0.729253873633293,
+    0.7296209230780658,
+    0.7299869612154162,
+    0.7493563659289462
    ],
    "text": "0.73\u20130.79",
    "source": "sr560_chain.json ac"
   },
   "SR560: at 1 MHz (dB)": {
    "value": [
-    -4.234637843084751,
-    -4.69968702618501,
-    -4.840880545416001,
-    -4.843786837432922,
-    -4.833363987459933,
-    -4.643220917863318
+    -4.23462056303245,
+    -4.699669692706837,
+    -4.840798961390169,
+    -4.83703255057469,
+    -4.8332825477976025,
+    -4.643139492592817
    ],
    "text": "\u22124.2 to \u22124.8",
    "source": "sr560_chain.json ac"
   },
   "SR560: peaking (dB)": {
    "value": [
-    3.301206657571292e-06,
-    3.731904663255226e-06,
-    9.983641852149129e-06,
-    3.86282742326717e-06,
-    9.946294130601849e-06,
-    9.804865488991025e-06
+    3.300760824080425e-06,
+    3.7314417534830245e-06,
+    9.983045537801715e-06,
+    9.98101751318249e-06,
+    9.951432532049894e-06,
+    9.69331140669134e-06
    ],
    "text": "1.0e-05 dB at most (none)",
    "source": "sr560_chain_ac_<gain>.npz, 1 Hz - 100 MHz"
+  },
+  "SR560 corrected: -3 dB (MHz)": {
+   "value": [
+    1.161906647065336,
+    1.0635745273890236,
+    1.0381900528725896,
+    1.0389069571213958,
+    1.0396223592878227,
+    1.0761869079506439
+   ],
+   "text": "1.04\u20131.16",
+   "source": "sr560_variants.json models.corrected.ac"
+  },
+  "SR560 corrected: at 1 MHz (dB)": {
+   "value": [
+    -2.372194142156247,
+    -2.7368162152821363,
+    -2.8364310610266608,
+    -2.833395421563716,
+    -2.8303741492558583,
+    -2.6789765914024564
+   ],
+   "text": "\u22122.4 to \u22122.8",
+   "source": "sr560_variants.json models.corrected.ac"
+  },
+  "SR560 corrected: peaking (dB)": {
+   "value": [
+    2.0597522133409866e-06,
+    2.2804171390773394e-06,
+    7.737247017228404e-06,
+    7.733157377516352e-06,
+    7.791176888084023e-06,
+    7.674221146822937e-06
+   ],
+   "text": "7.8e-06 dB at most",
+   "source": "sr560_variants.json models.corrected.ac.*.peak_db"
+  },
+  "SR560 corrected, LSK389B: -3 dB (MHz)": {
+   "value": [
+    1.174999873963419,
+    1.0735998299037322,
+    1.0932754353521172,
+    1.0940724182777544,
+    1.0948678175844346,
+    1.136142006154282
+   ],
+   "text": "1.07\u20131.17",
+   "source": "sr560_variants.json models.corrected_lsk389b.ac"
+  },
+  "SR560 corrected, LSK389B: at 1 MHz (dB)": {
+   "value": [
+    -2.3320482384667,
+    -2.696670275021324,
+    -2.617067434782992,
+    -2.6140316914427455,
+    -2.611010576607138,
+    -2.459613050545793
+   ],
+   "text": "\u22122.3 to \u22122.7",
+   "source": "sr560_variants.json models.corrected_lsk389b.ac"
+  },
+  "SR560 corrected, LSK389B: peaking (dB)": {
+   "value": [
+    2.3692745181042105e-06,
+    2.6414672248760978e-06,
+    7.53029339261043e-06,
+    7.523822967283109e-06,
+    7.521057382651544e-06,
+    7.3664155113215154e-06
+   ],
+   "text": "7.5e-06 dB at most",
+   "source": "sr560_variants.json models.corrected_lsk389b.ac.*.peak_db"
+  }
+ },
+ "table12": {
+  "SR560 corrected, ideal matching: 10 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz (dB)": {
+   "value": [
+    150.32538699200722,
+    110.44025385803232,
+    90.44824703252424,
+    71.57886078700601,
+    66.10109389890924
+   ],
+   "text": "150.3 | 110.4 | 90.4 | 71.6 | 66.1",
+   "source": "sr560_variants.json models.corrected.cmrr_ideal_matching"
+  },
+  "SR560 corrected, LSK389B, ideal matching: 10 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz (dB)": {
+   "value": [
+    151.87831622739765,
+    111.96399856215666,
+    91.97091531852783,
+    72.9947710082149,
+    67.28323756855063
+   ],
+   "text": "151.9 | 112.0 | 92.0 | 73.0 | 67.3",
+   "source": "sr560_variants.json models.corrected_lsk389b.cmrr_ideal_matching"
+  },
+  "SR560 reproduction (as drawn), ideal matching: 10 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz (dB)": {
+   "value": [
+    150.3035575059186,
+    110.417629626381,
+    90.42568793922814,
+    71.56542580336402,
+    65.56297295548762
+   ],
+   "text": "150.3 | 110.4 | 90.4 | 71.6 | 65.6",
+   "source": "sr560_chain.json cmrr_ideal_matching"
   }
  },
  "s6.3": {
@@ -1569,7 +2726,7 @@
    "source": "0.6745 Delta C_rms"
   },
   "L: capacitor-only runs, median at 1 MHz (dB)": {
-   "value": 55.30356618690139,
+   "value": 55.30356618032844,
    "text": "55",
    "source": "cmrr_mc.json L200_only_c"
   },
@@ -1579,69 +2736,69 @@
    "source": "the note's earlier estimate"
   },
   "L: trimming recovers at 1 MHz (dB)": {
-   "value": 24.90057537243517,
+   "value": 24.900575248630865,
    "text": "25",
    "source": "cmrr_mc.json L200_trimmed - L200"
   },
   "H100: median at 10 Hz / 1 kHz (dB)": {
    "value": [
-    114.48729552460038,
-    123.79630332250244
+    114.47761119264231,
+    123.79634870310599
    ],
    "text": "114 / 124",
    "source": "cmrr_mc.json"
   },
   "L200: median at 10 Hz / 1 kHz (dB)": {
    "value": [
-    108.20267055331291,
-    118.82933555592454
+    108.2080716083287,
+    118.82933818495252
    ],
    "text": "108 / 119",
    "source": "cmrr_mc.json"
   },
   "H10: median at 10 Hz / 1 kHz (dB)": {
    "value": [
-    104.06781428570159,
-    103.97225550250351
+    104.16329767008821,
+    103.97222003369535
    ],
    "text": "104 / 104",
    "source": "cmrr_mc.json"
   },
   "H100_rs0: median at 10 Hz / 1 kHz (dB)": {
    "value": [
-    114.48394992400485,
-    124.01442068911734
+    114.47443647537341,
+    124.01446164754165
    ],
    "text": "114 / 124",
    "source": "cmrr_mc.json"
   },
   "L200_rs0: median at 10 Hz / 1 kHz (dB)": {
    "value": [
-    108.18710590132396,
-    131.82645158161668
+    108.19248776548307,
+    131.82645404478745
    ],
    "text": "108 / 132",
    "source": "cmrr_mc.json"
   },
   "discrete S2 resistors: cost at 1 kHz (dB)": {
-   "value": 12.30006871567359,
+   "value": 12.300104431362598,
    "text": "12",
    "source": "cmrr_mc.json H100 - H100_discrete"
   },
   "H100 network / discrete at 1 kHz (dB)": {
    "value": [
-    123.79630332250244,
-    111.49623460682885
+    123.79634870310599,
+    111.4962442717434
    ],
    "text": "123.8 / 111.5",
    "source": "cmrr_mc.json"
   },
   "H100 resistors only, 10 Hz - 100 kHz (dB)": {
    "value": [
-    132.10705987221036,
-    124.99413079593654,
-    124.98413693041304,
-    123.52208107010051
+    132.1698532831736,
+    124.99422612445579,
+    124.98413761275984,
+    123.52208082832163
    ],
    "text": "124\u2013132",
    "source": "cmrr_mc.json H100_only_r"
@@ -1658,33 +2815,33 @@
   },
   "R_UP test at 10 Hz: R_UP -> ideal I_BS (improvement)": {
    "value": [
-    106.2138932833565,
-    137.97576926683186,
-    31.761875983475363
+    106.2138299544786,
+    137.9748905693666,
+    31.76106061488801
    ],
    "text": "106.2 -> 138.0 (31.8)",
    "source": "cmrr_mc.json rup_test"
   },
   "R_UP test at 100 Hz: R_UP -> ideal I_BS (improvement)": {
    "value": [
-    111.84981465112098,
-    137.93957106517485,
-    26.089756414053866
+    111.84981311075383,
+    137.93956312217765,
+    26.089750011423817
    ],
    "text": "111.8 -> 137.9 (26.1)",
    "source": "cmrr_mc.json rup_test"
   },
   "R_UP test at 1000 Hz: R_UP -> ideal I_BS (improvement)": {
    "value": [
-    129.12706681865308,
-    137.48673895899998,
-    8.359672140346902
+    129.12706653526723,
+    137.4867385544033,
+    8.35967201913607
    ],
    "text": "129.1 -> 137.5 (8.4)",
    "source": "cmrr_mc.json rup_test"
   },
   "R_UP test: largest change from 10 kHz to 10 MHz (dB)": {
-   "value": 0.3270146484862835,
+   "value": 0.3270146341901068,
    "text": "0.33",
    "source": "cmrr_mc.json H100_jfet_rs0_*"
   },
@@ -1716,112 +2873,125 @@
  },
  "table13": {
   "H100 THD 1000 Hz 1 Vpp (%)": {
-   "value": 7.894625558782266e-05,
+   "value": 7.896679115231281e-05,
    "text": "0.0001",
    "source": "large_signal.json"
   },
   "H100 THD 1000 Hz 10 Vpp (%)": {
-   "value": 0.00016889402815108406,
+   "value": 0.00016885728331484602,
    "text": "0.0002",
    "source": "large_signal.json"
   },
   "H100 THD 100000 Hz 1 Vpp (%)": {
-   "value": 8.825658571123687e-05,
+   "value": 8.966251979733795e-05,
    "text": "0.0001",
    "source": "large_signal.json"
   },
   "H100 THD 100000 Hz 10 Vpp (%)": {
-   "value": 0.0025600108264001433,
+   "value": 0.0025598450756787496,
    "text": "0.0026",
    "source": "large_signal.json"
   },
   "H100 THD 1e+06 Hz 1 Vpp (%)": {
-   "value": 0.0008735170856397185,
+   "value": 0.0008686316987699261,
    "text": "0.0009",
    "source": "large_signal.json"
   },
   "H100 THD 1e+06 Hz 10 Vpp (%)": {
-   "value": 0.024854536151250935,
+   "value": 0.024856415858120824,
    "text": "0.025",
    "source": "large_signal.json"
   },
   "H100 THD 1e+07 Hz 1 Vpp (%)": {
-   "value": 0.011917824619433921,
+   "value": 0.01191906180164251,
    "text": "0.012",
    "source": "large_signal.json"
   },
   "L1000 THD 1000 Hz 1 Vpp (%)": {
-   "value": 6.765623355279042e-05,
+   "value": 6.753565466397518e-05,
    "text": "0.0001",
    "source": "large_signal.json"
   },
   "L1000 THD 1000 Hz 10 Vpp (%)": {
-   "value": 0.00016223510657235502,
+   "value": 0.00016222756062452294,
    "text": "0.0002",
    "source": "large_signal.json"
   },
   "L1000 THD 100000 Hz 1 Vpp (%)": {
-   "value": 8.832902004319824e-05,
+   "value": 8.694992921242207e-05,
    "text": "0.0001",
    "source": "large_signal.json"
   },
   "L1000 THD 100000 Hz 10 Vpp (%)": {
-   "value": 0.0024575259559907834,
+   "value": 0.002457056988198509,
    "text": "0.0025",
    "source": "large_signal.json"
   },
   "L1000 THD 1e+06 Hz 1 Vpp (%)": {
-   "value": 0.0008679784147346698,
-   "text": "0.0009",
+   "value": 0.0008465884908443716,
+   "text": "0.0008",
    "source": "large_signal.json"
   },
   "L1000 THD 1e+06 Hz 10 Vpp (%)": {
-   "value": 0.02345225682709175,
+   "value": 0.023453132598594637,
    "text": "0.023",
    "source": "large_signal.json"
   },
   "L1000 THD 1e+07 Hz 1 Vpp (%)": {
-   "value": 0.009964701868644071,
-   "text": "0.0100",
+   "value": 0.007171920871984447,
+   "text": "0.0072",
    "source": "large_signal.json"
   },
   "L 10 V step: rise, overshoot, 1 % / 0.1 %, slew": {
    "value": {
     "vstep": 10.0,
-    "dv": 10.013119302352566,
+    "dv": 10.013011120654738,
     "rise_ns": 33.8,
-    "overshoot": 0.046683127416383696,
-    "settle_ns_0p1": 162.8109000000001,
-    "settle_ns_1": 105.63590000000009,
-    "slew_v_us": 274.9979000002705,
+    "overshoot": 0.0466796163120049,
+    "settle_ns_0p1": 162.83290000000008,
+    "settle_ns_1": 105.6329,
+    "slew_v_us": 274.9953349999793,
     "bench": "50 ohm sources and input network"
    },
    "text": "34 ns, 4.7 %, 106 / 163 ns, 275 V/us",
-   "source": "large_signal_L1000_step.json"
+   "source": "large_signal.json L1000 step (6 V sinks)"
   },
   "L 1 V step: rise, overshoot, 1 % / 0.1 %": {
    "value": {
     "vstep": 1.0,
-    "dv": 1.001319517672838,
-    "rise_ns": 33.8,
-    "overshoot": 0.04652132707679413,
-    "settle_ns_0p1": 162.75049999999996,
-    "settle_ns_1": 105.62550000000006,
-    "slew_v_us": 28.397069999997907,
+    "dv": 1.0013086595223157,
+    "rise_ns": 33.80000000000021,
+    "overshoot": 0.04651787474425806,
+    "settle_ns_0p1": 162.64150000000012,
+    "settle_ns_1": 105.44150000000006,
+    "slew_v_us": 28.396439999997888,
     "bench": "50 ohm sources and input network"
    },
-   "text": "34 ns, 4.7 %, 106 / 163 ns",
-   "source": "large_signal_L1000_step.json"
+   "text": "34 ns, 4.7 %, 105 / 163 ns",
+   "source": "large_signal.json L1000 step (6 V sinks)"
+  },
+  "L steps: bench and options": {
+   "value": [
+    "50 ohm sources and input network",
+    "50 ohm sources and input network"
+   ],
+   "text": "50 ohm sources and input network; 50 ohm sources and input network",
+   "source": "large_signal.json L1000 step"
+  },
+  "L steps, 6 V against 2 V sinks: largest difference in rise and settling (ns)": {
+   "value": 0.0,
+   "text": "0.00",
+   "source": "large_signal.json L1000 step against large_signal_L1000_step.json"
   },
   "H 1 V step: rise, overshoot, 1 % / 0.1 %, slew": {
    "value": {
     "vstep": 1.0,
-    "dv": 1.001698607948057,
-    "rise_ns": 23.000000000000036,
-    "overshoot": 0.07667002846601156,
-    "settle_ns_0p1": 129.26090000000002,
-    "settle_ns_1": 82.86090000000013,
-    "slew_v_us": 40.97084999999692
+    "dv": 1.0016986006520001,
+    "rise_ns": 22.999999999999822,
+    "overshoot": 0.07667068646997288,
+    "settle_ns_0p1": 129.25930000000014,
+    "settle_ns_1": 82.85930000000005,
+    "slew_v_us": 40.971299999996894
    },
    "text": "23 ns, 7.7 %, 83 / 129 ns, 41 V/us",
    "source": "large_signal.json H100 step"
@@ -1829,50 +2999,63 @@
   "H 10 V step: rise, overshoot, 1 % / 0.1 %, slew": {
    "value": {
     "vstep": 10.0,
-    "dv": 10.016906089116462,
-    "rise_ns": 27.199999999999925,
-    "overshoot": 0.09312090437915788,
-    "settle_ns_0p1": 130.60140000000007,
-    "settle_ns_1": 84.00139999999996,
-    "slew_v_us": 311.9144499999767
+    "dv": 10.016902409776993,
+    "rise_ns": 27.150000000000027,
+    "overshoot": 0.09312146956719136,
+    "settle_ns_0p1": 130.69599999999997,
+    "settle_ns_1": 84.07160000000007,
+    "slew_v_us": 311.9028499999767
    },
    "text": "27 ns, 9.3 %, 84 / 131 ns, 312 V/us",
    "source": "large_signal.json H100 step"
   },
   "H100 fundamental at 10 MHz, 1 Vpp (Vpp)": {
-   "value": 0.9607014776886775,
+   "value": 0.9607014955939771,
    "text": "0.961",
    "source": "large_signal.json"
   },
   "L1000 fundamental at 10 MHz, 1 Vpp (Vpp)": {
-   "value": 0.9156194983585536,
+   "value": 0.9156820790110318,
    "text": "0.916",
    "source": "large_signal.json"
   },
-  "H recovery with the THS4031 in S2 (us)": {
-   "value": 0.1930699999999978,
-   "text": "0.19",
-   "source": "large_signal_THS4031.json"
+  "H recovery (LM7171 in S2) (us); options; bench": {
+   "value": [
+    0.1645379999999988,
+    ".options abstol=1e-11 method=gear klu",
+    "50 ohm sources and input network"
+   ],
+   "text": "0.16",
+   "source": "large_signal.json H100.overload (overload_detail.py)"
+  },
+  "L recovery (us); options; bench": {
+   "value": [
+    0.15217400000000056,
+    ".options abstol=1e-11 method=gear klu",
+    "50 ohm sources and input network"
+   ],
+   "text": "0.15",
+   "source": "large_signal.json L1000.overload (overload_detail.py)"
   }
  },
  "table14": {
   "THS4031 slew rate, 10 V step (V/us)": {
-   "value": 133.0134999999899,
+   "value": 133.0139999999902,
    "text": "133",
    "source": "large_signal_THS4031.json"
   },
   "THS4031: HD3 at 10 MHz, 1 Vpp (dBc)": {
-   "value": -37.79080012118213,
+   "value": -37.789453819411214,
    "text": "\u221237.8",
    "source": "da_compare.json thd[0].h3"
   },
   "LM7171: HD3 at 10 MHz, 1 Vpp (dBc)": {
-   "value": -78.79386696016806,
+   "value": -78.79244057139903,
    "text": "\u221278.8",
    "source": "da_compare.json thd[0].h3"
   },
   "THS3091: HD3 at 10 MHz, 1 Vpp (dBc)": {
-   "value": -78.85278887514463,
+   "value": -78.8709443717938,
    "text": "\u221278.9",
    "source": "da_compare.json thd[0].h3"
   },
@@ -1883,24 +3066,24 @@
   },
   "THS4031 model above the data sheet: as read / scaled (dB)": {
    "value": [
-    12.20919987881787,
-    24.25039970537712
+    12.210546180588786,
+    24.251746007148036
    ],
    "text": "12.2 / 24.3",
    "source": "as model_defects.json opamp/THS4031 HD3"
   },
   "THS4031 data sheet (scaled) above the LM7171 (dB; ratio)": {
    "value": [
-    16.75266713360881,
-    6.880711625167399
+    16.751240744839777,
+    6.879581773837445
    ],
    "text": "16.8 dB; 6.9 times",
    "source": "data sheet value - da_compare.json LM7171 h3"
   },
   "THS4031 data sheet (as read) above the LM7171 (dB; ratio)": {
    "value": [
-    28.79386696016806,
-    27.522846500669612
+    28.792440571399027,
+    27.51832709534978
    ],
    "text": "28.8 dB; 27.5 times",
    "source": "data sheet value - da_compare.json LM7171 h3"
@@ -1964,10 +3147,35 @@
    "text": "3.9\u20134.5",
    "source": "chain_noise.json"
   },
-  "SR560 reproduction, gain >= 100: white / 1 kHz / 10 Hz; gain 10 at 1 kHz": {
+  "SR560 reproduction, gain >= 1000: white / 1 kHz / 10 Hz; gain 10 at 1 kHz": {
    "value": null,
    "text": "3.2 / 5.7 / 48; 11.5",
    "source": "sr560_chain.json noise"
+  },
+  "SR560 corrected, gain >= 1000: white / 1 kHz / 10 Hz; gain 10 at 1 kHz": {
+   "value": null,
+   "text": "3.2 / 5.7 / 47.7; 11.5",
+   "source": "sr560_variants.json models.corrected.noise"
+  },
+  "SR560 corrected: bandwidth (MHz); CMRR 1 kHz / 1 MHz (dB)": {
+   "value": null,
+   "text": "1.04\u20131.16 MHz; 110.4 / 66.1 dB",
+   "source": "sr560_variants.json models.corrected"
+  },
+  "SR560 corrected_lsk389b, gain >= 1000: white / 1 kHz / 10 Hz; gain 10 at 1 kHz": {
+   "value": null,
+   "text": "3.2 / 3.2 / 5.2; 10.3",
+   "source": "sr560_variants.json models.corrected_lsk389b.noise"
+  },
+  "SR560 corrected_lsk389b: bandwidth (MHz); CMRR 1 kHz / 1 MHz (dB)": {
+   "value": null,
+   "text": "1.07\u20131.17 MHz; 112.0 / 67.3 dB",
+   "source": "sr560_variants.json models.corrected_lsk389b"
+  },
+  "SR560 reproduction (as drawn): CMRR 1 kHz / 1 MHz (dB)": {
+   "value": null,
+   "text": "110.4 / 65.6 dB",
+   "source": "sr560_chain.json cmrr_ideal_matching"
   },
   "input capacitance C_P + C_Z: H / L (pF)": {
    "value": [
@@ -1979,16 +3187,16 @@
   },
   "CMRR H100_rs0: 1 kHz / 1 MHz (dB)": {
    "value": [
-    124.01442068911734,
-    95.1158255676217
+    124.01446164754165,
+    95.11582556210386
    ],
    "text": "124 / 95",
    "source": "cmrr_mc.json"
   },
   "CMRR L200_rs0: 1 kHz / 1 MHz (dB)": {
    "value": [
-    131.82645158161668,
-    98.30807620549228
+    131.82645404478745,
+    98.30807616970444
    ],
    "text": "132 / 98",
    "source": "cmrr_mc.json"
@@ -2020,14 +3228,14 @@
   },
   "L200: CM gain margin (dB) at the grid point past -180 deg (MHz)": {
    "value": [
-    10.152656384397517,
+    10.152656379354548,
     206.08522
    ],
    "text": "10.2 dB at 206.1 MHz",
    "source": "curves_loop.npz out_*_cm, frontend._margins"
   },
   "L200: CM -180 deg crossing, interpolated (MHz; nearest 5 MHz)": {
-   "value": 203.9333947581829,
+   "value": 203.93339310821597,
    "text": "203.9 (205)",
    "source": "log-f interpolation between the grid points around it"
   },
@@ -2058,32 +3266,32 @@
  "appendix": {
   "H100_first: dominant frequency (MHz), output pk-pk (V)": {
    "value": [
-    292831174.25537896,
-    1.00536209
+    292841352.92416865,
+    1.00529854
    ],
    "text": "293 MHz, 1.01 V",
    "source": "osc_check.json H100_first (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)"
   },
   "H100_first_ties: dominant frequency (MHz), output pk-pk (V)": {
    "value": [
-    282839782.7721783,
-    1.03160314
+    282823406.3028556,
+    1.031625125
    ],
    "text": "283 MHz, 1.03 V",
    "source": "osc_check.json H100_first_ties (inputs tied to ground through 1 milliohm, global options only (trapezoidal))"
   },
   "L200_first: dominant frequency (MHz), output pk-pk (V)": {
    "value": [
-    275691719.86924356,
-    0.7825457
+    275684311.5399644,
+    0.78251914
    ],
    "text": "276 MHz, 0.78 V",
    "source": "osc_check.json L200_first (50 ohm sources and input network (chain.INPUT_NET), Gear, abstol 1e-12)"
   },
   "L200_first_ties: dominant frequency (MHz), output pk-pk (V)": {
    "value": [
-    227123397.0349984,
-    0.81513346
+    227116060.91910666,
+    0.8151335550000001
    ],
    "text": "227 MHz, 0.82 V",
    "source": "osc_check.json L200_first_ties (inputs tied to ground through 1 milliohm, global options only (trapezoidal))"

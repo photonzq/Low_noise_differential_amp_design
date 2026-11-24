@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import math
 import re
+from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
@@ -28,6 +29,23 @@ KT = 1.380649e-23 * 300.15          # ngspice's default temperature, 27 C
 Q = 1.602176634e-19
 
 OPTIONS = ".options reltol=1e-4 abstol=1e-15 vntol=1e-9 gmin=1e-14 itl1=500 itl4=200\n"
+
+
+@contextmanager
+def options_replaced(old: str, new: str):
+    """Decks written inside the block use OPTIONS with old replaced by new (frontend.op_checked: a larger
+    abstol for a deck whose operating point fell back)."""
+    global OPTIONS
+    if old not in OPTIONS:
+        raise ValueError(f"{old!r} is not in OPTIONS")
+    saved = OPTIONS
+    OPTIONS = saved.replace(old, new)
+    try:
+        yield
+    finally:
+        OPTIONS = saved
+
+
 ERRORS = re.compile(r"error|singular|timestep too small|no convergence|aborted|unknown model|"
                     r"could not find|not found|fatal", re.I)
 
@@ -66,6 +84,32 @@ def run(name: str, deck: str, allow: tuple[str, ...] = ()) -> Path:
             bad.append(line.strip())
     if bad:
         raise RuntimeError(f"ngspice reported problems in {name}:\n" + "\n".join(bad[:12]))
+    if op_fallback(folder):
+        FALLBACKS.append(folder)
+    return folder
+
+
+# every run folder of this process whose operating point fell back to the transient op, in order: a
+# caller compares the list's length before and after its runs (frontend.op_checked)
+FALLBACKS: list[Path] = []
+
+
+def op_fallback(folder: Path) -> bool:
+    """True if ngspice's operating point failed its gmin and source stepping and fell back to the
+    transient op.  Its result can then be an unsettled state of the circuit's capacitors rather than
+    a DC solution (the SR560 decks: sr560_frontend.NODESET; the front ends: frontend.op_checked), so a
+    caller that needs the DC solution checks this; spice.run does not treat it as an error, since the
+    fallback can also succeed."""
+    return "Transient op" in (folder / "run.log").read_text(encoding="utf-8", errors="replace")
+
+
+def check_dc(folder: Path) -> Path:
+    """The folder, or RuntimeError (in run's format) if its operating point fell back to the transient op:
+    an analysis from that state is not one of the circuit (a transient ladder then tries its next set;
+    in the KLU runs of the THS4031 and THS3091 chains it left the chain without signal)."""
+    if op_fallback(folder):
+        raise RuntimeError(f"ngspice reported problems in {folder.relative_to(RUNS).as_posix()}:\n"
+                           "the operating point fell back to the transient op (not a DC solution)")
     return folder
 
 

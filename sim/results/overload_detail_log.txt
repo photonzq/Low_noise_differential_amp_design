@@ -1,40 +1,40 @@
 Traceback (most recent call last):
-  File "<root>\scripts\overload_detail.py", line 368, in <module>
+  File "<root>\scripts\overload_detail.py", line 372, in <module>
     main(sys.argv[1:])
     ~~~~^^^^^^^^^^^^^^
-  File "<root>\scripts\overload_detail.py", line 328, in main
+  File "<root>\scripts\overload_detail.py", line 332, in main
     _child(args[1], int(args[2]))
     ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "<root>\scripts\overload_detail.py", line 319, in _child
+  File "<root>\scripts\overload_detail.py", line 323, in _child
     r, d = run(name, k)
            ~~~^^^^^^^^^
-  File "<root>\scripts\overload_detail.py", line 87, in run
-    f = spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl))
-  File "<root>\scripts\spice.py", line 68, in run
+  File "<root>\scripts\overload_detail.py", line 93, in run
+    f = spice.check_dc(spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl)))
+                       ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<root>\scripts\spice.py", line 86, in run
     raise RuntimeError(f"ngspice reported problems in {name}:\n" + "\n".join(bad[:12]))
 RuntimeError: ngspice reported problems in large/H100_overload_detail:
-stderr doAnalyses: TRAN:  Timestep too small; time = 2.07161e-06, timestep = 2.5e-21: trouble with node "xs3.x1.17"
+stderr doAnalyses: TRAN:  Timestep too small; time = 4.32809e-09, timestep = 2.5e-21: trouble with xca2:lsbf862_m-instance j.xca2.j1
 stderr tran simulation(s) aborted
 H100: attempt 0 failed
-H100: attempt 1 timed out
-H100: attempt 2 timed out
+H100: attempt 1 ran {"input_overdrive": 3, "bench": "50 ohm sources and input network", "options": ".options abstol=1e-11 method=gear klu", "input_edge": "10n", "recovery_us": 0.1645379999999988, "v_during": 11.362178999999998, "fe_out_during": 26.3883406728, "oa_ob_during": [13.42232, -12.966020672800001], "sa_sb_during": [0.48178555139199997, 0.21325759681599998], "ca_cb_during": [8.56460470872, 9.13648997236], "ca_cb_before": [8.993346900000002, 8.993346900000002], "oa_recovery_us": 0.20072599999999738, "ob_recovery_us": 0.20072599999999738, "ca_recovery_us": 0.11760199999999915, "cb_recovery_us": 0.11760199999999915, "sa_recovery_us": 0.10666499999999773, "sb_recovery_us": 0.10615399999999993}
 Traceback (most recent call last):
-  File "<root>\scripts\overload_detail.py", line 368, in <module>
+  File "<root>\scripts\overload_detail.py", line 372, in <module>
     main(sys.argv[1:])
     ~~~~^^^^^^^^^^^^^^
-  File "<root>\scripts\overload_detail.py", line 328, in main
+  File "<root>\scripts\overload_detail.py", line 332, in main
     _child(args[1], int(args[2]))
     ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "<root>\scripts\overload_detail.py", line 319, in _child
+  File "<root>\scripts\overload_detail.py", line 323, in _child
     r, d = run(name, k)
            ~~~^^^^^^^^^
-  File "<root>\scripts\overload_detail.py", line 87, in run
-    f = spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl))
-  File "<root>\scripts\spice.py", line 68, in run
+  File "<root>\scripts\overload_detail.py", line 93, in run
+    f = spice.check_dc(spice.run(f"large/{name}_overload_detail", chain.deck(s, f"overload {name}", src, ctl)))
+                       ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<root>\scripts\spice.py", line 86, in run
     raise RuntimeError(f"ngspice reported problems in {name}:\n" + "\n".join(bad[:12]))
-RuntimeError: ngspice reported problems in large/H100_overload_detail:
-stderr doAnalyses: TRAN:  Timestep too small; time = 2.10451e-06, timestep = 2.5e-21: trouble with xja2:jfe2140_m-instance j.xja2.j1
+RuntimeError: ngspice reported problems in large/L1000_overload_detail:
+stderr doAnalyses: TRAN:  Timestep too small; time = 2.01056e-06, timestep = 2.5e-21: trouble with xja4:jfe150_m-instance j.xja4.j1
 stderr tran simulation(s) aborted
-H100: attempt 3 failed
-H100: attempt 4 timed out
-L1000: attempt 0 ran {"input_overdrive": 3, "bench": "50 ohm sources and input network", "options": ".options abstol=1e-12 method=gear", "input_edge": "10n", "recovery_us": 0.15274799999999733, "v_during": 11.362180759164366, "fe_out_during": 5.99983618068585, "oa_ob_during": [3.5644677828931806, -2.4353683977926686], "sa_sb_during": [0.5794743466141111, 0.5496275001497831], "ca_cb_during": [8.99330120035475, 8.993388491407174], "ca_cb_before": [8.993343801424214, 8.993343801424214], "servo_change_mV": 2.220446049250313e-13, "oa_recovery_us": 0.14674799999999774, "ob_recovery_us": 0.14674799999999774, "ca_recovery_us": 0.04418899999999857, "cb_recovery_us": 0.045008999999998335, "sa_recovery_us": 0.021786999999998103, "sb_recovery_us": 0.021786999999998103}
+L1000: attempt 0 failed
+L1000: attempt 1 ran {"input_overdrive": 3, "bench": "50 ohm sources and input network", "options": ".options abstol=1e-11 method=gear klu", "input_edge": "10n", "recovery_us": 0.15217400000000056, "v_during": 11.362179999999999, "fe_out_during": 5.99983617964, "oa_ob_during": [3.564471135, -2.4353650446399997], "sa_sb_during": [0.57947434556, 0.549627498692], "ca_cb_during": [8.993301200000001, 8.9933885], "ca_cb_before": [8.993343800000003, 8.993343800000003], "oa_recovery_us": 0.14617399999999756, "ob_recovery_us": 0.14617399999999756, "ca_recovery_us": 0.044201999999997445, "cb_recovery_us": 0.04503599999999887, "sa_recovery_us": 0.022018999999999424, "sb_recovery_us": 0.022018999999999424}

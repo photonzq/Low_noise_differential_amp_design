@@ -1,4 +1,4 @@
-"""The derived numbers of Sections 6 (results, Tables 8-15, Figures 12-16) and 7 and of the
+"""The derived numbers of Sections 6 (results, Tables 8-15, Figures 12-17) and 7 and of the
 Appendix of the note (not Section 8): every number there that is not a plain readout of an
 archived JSON file is computed here, from the archived results only (no simulation), and every
 data-sheet value used is a constant below with its document, page, table or figure.
@@ -19,6 +19,9 @@ Formulas, in the order of the note:
   stages after   e_post = sqrt(e_chain^2 - e_FE^2) (fe_closed_forms.json; da_compare.json e_post)
   Table 9        ranges over the gains of a row of chain_noise.json
   headroom       20 log10(G_FE,LN / G_FE,HR) = 20 log10(100 / 10)
+  Figure 14      readouts of nf_map.json and sr560_nf_datasheet.json (the noise-figure maps and the
+                 SR560 data sheet's two-port fit), resistances to two or three significant figures;
+                 a deviation's bound rounded up to one significant figure
   Section 6.2    crossover of NF_H - NF_L (noise_vs_source.json): the two source resistances of
                  Table 10 (and of the full grid) between which the sign changes, per frequency
   Table 11       ranges of chain_ac.json over the gains of a row; SR560 peaking
@@ -112,6 +115,16 @@ NF_CMRR_PLOT = {10: 136.2, 1e3: 135.7, 1e4: 125.9, 1e5: 107.0, 1e6: 84.8}
 # front end (Table 5 of the note; frontend.CASES), servo integrator (frontend.py: GINT 1e-6, CINT 1u)
 G_INT, C_INT = 1e-6, 1e-6
 R_BS, C_BS = 3.5e3, 1e-6
+
+# The SR560 reproduction's NPD5564 is the 2N5564 card recalibrated in models.py to Vishay's 2N5564 data sheet
+# (Doc. 70254 Rev. E): its targets, 1.28 nV/rtHz white (100 kHz) and 3.6 nV/rtHz at 1 kHz at 4.5 mA, give one 1/f
+# line, e(f) = sqrt(e_w^2 + (e_lf^2 - e_w^2) f_lf / f).  Vishay's Noise Voltage vs Frequency (p. 5, V_DS = 15 V),
+# read by eye in refs/datasheets/jfet/survey_InterFET_NXP_others.md, Section 3.1, nV/rtHz per device, at 1 and
+# 10 mA; interpolated to 4.5 mA log-log in current, e(4.5 mA) = e(1 mA) (e(10 mA) / e(1 mA))^log10(4.5), the
+# interpolation that models.py quotes (1.25 and 3.44 at 100 kHz and 1 kHz).
+CARD_2N5564 = dict(id=4.5e-3, e_w=1.28, e_lf=3.6, f_lf=1e3)
+VISHAY_2N5564_EN = {1e-3: {10.0: 15.0, 100.0: 10.0, 1e3: 4.2, 1e4: 2.1, 1e5: 1.35},
+                    10e-3: {10.0: 8.7, 100.0: 7.0, 1e3: 3.1, 1e4: 1.6, 1e5: 1.2}}
 
 OUT: dict = {}
 ROWS: list = []
@@ -228,6 +241,20 @@ def table8a():
         put("table8a", k, dict(sinks=s, R_T=rt, transistor=tr, en_10k=en["10000.0"], en_10=en["10"],
                                en_10M=en["10000000.0"], vcm_min=v["op"]["vcm_min"]), txt,
             "sink_options.json, 10 kHz unless stated")
+    # the gain-100 column, and what the JFE150 sink needed there (sink_options.py evaluate_checked)
+    for k in rows[:7]:
+        k100 = "H100 | " + k.split(" | ", 1)[1]
+        v = d[k100]
+        dm, cm = v["loop"]["dm"], v["loop"]["cm"]
+        put("table8a", f"{k100}: front end at 10 kHz | f3dB | margins | source node | ties",
+            dict(en_10k=v["en"]["10000.0"], f3db=v["f3db"], v_sa=v["op"]["v_sa"], r_in=v.get("r_in", 1e-3),
+                 op_note=v.get("op_note", "")),
+            f"{f(v['en']['10000.0'], 2)} | {f(v['f3db'] / 1e6, 1)} MHz | DM {dm['pm']} deg, {dm['gm_db']} dB; CM "
+            f"{cm['pm']} deg, {cm['gm_db']} dB | {f(v['op']['v_sa'], 3)} V | {v.get('r_in', 1e-3):g} ohm",
+            "sink_options.json, 10 kHz; r_in 1 ohm where 1 mOhm made the operating point fall back (op_note)")
+    loops = [d[k]["loop"] for k in d if k.startswith("H100 | ") and "loop" in d[k]]
+    put("table8a", "H100: the loop margins are the same in every sink variant", all(x == loops[0] for x in loops),
+        str(all(x == loops[0] for x in loops)), "sink_options.json H100 | *.loop")
     a10, a100 = d["H10 | MMBT3904, 2 V (adopted)"], d["H100 | MMBT3904, 2 V (adopted)"]
     b10 = math.sqrt(a10["en"]["10000.0"] ** 2 - a10["sinks"]["10000"] ** 2)
     b100 = math.sqrt(a100["en"]["10000.0"] ** 2 - a100["sinks"]["10000"] ** 2)
@@ -330,6 +357,134 @@ def section62():
             "zin_numbers.json sources_archived.network_1Meg (collect_curves.py zin)")
 
 
+# ---- Section 6.2: Figure 14, the noise-figure maps against the SR560 data sheet's -----------------
+def bound(x: float) -> str:
+    """An upper bound of x rounded up to one significant figure, as "2e-05" (0: "0")."""
+    if x <= 0:
+        return "0"
+    e = math.floor(math.log10(x))
+    return f"{math.ceil(x / 10 ** e)}e{e:+03d}"
+
+
+def section62_nf_map():
+    m, s = load("nf_map.json"), load("sr560_nf_datasheet.json")
+    sm, ss = "nf_map.json", "sr560_nf_datasheet.json"
+    g = "s6.2 Figure 14"
+    cal, fit, mod = s["calibration"], s["two_port_fit"], s["model"]
+    put(g, "data sheet: largest residual of the tick calibration (pt)", cal["max_tick_residual_pt"],
+        f(cal["max_tick_residual_pt"], 2), ss + " calibration")
+    put(g, "data sheet: two-port fit, largest deviation (decade of R_S | dB)", (fit["max_dev_decades"], fit["max_dev_db"]),
+        f"{f(fit['max_dev_decades'], 2)} | {f(fit['max_dev_db'], 2)}", ss + " two_port_fit")
+    e = {float(k): v["e_n"] * 1e9 for k, v in mod["at"].items()}
+    put(g, "data sheet: e_n at 1 MHz (white) | 1 kHz | 10 Hz | 1 Hz (nV/rtHz)", e,
+        f"{f(e[1e6], 2)} | {f(e[1e3], 2)} | {f(e[10.0], 1)} | {sig(e[1.0], 2)}", ss + " model.at")
+    put(g, "data sheet: i_n at low frequencies (fA/rtHz); the resistance with that thermal noise at 290 K (Mohm)",
+        (mod["i_n_low"], mod["r_equiv_ohm"]), f"{f(mod['i_n_low'] * 1e15, 1)}; {sig(mod['r_equiv_ohm'] / 1e6, 2)}",
+        ss + " model; R = 4 k T0 / i_n^2")
+    put(g, "data sheet: C of the e_n w C term, 100 kHz to 1 MHz (pF)", mod["c_eff_pf_100k_1M"],
+        rng(mod["c_eff_pf_100k_1M"], 0), ss + " model; C = sqrt(i_n^2 - i_n,low^2) / (e_n 2 pi f)")
+    worst = max(m[k]["two_port_fit_max_dev_db"] for k in ("H", "L", "SR560"))
+    put(g, "simulated (H, L, SR560 as drawn): largest deviation of a run from its two-port fit, 1 Hz to 10 MHz "
+           "(dB, bound)", worst, bound(worst), sm)
+    worst = m["SR560_LSK389B"]["two_port_fit_max_dev_db"]
+    put(g, "simulated (SR560 with the LSK389B): the same (dB, bound)", worst, bound(worst), sm)
+    worst = max(m[k]["archived_check"]["max_abs_diff_db"] for k in ("SR560", "SR560_LSK389B"))
+    put(g, "SR560 models: the 1 ohm run against the archived noise run, largest difference (dB of noise power; "
+           "both written with 7 digits)",
+        worst, bound(worst), sm + " archived_check")
+    worst = max(m[k]["table10_check"]["max_abs_diff_db"] for k in ("H", "L"))
+    put(g, "simulated at 300.15 K against Table 10: largest difference (dB, bound)", worst, bound(worst),
+        sm + " table10_check")
+
+    def lo_hi(rows, f0, lev):
+        v = rows[f0][f"below_{lev:g}dB"]
+        return (v[0], v[1]) if len(v) == 2 else (None, None)
+
+    ds = m["datasheet"]["at"]
+    for who, rows in (("data sheet", ds), ("H", m["H"]["at"]), ("L", m["L"]["at"]), ("SR560 reproduction", m["SR560"]["at"]),
+                      ("SR560_LSK389B reproduction", m["SR560_LSK389B"]["at"])):
+        for f0 in ("10.0", "1000.0", "100000.0", "1000000.0", "10000000.0"):
+            if f0 not in rows:
+                continue
+            r = rows[f0]
+            l1, h1 = lo_hi(rows, f0, 1.0)
+            l3, h3 = lo_hi(rows, f0, 3.0)
+            txt = (f"3 dB {sig(l3, 2) if l3 else '-'} / 1 dB {sig(l1, 2) if l1 else '-'} ohm (low side); "
+                   f"1 dB {sig(h1, 3) if h1 else '-'} / 3 dB {sig(h3, 2) if h3 else '-'} ohm (high side); "
+                   f"min {f(r['nf_min_db'], 2 if r['nf_min_db'] < 10 else 0)} dB at {sig(r['r_opt'], 2)} ohm; e_n {sig(r['e_n'] * 1e9, 3)} nV, "
+                   f"i_n {sig(r['i_n'] * 1e12, 3)} pA")
+            put(g, f"{who}, {float(f0):g} Hz", r, txt, (ss + " via " if who == "data sheet" else "") + sm +
+                (" datasheet.at" if who == "data sheet" else f" {who.split()[0]}.at"))
+    # the low-resistance contours scale with e_n^2 (R_S = e_n^2 / ((F - 1) 4 k T0) where i_n is negligible)
+    e_ds, e_h, e_l = (rows["1000.0"]["e_n"] for rows in (ds, m["H"]["at"], m["L"]["at"]))
+    put(g, "1 kHz: (e_n,sheet / e_n,H)^2 | (e_n,H / e_n,L)^2", ((e_ds / e_h) ** 2, (e_h / e_l) ** 2),
+        f"{f((e_ds / e_h) ** 2, 1)} | {f((e_h / e_l) ** 2, 1)}", sm + " datasheet.at, H.at, L.at")
+    for key in ("H", "L", "SR560", "SR560_LSK389B"):
+        v = m[key]["vs_datasheet"]
+        put(g, f"{key} minus the data sheet: fraction of the plane lower by > 0.1 dB | within 0.1 dB | higher (%)",
+            (v["fraction_lower"], v["fraction_within_0p1"], v["fraction_higher"]),
+            " | ".join(f(100 * x, 0) for x in (v["fraction_lower"], v["fraction_within_0p1"], v["fraction_higher"])),
+            sm + " vs_datasheet")
+        put(g, f"{key} minus the data sheet: extremes (dB) at (Hz, ohm)", (v["min_db"], v["max_db"]),
+            f"{f(v['min_db']['value'], 1)} at ({v['min_db']['f_hz']:.3g}, {v['min_db']['r_ohm']:.3g}); "
+            f"{f(v['max_db']['value'], 1)} ({f(v['max_db']['value'], 2)}) at ({v['max_db']['f_hz']:.3g}, "
+            f"{v['max_db']['r_ohm']:.3g})", sm + " vs_datasheet")
+        eq = v["equal_at_r_ohm"]
+        put(g, f"{key} equal to the data sheet at (ohm): 10 Hz | 1 kHz | 100 kHz | 1 MHz", eq,
+            " | ".join(",".join(sig(x, 2) for x in eq[k]) or "-" for k in ("10.0", "1000.0", "100000.0", "1000000.0")),
+            sm + " vs_datasheet.equal_at_r_ohm")
+    # the SR560 low-frequency noise: the data sheet's plot and the two reproductions (1 ohm runs)
+    for who, lf in (("data sheet", m["datasheet"]["low_frequency"]), ("SR560", m["SR560"]["low_frequency"]),
+                    ("SR560_LSK389B", m["SR560_LSK389B"]["low_frequency"])):
+        e = {float(k): v * 1e9 for k, v in lf["e_n"].items()}
+        put(g, f"{who}: e_n at 1 Hz | 10 Hz | 100 Hz | 1 kHz | 100 kHz (nV/rtHz)", e,
+            " | ".join(sig(e[k], 3) for k in (1.0, 10.0, 100.0, 1e3, 1e5)), sm + " low_frequency.e_n")
+        c = {float(k): v for k, v in lf["corner_hz"].items()}
+        put(g, f"{who}: 1/f corner f (e^2 - e_w^2) / e_w^2 from 10 Hz | 100 Hz | 1 kHz (Hz)", c,
+            " | ".join(sig(c[k], 2) for k in (10.0, 100.0, 1e3)), sm + " low_frequency.corner_hz")
+        if "jfet_flicker_share" in lf:
+            sh = {float(k): v for k, v in lf["jfet_flicker_share"].items()}
+            put(g, f"{who}: the input JFETs' flicker share of the output noise at 10 Hz | 100 Hz | 1 kHz | 10 kHz (%)",
+                sh, " | ".join(f(100 * sh[k], 1) for k in (10.0, 100.0, 1e3, 1e4)), sm + " low_frequency")
+    for key in ("SR560", "SR560_LSK389B"):
+        for name, lab in (("tail_servo_share_rs_1e6", "1 Mohm in input A, input B grounded"),
+                          ("balanced_tail_servo_share_rs_1e6", "1 Mohm in input A and from input B to ground")):
+            sh = {float(k): v for k, v in m[key][name].items()}
+            put(g, f"{key}: the tail servo's share of the output noise, {lab}, at 10 kHz | 100 kHz | 1 MHz (%)",
+                sh, " | ".join(f(100 * sh[k], 2 if sh[k] < 0.01 else 0) for k in (1e4, 1e5, 1e6)), sm + " " + name)
+    # per device: the 2N5564 card's single 1/f line against Vishay's curve at 4.5 mA
+    cd = CARD_2N5564
+    card = {f0: math.sqrt(cd["e_w"] ** 2 + (cd["e_lf"] ** 2 - cd["e_w"] ** 2) * cd["f_lf"] / f0) for f0 in (10.0, 100.0, 1e3)}
+    x = math.log10(cd["id"] / 1e-3)
+    vis = {f0: VISHAY_2N5564_EN[1e-3][f0] * (VISHAY_2N5564_EN[10e-3][f0] / VISHAY_2N5564_EN[1e-3][f0]) ** x
+           for f0 in (10.0, 100.0, 1e3)}
+    corner = cd["f_lf"] * (cd["e_lf"] ** 2 - cd["e_w"] ** 2) / cd["e_w"] ** 2
+    put(g, "2N5564 card per device: its 1/f corner (kHz); e_n at 10 Hz | 100 Hz | 1 kHz, card / Vishay at 4.5 mA "
+           "(nV/rtHz) and their ratio", dict(corner=corner, card=card, vishay=vis),
+        f"{f(corner / 1e3, 1)}; " + " | ".join(f"{f(card[k], 1)} / {f(vis[k], 1)} = {f(card[k] / vis[k], 2)}"
+                                              for k in (10.0, 100.0, 1e3)),
+        "CARD_2N5564 (models.py targets), VISHAY_2N5564_EN (data sheet p. 5, survey Section 3.1)")
+    # Vishay 10 kHz/10 mA style check: the excess power of the curve from 10 to 100 Hz at 10 mA
+    v10 = VISHAY_2N5564_EN[10e-3]
+    ratio = (v10[10.0] ** 2 - v10[1e5] ** 2) / (v10[100.0] ** 2 - v10[1e5] ** 2)
+    put(g, "Vishay 2N5564 at 10 mA: excess power above the 100 kHz level, 10 Hz over 100 Hz (a 1/f line: 10)",
+        ratio, f(ratio, 1), "VISHAY_2N5564_EN")
+    put(g, "the pair from the card at 10 Hz: sqrt(2) e_card(10 Hz) (nV/rtHz)", math.sqrt(2) * card[10.0],
+        f(math.sqrt(2) * card[10.0], 1), "CARD_2N5564")
+    # the pair with Vishay's curve instead of the card at 10 Hz: the card's flicker replaced, the rest kept
+    e10 = m["SR560"]["low_frequency"]["e_n"]["10.0"] * 1e9
+    s10 = m["SR560"]["low_frequency"]["jfet_flicker_share"]["10.0"]
+    pair = math.sqrt(2 * vis[10.0] ** 2 + (1 - s10) * e10 ** 2)
+    put(g, "SR560 as drawn at 10 Hz with the JFETs of Vishay's curve: sqrt(2 e_V^2 + (1 - share) e^2) (nV/rtHz)",
+        pair, f(pair, 0), "nf_map.json SR560.low_frequency, VISHAY_2N5564_EN")
+    for key in ("H", "L"):
+        for f0, row in m[key]["input_network"].items():
+            put(g, f"{key}, {float(f0):g} Hz: i_n | R_Z's sqrt(4kT Re Y_Z) (pA/rtHz); R_Z's share of the output "
+                   "noise with 1 kOhm | 100 kOhm (%)", row,
+                f"{f(row['i_n'] * 1e12, 2)} | {f(row['i_rz'] * 1e12, 2)}; {f(100 * row['rza_share_of_output_noise_rs_1000'], 0)}"
+                f" | {f(100 * row['rza_share_of_output_noise_rs_100000'], 0)}", sm + " input_network")
+
+
 # ---- Section 6.3 -------------------------------------------------------------------------------
 def section63():
     d = load("chain_ac.json")
@@ -354,6 +509,22 @@ def section63():
         h = np.abs(a["h"])
         pk.append(20 * math.log10(h.max() / at(a["f"], h, 1e3)))
     put("table11", "SR560: peaking (dB)", pk, f"{max(pk):.1e} dB at most (none)", "sr560_chain_ac_<gain>.npz, 1 Hz - 100 MHz")
+    # the two further SR560 models (sr560_variants.py): corrected, and corrected with the LSK389B
+    sv = load("sr560_variants.json")["models"]
+    for m, lab in (("corrected", "SR560 corrected"), ("corrected_lsk389b", "SR560 corrected, LSK389B")):
+        a = sv[m]["ac"]
+        f3 = [v["f3db"] / 1e6 for v in a.values()]
+        d1 = [v["db_1M"] for v in a.values()]
+        pk = [v["peak_db"] for v in a.values()]
+        put("table11", f"{lab}: -3 dB (MHz)", f3, rng(f3, 2), f"sr560_variants.json models.{m}.ac")
+        put("table11", f"{lab}: at 1 MHz (dB)", d1, rng(d1, 1), f"sr560_variants.json models.{m}.ac")
+        put("table11", f"{lab}: peaking (dB)", pk, f"{max(pk):.1e} dB at most", f"sr560_variants.json models.{m}.ac.*.peak_db")
+        c = sv[m]["cmrr_ideal_matching"]
+        put("table12", f"{lab}, ideal matching: 10 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz (dB)", list(c.values()),
+            " | ".join(f(v, 1) for v in c.values()), f"sr560_variants.json models.{m}.cmrr_ideal_matching")
+    c = load("sr560_chain.json")["cmrr_ideal_matching"]
+    put("table12", "SR560 reproduction (as drawn), ideal matching: 10 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz (dB)",
+        list(c.values()), " | ".join(f(v, 1) for v in c.values()), "sr560_chain.json cmrr_ideal_matching")
     post = [v["out"]["f3db"] / 1e6 for v in load("chain_extras.json")["post"].values()]
     put("s6.3", "stages after the front end alone: -3 dB (MHz)", post, rng(post, 0),
         "chain_extras.json post (chain_extras.py post)")
@@ -468,15 +639,22 @@ def section65():
     sr = ls["H100"]["step"][1]["slew_v_us"]
     fp = sr * 1e6 / (math.pi * 10) / 1e6
     put("s6.5", "full-power bandwidth, 10 Vpp: SR / (pi 10 V) (MHz)", fp, f(fp, 2), "large_signal.json H100 step 10 V")
-    ls_l = load("large_signal_L1000_step.json")[1]
+    # L's steps with its adopted sinks (large_signal.py L1000 step: they run with the KLU solver on the 50-ohm
+    # bench), and with the first design's 2 V sinks (large_signal_L1000_step.json), which give the same
+    ls_l = ls["L1000"]["step"][1]
     put("table13", "L 10 V step: rise, overshoot, 1 % / 0.1 %, slew", ls_l,
         f"{f(ls_l['rise_ns'], 0)} ns, {f(ls_l['overshoot'] * 100, 1)} %, {f(ls_l['settle_ns_1'], 0)} / "
-        f"{f(ls_l['settle_ns_0p1'], 0)} ns, {f(ls_l['slew_v_us'], 0)} V/us", "large_signal_L1000_step.json")
-    ls_l1 = load("large_signal_L1000_step.json")[0]
-    if "overshoot" in ls_l1:                   # the 1 V step failed before the model recalibration
-        put("table13", "L 1 V step: rise, overshoot, 1 % / 0.1 %", ls_l1,
-            f"{f(ls_l1['rise_ns'], 0)} ns, {f(ls_l1['overshoot'] * 100, 1)} %, {f(ls_l1['settle_ns_1'], 0)} / "
-            f"{f(ls_l1['settle_ns_0p1'], 0)} ns", "large_signal_L1000_step.json")
+        f"{f(ls_l['settle_ns_0p1'], 0)} ns, {f(ls_l['slew_v_us'], 0)} V/us", "large_signal.json L1000 step (6 V sinks)")
+    ls_l1 = ls["L1000"]["step"][0]
+    put("table13", "L 1 V step: rise, overshoot, 1 % / 0.1 %", ls_l1,
+        f"{f(ls_l1['rise_ns'], 0)} ns, {f(ls_l1['overshoot'] * 100, 1)} %, {f(ls_l1['settle_ns_1'], 0)} / "
+        f"{f(ls_l1['settle_ns_0p1'], 0)} ns", "large_signal.json L1000 step (6 V sinks)")
+    put("table13", "L steps: bench and options", [x.get("bench", "1 ohm sources") for x in ls["L1000"]["step"]],
+        "; ".join(x.get("bench", "1 ohm sources") for x in ls["L1000"]["step"]), "large_signal.json L1000 step")
+    two = load("large_signal_L1000_step.json")
+    dmax = max(abs(a[k] - b[k]) for a, b in zip(ls["L1000"]["step"], two) for k in ("settle_ns_1", "settle_ns_0p1", "rise_ns"))
+    put("table13", "L steps, 6 V against 2 V sinks: largest difference in rise and settling (ns)", dmax, f(dmax, 2),
+        "large_signal.json L1000 step against large_signal_L1000_step.json")
     for i, vk in enumerate(("1 V", "10 V")):
         s_ = ls["H100"]["step"][i]
         put("table13", f"H {vk} step: rise, overshoot, 1 % / 0.1 %, slew", s_,
@@ -492,8 +670,14 @@ def section65():
             put("s6.5", f"H100 THD {r['f0']:g} Hz {r['vout_pp']} Vpp: H3 / H2 (%)", (r["h3"] * 100, r["h2"] * 100),
                 f"{r['h3'] * 100:.2g} / {r['h2'] * 100:.2g}", "large_signal.json (h2, h3: harmonic / fundamental)")
     t31 = load("large_signal_THS4031.json")["H100"]
-    put("table13", "H recovery with the THS4031 in S2 (us)", t31["overload"]["recovery_us"],
+    put("s6.5", "H recovery with the THS4031 in S2, 1-ohm sources (us)", t31["overload"]["recovery_us"],
         f(t31["overload"]["recovery_us"], 2), "large_signal_THS4031.json")
+    ho = ls["H100"]["overload"]  # with the LM7171 in S2: runs only with the KLU solver (overload_detail.py)
+    put("table13", "H recovery (LM7171 in S2) (us); options; bench", [ho["recovery_us"], ho["options"], ho["bench"]],
+        f(ho["recovery_us"], 2), "large_signal.json H100.overload (overload_detail.py)")
+    lo_ = ls["L1000"]["overload"]
+    put("table13", "L recovery (us); options; bench", [lo_["recovery_us"], lo_["options"], lo_["bench"]],
+        f(lo_["recovery_us"], 2), "large_signal.json L1000.overload (overload_detail.py)")
     put("table14", "THS4031 slew rate, 10 V step (V/us)", t31["step"][1]["slew_v_us"], f(t31["step"][1]["slew_v_us"], 0),
         "large_signal_THS4031.json")
     # overload (overload_numbers.json and the formulas above)
@@ -535,8 +719,9 @@ def section65():
         f"+{f(sv['outputs_mean_during_V'], 2)} / +{f(sv['sources_mean_during_V'], 2)}", "overload_numbers.json servo")
     put("s6.5", "servo: error e (V); rate G_INT e / C_INT (V/s)", (e, rate), f"{f(e, 2)} V; {f(rate, 2)} V/s",
         "overload_numbers.json servo; G_INT 1 uS, C_INT 1 uF (frontend.py)")
-    put("s6.5", "servo: change over 20 us (uV), formula / run", (rate * 20e-6 * 1e6, sv["nint_change_uV"]),
-        f"{f(rate * 20e-6 * 1e6, 1)} / {f(sv['nint_change_uV'], 2)}", "rate x 20 us; overload_numbers.json")
+    put("s6.5", "servo (Appendix B, if used): change over 20 us (uV), formula / error integral",
+        (rate * 20e-6 * 1e6, sv["integrator_change_uV"]),
+        f"{f(rate * 20e-6 * 1e6, 1)} / {f(sv['integrator_change_uV'], 2)}", "rate x 20 us; overload_numbers.json")
     ratio = sv["R_F"] / sv["R_T"]
     cm1 = ratio * rate * 1.0
     tau = (C_INT / G_INT) * (sv["R_T"] / sv["R_F"])
@@ -551,6 +736,11 @@ def section65():
         f"{f(vsd, 2)}; {f(lo['dV_GS_estimate_at_10x_V'], 2)}; {f(lo['input_for_zero_gate_bias_V'], 2)} V "
         f"({f(lo['overdrive_for_zero_gate_bias'], 1)} x)", "overload_numbers.json larger_overloads; R_G 10.1, R_F 500 ohm")
     u = l["undershoot"]
+    hu = h["undershoot"]
+    put("s6.5", "H: undershoot (V), time beyond -0.1 V (ns), overshoot after (V), recovery (us)",
+        (hu["depth_V"], hu["beyond_minus_0p1V_duration_ns"], hu["overshoot_after_V"], h["recovery_us"]),
+        f"{f(-hu['depth_V'], 2)}; {f(hu['beyond_minus_0p1V_duration_ns'], 0)}; {f(hu['overshoot_after_V'], 2)}; "
+        f"{f(h['recovery_us'], 2)}", "overload_numbers.json H100")
     put("s6.5", "L: undershoot (V), time beyond -0.1 V (ns), recovery (us), FE outputs apart (V)",
         (u["depth_V"], u["beyond_minus_0p1V_duration_ns"], l["recovery_us"], l["fe_out_during_V"]),
         f"{f(-u['depth_V'], 2)}; {f(u['beyond_minus_0p1V_duration_ns'], 0)}; {f(l['recovery_us'], 2)}; "
@@ -602,11 +792,26 @@ def table15():
     put("table15", "H, gain 10: white (100 kHz) to 1 kHz", None,
         f"{f(g10['100000.0'] * 1e9, 1)}–{f(g10['1000.0'] * 1e9, 1)}", "chain_noise.json")
     sr = load("sr560_chain.json")["noise"]
-    put("table15", "SR560 reproduction, gain >= 100: white / 1 kHz / 10 Hz; gain 10 at 1 kHz", None,
-        f"{rng([sr[f'LN_{g}']['en']['100000.0'] * 1e9 for g in (100, 1000, 50000)], 1)} / "
-        f"{rng([sr[f'LN_{g}']['en']['1000.0'] * 1e9 for g in (100, 1000, 50000)], 1)} / "
-        f"{rng([sr[f'LN_{g}']['en']['10'] * 1e9 for g in (100, 1000, 50000)], 0)}; {f(sr['LN_10']['en']['1000.0'] * 1e9, 1)}",
+    put("table15", "SR560 reproduction, gain >= 1000: white / 1 kHz / 10 Hz; gain 10 at 1 kHz", None,
+        f"{rng([sr[f'LN_{g}']['en']['100000.0'] * 1e9 for g in (1000, 10000, 50000)], 1)} / "
+        f"{rng([sr[f'LN_{g}']['en']['1000.0'] * 1e9 for g in (1000, 10000, 50000)], 1)} / "
+        f"{rng([sr[f'LN_{g}']['en']['10'] * 1e9 for g in (1000, 10000, 50000)], 0)}; {f(sr['LN_10']['en']['1000.0'] * 1e9, 1)}",
         "sr560_chain.json noise")
+    for m in ("corrected", "corrected_lsk389b"):
+        sm = load("sr560_variants.json")["models"][m]
+        n = sm["noise"]
+        put("table15", f"SR560 {m}, gain >= 1000: white / 1 kHz / 10 Hz; gain 10 at 1 kHz", None,
+            f"{rng([n[f'LN_{g}']['en']['100000.0'] * 1e9 for g in (1000, 10000, 50000)], 1)} / "
+            f"{rng([n[f'LN_{g}']['en']['1000.0'] * 1e9 for g in (1000, 10000, 50000)], 1)} / "
+            f"{rng([n[f'LN_{g}']['en']['10'] * 1e9 for g in (1000, 10000, 50000)], 1)}; {f(n['LN_10']['en']['1000.0'] * 1e9, 1)}",
+            f"sr560_variants.json models.{m}.noise")
+        f3 = [v["f3db"] / 1e6 for v in sm["ac"].values()]
+        c = sm["cmrr_ideal_matching"]
+        put("table15", f"SR560 {m}: bandwidth (MHz); CMRR 1 kHz / 1 MHz (dB)", None,
+            f"{rng(f3, 2)} MHz; {f(c['1000.0'], 1)} / {f(c['1000000.0'], 1)} dB", f"sr560_variants.json models.{m}")
+    c = load("sr560_chain.json")["cmrr_ideal_matching"]
+    put("table15", "SR560 reproduction (as drawn): CMRR 1 kHz / 1 MHz (dB)", None,
+        f"{f(c['1000.0'], 1)} / {f(c['1000000.0'], 1)} dB", "sr560_chain.json cmrr_ideal_matching")
     pr = load("protection.json")["input_capacitance"]
     put("table15", "input capacitance C_P + C_Z: H / L (pF)", (pr["H"]["C_in"], pr["L"]["C_in"]),
         f"{f(pr['H']['C_in'] * 1e12, 0)} / {f(pr['L']['C_in'] * 1e12, 0)}", "protection.json input_capacitance")
@@ -660,7 +865,8 @@ def section7():
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
-    for step in (table8, table8a, stages_after, table9, section62, section63, section64, section65, table15, section7):
+    for step in (table8, table8a, stages_after, table9, section62, section62_nf_map, section63, section64, section65,
+                 table15, section7):
         step()
     (R / "numbers_s6_7.json").write_text(json.dumps(OUT, indent=1, default=float), encoding="utf-8", newline="\n")
     w = max(len(q) for q, _, _ in ROWS)

@@ -1,0 +1,86 @@
+op check, one_mohm_without_nodeset: fallback True, v(ref) 0.9406, v(da) 1.3997, v(out) -8.002920, v(out50) -8.3411
+op check, one_ohm_without_nodeset: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.013172, v(out50) +1.5337
+op check, with_nodeset: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.013172, v(out50) +1.5337
+op check, nodeset_at_fallback_state: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.013172, v(out50) +1.5337
+op check, trimmed_generic_nodeset: fallback True, v(ref) 0.9406, v(da) 1.4019, v(out) -8.002970, v(out50) -7.0901
+op check, trimmed_continuation: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.000007, v(out50) +0.0006
+check as drawn: largest relative difference from sr560_chain.json 0.00e+00
+corrected: front end x10 gain(1k) 10.1565, f3dB 2.484 MHz, CMRR(1k) 102.6 dB, e_in(1k) 5.703 nV/rtHz
+corrected LN  G      1: en(1k)  51.98  en(100k)  50.69  en(10)  140.40  (manual 60)
+corrected LN  G      2: en(1k)  36.42  en(100k)  35.41  en(10)  100.96  (manual 40)
+corrected LN  G      5: en(1k)  16.88  en(100k)  15.95  en(10)   59.88  (manual 25)
+corrected LN  G     10: en(1k)  11.46  en(100k)  10.34  en(10)   51.33  (manual 13)
+corrected LN  G     20: en(1k)   9.93  en(100k)   8.70  en(10)   49.14  (manual 11)
+corrected LN  G     50: en(1k)   9.45  en(100k)   8.17  en(10)   48.50  (manual 10)
+corrected LN  G    100: en(1k)   5.74  en(100k)   3.25  en(10)   47.73  (manual 4)
+corrected LN  G    200: en(1k)   5.72  en(100k)   3.20  en(10)   47.71  (manual 4)
+corrected LN  G    500: en(1k)   5.71  en(100k)   3.19  en(10)   47.71  (manual 4)
+corrected LN  G   1000: en(1k)   5.71  en(100k)   3.18  en(10)   47.70  (manual 4)
+corrected LN  G   2000: en(1k)   5.71  en(100k)   3.18  en(10)   47.70  (manual 4)
+corrected LN  G   5000: en(1k)   5.71  en(100k)   3.18  en(10)   47.70  (manual 4)
+corrected LN  G  10000: en(1k)   5.71  en(100k)   3.18  en(10)   47.70  (manual 4)
+corrected LN  G  20000: en(1k)   5.71  en(100k)   3.18  en(10)   47.70  (manual 4)
+corrected LN  G  50000: en(1k)   5.71  en(100k)   3.18  en(10)   47.70  (manual 4)
+corrected HDR G     10: en(1k)  35.12  en(100k)  34.05  en(10)  100.54  (manual 25)
+corrected HDR G     20: en(1k)  25.48  en(100k)  24.70  en(10)   71.39  (manual 25)
+corrected HDR G     50: en(1k)  21.97  en(100k)  21.29  en(10)   60.72  (manual 25)
+corrected HDR G    100: en(1k)  19.90  en(100k)  19.16  en(10)   58.42  (manual 20)
+corrected HDR G    200: en(1k)  16.61  en(100k)  15.80  en(10)   54.68  (manual 18)
+corrected HDR G    500: en(1k)  16.41  en(100k)  15.58  en(10)   54.50  (manual 15)
+corrected HDR G   1000: en(1k)   9.45  en(100k)   8.17  en(10)   48.44  (manual 15)
+corrected HDR G   2000: en(1k)   9.43  en(100k)   8.15  en(10)   48.43  (manual 10)
+corrected AC G      1: f3dB 1.162 MHz, 1 MHz -2.37 dB, peak +0.00 dB
+corrected AC G     10: f3dB 1.064 MHz, 1 MHz -2.74 dB, peak +0.00 dB
+corrected AC G    100: f3dB 1.038 MHz, 1 MHz -2.84 dB, peak +0.00 dB
+corrected AC G   1000: f3dB 1.039 MHz, 1 MHz -2.83 dB, peak +0.00 dB
+corrected AC G  10000: f3dB 1.040 MHz, 1 MHz -2.83 dB, peak +0.00 dB
+corrected AC G  50000: f3dB 1.076 MHz, 1 MHz -2.68 dB, peak +0.00 dB
+corrected CMRR (ideal matching) at G 1000: {'10': 150.32538699200722, '1000.0': 110.44025385803232, '10000.0': 90.44824703252424, '100000.0': 71.57886078700601, '1000000.0': 66.10109389890924}
+corrected_lsk389b: front end x10 gain(1k) 10.1611, f3dB 3.122 MHz, CMRR(1k) 104.6 dB, e_in(1k) 3.225 nV/rtHz
+corrected_lsk389b LN  G      1: en(1k)  51.73  en(100k)  50.64  en(10)  132.13  (manual 60)
+corrected_lsk389b LN  G      2: en(1k)  36.07  en(100k)  35.36  en(10)   89.13  (manual 40)
+corrected_lsk389b LN  G      5: en(1k)  16.13  en(100k)  15.87  en(10)   36.66  (manual 25)
+corrected_lsk389b LN  G     10: en(1k)  10.34  en(100k)  10.23  en(10)   19.86  (manual 13)
+corrected_lsk389b LN  G     20: en(1k)   8.61  en(100k)   8.56  en(10)   13.18  (manual 11)
+corrected_lsk389b LN  G     50: en(1k)   8.05  en(100k)   8.02  en(10)   10.57  (manual 10)
+corrected_lsk389b LN  G    100: en(1k)   3.30  en(100k)   3.27  en(10)    5.44  (manual 4)
+corrected_lsk389b LN  G    200: en(1k)   3.25  en(100k)   3.22  en(10)    5.24  (manual 4)
+corrected_lsk389b LN  G    500: en(1k)   3.23  en(100k)   3.21  en(10)    5.18  (manual 4)
+corrected_lsk389b LN  G   1000: en(1k)   3.23  en(100k)   3.21  en(10)    5.17  (manual 4)
+corrected_lsk389b LN  G   2000: en(1k)   3.23  en(100k)   3.21  en(10)    5.17  (manual 4)
+corrected_lsk389b LN  G   5000: en(1k)   3.23  en(100k)   3.21  en(10)    5.17  (manual 4)
+corrected_lsk389b LN  G  10000: en(1k)   3.23  en(100k)   3.21  en(10)    5.17  (manual 4)
+corrected_lsk389b LN  G  20000: en(1k)   3.23  en(100k)   3.21  en(10)    5.17  (manual 4)
+corrected_lsk389b LN  G  50000: en(1k)   3.23  en(100k)   3.21  en(10)    5.17  (manual 4)
+corrected_lsk389b HDR G     10: en(1k)  34.76  en(100k)  33.99  en(10)   88.66  (manual 25)
+corrected_lsk389b HDR G     20: en(1k)  24.99  en(100k)  24.64  en(10)   53.41  (manual 25)
+corrected_lsk389b HDR G     50: en(1k)  21.40  en(100k)  21.22  en(10)   38.01  (manual 25)
+corrected_lsk389b HDR G    100: en(1k)  19.27  en(100k)  19.09  en(10)   34.23  (manual 20)
+corrected_lsk389b HDR G    200: en(1k)  15.86  en(100k)  15.72  en(10)   27.36  (manual 18)
+corrected_lsk389b HDR G    500: en(1k)  15.64  en(100k)  15.50  en(10)   27.00  (manual 15)
+corrected_lsk389b HDR G   1000: en(1k)   8.05  en(100k)   8.03  en(10)   10.29  (manual 15)
+corrected_lsk389b HDR G   2000: en(1k)   8.03  en(100k)   8.01  en(10)   10.25  (manual 10)
+corrected_lsk389b AC G      1: f3dB 1.175 MHz, 1 MHz -2.33 dB, peak +0.00 dB
+corrected_lsk389b AC G     10: f3dB 1.074 MHz, 1 MHz -2.70 dB, peak +0.00 dB
+corrected_lsk389b AC G    100: f3dB 1.093 MHz, 1 MHz -2.62 dB, peak +0.00 dB
+corrected_lsk389b AC G   1000: f3dB 1.094 MHz, 1 MHz -2.61 dB, peak +0.00 dB
+corrected_lsk389b AC G  10000: f3dB 1.095 MHz, 1 MHz -2.61 dB, peak +0.00 dB
+corrected_lsk389b AC G  50000: f3dB 1.136 MHz, 1 MHz -2.46 dB, peak +0.00 dB
+corrected_lsk389b CMRR (ideal matching) at G 1000: {'10': 151.87831622739765, '1000.0': 111.96399856215666, '10000.0': 91.97091531852783, '100000.0': 72.9947710082149, '1000000.0': 67.28323756855063}
+check corrected vs sr560_bw_check: {'1': {'this': np.float64(1.161906647065336), 'bw_check': 1.161906647065336, 'rel_diff': np.float64(0.0)}, '100': {'this': np.float64(1.0381900528725896), 'bw_check': 1.0381900528725896, 'rel_diff': np.float64(0.0)}, '1000': {'this': np.float64(1.0389069571213958), 'bw_check': 1.0389069571213958, 'rel_diff': np.float64(0.0)}}
+written sr560_variants.json
+
+# python sr560_variants.py checks (23 November 2026): the checks alone, re-run after adding the abstol case of
+# check_operating_point and check_cmrr_trim; the models' results above are kept
+op check, one_mohm_without_nodeset: fallback True, v(ref) 0.9406, v(da) 1.3997, v(out) -8.002920, v(out50) -8.3411
+op check, one_mohm_abstol_1e-12_without_nodeset: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.013172, v(out50) +1.5337
+op check, one_ohm_without_nodeset: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.013172, v(out50) +1.5337
+op check, with_nodeset: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.013172, v(out50) +1.5337
+op check, nodeset_at_fallback_state: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.013172, v(out50) +1.5337
+op check, trimmed_generic_nodeset: fallback True, v(ref) 0.9406, v(da) 1.4019, v(out) -8.002970, v(out50) -7.0901
+op check, trimmed_continuation: fallback False, v(ref) 6.2000, v(da) 6.2000, v(out) -0.000007, v(out50) +0.0006
+check as drawn: largest relative difference from sr560_chain.json 0.00e+00
+cmrr vs trim, trimmed (VTRIM 1.5497 V): I_D(A) - I_D(B) -0.00 uA, g_m(A)/g_m(B) - 1 -3.818e-07, v(sa) - v(sb) +0.0003 mV; CMRR {'10': 150.3035575059186, '1000.0': 110.417629626381, '10000.0': 90.42568793922814, '100000.0': 71.56542580336402, '1000000.0': 65.56297295548762}
+cmrr vs trim, vtrim_0V (VTRIM 0.0000 V): I_D(A) - I_D(B) -20.67 uA, g_m(A)/g_m(B) - 1 -2.293e-03, v(sa) - v(sb) +1.5968 mV; CMRR {'10': 104.99183542422921, '1000.0': 102.55405995787396, '10000.0': 86.47501651928789, '100000.0': 67.6804056030922, '1000000.0': 61.65852845426513}
+check corrected vs sr560_bw_check: {'1': {'this': 1.161906647065336, 'bw_check': 1.161906647065336, 'rel_diff': 0.0}, '100': {'this': 1.0381900528725896, 'bw_check': 1.0381900528725896, 'rel_diff': 0.0}, '1000': {'this': 1.0389069571213958, 'bw_check': 1.0389069571213958, 'rel_diff': 0.0}}
+written sr560_variants.json

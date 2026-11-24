@@ -1,77 +1,96 @@
 linear reference H100     1000 Hz   1 Vpp gear                  : THD 2.33e-07 % (-173 dBc; H2 -199, H3 -188 dBc), steps 0.98-1.00 x tmax
 linear reference H100     1000 Hz   1 Vpp trap                  : THD 1.43e-07 % (-177 dBc; H2 -206, H3 -193 dBc), steps 0.55-1.00 x tmax
 linear reference H100     1000 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.63e-07 % (-176 dBc; H2 -189, H3 -182 dBc), steps 0.77-1.00 x tmax
+linear reference H100     1000 Hz   1 Vpp gear_klu_abstol1e-11  : THD 2.33e-07 % (-173 dBc; H2 -199, H3 -188 dBc), steps 0.98-1.00 x tmax
 linear reference H100     1000 Hz  10 Vpp gear                  : THD 1.72e-07 % (-175 dBc; H2 -186, H3 -183 dBc), steps 0.63-1.00 x tmax
 linear reference H100     1000 Hz  10 Vpp trap                  : THD 2.53e-07 % (-172 dBc; H2 -185, H3 -179 dBc), steps 0.94-1.00 x tmax
 linear reference H100     1000 Hz  10 Vpp gear_itl4_reltol2e-4  : THD 1.32e-07 % (-178 dBc; H2 -195, H3 -182 dBc), steps 0.65-1.00 x tmax
+linear reference H100     1000 Hz  10 Vpp gear_klu_abstol1e-11  : THD 1.72e-07 % (-175 dBc; H2 -186, H3 -183 dBc), steps 0.63-1.00 x tmax
 linear reference H100   100000 Hz   1 Vpp gear                  : THD 1.80e-07 % (-175 dBc; H2 -183, H3 -183 dBc), steps 0.76-1.00 x tmax
 linear reference H100   100000 Hz   1 Vpp trap                  : THD 1.63e-07 % (-176 dBc; H2 -188, H3 -181 dBc), steps 0.94-1.00 x tmax
 linear reference H100   100000 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.86e-07 % (-175 dBc; H2 -193, H3 -183 dBc), steps 0.73-1.00 x tmax
+linear reference H100   100000 Hz   1 Vpp gear_klu_abstol1e-11  : THD 1.80e-07 % (-175 dBc; H2 -183, H3 -183 dBc), steps 0.76-1.00 x tmax
 linear reference H100   100000 Hz  10 Vpp gear                  : THD 1.73e-07 % (-175 dBc; H2 -208, H3 -190 dBc), steps 0.93-1.00 x tmax
 linear reference H100   100000 Hz  10 Vpp trap                  : THD 2.19e-07 % (-173 dBc; H2 -184, H3 -193 dBc), steps 0.66-1.00 x tmax
 linear reference H100   100000 Hz  10 Vpp gear_itl4_reltol2e-4  : THD 1.84e-07 % (-175 dBc; H2 -193, H3 -182 dBc), steps 0.59-1.00 x tmax
+linear reference H100   100000 Hz  10 Vpp gear_klu_abstol1e-11  : THD 1.73e-07 % (-175 dBc; H2 -208, H3 -190 dBc), steps 0.93-1.00 x tmax
 linear reference H100    1e+06 Hz   1 Vpp gear                  : THD 2.62e-07 % (-172 dBc; H2 -182, H3 -187 dBc), steps 0.50-1.00 x tmax
 linear reference H100    1e+06 Hz   1 Vpp trap                  : THD 2.47e-07 % (-172 dBc; H2 -185, H3 -184 dBc), steps 0.75-1.00 x tmax
 linear reference H100    1e+06 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.32e-07 % (-178 dBc; H2 -196, H3 -184 dBc), steps 0.92-1.00 x tmax
+linear reference H100    1e+06 Hz   1 Vpp gear_klu_abstol1e-11  : THD 2.62e-07 % (-172 dBc; H2 -182, H3 -187 dBc), steps 0.50-1.00 x tmax
 linear reference H100    1e+06 Hz  10 Vpp gear                  : THD 4.19e-07 % (-168 dBc; H2 -178, H3 -177 dBc), steps 0.53-1.00 x tmax
 linear reference H100    1e+06 Hz  10 Vpp trap                  : THD 3.76e-07 % (-168 dBc; H2 -178, H3 -180 dBc), steps 0.50-1.00 x tmax
 linear reference H100    1e+06 Hz  10 Vpp gear_itl4_reltol2e-4  : THD 3.42e-07 % (-169 dBc; H2 -180, H3 -177 dBc), steps 0.65-1.00 x tmax
+linear reference H100    1e+06 Hz  10 Vpp gear_klu_abstol1e-11  : THD 4.19e-07 % (-168 dBc; H2 -178, H3 -177 dBc), steps 0.53-1.00 x tmax
 linear reference H100    1e+07 Hz   1 Vpp gear                  : THD 1.17e-06 % (-159 dBc; H2 -167, H3 -167 dBc), steps 0.86-1.00 x tmax
 linear reference H100    1e+07 Hz   1 Vpp trap                  : THD 1.30e-06 % (-158 dBc; H2 -167, H3 -166 dBc), steps 0.86-1.00 x tmax
 linear reference H100    1e+07 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.17e-06 % (-159 dBc; H2 -167, H3 -167 dBc), steps 0.86-1.00 x tmax
+linear reference H100    1e+07 Hz   1 Vpp gear_klu_abstol1e-11  : THD 1.17e-06 % (-159 dBc; H2 -167, H3 -167 dBc), steps 0.86-1.00 x tmax
 linear reference L1000     1000 Hz   1 Vpp gear                  : THD 2.73e-07 % (-171 dBc; H2 -185, H3 -183 dBc), steps 0.73-1.00 x tmax
 linear reference L1000     1000 Hz   1 Vpp trap                  : THD 1.04e-07 % (-180 dBc; H2 -200, H3 -208 dBc), steps 0.91-1.00 x tmax
 linear reference L1000     1000 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.35e-07 % (-177 dBc; H2 -194, H3 -183 dBc), steps 0.53-1.00 x tmax
+linear reference L1000     1000 Hz   1 Vpp gear_klu_abstol1e-11  : THD 2.73e-07 % (-171 dBc; H2 -185, H3 -183 dBc), steps 0.73-1.00 x tmax
 linear reference L1000     1000 Hz  10 Vpp gear                  : THD 1.49e-07 % (-177 dBc; H2 -206, H3 -190 dBc), steps 0.93-1.00 x tmax
 linear reference L1000     1000 Hz  10 Vpp trap                  : THD 1.21e-07 % (-178 dBc; H2 -192, H3 -190 dBc), steps 0.84-1.00 x tmax
 linear reference L1000     1000 Hz  10 Vpp gear_itl4_reltol2e-4  : THD 1.19e-07 % (-178 dBc; H2 -211, H3 -182 dBc), steps 1.00-1.00 x tmax
+linear reference L1000     1000 Hz  10 Vpp gear_klu_abstol1e-11  : THD 1.49e-07 % (-177 dBc; H2 -206, H3 -190 dBc), steps 0.93-1.00 x tmax
 linear reference L1000   100000 Hz   1 Vpp gear                  : THD 1.50e-07 % (-176 dBc; H2 -193, H3 -178 dBc), steps 0.66-1.00 x tmax
 linear reference L1000   100000 Hz   1 Vpp trap                  : THD 2.04e-07 % (-174 dBc; H2 -185, H3 -181 dBc), steps 0.92-1.00 x tmax
 linear reference L1000   100000 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.30e-07 % (-178 dBc; H2 -205, H3 -185 dBc), steps 0.74-1.00 x tmax
+linear reference L1000   100000 Hz   1 Vpp gear_klu_abstol1e-11  : THD 1.50e-07 % (-176 dBc; H2 -193, H3 -178 dBc), steps 0.66-1.00 x tmax
 linear reference L1000   100000 Hz  10 Vpp gear                  : THD 1.57e-07 % (-176 dBc; H2 -198, H3 -186 dBc), steps 0.97-1.00 x tmax
 linear reference L1000   100000 Hz  10 Vpp trap                  : THD 1.10e-07 % (-179 dBc; H2 -195, H3 -192 dBc), steps 0.68-1.00 x tmax
 linear reference L1000   100000 Hz  10 Vpp gear_itl4_reltol2e-4  : THD 1.28e-07 % (-178 dBc; H2 -190, H3 -192 dBc), steps 0.66-1.00 x tmax
+linear reference L1000   100000 Hz  10 Vpp gear_klu_abstol1e-11  : THD 1.57e-07 % (-176 dBc; H2 -198, H3 -186 dBc), steps 0.97-1.00 x tmax
 linear reference L1000    1e+06 Hz   1 Vpp gear                  : THD 2.40e-07 % (-172 dBc; H2 -186, H3 -179 dBc), steps 0.58-1.00 x tmax
 linear reference L1000    1e+06 Hz   1 Vpp trap                  : THD 1.92e-07 % (-174 dBc; H2 -185, H3 -178 dBc), steps 0.77-1.00 x tmax
 linear reference L1000    1e+06 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.29e-07 % (-178 dBc; H2 -200, H3 -180 dBc), steps 0.96-1.00 x tmax
+linear reference L1000    1e+06 Hz   1 Vpp gear_klu_abstol1e-11  : THD 2.40e-07 % (-172 dBc; H2 -186, H3 -179 dBc), steps 0.58-1.00 x tmax
 linear reference L1000    1e+06 Hz  10 Vpp gear                  : THD 2.86e-07 % (-171 dBc; H2 -179, H3 -179 dBc), steps 0.60-1.00 x tmax
 linear reference L1000    1e+06 Hz  10 Vpp trap                  : THD 2.85e-07 % (-171 dBc; H2 -180, H3 -178 dBc), steps 0.57-1.00 x tmax
 linear reference L1000    1e+06 Hz  10 Vpp gear_itl4_reltol2e-4  : THD 2.77e-07 % (-171 dBc; H2 -183, H3 -179 dBc), steps 0.76-1.00 x tmax
+linear reference L1000    1e+06 Hz  10 Vpp gear_klu_abstol1e-11  : THD 2.86e-07 % (-171 dBc; H2 -179, H3 -179 dBc), steps 0.60-1.00 x tmax
 linear reference L1000    1e+07 Hz   1 Vpp gear                  : THD 1.18e-06 % (-159 dBc; H2 -168, H3 -167 dBc), steps 0.86-1.00 x tmax
 linear reference L1000    1e+07 Hz   1 Vpp trap                  : THD 1.18e-06 % (-159 dBc; H2 -168, H3 -169 dBc), steps 0.86-1.00 x tmax
 linear reference L1000    1e+07 Hz   1 Vpp gear_itl4_reltol2e-4  : THD 1.18e-06 % (-159 dBc; H2 -168, H3 -167 dBc), steps 0.86-1.00 x tmax
-grid H100_thd_1000_1       : steps 0.937-1.00 x tmax; THD exact -197 dBc, as printed -152 dBc, chain -122 dBc
-grid H100_thd_1000_10      : steps 0.601-1.00 x tmax; THD exact -186 dBc, as printed -153 dBc, chain -115 dBc
-grid H100_thd_100000_1     : steps 0.950-1.00 x tmax; THD exact -192 dBc, as printed -152 dBc, chain -121 dBc
-grid H100_thd_100000_10    : steps 0.554-1.00 x tmax; THD exact -179 dBc, as printed -152 dBc, chain -92 dBc
-grid H100_thd_1e+06_1      : steps 0.793-1.00 x tmax; THD exact -164 dBc, as printed -153 dBc, chain -101 dBc
-grid H100_thd_1e+06_10     : steps 0.876-1.00 x tmax; THD exact -172 dBc, as printed -153 dBc, chain -72 dBc
-grid H100_thd_1e+07_1      : steps 0.798-1.00 x tmax; THD exact -148 dBc, as printed -147 dBc, chain -78 dBc
-grid L1000_thd_1000_1      : steps 0.944-1.00 x tmax; THD exact -197 dBc, as printed -152 dBc, chain -123 dBc
-grid L1000_thd_1000_10     : steps 0.125-1.00 x tmax; THD exact -147 dBc, as printed -146 dBc, chain -116 dBc
-grid L1000_thd_100000_1    : steps 0.635-1.00 x tmax; THD exact -180 dBc, as printed -154 dBc, chain -121 dBc
-grid L1000_thd_100000_10   : steps 0.936-1.00 x tmax; THD exact -197 dBc, as printed -153 dBc, chain -92 dBc
-grid L1000_thd_1e+06_1     : steps 0.000-1.00 x tmax; THD exact -126 dBc, as printed -126 dBc, chain -101 dBc
-grid L1000_thd_1e+06_10    : steps 0.939-1.00 x tmax; THD exact -180 dBc, as printed -152 dBc, chain -73 dBc
-grid L1000_thd_1e+07_1     : steps 0.000-1.00 x tmax; THD exact -145 dBc, as printed -143 dBc, chain -82 dBc
-  (floor/L1000_thd_1e+07_1_THS4031_first: ran with '.options abstol=1e-12')
-L1000 10 MHz 1 Vpp, S2 THS4031, sinks MMBT3904, 2 V across R_T: THD 0.0376 % (H2 -88, H3 -69 dBc, fundamental 0.917 Vpp; options '.options abstol=1e-12')
-L1000 10 MHz 1 Vpp, S2 THS4031, sinks PZT3904, 6 V across R_T: THD 0.0369 % (H2 -88, H3 -69 dBc, fundamental 0.917 Vpp; options '.options abstol=1e-12 method=gear')
-  (floor/L1000_thd_1e+07_1_LM7171_first: ran with '.options abstol=1e-12 method=gear itl4=1000 reltol=2e-4')
-L1000 10 MHz 1 Vpp, S2 LM7171, sinks MMBT3904, 2 V across R_T: THD 0.0072 % (H2 -93, H3 -83 dBc, fundamental 0.916 Vpp; options '.options abstol=1e-12 method=gear itl4=1000 reltol=2e-4')
-L1000 10 MHz 1 Vpp, S2 LM7171, sinks PZT3904, 6 V across R_T: THD 0.0100 % (H2 -96, H3 -81 dBc, fundamental 0.916 Vpp; options '.options abstol=1e-12 method=gear')
-chain H100     1000 Hz 1 Vpp gear              : THD 7.89e-05 % (-122.1 dBc; H2 -125.1, H3 -130.0 dBc)
-chain H100     1000 Hz 1 Vpp trap              : THD 7.90e-05 % (-122.0 dBc; H2 -125.1, H3 -130.0 dBc)
-chain H100     1000 Hz 1 Vpp gear_reltol2e-5   : THD 7.90e-05 % (-122.1 dBc; H2 -125.1, H3 -130.0 dBc)
-chain H100     1000 Hz 1 Vpp gear_reltol1e-5_abstol1e-11: THD 7.90e-05 % (-122.0 dBc; H2 -125.1, H3 -130.0 dBc)
-chain H100     1000 Hz 1 Vpp gear_tmax_T_1600  : THD 7.89e-05 % (-122.1 dBc; H2 -125.1, H3 -130.0 dBc)
-chain H100   100000 Hz 1 Vpp gear              : THD 8.83e-05 % (-121.1 dBc; H2 -136.4, H3 -121.2 dBc)
-chain H100   100000 Hz 1 Vpp trap              : THD 8.74e-05 % (-121.2 dBc; H2 -135.9, H3 -121.3 dBc)
-chain H100   100000 Hz 1 Vpp gear_reltol2e-5   : THD 8.82e-05 % (-121.1 dBc; H2 -136.3, H3 -121.2 dBc)
-chain H100   100000 Hz 1 Vpp gear_reltol1e-5_abstol1e-11: failed: stderr doAnalyses: TRAN:  Timestep too small; time = 8.27438e-09, timestep = 3.125e-20: trouble with xja1:jfe2140_m-instance j.xja1.j1
-chain H100   100000 Hz 1 Vpp gear_tmax_T_1600  : THD 8.87e-05 % (-121.0 dBc; H2 -136.7, H3 -121.2 dBc)
-chain H100    1e+06 Hz 1 Vpp gear              : THD 8.74e-04 % (-101.2 dBc; H2 -120.8, H3 -101.2 dBc)
-chain H100    1e+06 Hz 1 Vpp trap              : THD 8.69e-04 % (-101.2 dBc; H2 -120.6, H3 -101.3 dBc)
-chain H100    1e+06 Hz 1 Vpp gear_reltol2e-5   : THD 8.69e-04 % (-101.2 dBc; H2 -120.5, H3 -101.3 dBc)
-chain H100    1e+06 Hz 1 Vpp gear_reltol1e-5_abstol1e-11: THD 8.65e-04 % (-101.3 dBc; H2 -120.2, H3 -101.3 dBc)
-chain H100    1e+06 Hz 1 Vpp gear_tmax_T_1600  : THD 8.68e-04 % (-101.2 dBc; H2 -120.5, H3 -101.3 dBc)
+linear reference L1000    1e+07 Hz   1 Vpp gear_klu_abstol1e-11  : THD 1.18e-06 % (-159 dBc; H2 -168, H3 -167 dBc), steps 0.86-1.00 x tmax
+grid H100_thd_1000_1       : steps 0.795-1.00 x tmax; THD exact -185 dBc, as printed -152 dBc, chain -122 dBc
+grid H100_thd_1000_10      : steps 0.914-1.00 x tmax; THD exact -207 dBc, as printed -152 dBc, chain -115 dBc
+grid H100_thd_100000_1     : steps 0.933-1.00 x tmax; THD exact -191 dBc, as printed -153 dBc, chain -121 dBc
+grid H100_thd_100000_10    : steps 0.878-1.00 x tmax; THD exact -188 dBc, as printed -154 dBc, chain -92 dBc
+grid H100_thd_1e+06_1      : steps 0.779-1.00 x tmax; THD exact -164 dBc, as printed -152 dBc, chain -101 dBc
+grid H100_thd_1e+06_10     : steps 0.125-1.00 x tmax; THD exact -139 dBc, as printed -139 dBc, chain -72 dBc
+grid H100_thd_1e+07_1      : steps 0.936-1.00 x tmax; THD exact -159 dBc, as printed -153 dBc, chain -78 dBc
+grid L1000_thd_1000_1      : steps 0.915-1.00 x tmax; THD exact -197 dBc, as printed -152 dBc, chain -123 dBc
+grid L1000_thd_1000_10     : steps 0.841-1.00 x tmax; THD exact -188 dBc, as printed -152 dBc, chain -116 dBc
+grid L1000_thd_100000_1    : steps 0.621-1.00 x tmax; THD exact -180 dBc, as printed -152 dBc, chain -121 dBc
+grid L1000_thd_100000_10   : steps 0.626-1.00 x tmax; THD exact -180 dBc, as printed -153 dBc, chain -92 dBc
+grid L1000_thd_1e+06_1     : steps 0.838-1.00 x tmax; THD exact -167 dBc, as printed -152 dBc, chain -101 dBc
+grid L1000_thd_1e+06_10    : steps 0.732-1.00 x tmax; THD exact -166 dBc, as printed -152 dBc, chain -73 dBc
+grid L1000_thd_1e+07_1     : steps 0.944-1.00 x tmax; THD exact -163 dBc, as printed -153 dBc, chain -83 dBc
+  (floor/L1000_thd_1e+07_1_THS4031_first: ran with '.options abstol=1e-11 method=gear')
+L1000 10 MHz 1 Vpp, S2 THS4031, sinks MMBT3904, 2 V across R_T: THD 0.0373 % (H2 -87, H3 -69 dBc, fundamental 0.917 Vpp; options '.options abstol=1e-11 method=gear')
+  (floor/L1000_thd_1e+07_1_THS4031_adopted: ran with '.options abstol=1e-11 method=gear')
+L1000 10 MHz 1 Vpp, S2 THS4031, sinks PZT3904, 6 V across R_T: THD 0.0377 % (H2 -88, H3 -69 dBc, fundamental 0.917 Vpp; options '.options abstol=1e-11 method=gear')
+  (floor/L1000_thd_1e+07_1_LM7171_first: ran with '.options abstol=1e-11 method=gear klu')
+L1000 10 MHz 1 Vpp, S2 LM7171, sinks MMBT3904, 2 V across R_T: THD 0.0072 % (H2 -92, H3 -84 dBc, fundamental 0.916 Vpp; options '.options abstol=1e-11 method=gear klu')
+  (floor/L1000_thd_1e+07_1_LM7171_adopted: ran with '.options abstol=1e-11 method=gear klu reltol=3e-4')
+L1000 10 MHz 1 Vpp, S2 LM7171, sinks PZT3904, 6 V across R_T: THD 0.0072 % (H2 -92, H3 -83 dBc, fundamental 0.916 Vpp; options '.options abstol=1e-11 method=gear klu reltol=3e-4')
+chain H100     1000 Hz 1 Vpp gear              : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 6.28016e-08, timestep = 3.125e-18: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100     1000 Hz 1 Vpp trap              : THD 7.92e-05 % (-122.0 dBc; H2 -125.1, H3 -130.0 dBc)
+chain H100     1000 Hz 1 Vpp gear_reltol2e-5   : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 2.53673e-08, timestep = 3.125e-18: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100     1000 Hz 1 Vpp gear_reltol1e-5_abstol1e-11: failed: stderr doAnalyses: TRAN:  Timestep too small; time = 2.5396e-08, timestep = 3.125e-18: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100     1000 Hz 1 Vpp gear_tmax_T_1600  : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 7.8125e-10, timestep = 7.8125e-19: trouble with xja2:jfe2140_m-instance j.xja2.j1
+chain H100     1000 Hz 1 Vpp gear_klu_abstol1e-11: THD 7.90e-05 % (-122.1 dBc; H2 -125.1, H3 -130.0 dBc)
+chain H100   100000 Hz 1 Vpp gear              : THD 8.97e-05 % (-120.9 dBc; H2 -139.4, H3 -121.2 dBc)
+chain H100   100000 Hz 1 Vpp trap              : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 2.48487e-09, timestep = 3.125e-20: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100   100000 Hz 1 Vpp gear_reltol2e-5   : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 2.95017e-10, timestep = 3.125e-20: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100   100000 Hz 1 Vpp gear_reltol1e-5_abstol1e-11: failed: stderr doAnalyses: TRAN:  Timestep too small; time = 2.7412e-10, timestep = 3.125e-20: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100   100000 Hz 1 Vpp gear_tmax_T_1600  : THD 1.01e-04 % (-119.9 dBc; H2 -139.9, H3 -121.0 dBc)
+chain H100   100000 Hz 1 Vpp gear_klu_abstol1e-11: THD 8.89e-05 % (-121.0 dBc; H2 -136.7, H3 -121.1 dBc)
+chain H100    1e+06 Hz 1 Vpp gear              : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 2.93696e-09, timestep = 3.125e-21: trouble with xs4.x1:npn_in-instance q.xs4.x1.q1
+chain H100    1e+06 Hz 1 Vpp trap              : THD 9.64e-04 % (-100.3 dBc; H2 -114.4, H3 -100.7 dBc)
+chain H100    1e+06 Hz 1 Vpp gear_reltol2e-5   : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 1.08087e-10, timestep = 3.125e-21: trouble with xca2:lsbf862_m-instance j.xca2.j1
+chain H100    1e+06 Hz 1 Vpp gear_reltol1e-5_abstol1e-11: failed: stderr doAnalyses: TRAN:  Timestep too small; time = 1.21475e-10, timestep = 3.125e-21: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100    1e+06 Hz 1 Vpp gear_tmax_T_1600  : failed: stderr doAnalyses: TRAN:  Timestep too small; time = 1.24325e-08, timestep = 7.8125e-22: trouble with xja1:jfe2140_m-instance j.xja1.j1
+chain H100    1e+06 Hz 1 Vpp gear_klu_abstol1e-11: THD 8.69e-04 % (-101.2 dBc; H2 -120.5, H3 -101.3 dBc)

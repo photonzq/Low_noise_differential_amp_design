@@ -37,85 +37,85 @@ LF356 model at 1 kHz: e_n 12.586 nV/rtHz, i_n 0.01 pA/rtHz (parameters {'en': 1.
    c_U402_x10                   f3dB 0.808 MHz  300 kHz -0.66 dB  1 MHz -4.12 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 9.751e-07
    c_U404_x10                   f3dB 0.891 MHz  300 kHz -0.60 dB  1 MHz -3.55 dB  peak +0.00 dB at 0.000562 MHz  v(out50) 9.751e-07
    c_U403+U406_x10              f3dB 0.795 MHz  300 kHz -0.67 dB  1 MHz -4.24 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 9.751e-07
-   c_after_fe_ideal             f3dB 1.124 MHz  300 kHz -0.50 dB  1 MHz -2.58 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 9.751e-07
+   c_after_fe_ideal             f3dB 1.124 MHz  300 kHz -0.50 dB  1 MHz -2.58 dB  peak +0.00 dB at 0.000668 MHz  v(out50) 9.751e-07
    c_all_ideal                  f3dB 1.136 MHz  300 kHz -0.49 dB  1 MHz -2.54 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 9.751e-07
-   e_lf356_lf411_datasheet      f3dB 0.874 MHz  300 kHz -0.61 dB  1 MHz -3.66 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 9.742e-07
-   e_op37_datasheet             f3dB 0.999 MHz  300 kHz -0.52 dB  1 MHz -3.02 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 9.733e-07
-   e_lt1028_datasheet           f3dB 1.021 MHz  300 kHz -0.50 dB  1 MHz -2.91 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 9.742e-07
-   e_all_datasheet              f3dB 1.524 MHz  300 kHz -0.30 dB  1 MHz -1.11 dB  peak +0.00 dB at 0.00075 MHz  v(out50) 9.733e-07
-   e_rout_datasheet             f3dB 0.798 MHz  300 kHz -0.67 dB  1 MHz -4.21 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 9.496e-07
+   e_lf356_lf411_datasheet      f3dB 0.874 MHz  300 kHz -0.61 dB  1 MHz -3.66 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 9.733e-07
+   e_op37_datasheet             f3dB 0.999 MHz  300 kHz -0.52 dB  1 MHz -3.02 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 9.742e-07
+   e_lt1028_datasheet           f3dB 1.021 MHz  300 kHz -0.50 dB  1 MHz -2.91 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 9.751e-07
+   e_all_datasheet              f3dB 1.524 MHz  300 kHz -0.30 dB  1 MHz -1.11 dB  peak +0.00 dB at 0.00075 MHz  v(out50) 9.742e-07
+   e_rout_datasheet             f3dB 0.798 MHz  300 kHz -0.67 dB  1 MHz -4.21 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 9.477e-07
    f_add_C406                   f3dB 0.765 MHz  300 kHz -0.70 dB  1 MHz -4.51 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 9.742e-07
    f_C301_47p                   f3dB 0.685 MHz  300 kHz -0.84 dB  1 MHz -5.10 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 9.751e-07
-   f_ideal_add_C406             f3dB 1.073 MHz  300 kHz -0.51 dB  1 MHz -2.74 dB  peak +0.00 dB at 0.000501 MHz  v(out50) 9.742e-07
-   f_datasheet_add_C406         f3dB 1.383 MHz  300 kHz -0.32 dB  1 MHz -1.46 dB  peak +0.00 dB at 0.000708 MHz  v(out50) 9.815e-07
-   f_datasheet_add_C406_C301_47p f3dB 1.162 MHz  300 kHz -0.49 dB  1 MHz -2.37 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 9.815e-07
+   f_ideal_add_C406             f3dB 1.073 MHz  300 kHz -0.51 dB  1 MHz -2.74 dB  peak +0.00 dB at 0.000562 MHz  v(out50) 9.742e-07
+   f_datasheet_add_C406         f3dB 1.383 MHz  300 kHz -0.32 dB  1 MHz -1.46 dB  peak +0.00 dB at 0.000708 MHz  v(out50) 9.751e-07
+   f_datasheet_add_C406_C301_47p f3dB 1.162 MHz  300 kHz -0.49 dB  1 MHz -2.37 dB  peak +0.00 dB at 0.000631 MHz  v(out50) 9.751e-07
    passive networks with ideal op amps (dB at 0.3 / 0.73 / 1 MHz): U105 (R123 || C111, R124): -0.06 / -0.33 / -0.60; U201 (R217 || (R229 + C201), R215): -0.34 / -0.85 / -1.00; U305 (R315 || (R330 + C301), R313): -0.00 / -0.02 / -0.04; U402 (R403 || C401, R404): -0.02 / -0.14 / -0.25; vernier (RFB || C407): -0.01 / -0.08 / -0.15; filter-1 node (RU104 + RF1BYP, CF1MUX): -0.00 / -0.00 / -0.01; filter-2 node (RF2BYP, CF2MUX): -0.00 / -0.00 / -0.00; K102 x2 path (R116, C116, A105 load): -0.02 / -0.13 / -0.23; U403 with C406 = 82 pF (not in the netlist): -0.02 / -0.10 / -0.19; U305 with C301 = 47 pF (parts list) instead of 6.8 pF: -0.16 / -0.63 / -0.87; sum {'0.3': -0.461, '0.73': -1.556, '1': -2.29}
 
 == Chain, gain 100: setting fe10_02222_dac0p830375, vtrim 1.54973 V, vernier code 0.830375
-   baseline f3dB 0.7292 MHz (archived 0.7292, fe10_02222_dac0p830375; rel. diff 0.00e+00; curve max |diff| 0.0 dB)
+   baseline f3dB 0.7293 MHz (archived 0.7293, fe10_02222_dac0p830375; rel. diff 0.00e+00; curve max |diff| 0.0 dB)
    baseline                     f3dB 0.729 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
-   b_lf356_lf411_x10            f3dB 0.924 MHz  300 kHz -0.59 dB  1 MHz -3.36 dB  peak +0.00 dB at 4.22e-05 MHz  v(out50) 6.325e-05
+   b_lf356_lf411_x10            f3dB 0.924 MHz  300 kHz -0.59 dB  1 MHz -3.36 dB  peak +0.00 dB at 4.47e-05 MHz  v(out50) 6.325e-05
    c_U102_x10                   f3dB 0.739 MHz  300 kHz -0.73 dB  1 MHz -4.74 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
    c_U103_x10                   f3dB 0.729 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
-   c_U105_x10                   f3dB 0.764 MHz  300 kHz -0.70 dB  1 MHz -4.49 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
-   c_U204_x10                   f3dB 0.746 MHz  300 kHz -0.72 dB  1 MHz -4.66 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
+   c_U105_x10                   f3dB 0.764 MHz  300 kHz -0.70 dB  1 MHz -4.49 dB  peak +0.00 dB at 3.55e-05 MHz  v(out50) 6.325e-05
+   c_U204_x10                   f3dB 0.746 MHz  300 kHz -0.72 dB  1 MHz -4.66 dB  peak +0.00 dB at 3.55e-05 MHz  v(out50) 6.325e-05
    c_U201_x10                   f3dB 0.734 MHz  300 kHz -0.72 dB  1 MHz -4.81 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
-   c_U303_x10                   f3dB 0.746 MHz  300 kHz -0.72 dB  1 MHz -4.66 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
+   c_U303_x10                   f3dB 0.746 MHz  300 kHz -0.72 dB  1 MHz -4.66 dB  peak +0.00 dB at 3.55e-05 MHz  v(out50) 6.325e-05
    c_U305_x10                   f3dB 0.732 MHz  300 kHz -0.73 dB  1 MHz -4.81 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
    c_U402_x10                   f3dB 0.740 MHz  300 kHz -0.73 dB  1 MHz -4.73 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
    c_U404_x10                   f3dB 0.861 MHz  300 kHz -0.62 dB  1 MHz -3.73 dB  peak +0.00 dB at 3.76e-05 MHz  v(out50) 6.325e-05
    c_U403+U406_x10              f3dB 0.729 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
    c_after_fe_ideal             f3dB 1.074 MHz  300 kHz -0.51 dB  1 MHz -2.74 dB  peak +0.00 dB at 5.31e-05 MHz  v(out50) 6.325e-05
-   c_all_ideal                  f3dB 1.109 MHz  300 kHz -0.50 dB  1 MHz -2.62 dB  peak +0.00 dB at 5.31e-05 MHz  v(out50) 6.325e-05
+   c_all_ideal                  f3dB 1.109 MHz  300 kHz -0.50 dB  1 MHz -2.62 dB  peak +0.00 dB at 5.62e-05 MHz  v(out50) 6.325e-05
    e_lf356_lf411_datasheet      f3dB 0.802 MHz  300 kHz -0.66 dB  1 MHz -4.16 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
-   e_op37_datasheet             f3dB 0.894 MHz  300 kHz -0.58 dB  1 MHz -3.58 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.323e-05
+   e_op37_datasheet             f3dB 0.894 MHz  300 kHz -0.58 dB  1 MHz -3.58 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
    e_lt1028_datasheet           f3dB 0.907 MHz  300 kHz -0.57 dB  1 MHz -3.51 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.323e-05
-   e_all_datasheet              f3dB 1.357 MHz  300 kHz -0.34 dB  1 MHz -1.57 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.325e-05
-   e_rout_datasheet             f3dB 0.732 MHz  300 kHz -0.73 dB  1 MHz -4.81 dB  peak +0.00 dB at 1.33e-05 MHz  v(out50) 6.253e-05
+   e_all_datasheet              f3dB 1.357 MHz  300 kHz -0.34 dB  1 MHz -1.57 dB  peak +0.00 dB at 3.55e-05 MHz  v(out50) 6.325e-05
+   e_rout_datasheet             f3dB 0.732 MHz  300 kHz -0.73 dB  1 MHz -4.81 dB  peak +0.00 dB at 1.41e-05 MHz  v(out50) 6.253e-05
    f_add_C406                   f3dB 0.707 MHz  300 kHz -0.76 dB  1 MHz -5.11 dB  peak +0.00 dB at 3.16e-05 MHz  v(out50) 6.323e-05
-   f_C301_47p                   f3dB 0.640 MHz  300 kHz -0.90 dB  1 MHz -5.70 dB  peak +0.00 dB at 2.99e-05 MHz  v(out50) 6.325e-05
+   f_C301_47p                   f3dB 0.640 MHz  300 kHz -0.90 dB  1 MHz -5.70 dB  peak +0.00 dB at 3.16e-05 MHz  v(out50) 6.325e-05
    f_ideal_add_C406             f3dB 1.050 MHz  300 kHz -0.52 dB  1 MHz -2.82 dB  peak +0.00 dB at 5.01e-05 MHz  v(out50) 6.323e-05
-   f_datasheet_add_C406         f3dB 1.243 MHz  300 kHz -0.36 dB  1 MHz -1.92 dB  peak +0.00 dB at 3.16e-05 MHz  v(out50) 6.323e-05
-   f_datasheet_add_C406_C301_47p f3dB 1.038 MHz  300 kHz -0.53 dB  1 MHz -2.84 dB  peak +0.00 dB at 2.99e-05 MHz  v(out50) 6.323e-05
+   f_datasheet_add_C406         f3dB 1.243 MHz  300 kHz -0.36 dB  1 MHz -1.92 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 6.323e-05
+   f_datasheet_add_C406_C301_47p f3dB 1.038 MHz  300 kHz -0.53 dB  1 MHz -2.84 dB  peak +0.00 dB at 3.16e-05 MHz  v(out50) 6.323e-05
    passive networks with ideal op amps (dB at 0.3 / 0.73 / 1 MHz): U105 (R123 || C111, R124): -0.06 / -0.33 / -0.60; U201 (R217 || (R229 + C201), R215): -0.34 / -0.85 / -1.00; U305 (R315 || (R330 + C301), R313): -0.00 / -0.02 / -0.04; U402 (R403 || C401, R404): -0.02 / -0.14 / -0.25; vernier (RFB || C407): -0.01 / -0.08 / -0.15; filter-1 node (RU104 + RF1BYP, CF1MUX): -0.00 / -0.00 / -0.01; filter-2 node (RF2BYP, CF2MUX): -0.00 / -0.00 / -0.00; U403 with C406 = 82 pF (not in the netlist): -0.02 / -0.10 / -0.19; U305 with C301 = 47 pF (parts list) instead of 6.8 pF: -0.16 / -0.63 / -0.87; sum {'0.3': -0.439, '0.73': -1.43, '1': -2.056}
 
-== Chain, gain 1000: setting fe10_00122_dac0p827054, vtrim -0.00466142 V, vernier code 0.827054
-   baseline f3dB 0.7285 MHz (archived 0.7285, fe10_00122_dac0p827054; rel. diff 0.00e+00; curve max |diff| 0.0 dB)
-   baseline                     f3dB 0.729 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 3.587
-   b_lf356_lf411_x10            f3dB 0.922 MHz  300 kHz -0.59 dB  1 MHz -3.36 dB  peak +0.00 dB at 0.000501 MHz  v(out50) 3.587
-   c_U102_x10                   f3dB 0.738 MHz  300 kHz -0.73 dB  1 MHz -4.74 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 3.587
-   c_U103_x10                   f3dB 0.729 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 0.000447 MHz  v(out50) 3.587
-   c_U105_x10                   f3dB 0.763 MHz  300 kHz -0.70 dB  1 MHz -4.50 dB  peak +0.00 dB at 0.000447 MHz  v(out50) 3.587
-   c_U204_x10                   f3dB 0.745 MHz  300 kHz -0.72 dB  1 MHz -4.66 dB  peak +0.00 dB at 0.000501 MHz  v(out50) 3.587
-   c_U201_x10                   f3dB 0.733 MHz  300 kHz -0.73 dB  1 MHz -4.81 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 3.587
-   c_U303_x10                   f3dB 0.745 MHz  300 kHz -0.72 dB  1 MHz -4.66 dB  peak +0.00 dB at 0.000501 MHz  v(out50) 3.587
-   c_U305_x10                   f3dB 0.731 MHz  300 kHz -0.74 dB  1 MHz -4.81 dB  peak +0.00 dB at 0.000473 MHz  v(out50) 3.587
-   c_U402_x10                   f3dB 0.739 MHz  300 kHz -0.73 dB  1 MHz -4.73 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 3.587
-   c_U404_x10                   f3dB 0.860 MHz  300 kHz -0.63 dB  1 MHz -3.74 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 3.587
-   c_U403+U406_x10              f3dB 0.728 MHz  300 kHz -0.74 dB  1 MHz -4.85 dB  peak +0.00 dB at 0.000447 MHz  v(out50) 3.587
-   c_after_fe_ideal             f3dB 1.072 MHz  300 kHz -0.52 dB  1 MHz -2.74 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 3.587
-   c_all_ideal                  f3dB 1.107 MHz  300 kHz -0.51 dB  1 MHz -2.63 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 3.587
-   e_lf356_lf411_datasheet      f3dB 0.801 MHz  300 kHz -0.67 dB  1 MHz -4.17 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 3.587
-   e_op37_datasheet             f3dB 0.894 MHz  300 kHz -0.58 dB  1 MHz -3.58 dB  peak +0.00 dB at 0.000562 MHz  v(out50) 3.587
-   e_lt1028_datasheet           f3dB 0.906 MHz  300 kHz -0.57 dB  1 MHz -3.52 dB  peak +0.00 dB at 0.000562 MHz  v(out50) 3.587
-   e_all_datasheet              f3dB 1.357 MHz  300 kHz -0.34 dB  1 MHz -1.58 dB  peak +0.00 dB at 0.000708 MHz  v(out50) 3.587
-   e_rout_datasheet             f3dB 0.731 MHz  300 kHz -0.74 dB  1 MHz -4.82 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 3.587
-   f_add_C406                   f3dB 0.706 MHz  300 kHz -0.77 dB  1 MHz -5.12 dB  peak +0.00 dB at 0.000447 MHz  v(out50) 3.587
-   f_C301_47p                   f3dB 0.639 MHz  300 kHz -0.91 dB  1 MHz -5.71 dB  peak +0.00 dB at 0.000447 MHz  v(out50) 3.587
-   f_ideal_add_C406             f3dB 1.048 MHz  300 kHz -0.52 dB  1 MHz -2.82 dB  peak +0.00 dB at 0.000531 MHz  v(out50) 3.587
-   f_datasheet_add_C406         f3dB 1.243 MHz  300 kHz -0.37 dB  1 MHz -1.92 dB  peak +0.00 dB at 0.000668 MHz  v(out50) 3.587
-   f_datasheet_add_C406_C301_47p f3dB 1.037 MHz  300 kHz -0.54 dB  1 MHz -2.84 dB  peak +0.00 dB at 0.000596 MHz  v(out50) 3.587
+== Chain, gain 1000: setting fe10_00122_dac0p827054, vtrim 1.54973 V, vernier code 0.827054
+   baseline f3dB 0.7296 MHz (archived 0.7296, fe10_00122_dac0p827054; rel. diff 0.00e+00; curve max |diff| 0.0 dB)
+   baseline                     f3dB 0.730 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   b_lf356_lf411_x10            f3dB 0.924 MHz  300 kHz -0.59 dB  1 MHz -3.36 dB  peak +0.00 dB at 2.66e-05 MHz  v(out50) 0.0006325
+   c_U102_x10                   f3dB 0.739 MHz  300 kHz -0.73 dB  1 MHz -4.74 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   c_U103_x10                   f3dB 0.730 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   c_U105_x10                   f3dB 0.764 MHz  300 kHz -0.70 dB  1 MHz -4.49 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   c_U204_x10                   f3dB 0.746 MHz  300 kHz -0.72 dB  1 MHz -4.65 dB  peak +0.00 dB at 2.24e-05 MHz  v(out50) 0.0006325
+   c_U201_x10                   f3dB 0.734 MHz  300 kHz -0.72 dB  1 MHz -4.80 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   c_U303_x10                   f3dB 0.746 MHz  300 kHz -0.72 dB  1 MHz -4.65 dB  peak +0.00 dB at 2.24e-05 MHz  v(out50) 0.0006325
+   c_U305_x10                   f3dB 0.732 MHz  300 kHz -0.73 dB  1 MHz -4.81 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   c_U402_x10                   f3dB 0.740 MHz  300 kHz -0.73 dB  1 MHz -4.72 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   c_U404_x10                   f3dB 0.861 MHz  300 kHz -0.62 dB  1 MHz -3.73 dB  peak +0.00 dB at 2.37e-05 MHz  v(out50) 0.0006325
+   c_U403+U406_x10              f3dB 0.729 MHz  300 kHz -0.74 dB  1 MHz -4.84 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   c_after_fe_ideal             f3dB 1.074 MHz  300 kHz -0.51 dB  1 MHz -2.74 dB  peak +0.00 dB at 3.35e-05 MHz  v(out50) 0.0006325
+   c_all_ideal                  f3dB 1.109 MHz  300 kHz -0.50 dB  1 MHz -2.62 dB  peak +0.00 dB at 3.55e-05 MHz  v(out50) 0.0006325
+   e_lf356_lf411_datasheet      f3dB 0.802 MHz  300 kHz -0.66 dB  1 MHz -4.16 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   e_op37_datasheet             f3dB 0.895 MHz  300 kHz -0.58 dB  1 MHz -3.57 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   e_lt1028_datasheet           f3dB 0.907 MHz  300 kHz -0.57 dB  1 MHz -3.51 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006325
+   e_all_datasheet              f3dB 1.358 MHz  300 kHz -0.34 dB  1 MHz -1.57 dB  peak +0.00 dB at 2.24e-05 MHz  v(out50) 0.0006325
+   e_rout_datasheet             f3dB 0.732 MHz  300 kHz -0.73 dB  1 MHz -4.81 dB  peak +0.00 dB at 3.55e-05 MHz  v(out50) 0.0006253
+   f_add_C406                   f3dB 0.708 MHz  300 kHz -0.76 dB  1 MHz -5.11 dB  peak +0.00 dB at 2e-05 MHz  v(out50) 0.0006325
+   f_C301_47p                   f3dB 0.640 MHz  300 kHz -0.90 dB  1 MHz -5.70 dB  peak +0.00 dB at 2e-05 MHz  v(out50) 0.0006325
+   f_ideal_add_C406             f3dB 1.050 MHz  300 kHz -0.52 dB  1 MHz -2.82 dB  peak +0.00 dB at 3.16e-05 MHz  v(out50) 0.0006325
+   f_datasheet_add_C406         f3dB 1.244 MHz  300 kHz -0.36 dB  1 MHz -1.92 dB  peak +0.00 dB at 2.11e-05 MHz  v(out50) 0.0006323
+   f_datasheet_add_C406_C301_47p f3dB 1.039 MHz  300 kHz -0.53 dB  1 MHz -2.83 dB  peak +0.00 dB at 2e-05 MHz  v(out50) 0.0006323
    passive networks with ideal op amps (dB at 0.3 / 0.73 / 1 MHz): U105 (R123 || C111, R124): -0.06 / -0.33 / -0.60; U201 (R217 || (R229 + C201), R215): -0.34 / -0.85 / -1.00; U305 (R315 || (R330 + C301), R313): -0.00 / -0.02 / -0.04; U402 (R403 || C401, R404): -0.02 / -0.14 / -0.25; vernier (RFB || C407): -0.01 / -0.08 / -0.15; filter-1 node (RU104 + RF1BYP, CF1MUX): -0.00 / -0.00 / -0.01; filter-2 node (RF2BYP, CF2MUX): -0.00 / -0.00 / -0.00; U403 with C406 = 82 pF (not in the netlist): -0.02 / -0.10 / -0.19; U305 with C301 = 47 pF (parts list) instead of 6.8 pF: -0.16 / -0.63 / -0.87; sum {'0.3': -0.439, '0.73': -1.43, '1': -2.056}
 
 == Front end alone (output v(out), -3 dB from the 1 Hz value, as sr560_frontend.run_case)
-   x10 baseline         f3dB 2.444 MHz  gain(1 kHz) 10.1565  1 MHz -0.68 dB  peak +0.00 dB at 0.00141 MHz  (archived 2.4445 MHz)
+   x10 baseline         f3dB 2.445 MHz  gain(1 kHz) 10.1565  1 MHz -0.68 dB  peak +0.00 dB at 0.00126 MHz  (archived 2.4447 MHz)
    x10 U102_x10         f3dB 2.664 MHz  gain(1 kHz) 10.1565  1 MHz -0.59 dB  peak +0.00 dB at 0.00126 MHz
    x10 U102_x1000       f3dB 2.692 MHz  gain(1 kHz) 10.1565  1 MHz -0.57 dB  peak +0.00 dB at 0.00126 MHz
    x10 U102_datasheet   f3dB 2.484 MHz  gain(1 kHz) 10.1565  1 MHz -0.49 dB  peak +0.00 dB at 0.00126 MHz
    x2  baseline         f3dB 3.924 MHz  gain(1 kHz) 1.9832  1 MHz -0.29 dB  peak +0.00 dB at 0.00158 MHz
-   x2  U102_x10         f3dB 4.162 MHz  gain(1 kHz) 1.9832  1 MHz -0.26 dB  peak +0.00 dB at 0.00158 MHz
+   x2  U102_x10         f3dB 4.162 MHz  gain(1 kHz) 1.9832  1 MHz -0.26 dB  peak +0.00 dB at 0.00141 MHz
    x2  U102_x1000       f3dB 4.195 MHz  gain(1 kHz) 1.9832  1 MHz -0.25 dB  peak +0.00 dB at 0.00158 MHz
-   x2  U102_datasheet   f3dB 4.027 MHz  gain(1 kHz) 1.9832  1 MHz -0.13 dB  peak +0.00 dB at 0.00178 MHz
+   x2  U102_datasheet   f3dB 4.027 MHz  gain(1 kHz) 1.9832  1 MHz -0.13 dB  peak +0.00 dB at 0.00158 MHz
 
 == Single stage ten times faster: change of f3dB (MHz) and of the 1 MHz response (dB)
    gain 1: U404 +0.096 (+0.68 dB), U105 +0.045 (+0.35 dB), U204 +0.022 (+0.18 dB), U303 +0.022 (+0.18 dB), U402 +0.013 (+0.11 dB), U201 +0.005 (+0.04 dB), U102 +0.004 (+0.03 dB), U305 +0.004 (+0.03 dB), U103 +0.000 (+0.00 dB), U403+U406 -0.000 (-0.00 dB)

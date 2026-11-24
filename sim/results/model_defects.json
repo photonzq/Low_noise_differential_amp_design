@@ -99,9 +99,9 @@
   {
    "model": "TI THS4031",
    "quantity": "HD3 at 10 MHz",
-   "model_gives": "-37.7 dBc at 1 Vpp (in S2)",
+   "model_gives": "-37.8 dBc at 1 Vpp (in S2)",
    "data_sheet": "about -50 dBc at 2 Vpp, G = 2 (Fig. 5-15)",
-   "error": "12.3 dB as read; 24.3 dB after scaling to 2 Vpp",
+   "error": "12.2 dB as read; 24.3 dB after scaling to 2 Vpp",
    "json_key": "opamp/THS4031 HD3"
   },
   {
@@ -274,19 +274,19 @@
    "e_1f_10kHz_eq1": 5.851036965336996e-07,
    "e_1f_10kHz_eq1_with_lambda": 5.435344511587881e-07,
    "e_10kHz_card_ngspice": 5.4362317e-07,
-   "gm_card_ngspice": 0.013148203,
-   "e_1f_10kHz_ngspice_gm": 5.436223810418401e-07,
+   "gm_card_ngspice": 0.013148202,
+   "e_1f_10kHz_ngspice_gm": 5.436223977331126e-07,
    "sink_op": {
     "v_sa": 0.3551963,
     "v_ea": -8.986458,
     "v_ctrl": -10.70743,
-    "i_sink": 0.011024818,
+    "i_sink": 0.011024817,
     "v_ce": 9.3416543,
-    "p_transistor": 0.10299003847641741,
-    "p_rt": 0.066298206085356,
+    "p_transistor": 0.1029900291347631,
+    "p_rt": 0.06629820007181399,
     "vcm_min": -7.353626300000001
    },
-   "sink_current": 0.011024818,
+   "sink_current": 0.011024817,
    "sink_vds": 9.3416543,
    "sink_run": {
     "case": "replace(frontend.CASES['H10'], sink='J:J310', v_sink=6.0, v_be_sink=-1.6)",
@@ -585,12 +585,12 @@
    }
   },
   "THS4031 HD3": {
-   "h3": 0.012973787045680167,
-   "hd3_dBc_1Vpp": -37.73866469886508,
-   "hd3_dBc_scaled_to_2Vpp": -25.69746487230583,
+   "h3": 0.012898146606540843,
+   "hd3_dBc_1Vpp": -37.789453819411214,
+   "hd3_dBc_scaled_to_2Vpp": -25.748253992851964,
    "datasheet_dBc_2Vpp": -50.0,
-   "excess_unscaled_dB": 12.26133530113492,
-   "excess_scaled_dB": 24.30253512769417,
+   "excess_unscaled_dB": 12.210546180588786,
+   "excess_scaled_dB": 24.251746007148036,
    "datasheet_src": "SLOS224L Fig. 5-15, p. 12 (+/-15 V, G = +2, R_L 1 kohm, 2 Vpp): the HD3 curve reaches the plot's top edge, -50 dBc, at 10 MHz (read by eye)",
    "model_src": "da_compare.json THS4031.thd (10 MHz, 1 Vpp at the output, S2 at unity gain)",
    "note_text": "-37 dBc at 1 Vpp (in S2) | about -50 dBc at 2 Vpp, G = 2 (Fig. 5-15) | about 20 dB too high"

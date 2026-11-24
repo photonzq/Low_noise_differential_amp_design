@@ -1,36 +1,257 @@
 {
- "R_F route, gain 30, ac deck": {
-  "values": {
-   "v(sa)": 0.3551963,
-   "v(ba)": 3.9146972,
-   "v(da1)": 4.2607461,
-   "v(ca)": 8.993347,
-   "v(oa)": 0.35519574,
-   "@rupa[i]": 0.0010170003,
-   "@rbsa[i]": 0.0010170002,
-   "@j.xca1.j1[ig]": -7.424286e-14,
-   "@j.xca2.j1[ig]": -7.424286e-14
+ "f3db_adopted": 15030739.168216696,
+ "without the servo": {
+  "R_F route, gain 20": {
+   "ac deck": {
+    "values": {
+     "v(oa)": 0.35519626,
+     "v(sa)": 0.3551963,
+     "v(ga)": 1.1347467e-16,
+     "v(ba)": 3.9146972,
+     "v(da1)": 4.2607461,
+     "v(ca)": 8.993347,
+     "v(vsink)": -12.24466,
+     "@j.xja1.j1[ig]": -5.673733e-14,
+     "@rupa[i]": 0.0010170003,
+     "@rbsa[i]": 0.0010170002,
+     "@j.xca1.j1[ig]": -7.424286e-14,
+     "@j.xca2.j1[ig]": -7.424286e-14
+    },
+    "kcl_residual_at_b": 1.0014848575410058e-10,
+    "fallback": false
+   },
+   "loop deck at the op-amp outputs (dm, v), abstol 1e-15 A, 1-mOhm ties (as run)": {
+    "op": {
+     "values": {
+      "v(oa)": -10.00193,
+      "v(sa)": -1.486863,
+      "v(ga)": -0.0001000281,
+      "v(ba)": -1.471659,
+      "v(da1)": -0.9568855,
+      "v(ca)": 12.058398,
+      "v(vsink)": -0.1318692,
+      "@j.xja1.j1[ig]": 0.050014055,
+      "@rupa[i]": 0.0015111614,
+      "@rbsa[i]": 4.3438913e-06,
+      "@j.xca1.j1[ig]": -5.705479e-08,
+      "@j.xca2.j1[ig]": -5.705479e-08
+     },
+     "kcl_residual_at_b": 0.00150693161828,
+     "fallback": true
+    },
+    "margins": {
+     "dm": {
+      "pm": NaN,
+      "gm_db": 36.0,
+      "fc": [],
+      "mod": 0.98
+     },
+     "cm": {
+      "pm": NaN,
+      "gm_db": 30.8,
+      "fc": [],
+      "mod": 0.97
+     }
+    },
+    "fallbacks": [
+     "fe/H_RF20_pitfall/loopout_cm_i",
+     "fe/H_RF20_pitfall/loopout_cm_v",
+     "fe/H_RF20_pitfall/loopout_dm_i",
+     "fe/H_RF20_pitfall/loopout_dm_v",
+     "pitfall/H_RF20_pitfall_loopout_dm_v_op"
+    ]
+   },
+   "loop deck at the op-amp outputs (dm, v), 1-ohm ties": {
+    "op": {
+     "values": {
+      "v(oa)": -10.05485,
+      "v(sa)": -1.546573,
+      "v(ga)": -0.09489541,
+      "v(ba)": -1.53132,
+      "v(da1)": -1.031359,
+      "v(ca)": 11.769323,
+      "v(vsink)": -0.1405193,
+      "@j.xja1.j1[ig]": 0.047447707,
+      "@rupa[i]": 0.0015166349,
+      "@rbsa[i]": 4.3580488e-06,
+      "@j.xca1.j1[ig]": -6.148509e-08,
+      "@j.xca2.j1[ig]": -6.148509e-08
+     },
+     "kcl_residual_at_b": 0.00151239982138,
+     "fallback": true
+    },
+    "margins": {
+     "dm": {
+      "pm": NaN,
+      "gm_db": 43.0,
+      "fc": [],
+      "mod": 0.99
+     },
+     "cm": {
+      "pm": NaN,
+      "gm_db": 37.5,
+      "fc": [],
+      "mod": 0.99
+     }
+    },
+    "fallbacks": [
+     "fe/H_RF20_pitfall_ties1/loopout_cm_i",
+     "fe/H_RF20_pitfall_ties1/loopout_cm_v",
+     "fe/H_RF20_pitfall_ties1/loopout_dm_i",
+     "fe/H_RF20_pitfall_ties1/loopout_dm_v",
+     "pitfall/H_RF20_pitfall_ties1_loopout_dm_v_op"
+    ]
+   },
+   "loop deck at the op-amp outputs (dm, v), abstol 1e-12 A": {
+    "op": {
+     "values": {
+      "v(oa)": 0.35519626,
+      "v(sa)": 0.3551963,
+      "v(ga)": 1.1347467e-16,
+      "v(ba)": 3.9146972,
+      "v(da1)": 4.2607461,
+      "v(ca)": 8.993347,
+      "v(vsink)": -12.24466,
+      "@j.xja1.j1[ig]": -5.673733e-14,
+      "@rupa[i]": 0.0010170003,
+      "@rbsa[i]": 0.0010170002,
+      "@j.xca1.j1[ig]": -7.424286e-14,
+      "@j.xca2.j1[ig]": -7.424286e-14
+     },
+     "kcl_residual_at_b": 1.0014848575410058e-10,
+     "fallback": false
+    },
+    "margins": {
+     "dm": {
+      "pm": 50.4,
+      "gm_db": 21.5,
+      "fc": [
+       17.8
+      ],
+      "mod": 0.81
+     },
+     "cm": {
+      "pm": 42.1,
+      "gm_db": 10.6,
+      "fc": [
+       54.0
+      ],
+      "mod": 0.57
+     }
+    },
+    "fallbacks": []
+   }
   },
-  "kcl_residual_at_b": 1.0014848575410058e-10
- },
- "R_F route, gain 30, noise deck": {
-  "values": {
-   "v(sa)": -1.324478,
-   "v(ba)": -1.309409,
-   "v(da1)": -0.8610905,
-   "v(ca)": 10.744358,
-   "v(oa)": -12.22947,
-   "@rupa[i]": 0.0014962761,
-   "@rbsa[i]": 4.305562e-06,
-   "@j.xca1.j1[ig]": 7.7657887e-08,
-   "@j.xca2.j1[ig]": 7.7657887e-08
+  "R_F route, gain 30": {
+   "ac deck": {
+    "values": {
+     "v(oa)": 0.35519624,
+     "v(sa)": 0.3551963,
+     "v(ga)": 1.1347467e-16,
+     "v(ba)": 3.9146972,
+     "v(da1)": 4.2607461,
+     "v(ca)": 8.993347,
+     "v(vsink)": -12.24466,
+     "@j.xja1.j1[ig]": -5.673733e-14,
+     "@rupa[i]": 0.0010170003,
+     "@rbsa[i]": 0.0010170002,
+     "@j.xca1.j1[ig]": -7.424286e-14,
+     "@j.xca2.j1[ig]": -7.424286e-14
+    },
+    "kcl_residual_at_b": 1.0014848575410058e-10,
+    "fallback": false
+   },
+   "noise deck": {
+    "values": {
+     "v(oa)": 0.35519624,
+     "v(sa)": 0.3551963,
+     "v(ga)": 1.1347467e-16,
+     "v(ba)": 3.9146972,
+     "v(da1)": 4.2607461,
+     "v(ca)": 8.993347,
+     "v(vsink)": -12.24466,
+     "@j.xja1.j1[ig]": -5.673733e-14,
+     "@rupa[i]": 0.0010170003,
+     "@rbsa[i]": 0.0010170002,
+     "@j.xca1.j1[ig]": -7.424286e-14,
+     "@j.xca2.j1[ig]": -7.424286e-14
+    },
+    "kcl_residual_at_b": 1.0014848575410058e-10,
+    "fallback": false
+   },
+   "noise at 10 kHz (nV/rtHz)": 1.0684871
   },
-  "kcl_residual_at_b": 0.001491815222226
+  "JFE150 sink, gain 100": {
+   "v_sa": 0.3551963,
+   "fallback": false,
+   "f3db": 15032967.648613315
+  }
  },
- "R_F route, gain 30, noise at 10 kHz without .nodeset (nV/rtHz)": 64.012001,
- "JFE150 sink, gain 100": {
-  "v_sa": -0.9461564,
-  "f3db": 322291850.10973155,
-  "f3db_adopted": 15030739.168216696
+ "with the servo": {
+  "R_F route, gain 20, margins": {
+   "margins": {
+    "dm": {
+     "pm": 50.4,
+     "gm_db": 21.5,
+     "fc": [
+      17.8
+     ],
+     "mod": 0.81
+    },
+    "cm": {
+     "pm": 42.1,
+     "gm_db": 10.6,
+     "fc": [
+      54.0
+     ],
+     "mod": 0.57
+    }
+   },
+   "fallbacks": []
+  },
+  "R_F route, gain 30": {
+   "ac deck": {
+    "values": {
+     "v(oa)": 0.35519574,
+     "v(sa)": 0.3551963,
+     "v(ga)": 1.1347467e-16,
+     "v(ba)": 3.9146972,
+     "v(da1)": 4.2607461,
+     "v(ca)": 8.993347,
+     "v(vsink)": -12.24466,
+     "@j.xja1.j1[ig]": -5.673733e-14,
+     "@rupa[i]": 0.0010170003,
+     "@rbsa[i]": 0.0010170002,
+     "@j.xca1.j1[ig]": -7.424286e-14,
+     "@j.xca2.j1[ig]": -7.424286e-14
+    },
+    "kcl_residual_at_b": 1.0014848575410058e-10,
+    "fallback": false
+   },
+   "noise deck": {
+    "values": {
+     "v(oa)": -12.22947,
+     "v(sa)": -1.324478,
+     "v(ga)": -7.636909e-05,
+     "v(ba)": -1.309409,
+     "v(da1)": -0.8610905,
+     "v(ca)": 10.744358,
+     "v(vsink)": -12.34019,
+     "@j.xja1.j1[ig]": 0.038184543,
+     "@rupa[i]": 0.0014962761,
+     "@rbsa[i]": 4.305562e-06,
+     "@j.xca1.j1[ig]": 7.7657887e-08,
+     "@j.xca2.j1[ig]": 7.7657887e-08
+    },
+    "kcl_residual_at_b": 0.001491815222226,
+    "fallback": true
+   },
+   "noise at 10 kHz (nV/rtHz)": 64.012001
+  },
+  "JFE150 sink, gain 100": {
+   "v_sa": -0.9461564,
+   "fallback": true,
+   "f3db": 322291850.10973155
+  }
  }
 }

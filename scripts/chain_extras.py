@@ -12,7 +12,7 @@ post    The stages after the front end alone (S2, F1, S3, F2, S4, S5 and the out
         for every allocation (a3, a4, a5) that chain.allocate makes at the gains of chain.py (modes
         H_LN, H_HR, L; filters off).  AC from 1 Hz to 1 GHz, 40 points per decade.
 supply  The supply currents at the operating point, with ideal references (V_ref, the sinks' base
-        reference and the common-mode servo are ideal sources in the netlist and draw nothing from
+        reference and its 1 kohm filter's source are ideal in the netlist and draw nothing from
         the rails):
             I(+15 V) = -i(VP),  I(-15 V) = i(VM)   (ngspice's branch current flows from + to -
                                                     through the source)
@@ -170,13 +170,15 @@ def fe_step(vstep: float, s: chain.Setting) -> dict:
            f"RZB gb zb {net['rz']:g}\nCZB zb 0 {net['cz']:g}\nRBA ga 0 {net['rbias']:g}\nRBB gb 0 {net['rbias']:g}\n")
     src = L.step_source(s.gain, vstep) + inp
     ctl = ".control\n" + spice.WR + "tran 0.2n 4u 0 0.2n\nwrdata tran.txt v(oa) v(ob)\n.endc\n"
-    for k, opt in enumerate(L.TRIES[:3]):
+    tries = [t for t in L.TRIES if not t.startswith("50ohm")]   # the front end alone keeps its input network
+    for k, opt in enumerate(tries):
         try:
-            f = spice.run(f"chain/extras_fe_step_{vstep:g}", F.deck(p, f"front end step {vstep:g} V", opt + src, ctl))
+            f = spice.check_dc(spice.run(f"chain/extras_fe_step_{vstep:g}",
+                                         F.deck(p, f"front end step {vstep:g} V", opt + src, ctl)))
             d = spice.read_table(f / "tran.txt")
             return dict(options=opt.strip(), **L.step_metrics(d["time"], d["v(oa)"] - d["v(ob)"]))
         except RuntimeError:
-            if k == 2:
+            if k == len(tries) - 1:
                 raise
 
 
