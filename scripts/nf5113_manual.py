@@ -1,5 +1,5 @@
 """The noise-figure contours of the Signal Recovery Model 5113, read from the pixels of its manual's plot, so that the
-note can set them beside H and L (Figure 14j-l, Section 6.2): instruction manual 222144-A-MNL-F (©2002 AMETEK Advanced
+note can set them beside H and L (Figure 17j-l, Section 6.2): instruction manual 222144-A-MNL-F (©2002 AMETEK Advanced
 Measurement Technology), Appendix A, printed p. A-2 = PyMuPDF index 27, "Figure A-1, Typical Noise Figure Contours at
 Gain = x1000, AC Coupling and 10s Coupling Time-Constant, Flat Filter Mode"
 (refs/commercial_preamps/SignalRecovery_AMETEK/SignalRecovery_5113_manual_2002.pdf).  The 2010 data sheet

@@ -31,7 +31,7 @@ GRIDS = {
     "H10": dict(S=[10.6e-12, 14e-12], D=[5e-12, 7.77e-12, 10e-12], CN=[100e-12, 150e-12, 220e-12]),
     "L200": dict(S=[21.2e-12, 30e-12, 40e-12], D=[5.6e-12, 8e-12, 12e-12], CN=[220e-12, 330e-12, 470e-12]),
 }
-# Points evaluated after the grids: the adopted values (Table 5) and their neighbours with C_node
+# Points evaluated after the grids: the adopted values (Table 6) and their neighbours with C_node
 # raised to the next E12 values (330 pF for H, 680 pF for L; Section 4.3.1), (S, D, C_node) in F.
 EXTRA = {
     "H100": [(14e-12, 4e-12, 220e-12), (14e-12, 4e-12, 330e-12), (14e-12, 3.5e-12, 330e-12),

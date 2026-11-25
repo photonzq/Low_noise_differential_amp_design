@@ -38,7 +38,7 @@ the capacitance exponent at 0.5.
 
 prepare_published_opamps() writes a second op-amp library, _lib/opamps_published.lib, with the
 vendor models as published (translated for ngspice, noise not corrected) and with every KF set to
-zero, for the checks of Table 7 of the note (opamp_noise_check.py); prepare() does not write it.
+zero, for the checks of Table 8 of the note (opamp_noise_check.py); prepare() does not write it.
 """
 from __future__ import annotations
 

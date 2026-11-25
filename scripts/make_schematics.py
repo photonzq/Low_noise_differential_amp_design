@@ -6,6 +6,9 @@ Sheets (PNG at 600 dpi and PDF, in ../figures/):
                           identical; R_G and the cross-coupled C_X join the sides), the sinks' base
                           reference as an off-sheet net
   schematic_front_end_L   the same with the L values
+  schematic_front_end_B   the same for the bipolar front end B of Section 3.5 (bipolar_inputs.fe_p("B")): the input
+                          array is the SSM2212's calibrated card (drawn as SSM2212, QJa1..QJa24), RUPa sized for its
+                          source node below the input
   schematic_chain         difference amplifier, filters, gain stages and output driver
   schematic_sr560         the SR560's front end as read from its schematic (x10 position)
   schematic_topology      the topology in its basic form and its differential noise half-circuit
@@ -34,10 +37,11 @@ JX, JD, JS = 0.66, 0.66, 0.30        # JFET (gate on the left): channel 0.66 rig
 
 
 def collapse(text: str, n: int) -> str:
-    """Per-device instances of the paralleled JFETs and cascodes folded into the first."""
+    """Per-device instances of the paralleled JFETs (or bipolar transistors, QJa1..QJan) and cascodes folded into
+    the first."""
     keep = []
     for line in text.splitlines():
-        m = re.match(r"\s*X([JC])([ab])(\d+)\b", line)
+        m = re.match(r"\s*[XQ]([JC])([ab])(\d+)\b", line)
         if m and int(m.group(3)) > 1:
             continue
         keep.append(re.sub(r"\bd([ab])\d+\b", r"d\g<1>1", line))
@@ -45,19 +49,31 @@ def collapse(text: str, n: int) -> str:
 
 
 # ---------------------------------------------------------------------- front end, side a --
-def sheet_front_end(case: str) -> tuple[Sch, dict, list]:
-    p = F.CASES[case]
-    S = Sch(f"schematic_front_end_{case[0]}")
-    # input JFET array (gate on the left) and its cascode array (gate on the right)
+def sheet_front_end(case: str, p=None, letter: str | None = None, part: str | None = None) -> tuple[Sch, dict, list]:
+    """Side a of a front end: F.CASES[case], or the FE p with the letter of its sheet and, for a bipolar input
+    (p.bjt), the part name drawn for its calibrated card (mapped to p.bjt by report's model_alias)."""
+    p = p or F.CASES[case]
+    letter = letter or case[0]
+    S = Sch(f"schematic_front_end_{letter}")
+    # input array (gate or base on the left) and its cascode array (gate on the right)
     jg = (1.6, 3.0)
-    J = S.J("XJa1", p.jfet, jg, label=(-0.95, -0.55, "right", "top"),
-            show=f"XJa1…XJa{p.n}  (× {p.n})", mirror=True)
+    if p.bjt:
+        # the NPN's collector lies 0.5412 right of its base, the JFET's drain 0.66 right of its gate: the base moves
+        # right by the difference, so that the collector sits under the cascode's source (checked below)
+        J = S.Q("QJa1", part, (jg[0] + 0.66 - 0.5412, jg[1]), label=(-0.95, -0.55, "right", "top"),
+                show=f"QJa1…QJa{p.n}  (× {p.n})")
+        j_top, j_bottom = J.collector, J.emitter
+    else:
+        J = S.J("XJa1", p.jfet, jg, label=(-0.95, -0.55, "right", "top"),
+                show=f"XJa1…XJa{p.n}  (× {p.n})", mirror=True)
+        j_top, j_bottom = J.drain, J.source
     cg = (2.92, 5.0)
     C = S.J("XCa1", p.cascode[2:], cg, label=(-0.85, 0.35, "right", "center"),
             show=f"XCa1…XCa{p.n}  (× {p.n})", mirror=False)
-    S.wire(J.drain, C.source)
+    assert abs(j_top[0] - C.source[0]) < 1e-3, (j_top, C.source)      # a vertical wire, not a slanted one
+    S.wire(j_top, C.source)
     S.offsheet((-0.2, 3.0), "ga", side="left", text="input a (ga)")
-    S.wire((-0.2, 3.0), jg)
+    S.wire((-0.2, 3.0), (J.base[0], 3.0) if p.bjt else jg)
     # summing node, R_D, op amp with C_I and C_X
     ys = 7.6
     S.wire(C.drain, (C.drain[0], ys))
@@ -102,14 +118,14 @@ def sheet_front_end(case: str) -> tuple[Sch, dict, list]:
     S.wire((xb1, ysa + 0.4), (xb1, ysa))
     S.C("CBSa", p.c_bs, (xb2, yb), (xb2, ysa + 0.4), side="right")
     S.wire((xb2, ysa + 0.4), (xb2, ysa))
-    r_up = (p.vp - (0.6 + p.vbs)) / p.i_bs
+    r_up = (p.vp - ((-0.65 if p.bjt else 0.6) + p.vbs)) / p.i_bs      # as frontend.side() sizes it
     S.R("RUPa", r_up, (xb2, yb), (xb2, 6.6), side="right")
     S.rail((xb2, 6.6), p.vp, "vp", side="right")
     S.dot((xb2, yb))
     # source node bus, R_F from the output, R_G to side b, current sink
-    S.wire(J.source, (J.source[0], ysa))
+    S.wire(j_bottom, (j_bottom[0], ysa))
     xs = 8.6
-    S.wire((J.source[0], ysa), (xb1, ysa), (xb2, ysa), (xs, ysa), (xo, ysa))
+    S.wire((j_bottom[0], ysa), (xb1, ysa), (xb2, ysa), (xs, ysa), (xo, ysa))
     S.dot((xb1, ysa))
     S.dot((xb2, ysa))
     S.R("RFa", p.rf, (xo, 5.6), (xo, 3.6), side="right")
@@ -127,12 +143,14 @@ def sheet_front_end(case: str) -> tuple[Sch, dict, list]:
     S.rail((Q.emitter[0], Q.emitter[1] - 1.6), p.vm, "vm")
     S.offsheet((Q.base[0] - 1.6, Q.base[1]), "vsink", side="left", text="vsink (sink reference)")
     S.wire((Q.base[0] - 1.6, Q.base[1]), Q.base)
-    S.text((-0.2, -3.1), f"Front end {case[0]}: {p.n} × {p.jfet} per side at {p.id * 1e3:g} mA; "
+    dev = f"{part} (one transistor of each dual)" if p.bjt else p.jfet
+    S.text((-0.2, -3.1), f"Front end {letter}: {p.n} × {dev} per side at {p.id * 1e3:g} mA; "
                          f"gain 1 + 2 R_F / R_G = {p.gain:.4g}", ha="left", va="center")
     # netlist (front end plus the chain's input network) and the parts of side a in scope
     text = collapse(F.netlist(p), p.n)
     net = parse_top(text)
-    scope = ["XJa1", "XCa1", "RDa", "CIa", "CXa", "XUa", "RFa", "RBSa", "CBSa", "RUPa", "QTa", "RTa", "RG"]
+    scope = ["QJa1" if p.bjt else "XJa1", "XCa1", "RDa", "CIa", "CXa", "XUa", "RFa", "RBSa", "CBSa", "RUPa", "QTa",
+             "RTa", "RG"]
     if p.cnode:
         scope.append("CNa")
     return S, net, scope
@@ -511,8 +529,8 @@ def sheet_sr560() -> tuple[Sch, dict, list]:
 
 # ------------------------------------------------- topology and noise half-circuit --
 def sheet_topology() -> ss.Sheet:
-    """Figure 6 of the note.  (a) The current-feedback topology in its basic form, both sides,
-    one JFET per side (the paralleled JFETs, their cascodes and the bootstrap of Figures 7 and 8
+    """Figure 9 of the note.  (a) The current-feedback topology in its basic form, both sides,
+    one JFET per side (the paralleled JFETs, their cascodes and the bootstrap of Figures 10 and 11
     left out), with a DC current sink at each source node.  (b) Its differential half-circuit
     with the noise generators of Eq. (9): the supplies and V_ref are AC ground, and in
     differential mode the midpoint of R_G is a virtual ground, so each side sees R_G / 2.  Drawn
@@ -689,6 +707,13 @@ def main():
         S, net, scope = sheet_front_end(case)
         ok &= report(S, net, scope, model_alias={"THS4021": "OA_THS4021"})
         S.save(OUT / S.name)
+    # the bipolar front end B of Section 3.5: L with 24 SSM2212 per side (bipolar_inputs.py)
+    import bipolar_inputs as BI
+    BI.write_lib()
+    pb = BI.fe_p("B")
+    S, net, scope = sheet_front_end("B", p=pb, letter="B", part="SSM2212")
+    ok &= report(S, net, scope, model_alias={"THS4021": "OA_THS4021", "SSM2212": pb.bjt})
+    S.save(OUT / S.name)
     S, net, scope = sheet_front_end_full("H100")
     ok &= report(S, net, scope, model_alias={"THS4021": "OA_THS4021"})
     S.save(OUT / S.name)

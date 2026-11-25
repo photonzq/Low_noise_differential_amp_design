@@ -1,4 +1,4 @@
-"""The derived numbers of Sections 6 (results, Tables 8-15, Figures 12-17) and 7 and of the
+"""The derived numbers of Sections 6 (results, Tables 9-16, Figures 15-20) and 7 and of the
 Appendix of the note (not Section 8): every number there that is not a plain readout of an
 archived JSON file is computed here, from the archived results only (no simulation), and every
 data-sheet value used is a constant below with its document, page, table or figure.
@@ -10,16 +10,16 @@ point).  Densities in nV/rtHz, CMRR and THD in dB / dBc, k = 1.380649e-23 J/K, q
 T = 300.15 K (ngspice's 27 C).
 
 Formulas, in the order of the note:
-  Table 8        e_x(f) of each group of curves_noise.npz (collect_curves.py noise), x 1e9
+  Table 9        e_x(f) of each group of curves_noise.npz (collect_curves.py noise), x 1e9
   Eq. (2)        e_diff = sqrt(2) e_1 / sqrt(N): H, N = 2 JFE2140 per side; L, N = 12 JFE150
   ranking        the groups of H10 at 10 kHz sorted by size (which term follows R_G)
   V_T            V_T = kT / q
-  Table 8a       readouts of sink_options.json at 10 kHz; the bound row at a gain of 100:
+  Table 9a       readouts of sink_options.json at 10 kHz; the bound row at a gain of 100:
                  e_without = sqrt(e_tot^2 - e_sinks^2) (H100, 10 kHz)
   stages after   e_post = sqrt(e_chain^2 - e_FE^2) (fe_closed_forms.json; da_compare.json e_post)
-  Table 9        ranges over the gains of a row of chain_noise.json
+  Table 10        ranges over the gains of a row of chain_noise.json
   headroom       20 log10(G_FE,LN / G_FE,HR) = 20 log10(100 / 10)
-  Figure 14      readouts of nf_map.json and sr560_nf_datasheet.json (the noise-figure maps and the
+  Figure 17      readouts of nf_map.json and sr560_nf_datasheet.json (the noise-figure maps and the
                  SR560 data sheet's two-port fit), resistances to two or three significant figures;
                  a deviation's bound rounded up to one significant figure; the SR560 models' noise current
                  at 1 MHz without the tail servo's share, i = sqrt(1 - s) i_n with s the servo's share of the
@@ -29,14 +29,14 @@ Formulas, in the order of the note:
                  readouts of sr560_nf_sources.json (the SR560 models' input capacitance, JFET A's C_gs + C_gd
                  at its bias, and the effective capacitance sqrt(S_i / S_e) / w of each group of noise sources),
                  and the ratios LSK389B / NPD5564 of the servo's noise current and of the input capacitance
-  Figure 14j-l   readouts of nf5113_manual.json (the Signal Recovery 5113 manual's plot read from its pixels: the
+  Figure 17j-l   readouts of nf5113_manual.json (the Signal Recovery 5113 manual's plot read from its pixels: the
                  calibration, the corner contours' check, the fit's deviations, e_n, i_n, C, the slopes and corners,
                  the specification and AC-coupling checks, the drawn 1 and 3 dB contours, and H, L and the SR560
                  data sheet's plot against it); the corner check's largest difference max |(R / R_6dB) / ((F - 1) /
                  (F_6dB - 1)) - 1|
   Section 6.2    crossover of NF_H - NF_L (noise_vs_source.json): the two source resistances of
-                 Table 10 (and of the full grid) between which the sign changes, per frequency
-  Table 11       ranges of chain_ac.json over the gains of a row; SR560 peaking
+                 Table 11 (and of the full grid) between which the sign changes, per frequency
+  Table 12       ranges of chain_ac.json over the gains of a row; SR560 peaking
                  20 log10(max|H| / |H(1 kHz)|) from sr560_chain_ac_<gain>.npz
   CMRR, Delta C  per input sigma_C = s sqrt(C_P^2 + C_Z^2) (C_P and C_Z drawn independently with
                  s = 2.5 %), Delta C_rms = sqrt(2) sigma_C, median |Delta C| = 0.6745 Delta C_rms
@@ -47,7 +47,7 @@ Formulas, in the order of the note:
   CMRR, SR560    specification CMRR(f) = 100 dB - 20 log10(f / 1 kHz) for f > 1 kHz (100 dB to 1 kHz,
                  6 dB per octave above, data sheet p. 3)
   CMRR, others   differences of medians (trimmed - 50 ohm; network - discrete; ideal I_BS - R_UP)
-  Table 13       THD (%) = 100 thd; THD (dBc) = 20 log10(thd); the floor: min and max of the linear
+  Table 14       THD (%) = 100 thd; THD (dBc) = 20 log10(thd); the floor: min and max of the linear
                  reference's dBc, and per frequency max - min of the chain's dBc over the settings
   full power     f_FP = SR / (pi V_pp) at V_pp = 10 V
   overload       servo rate = G_INT e / C_INT (G_INT 1 uS, C_INT 1 uF: GINT, CINT of frontend.py);
@@ -56,7 +56,7 @@ Formulas, in the order of the note:
                  bootstrap R_BS C_BS; with the outputs clipped v_s,d = (v_oa - v_ob) R_G / (2 R_F + R_G),
                  dV_GS ~ (v_in - v_s,d) / 2, zero gate bias at v_in = 2 |V_GS,rest| + v_s,d
                  (overload_detail.py numbers; repeated here from overload_numbers.json)
-  Table 14       HD3 (dBc) = 20 log10(h3); the data sheet's HD3 at 2 Vpp scaled to 1 Vpp with
+  Table 15       HD3 (dBc) = 20 log10(h3); the data sheet's HD3 at 2 Vpp scaled to 1 Vpp with
                  HD3 ~ V^2: HD3(1 Vpp) = HD3(2 Vpp) + 20 log10((1/2)^2); ratio = 10^(dB / 20)
   Section 7      the common-mode gain-margin point: frontend._margins on curves_loop.npz gives the
                  first grid point past each -180 degree crossing; the crossing itself is
@@ -86,14 +86,14 @@ MINUS = "−"
 # JFETs, white noise at 1 kHz and 5 mA
 E1_JFE2140 = 0.9      # nV/rtHz, TI JFE2140 data sheet SLPS730B p. 1 (Features: 0.9 nV/rtHz at 1 kHz, I_DS = 5 mA)
 E1_JFE150 = 0.8       # nV/rtHz, TI JFE150 data sheet SLPS732B p. 5, Table 6.5 (I_DS = 5 mA, V_DS = 5 V, 1 kHz)
-N_H, N_L = 2, 12      # JFETs per side, Table 5 of the note (frontend.CASES)
+N_H, N_L = 2, 12      # JFETs per side, Table 6 of the note (frontend.CASES)
 # JFE2140 matching, SLPS730B p. 5, Table 6.5 (I_DS = 2 mA): dV_GS 1 mV typ, 4 mV max; I_DSS1/I_DSS2 0.95-1.05
 DVGS_TYP_MV, DVGS_MAX_MV = 1.0, 4.0
 IDSS_RATIO = (0.95, 1.05)
 SIGMA_HALF_MV = 0.85  # cmrr_mc.py: each JFE2140 half's V_TO about its dual's common offset (assumption)
 BIN_HALF_MV = 5.0     # the JFE150 V_GS bin, +-5 mV (design choice, Section 4.6 of the note)
 SIGMA_BIN_MV = 3.0    # cmrr_mc.py: V_TO sigma within the bin (assumption)
-# Op amps for S2 (Table 14)
+# Op amps for S2 (Table 15)
 THS4031_EN, THS4031_BW_MHZ = 1.2, 100   # SLOS224L p. 1 (1.2 nV/rtHz; 100 MHz, G = 2 or -1) and p. 6, Sec. 5.6
 THS4031_HD3_DS_DBC = -50.0              # SLOS224L Fig. 5-15, p. 12: HD3 at 10 MHz, G = +2, R_L 1 kohm, 2 Vpp (read by eye)
 LM7171A_EN, LM7171_SR, LM7171A_UGBW_MHZ = 8.5, 4100, 160   # SNOS760D Sec. 5.5, p. 5 (A grade; e_n at 10 kHz)
@@ -118,13 +118,13 @@ NF_GAINS = (10, 1000)     # same sheet: 10 to 1000 in 1-2-5 sequence
 # flat, 15.1-15.7
 NF_EN_PLOT_G100, NF_EN_PLOT_G100_10HZ, NF_EN_PLOT_G10 = (2.8, 3.1), (5.6, 5.9), (15.1, 15.7)
 # Fig. 46 of NF's data-sheet web page (NF_5307_datasheet_fig46.jpg), CMRR, gain 100 x1 curve, read by
-# eye against its grid at the frequencies of Table 12.  The curve stops at about 0.9 MHz, short of the
+# eye against its grid at the frequencies of Table 13.  The curve stops at about 0.9 MHz, short of the
 # 1 MHz frame line (85.9 dB at 888 kHz); the 1 MHz value is its straight-line extrapolation from 0.4 to
 # 0.95 MHz by scripts/nf5307_plot_check.py (nf5307_plot_check.json, fig46_cmrr), 84.8 dB, where the
 # earlier reading by eye, 86.4, was the curve's end.  The pixel check gives 136.1, 135.3, 125.9 and
 # 106.6 dB at the other four frequencies, within 0.4 dB of the readings by eye.
 NF_CMRR_PLOT = {10: 136.2, 1e3: 135.7, 1e4: 125.9, 1e5: 107.0, 1e6: 84.8}
-# front end (Table 5 of the note; frontend.CASES), servo integrator (frontend.py: GINT 1e-6, CINT 1u)
+# front end (Table 6 of the note; frontend.CASES), servo integrator (frontend.py: GINT 1e-6, CINT 1u)
 G_INT, C_INT = 1e-6, 1e-6
 R_BS, C_BS = 3.5e3, 1e-6
 
@@ -199,7 +199,7 @@ def dbc(x: float) -> float:
     return 20 * math.log10(x)
 
 
-# ---- Section 6.1: Table 8 and its paragraphs -------------------------------------------------
+# ---- Section 6.1: Table 9 and its paragraphs -------------------------------------------------
 def table8():
     d = load("curves_noise.npz")
     cols = (("Total", "total"), ("Input JFETs", "g_input JFETs"), ("R_G", "g_R_G"),
@@ -227,7 +227,7 @@ def table8():
     # Eq. (2) with the data sheets
     eh = math.sqrt(2) * E1_JFE2140 / math.sqrt(N_H)
     el = math.sqrt(2) * E1_JFE150 / math.sqrt(N_L)
-    put("eq2", "H: sqrt(2) x 0.9 / sqrt(2)", eh, f(eh, 2), "SLPS730B p. 1 (0.9 nV/rtHz, 5 mA); N = 2 (Table 5)")
+    put("eq2", "H: sqrt(2) x 0.9 / sqrt(2)", eh, f(eh, 2), "SLPS730B p. 1 (0.9 nV/rtHz, 5 mA); N = 2 (Table 6)")
     put("eq2", "L: sqrt(2) x 0.8 / sqrt(12)", el, f(el, 2), "SLPS732B p. 5, Table 6.5 (0.8 nV/rtHz, 5 mA); N = 12")
     nt = load("noise_theory.json")["Eq. (2)"]
     assert abs(nt["H: 2 x JFE2140 per side"]["e_diff"] * 1e9 - eh) < 1e-9
@@ -301,7 +301,7 @@ def stages_after():
 
 def table9():
     d = load("chain_noise.json")
-    # the precision of each cell as Table 9 quotes it: 1 Hz to two significant figures; 10 Hz of the
+    # the precision of each cell as Table 10 quotes it: 1 Hz to two significant figures; 10 Hz of the
     # high-reserve row to one decimal; everything else to two decimals
     rows = (("H_LN 1000-50000", ("H_LN_1000", "H_LN_10000", "H_LN_50000"), 2),
             ("H_HR 100-1000", ("H_HR_100", "H_HR_1000"), 1), ("L 1000-100000", ("L_1000", "L_10000", "L_100000"), 2))
@@ -310,7 +310,7 @@ def table9():
             vals = [d[k]["en"][fk] * 1e9 for k in keys]
             put("table9", f"{lab}, {float(fk):g} Hz", vals, rng(vals, nd) if nd is not None else srng(vals, 2),
                 "chain_noise.json")
-    # the single-gain rows, each cell with the precision Table 9 prints (s: significant figures,
+    # the single-gain rows, each cell with the precision Table 10 prints (s: significant figures,
     # d: decimals), and the output noise column (mV rms, 1 Hz - 10 MHz)
     single = (("H_LN_1", ("s3", "s3", "s3", "s3", "s3")), ("H_LN_10", ("s2", "s3", "s3", "s3", "s3")),
               ("H_LN_100", ("s3", "s3", "s3", "s3", "s3")), ("L_200", ("s3", "s3", "d2", "d2", "d2")))
@@ -333,7 +333,7 @@ def table9():
     put("s6.1", "SR560 reproduction, high reserve, gains 100-1000, 1 kHz", hdr, srng(hdr, 2),
         "sr560_chain.json noise.HDR_*")
     hd = 20 * math.log10(100 / 10)
-    put("s6.1", "input headroom of H_HR: 20 log10(100/10) (dB)", hd, f(hd, 0), "front-end gains 100 and 10 (Table 5)")
+    put("s6.1", "input headroom of H_HR: 20 log10(100/10) (dB)", hd, f(hd, 0), "front-end gains 100 and 10 (Table 6)")
 
 
 # ---- Section 6.2 -------------------------------------------------------------------------------
@@ -341,7 +341,7 @@ def section62():
     d = load("noise_vs_source.json")
     table10_rs = (10, 30, 100, 300, 1e3, 1e4, 1e5, 1e6)
     for fk in ("10", "1000.0", "1000000.0", "10000000.0"):
-        for grid, lab in ((table10_rs, "Table 10 rows"), (None, "full grid")):
+        for grid, lab in ((table10_rs, "Table 11 rows"), (None, "full grid")):
             hs = [r for r in d["H_LN"] if grid is None or r["rs"] in grid]
             ls = [r for r in d["L"] if grid is None or r["rs"] in grid]
             diff = [(h["rs"], h["nf_db"][fk] - l["nf_db"][fk]) for h, l in zip(hs, ls)]
@@ -353,7 +353,7 @@ def section62():
         for rs, fk in ((100, "1000000.0"), (1e5, "10000000.0")):
             v = [r for r in d[key] if r["rs"] == rs][0]["nf_db"][fk]
             put("table10", f"{mode}, {rs:g} ohm, {float(fk):g} Hz", v, f(v, 1), "noise_vs_source.json")
-    # every cell of Table 10, as it prints them: one decimal from 1 dB up, two below
+    # every cell of Table 11, as it prints them: one decimal from 1 dB up, two below
     for mode, key in (("H", "H_LN"), ("L", "L")):
         for r in d[key]:
             if r["rs"] not in table10_rs:
@@ -369,7 +369,7 @@ def section62():
             "zin_numbers.json sources_archived.network_1Meg (collect_curves.py zin)")
 
 
-# ---- Section 6.2: Figure 14, the noise-figure maps against the SR560 data sheet's -----------------
+# ---- Section 6.2: Figure 17, the noise-figure maps against the SR560 data sheet's -----------------
 def bound(x: float) -> str:
     """An upper bound of x rounded up to one significant figure, as "2e-05" (0: "0")."""
     if x <= 0:
@@ -381,7 +381,7 @@ def bound(x: float) -> str:
 def section62_nf_map():
     m, s = load("nf_map.json"), load("sr560_nf_datasheet.json")
     sm, ss = "nf_map.json", "sr560_nf_datasheet.json"
-    g = "s6.2 Figure 14"
+    g = "s6.2 Figure 17"
     cal, fit, mod = s["calibration"], s["two_port_fit"], s["model"]
     put(g, "data sheet: largest residual of the tick calibration (pt)", cal["max_tick_residual_pt"],
         f(cal["max_tick_residual_pt"], 2), ss + " calibration")
@@ -405,7 +405,7 @@ def section62_nf_map():
            "both written with 7 digits)",
         worst, bound(worst), sm + " archived_check")
     worst = max(m[k]["table10_check"]["max_abs_diff_db"] for k in ("H", "L"))
-    put(g, "simulated at 300.15 K against Table 10: largest difference (dB, bound)", worst, bound(worst),
+    put(g, "simulated at 300.15 K against Table 11: largest difference (dB, bound)", worst, bound(worst),
         sm + " table10_check")
 
     def lo_hi(rows, f0, lev):
@@ -545,10 +545,10 @@ def section62_nf_map():
 
 
 def section62_5113():
-    """Figure 14j-l: the Signal Recovery 5113 manual's noise-figure plot (nf5113_manual.py) and H, L and the SR560
+    """Figure 17j-l: the Signal Recovery 5113 manual's noise-figure plot (nf5113_manual.py) and H, L and the SR560
     data sheet's plot against it."""
     p, sp = load("nf5113_manual.json"), "nf5113_manual.json"
-    g = "s6.2 Figure 14j-l"
+    g = "s6.2 Figure 17j-l"
     cal, fit, mod = p["calibration"], p["two_port_fit"], p["model"]
     put(g, "5113 plot: px per decade (f | R); largest residual of the grid calibration (px)",
         (cal["px_per_decade_f"], cal["px_per_decade_r"], cal["max_residual_px"]),
@@ -869,7 +869,7 @@ def section65():
     tau = (C_INT / G_INT) * (sv["R_T"] / sv["R_F"])
     put("s6.5", "servo after 1 s: reference (V), R_F / R_T, outputs' CM (V), tau (s)", (rate * 1.0, ratio, cm1, tau),
         f"{f(rate, 2)} V; {f(ratio, 2)}; {f(cm1, 2)} V; {f(tau, 2)} s", "overload_numbers.json servo (R_F 500, R_T 181.8 ohm)")
-    put("s6.5", "bootstrap R_BS C_BS (ms)", R_BS * C_BS * 1e3, f(R_BS * C_BS * 1e3, 1), "Table 5: 3.5 kohm, 1 uF")
+    put("s6.5", "bootstrap R_BS C_BS (ms)", R_BS * C_BS * 1e3, f(R_BS * C_BS * 1e3, 1), "Table 6: 3.5 kohm, 1 uF")
     lo = h["larger_overloads"]
     vsd = op["difference_during_V"] * 10.1 / (2 * 500 + 10.1)
     assert abs(vsd - lo["source_difference_with_clipped_outputs_V"]) < 1e-9
@@ -887,7 +887,7 @@ def section65():
         (u["depth_V"], u["beyond_minus_0p1V_duration_ns"], l["recovery_us"], l["fe_out_during_V"]),
         f"{f(-u['depth_V'], 2)}; {f(u['beyond_minus_0p1V_duration_ns'], 0)}; {f(l['recovery_us'], 2)}; "
         f"{f(l['fe_out_during_V'], 1)}", "overload_numbers.json L1000")
-    # Table 14 and its paragraph
+    # Table 15 and its paragraph
     dc = load("da_compare.json")
     h3 = {s2: dbc(dc[s2]["thd"][0]["h3"]) for s2 in ("THS4031", "LM7171", "THS3091")}
     for s2, v in h3.items():
@@ -917,7 +917,7 @@ def section65():
         "SLOS224L pp. 1, 6; SNOS760D Sec. 5.5 p. 5; SLOS423K pp. 1, 6")
 
 
-# ---- Section 6.6, Table 15 ---------------------------------------------------------------------
+# ---- Section 6.6, Table 16 ---------------------------------------------------------------------
 def table15():
     cn = load("chain_noise.json")
     h = [cn[k]["en"] for k in ("H_LN_1000", "H_LN_10000", "H_LN_50000")]

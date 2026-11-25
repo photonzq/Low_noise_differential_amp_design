@@ -68,6 +68,21 @@ All files were downloaded on **2026-11-19** from the URL given (open-access arti
 |---|---|---|---|
 | `ngspice_2026_Users_Manual_v46.pdf` | copied on 2026-11-22 from a local copy downloaded for an earlier project; published at https://ngspice.sourceforge.io/docs.html | 2026-11-22 | H. Vogt, G. Atkinson, D. Warning, P. Nenzi, *Ngspice User's Manual*, Version 46 (31 March 2026), 755 pp.; §7.4.4, the JFET level 1 model, pp. 152–154 (cited in Sections 3.4 and 5.3 of the note) |
 
+## 1/f noise in bipolar transistors and JFETs (`bjt_1f/`, downloaded on 2026-11-24)
+
+For Section 3.5 of the note. Notes on each source, with page, equation and figure numbers and the DOI checks, are in `bjt_1f_notes.md`.
+
+| File | URL | Accessed | Note |
+|---|---|---|---|
+| `bjt_1f/Kleinpenning_1994_LF_Noise_Modern_Bipolar_Transistors_IEEE_TED.pdf` | https://pure.tue.nl/ws/files/1376103/Metis122824.pdf | 2026-11-24 | IEEE Trans. Electron Devices 41(11), 1981–1991 (1994), doi:10.1109/16.333815; final published version, TU/e repository. |
+| `bjt_1f/Markus_Kleinpenning_1995_LF_Noise_Polysilicon_Emitter_BJT_IEEE_TED.pdf` | https://research.tue.nl/p/file/document/1580586/Metis122897.pdf | 2026-11-24 | IEEE Trans. Electron Devices 42(4), 720–727 (1995), doi:10.1109/16.372077. |
+| `bjt_1f/Bruce_Vandamme_Rydberg_1999_Base_Collector_Noise_Coherence_SiGe_HBT_IEEE_TED.pdf` | https://research.tue.nl/p/file/document/1589476/Metis132948.pdf | 2026-11-24 | IEEE Trans. Electron Devices 46(5), 993–1000 (1999), doi:10.1109/16.760408. |
+| `bjt_1f/Hooge_1994_1f_Noise_Sources_IEEE_TED.pdf` | https://research.tue.nl/p/file/document/1562485/Metis122802.pdf | 2026-11-24 | IEEE Trans. Electron Devices 41(11), 1926–1935 (1994), doi:10.1109/16.333808. |
+| `bjt_1f/Fleetwood_2015_1f_Noise_and_Defects_IEEE_TNS.pdf` | https://ieeexplore.ieee.org/stampPDF/getPDF.jsp?tp=&arnumber=7094326 | 2026-11-24 | IEEE Trans. Nucl. Sci. 62(4), 1462–1486 (2015), doi:10.1109/TNS.2015.2405852; open access. |
+| `bjt_1f/Llacer_Meier_1976_Excess_Noise_Selected_FETs_LBL-5567.pdf` | https://escholarship.org/content/qt8xg3n7xg/qt8xg3n7xg.pdf | 2026-11-24 | LBL-5567 preprint (1976) of IEEE Trans. Nucl. Sci. 24(1), 317–326 (1977), doi:10.1109/TNS.1977.4328696. |
+| `bjt_1f/Achtenberg_2020_FET_Input_Voltage_Amplifier_LF_Noise_MMS.pdf` | https://journals.pan.pl/Content/116023/PDF/art11.pdf | 2026-11-24 | Metrol. Meas. Syst. 27(3), 531–540 (2020), doi:10.24425/mms.2020.132785; open access. |
+| `bjt_1f/Wang_2022_Differential_LNA_JFET_IF3602_TEM_Receiver_Micromachines.pdf` | https://air.unimi.it/bitstream/2434/1115109/2/ | 2026-11-24 | Micromachines 13(12), 2211 (2022), doi:10.3390/mi13122211; CC BY. |
+
 ## Cited but not downloaded
 
 - Scandurra, Cannatà, Ciofi, AIP Advances 1, 022144 (2011), DOI 10.1063/1.3605716: open access, read from the publisher's HTML page; the PDF download was blocked by a JavaScript challenge.

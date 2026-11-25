@@ -34,12 +34,26 @@
   "operating_points": 4,
   "v_ref": -8.002472953406796
  },
+ "06009dd6f9118c6b71dc": {
+  "case": "B_SSM2212_24_S80_D38_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "0ad6be288a8ab8213023": {
   "case": "H10_comp_S14_D5_CN220",
   "design_value": -12.34,
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "0dbe48aad26f073cde7c": {
+  "case": "B_SSM2212_24_S100_D65_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "0df5d879758ac024de1f": {
   "case": "H100_comp_S10.6_D2.5_CN100",
@@ -111,6 +125,13 @@
   "operating_points": 4,
   "v_ref": -12.059972051417223
  },
+ "188ba837d4f122326184": {
+  "case": "B_SSM2212_24_S60_D65_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "19f96c029623ab7404fa": {
   "case": "L200_corner_C_I_x0_9_C_X_x1_1",
   "design_value": -8.34,
@@ -139,6 +160,13 @@
   "operating_points": 4,
   "v_ref": -12.060607267503814
  },
+ "1b82d90602905d6e8981": {
+  "case": "B_SSM2212_24_S80_D50_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "205debfb407cf1dbd218": {
   "case": "H100_LV_S28_D3",
   "design_value": -12.34,
@@ -159,6 +187,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "2182a870cf670bee0de5": {
+  "case": "B_SSM2212_24_S60_D38_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "2234e960c108369ce98c": {
   "case": "H100_comp_S10.6_D1.77_CN220",
@@ -188,6 +223,13 @@
   "operating_points": 4,
   "v_ref": -12.060607267503814
  },
+ "2635813823d0df3f6ce6": {
+  "case": "B_SSM2212_24",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "26898de15cecef964417": {
   "case": "H100_comp_S6_D1.77_CN220",
   "design_value": -12.34,
@@ -215,6 +257,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "2b4d58e033c0b133e317": {
+  "case": "B_SSM2212_24_S100_D65_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "2b518332e079b5efda94": {
   "case": "L200_sinkpow_4V",
@@ -258,6 +307,13 @@
   "operating_points": 4,
   "v_ref": -12.059972051417223
  },
+ "2f428ba00bd12103440a": {
+  "case": "B_SSM2212_24_S60_D65_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "305be1d8cb8fdb28cb62": {
   "case": "H10_comp_S10.6_D7.77_CN220",
   "design_value": -12.34,
@@ -292,6 +348,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "3712140d183069a09c54": {
+  "case": "B_SSM2212_24_S100_D50_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "37a6e4bd1469c93f8e72": {
   "case": "H100_comp_S14_D1.77_CN100",
@@ -342,6 +405,13 @@
   "operating_points": 6,
   "v_ref": -6.40006744315583
  },
+ "3cb0bf562f2f06c57b46": {
+  "case": "B_SSM2212_24_S60_D50_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "3e55f2b0c4ef753039c5": {
   "case": "H10_comp_S10.6_D10_CN150",
   "design_value": -12.34,
@@ -356,12 +426,26 @@
   "operating_points": 6,
   "v_ref": -6.40006744315583
  },
+ "416bb53917914d398654": {
+  "case": "B_SSM2212_24_S100_D38_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "42392f655e31e2747b4e": {
   "case": "H10_comp_S14_D10_CN220",
   "design_value": -12.34,
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "441a482c1c50ca1b8a6f": {
+  "case": "B_SSM2212_24_S60_D38_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "44fcf353e8048d63a341": {
   "case": "H100_comp_S14_D5_CN68",
@@ -376,6 +460,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "471788c3f9df611709aa": {
+  "case": "B_SSM2212_24_S100_D65_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "4788bbe50c4ff59f036a": {
   "case": "H10_sink_BC81725_4V",
@@ -433,12 +524,26 @@
   "operating_points": 4,
   "v_ref": -12.060607267503814
  },
+ "5336ac77ea01d17ebd55": {
+  "case": "B_SSM2212_24_S60_D50_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "535a95cbbf3a9ee62494": {
   "case": "H100_comp_S14_D5_CN100",
   "design_value": -12.34,
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "544ae4522486d864082b": {
+  "case": "B_SSM2212_24_S60_D65_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "5469afde6286726af7b0": {
   "case": "L200_comp_S40_D5.6_CN470",
@@ -545,6 +650,13 @@
   "operating_points": 6,
   "v_ref": -6.40006744315583
  },
+ "65e04fc5956d89bc2b53": {
+  "case": "B_SSM2212_24_S80_D65_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "66c9832397042f602dd8": {
   "case": "H10_rf250",
   "design_value": -12.34,
@@ -607,6 +719,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "7023374f3982cc37a692": {
+  "case": "B_SSM2212_24_S80_D65_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "70a57ffdbeb7199ed6b9": {
   "case": "H10_comp_S10.6_D7.77_CN150",
@@ -692,6 +811,13 @@
   "operating_points": 6,
   "v_ref": -6.40006744315583
  },
+ "7e4ca4349e8ca9aaa2b0": {
+  "case": "B_SSM2212_24_S100_D50_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "7e7ab1603d8f8ed57e3c": {
   "case": "L200_first",
   "design_value": -12.34,
@@ -733,6 +859,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "8bd8e66a86f7ce7f006a": {
+  "case": "B_SSM2212_24_S80_D38_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "8d9e0451219e410e0e31": {
   "case": "H100_comp_S14_D3.5_CN150",
@@ -797,6 +930,13 @@
   "operating_points": 4,
   "v_ref": -12.060607267503814
  },
+ "93f56dedab8b7e1efd0e": {
+  "case": "B_SSM2212_24_S100_D38_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "946dc1c37453a303ebc1": {
   "case": "L200_comp_S30_D8_CN220",
   "design_value": -8.34,
@@ -860,12 +1000,26 @@
   "operating_points": 4,
   "v_ref": -12.059972051417223
  },
+ "9acb25ed89329cf6f9ea": {
+  "case": "H_lsk389",
+  "design_value": -12.34,
+  "e": -7.99999999995249e-08,
+  "operating_points": 4,
+  "v_ref": -12.154689290801429
+ },
  "9b0bdc7afbdf79c6fa48": {
   "case": "H100_comp_S6_D3.5_CN68",
   "design_value": -12.34,
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "9bac3d9e5203adebac2f": {
+  "case": "B_SSM2212_24_S80_D50_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "9c4953be2e99756d2489": {
   "case": "H100_comp_S14_D3.5_CN330",
@@ -880,6 +1034,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "9fa1165be0f107300af1": {
+  "case": "B_SSM2212_24_S80_D38_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "a11b4d24518cc33aebac": {
   "case": "L200_comp_S30_D5.6_CN330",
@@ -972,6 +1133,20 @@
   "operating_points": 4,
   "v_ref": -12.059972051417223
  },
+ "b0c166be2d64c23ae5e4": {
+  "case": "B_SSM2212_24_fc1k",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
+ "b1601d257d8e60ad0d55": {
+  "case": "B_SSM2212_24_S100_D38_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "b1a8c5af08fa0f52a09c": {
   "case": "H100_comp_S10.6_D3.5_CN220",
   "design_value": -12.34,
@@ -1035,6 +1210,13 @@
   "operating_points": 4,
   "v_ref": -12.059972051417223
  },
+ "bccbdcf5f8842c7150b3": {
+  "case": "B_SSM2212_24_S80_D50_CN1500",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "bd9590ec5d00b5ca93cd": {
   "case": "H100_LV",
   "design_value": -12.34,
@@ -1091,6 +1273,13 @@
   "operating_points": 4,
   "v_ref": -12.059972051417223
  },
+ "c7a5b858567e5206360c": {
+  "case": "B_SSM2212_24_S80_D65_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "c910abd561ef86bf0af0": {
   "case": "H100_comp_S10.6_D3.5_CN150",
   "design_value": -12.34,
@@ -1104,6 +1293,13 @@
   "e": 9.99999993922529e-09,
   "operating_points": 6,
   "v_ref": -6.40006744315583
+ },
+ "ca652818d4cb62c51037": {
+  "case": "B_SSM2212_24_S100_D50_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "cbfeb9d3057544ac5189": {
   "case": "H100_comp_S6_D5_CN100",
@@ -1273,6 +1469,13 @@
   "operating_points": 4,
   "v_ref": -12.059972051417223
  },
+ "e243df474a0e27088a02": {
+  "case": "B_SSM2212_24_S60_D38_CN1000",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
+ },
  "e2cc86c47e4fe895ab03": {
   "case": "L200_comp_S30_D8_CN470",
   "design_value": -8.34,
@@ -1300,6 +1503,13 @@
   "e": -4.80000000024905e-07,
   "operating_points": 4,
   "v_ref": -12.060607267503814
+ },
+ "e5ac7fc24357a5a117dc": {
+  "case": "B_SSM2212_24_fc30",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "e6ba106f357334714293": {
   "case": "H100_LV_S14_D2.5_CN47",
@@ -1356,6 +1566,13 @@
   "e": -4.400000000459592e-07,
   "operating_points": 4,
   "v_ref": -12.059972051417223
+ },
+ "efbd390091426071303e": {
+  "case": "B_SSM2212_24",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "f0c49eb067e4c0d1437a": {
   "case": "H100_sink_MMBT3904_6V",
@@ -1440,6 +1657,13 @@
   "e": 0.0,
   "operating_points": 6,
   "v_ref": -6.405421891637187
+ },
+ "ff9254cf96ba27be0612": {
+  "case": "B_SSM2212_24_S60_D50_CN2200",
+  "design_value": -8.34,
+  "e": 0.0,
+  "operating_points": 6,
+  "v_ref": -6.348163961576374
  },
  "ffabc1ef84f97fe8508b": {
   "case": "H100_comp_S8_D2.5_CN68",

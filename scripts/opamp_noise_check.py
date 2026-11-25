@@ -1,5 +1,5 @@
 """Noise of the op-amp models quoted in Section 4.3.1 of the note (the low-voltage alternative) and in
-Table 7 of Section 5.3 (the vendor models as published): the input voltage noise e_n and the
+Table 8 of Section 5.3 (the vendor models as published): the input voltage noise e_n and the
 inverting-input current noise i_n- of each model, separated by two noise runs of one non-inverting
 stage at two feedback resistances (the method of Section 5.3).
 
@@ -37,7 +37,7 @@ residue).  A second pair at G = 5, R_F = 1 and 10 Mohm, solved with (3), resolve
 numerical residue (a negative share), and above a few kHz the input capacitance against
 R_F || R_G changes the noise gain again.  The same pair's e_n agrees with the first pair's.
 
-Table 7: the vendor models as published.  models.prepare_published_opamps() writes
+Table 8: the vendor models as published.  models.prepare_published_opamps() writes
 ../sim/models/_lib/opamps_published.lib from the vendor files (translated for ngspice exactly as
 for opamps.lib, but without any noise correction): OA_<part>_PUB as published and OA_<part>_PUBKF0
 with every KF of the file set to zero, which leaves the model's own white noise.  Fixtures:
@@ -114,7 +114,7 @@ DATASHEET = {
                    src="SNOS760D: white from Sec. 5.5, p. 5 (A grade, 10 kHz: 8.5 nV, 1 pA); 10 Hz from "
                        "Fig. 5-16, p. 10 (+/-5 V, read by eye)"),
 }
-# the values printed in Table 7 of the note, for comparison only
+# the values printed in Table 8 of the note, for comparison only
 NOTE_TABLE7 = {"THS4021": dict(e_10=18.2e-9, i_10=293e-12), "THS4031": dict(e_10=22.2e-9, i_10=300e-12),
                "THS3091": dict(e_10=37e-9, i_10=317e-12, i_w=1.5e-12), "LM7171": dict(e_w=4.1e-9)}
 

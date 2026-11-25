@@ -1,10 +1,10 @@
 """Input protection and the input network: the closed forms of Section 4.4 of the note and its
-Table 6d.  None of the protection is in the simulated netlists; the inputs here are archived results
+Table 7d.  None of the protection is in the simulated netlists; the inputs here are archived results
 of other scripts and one operating point of each front end.
 
 Constants: k = 1.380649e-23 J/K, T = 300.15 K (ngspice's 27 C, spice.KT = kT), q = 1.602176634e-19 C.
 
-The bare front ends' input (Section 4.4, Figure 10), read from the archived simulations of
+The bare front ends' input (Section 4.4, Figure 13), read from the archived simulations of
 collect_curves.py (curves_zin.npz: input A driven by 1 A AC, input B grounded; curves_sources.npz):
     Y_in = 1 / Z_in,   C_eff = Im(Y_in) / w,   R_par = 1 / Re(Y_in)  (negative where Re Y_in < 0)
     the plateau of C_eff (its minimum, 1 kHz - 1 MHz) and the frequencies below and above it at
@@ -17,7 +17,7 @@ the damping network:
     C_in ~ C_P + C_Z (+ C_bare, the bootstrapped front end's own Im(Y_in) / w, 1 kHz - 1 MHz median
            of curves_zin.npz)            H: 10 + 10 pF = 20 pF;  L: 30 + 220 pF = 250 pF
 
-A series resistor R_s in each input (Table 6d):
+A series resistor R_s in each input (Table 7d):
     e_Rs  = sqrt(2 * 4kT R_s)                 both inputs, in series with the source
     e_tot = sqrt(e_FE^2 + e_Rs^2)             e_FE: the simulated white floors, H 1.08 and L 0.42 nV/rtHz
     f_p   = 1 / (2 pi R_s C_in)               C_in = C_P + C_Z: 20 pF (H), 250 pF (L)
@@ -60,7 +60,7 @@ import spice
 
 Q = 1.602176634e-19
 KT = spice.KT
-RS_NOTE = (0, 1, 10, 22, 47, 100, 1000)          # the rows of Table 6d
+RS_NOTE = (0, 1, 10, 22, 47, 100, 1000)          # the rows of Table 7d
 RS_ALL = (0, 1, 3, 10, 22, 47, 100, 220, 1000)   # as computed for the table (3 and 220 ohm not shown)
 R_SRC_NF = 1000.0
 LEAK = (1e-12, 10e-12, 100e-12, 1e-9)
@@ -88,7 +88,7 @@ def input_capacitance() -> dict:
 
 
 def admittance_readout() -> dict:
-    """Section 4.4's figures from the archived simulations of collect_curves.py (Figure 10)."""
+    """Section 4.4's figures from the archived simulations of collect_curves.py (Figure 13)."""
     z = np.load(spice.RESULTS / "curves_zin.npz")
     s = np.load(spice.RESULTS / "curves_sources.npz")
     cal = json.loads((spice.RESULTS / "jfet_calibration.json").read_text(encoding="utf-8"))
@@ -178,7 +178,7 @@ def main():
               f"{ro['source_peaking'][k]['f_peak'] / 1e6:.2f} MHz")
     print(f"largest peak with the input networks (50 ohm, 1 kohm, 1 Mohm sources): {ro['network_max_peak_db']:.2f} dB")
 
-    # Table 6d
+    # Table 7d
     full = white_floors()
     quoted = {k: round(v * 1e9, 2) * 1e-9 for k, v in full.items()}
     res["white_floors"] = dict(full=full, quoted=quoted, source="chain_noise.json, H_LN_1000 and L_1000, 100 kHz")

@@ -1,5 +1,5 @@
 """Ways to lower the H front end's gain, and where the noise of each comes from (Section 4.3.1 of
-the note, Table 6b).
+the note, Table 7b).
 
 The gain is G = 1 + 2 R_F / R_G (gain 100: R_F 500 ohm, R_G 10.1 ohm).  Two ways to lower it:
 
@@ -24,7 +24,7 @@ Both R_F-route variants at a gain of 20 need it: with abstol = 1e-15 A the opera
 loop decks fall back to a state with the op amps at -10 V and the input gates conducting, and the
 loop gain is near zero at every frequency (Section 5.1 of the note; op_pitfall.py).
 
-Writes ../sim/results/fe_gain_scan.json (the R_G route, in the format Table 6b was made from) and
+Writes ../sim/results/fe_gain_scan.json (the R_G route, in the format Table 7b was made from) and
 ../sim/results/fe_gain_options.json (every case, with the noise split).
 Usage: python gain_options.py
 """

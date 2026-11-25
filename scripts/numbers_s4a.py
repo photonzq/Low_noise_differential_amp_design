@@ -1,5 +1,5 @@
-"""Numbers of Sections 4.1-4.3.1 of the note (the chain, Table 5, the front end, the sinks' summary,
-the loops, Tables 6, 6a, 6b, 6c, Figures 6-9) that are not a direct readout of one archived result:
+"""Numbers of Sections 4.1-4.3.1 of the note (the chain, Table 6, the front end, the sinks' summary,
+the loops, Tables 7, 7a, 7b, 7c, Figures 9-12) that are not a direct readout of one archived result:
 arithmetic, ratios, unit conversions, single roundings, readouts of the archived JSON/npz files
 named below, data-sheet constants (each cited where it is defined), the front ends' operating
 points, and one noise run of H with NPN cascodes.
@@ -7,11 +7,11 @@ points, and one noise run of H with NPN cascodes.
 Constants: k = 1.380649e-23 J/K, q = 1.602176634e-19 C, T = 300.15 K (ngspice's 27 C).
 Roundings: half up, once, from the unrounded value (the 'shown' field of an entry).
 
-Section 4.1, the chain (chain_noise.json, Table 9):
+Section 4.1, the chain (chain_noise.json, Table 10):
     headroom of H_HR over H_LN         20 log10(G_FE,LN / G_FE,HR) = 20 log10(100 / 10)
-    noise ratio                         r(f, G) = e_HR(f, G) / e_LN(f, G),  f = 1 kHz, 100 kHz (Table 9's
+    noise ratio                         r(f, G) = e_HR(f, G) / e_LN(f, G),  f = 1 kHz, 100 kHz (Table 10's
                                         columns), total gain G = 100 and 1000
-Table 5 and Section 4.2 (operating point: frontend.check_op, and an op deck that prints the JFETs'
+Table 6 and Section 4.2 (operating point: frontend.check_op, and an op deck that prints the JFETs'
 intrinsic junction voltages @j.<inst>[vgs], [vgd]):
     g_m per JFET                        @j.xja1.j1[gm];   N g_m per side
     JFET capacitance per input          data sheets: N C_iss, C_iss = 13 pF (JFE2140, TI SLPS730B,
@@ -82,7 +82,7 @@ Section 4.3 (Eqs. (10)-(10b)):
                                         sink_power.json L200 | 6 V)
     comp_search sets                    number of entries in comp_search_{H100,L200,H10}.json
 Section 4.3.1:
-    Table 6a                            stability_corners.json, raw
+    Table 7a                            stability_corners.json, raw
     C_node E12 values                   270/220, 330/220, 560/470, 680/470; 1.3 and 1.5 times 220 and 470
     the R_F route's bandwidth           fe_gain_options.json f3db
     output current at full swing        I_o = V_o / R_F, V_o = 12 V (THS4021 V_O >= +-12 V into
@@ -244,10 +244,10 @@ def main():
         for f0 in ("1000.0", "100000.0"):
             ratios[f"gain {g}, {float(f0):g} Hz"] = cn[f"H_HR_{g}"]["en"][f0] / cn[f"H_LN_{g}"]["en"][f0]
     put(s, "noise ratio H_HR / H_LN at 1 kHz and 100 kHz, gains 100 and 1000", ratios, "",
-        "chain_noise.json (Table 9)", f"{rnd(min(ratios.values()), 1)}-{rnd(max(ratios.values()), 1)}")
+        "chain_noise.json (Table 10)", f"{rnd(min(ratios.values()), 1)}-{rnd(max(ratios.values()), 1)}")
 
-    # ================= operating points (Table 5) =================
-    s = "Table 5"
+    # ================= operating points (Table 6) =================
+    s = "Table 6"
     op = {c: F.check_op(F.CASES[c]) for c in ("H100", "L200")}
     jn = {c: junction_op(F.CASES[c]) for c in ("H100", "L200")}
     for c, p in (("H100", pH), ("L200", pL)):
@@ -447,7 +447,7 @@ def main():
     a = fgo["H, gain 100 (adopted)"]["groups"]
     for g, lab in (("input JFETs", "JFETs"), ("R_G", "R_G"), ("drain-side R_D", "R_D"),
                    ("loop op amps", "op amps"), ("current sinks", "sinks")):
-        put(s, f"H100: {lab} at 10 kHz", a[g]["10000"], "nV/rtHz", "fe_gain_options.json (Table 6c)",
+        put(s, f"H100: {lab} at 10 kHz", a[g]["10000"], "nV/rtHz", "fe_gain_options.json (Table 7c)",
             rnd(a[g]["10000"], 2))
     fL = cnz["L200_f"]
     for g, lab in (("input JFETs", "JFETs"), ("R_G", "R_G")):
@@ -496,7 +496,7 @@ def main():
         rnd(f10b / 1e6, 0))
     put(s, "H100 adopted: D / S", (pH.ci - pH.cx) / (pH.ci + pH.cx), "", "4 pF / 14 pF",
         rnd((pH.ci - pH.cx) / (pH.ci + pH.cx), 2))
-    # loop margins from the archived curves (Table 6, Figure 9)
+    # loop margins from the archived curves (Table 7, Figure 12)
     lp = {}
     for case in ("H100", "L200", "H100_nocross", "H100_old"):
         for mode in ("dm", "cm"):
@@ -519,7 +519,7 @@ def main():
                     "curves_loop.npz", f"{rnd(c180['f_interp'] / 1e6, 0)} MHz")
     x = min(F._margins(clp["outer_H100_nocross_cm_f"], clp["outer_H100_nocross_cm_T"])["crossings"],
             key=lambda c_: c_["pm"])
-    put(s, "Figure 9 (a, d): CM outer loop without C_X, f_c and PM (frontend._margins)", [x["f"] / 1e6, x["pm"]],
+    put(s, "Figure 12 (a, d): CM outer loop without C_X, f_c and PM (frontend._margins)", [x["f"] / 1e6, x["pm"]],
         "MHz, deg", "curves_loop.npz (make_figures.fig_loop_gain)", f"{rnd(x['f'] / 1e6, 0)} MHz, {rnd(x['pm'], 0)} deg")
     # oscillation
     for key in ("H100_first", "H100_first_ties", "L200_first"):
@@ -556,7 +556,7 @@ def main():
     # ================= Section 4.3.1 =================
     s = "4.3.1 mitigations"
     for key, v in sc.items():
-        put(s, f"Table 6a: {key}", {m_: [v[m_]["pm"], v[m_]["gm_db"], v[m_]["modulus"]] for m_ in ("dm", "cm")},
+        put(s, f"Table 7a: {key}", {m_: [v[m_]["pm"], v[m_]["gm_db"], v[m_]["modulus"]] for m_ in ("dm", "cm")},
             "deg, dB, -", "stability_corners.json",
             " | ".join(f"{rnd(v[m_]['pm'], 0)} deg, {rnd(v[m_]['gm_db'], 1)} dB, {rnd(v[m_]['modulus'], 2)}"
                        for m_ in ("dm", "cm")))
@@ -583,9 +583,9 @@ def main():
     rise = fgd["white rise, gain 20 and 30"]
     put(s, "white rise, gains 20 and 30 (R_G route)", rise, "", "fe_gain_derived.json",
         f"+{rnd(rise[0] * 100, 0)} % / +{rnd(rise[1] * 100, 0)} %")
-    for lab, gk, f0 in (("Table 6c: R_G, gain 100", "H, gain 100 (adopted)", "R_G"),
-                        ("Table 6c: loop op amps, gain 20 (R_G)", "R_G route, gain 20, D 8.33 pF", "loop op amps"),
-                        ("Table 6c: R_F, gain 10", "H, gain 10 (range)", "R_F")):
+    for lab, gk, f0 in (("Table 7c: R_G, gain 100", "H, gain 100 (adopted)", "R_G"),
+                        ("Table 7c: loop op amps, gain 20 (R_G)", "R_G route, gain 20, D 8.33 pF", "loop op amps"),
+                        ("Table 7c: R_F, gain 10", "H, gain 10 (range)", "R_F")):
         v = fgo[gk]["groups"][f0]["10000"]
         put(s, lab, v, "nV/rtHz", "fe_gain_options.json, 10 kHz", rnd(v, 2))
     put(s, "R_F route gain 20 against adopted: -3 dB", [fgo["R_F route, gain 20, all capacitors x5.21"]["f3db"] / 1e6,

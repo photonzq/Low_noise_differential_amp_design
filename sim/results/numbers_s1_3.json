@@ -138,21 +138,21 @@
    -0.3745827270943735,
    -0.36836871951817834
   ],
-  "source": "chain_ac.json H_LN_100..50000.db_10M (Table 11)"
+  "source": "chain_ac.json H_LN_100..50000.db_10M (Table 12)"
  },
  "db_10M_H_x10": {
   "value": [
    -0.41538707331058694,
    -0.41092179496429315
   ],
-  "source": "chain_ac.json H gains 1, 10, H_HR_100, 1000 .db_10M (Table 11)"
+  "source": "chain_ac.json H gains 1, 10, H_HR_100, 1000 .db_10M (Table 12)"
  },
  "db_10M_L": {
   "value": [
    -0.8216470922673789,
    -0.8156030791234702
   ],
-  "source": "chain_ac.json L_*.db_10M (Table 11)"
+  "source": "chain_ac.json L_*.db_10M (Table 12)"
  },
  "NF5307_plot_white_nV": {
   "value": [

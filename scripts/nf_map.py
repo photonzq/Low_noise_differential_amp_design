@@ -17,7 +17,7 @@ standard temperature T0 = 290 K of the data sheet's plot:
 
     F = 1 + v_a^2 / (4 k T0 R_S).
 
-(noise_vs_source.py and Table 10 take the source's noise at the simulator's 300.15 K, F = v_n^2 / (4 k 300.15 K
+(noise_vs_source.py and Table 11 take the source's noise at the simulator's 300.15 K, F = v_n^2 / (4 k 300.15 K
 R_S) with v_n^2 = v_a^2 + 4 k 300.15 K R_S; "table10_check" below compares the two runs on that basis.)
 
 R_S: 1 ohm to 100 Mohm, five values per decade (41 runs per amplifier).  Two checks are recorded:
@@ -29,7 +29,7 @@ R_S: 1 ohm to 100 Mohm, five values per decade (41 runs per amplifier).  Two che
                  falls so far (their bandwidth is about 1 MHz) that their input-referred noise is not a property
                  of a two-port: the LSK389B model's runs depart from any fit above 18 MHz.
                  The fit also gives the optimum source resistance sqrt(S_e / S_i) and the minimum noise figure.
-  table10_check  the runs at the resistances of Table 10 against noise_vs_source.json, at 300.15 K.
+  table10_check  the runs at the resistances of Table 11 against noise_vs_source.json, at 300.15 K.
   archived_check (the SR560 models) the 1 ohm run, whose deck is the model's archived noise deck, against the
                  archived spectrum (sr560_chain_noise_LN_1000.npz; sr560_variants_corrected_lsk389b_noise_LN_1000.npz):
                  the largest difference in dB of noise power.
@@ -71,7 +71,7 @@ K_B = 1.380649e-23
 T0 = 290.0
 RS = np.array([10 ** (k / 5) for k in range(41)])          # 1 ohm to 100 Mohm, five per decade
 F_REPORT = (10.0, 1e3, 1e5, 1e6, 1e7)
-BAND = (1.0, 1e7)                                           # the maps' frequency range (Figure 14)
+BAND = (1.0, 1e7)                                           # the maps' frequency range (Figure 17)
 
 
 def rs_name(rs: float) -> str:
@@ -396,7 +396,7 @@ def main(args: list[str]) -> None:
             res[key]["table10_check"] = table10_check(f, va2, {"H": "H_LN", "L": "L"}[key])
             res[key]["input_network"] = input_network(key, res[key]["at"])
         print(f"{key}: two-port fit within {res[key]['two_port_fit_max_dev_db']:.2g} dB"
-              + (f"; Table 10 check {res[key]['table10_check']}" if key not in SR560_MODELS else
+              + (f"; Table 11 check {res[key]['table10_check']}" if key not in SR560_MODELS else
                  f"; archived check {res[key]['archived_check']}; low frequency {res[key]['low_frequency']}"))
         show(key, res[key]["at"])
         for f0, row in res[key].get("input_network", {}).items():

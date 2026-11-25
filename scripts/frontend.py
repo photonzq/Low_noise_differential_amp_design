@@ -73,6 +73,18 @@ class FE:
                                # falls back to its transient op (sink_options.py; the note's Appendix)
     v_ref_sink: float | None = None   # the sinks' fixed base reference (vsink0), V; None: the adjusted value
                                       # (sink_reference); not used with cm_servo
+    bjt: str = ""              # "" (the designs of the note): the input devices are the JFET subcircuits `jfet`;
+                               # otherwise an NPN model name, and the input devices are that BJT (collector on the
+                               # cascode, emitter on the source node), for the bipolar input stage of Section 3.5
+    extra_lib: str = ""        # a further model library under sim/models/_lib (the calibrated bipolar cards)
+
+    @property
+    def device(self) -> str:
+        return self.bjt or self.jfet
+
+    @property
+    def extra(self) -> str:
+        return spice.lib(self.extra_lib) if self.extra_lib else ""
 
     @property
     def oa_rails(self) -> str:
@@ -113,14 +125,18 @@ def side(p: FE, x: str) -> str:
             lines.append(f"RGS{x}{k} {g} {gk} {p.rg_stop:g}")
         if p.rs_dev:
             lines.append(f"RSS{x}{k} {sk} {s} {p.rs_dev:g}")
-        lines.append(f"XJ{x}{k} {dk} {gk} {sk} {p.jfet}")
+        if p.bjt:
+            lines.append(f"QJ{x}{k} {dk} {gk} {sk} {p.bjt}")
+        else:
+            lines.append(f"XJ{x}{k} {dk} {gk} {sk} {p.jfet}")
         if p.cascode.startswith("J:"):          # JFET cascode (no gate current, no base-current noise)
             lines.append(f"XC{x}{k} {c} {b} {dk} {p.cascode[2:]}")
         else:
             lines.append(f"QC{x}{k} {c} {b} {dk} {p.cascode}")
     # bootstrap: R_BS || C_BS from the base node to the source node, I_BS from +V via R_UP
     r_bs = p.vbs / p.i_bs
-    v_b0 = 0.6 + p.vbs                  # base node at about 0.6 V source + vbs (zero input)
+    v_b0 = (-0.65 if p.bjt else 0.6) + p.vbs   # base node at the source node + vbs (zero input): the JFETs' source
+                                                # about 0.6 V above the gate, an NPN's emitter about 0.65 V below
     r_up = (p.vp - v_b0) / p.i_bs
     lines += [f"RBS{x} {b} {s} {r_bs:.6g}", f"CBS{x} {b} {s} {p.c_bs:g}",
               f"RUP{x} vp {b} {r_up:.6g}"]
@@ -151,7 +167,7 @@ def opamp_name(p: FE) -> str:
 
 def netlist(p: FE) -> str:
     """Front end with inputs ga, gb and outputs oa, ob; supplies vp, vm; references vref, vsink."""
-    head = (f"* ===== front end {p.name}: {p.n} x {p.jfet} per side at {p.id * 1e3:g} mA, R_F {p.rf:g}, "
+    head = (f"* ===== front end {p.name}: {p.n} x {p.device} per side at {p.id * 1e3:g} mA, R_F {p.rf:g}, "
             f"R_G {p.rg:g}, gain {p.gain:.4g}\n")
     rg = f"RG sa sb {p.rg:g}\n" if p.rg else ""
     # sink base reference: vm + v_sink + V_BE (ideal source, filtered)
@@ -227,7 +243,7 @@ def op_checked(fn, p: FE, *args, keep=None, **kw) -> tuple:
 def deck(p: FE, title: str, src: str, control: str) -> str:
     opn = blocks.opn("OPN_FE", **p.opn_kw) if p.opamp == "OPN" else ""
     return (f"* {title}\n{spice.OPTIONS}.options rshunt=1e12\n{spice.lib('jfets.lib')}{spice.lib('opamps.lib')}"
-            f"{spice.lib('bjts.lib')}{opn}{blocks.COMMON}{ties(src, p)}{netlist(p)}{control}.end\n")
+            f"{spice.lib('bjts.lib')}{p.extra}{opn}{blocks.COMMON}{ties(src, p)}{netlist(p)}{control}.end\n")
 
 
 SRC_DM = "VA ina 0 DC 0 AC 0.5\nVB inb 0 DC 0 AC -0.5\nRIA ina ga 1m rnl\nRIB inb gb 1m rnl\n"
@@ -244,7 +260,7 @@ def _ref_key(p: FE) -> str:
     model libraries it includes, so that a change of either is a new circuit."""
     import hashlib
     h = hashlib.sha256(netlist(replace(p, name="ref", cm_servo=False, v_ref_sink=0.0, v_be_sink=0.0)).encode())
-    for lib in ("jfets.lib", "opamps.lib", "bjts.lib"):
+    for lib in ("jfets.lib", "opamps.lib", "bjts.lib") + ((p.extra_lib,) if p.extra_lib else ()):
         h.update((spice.LIB / lib).read_bytes())
     return h.hexdigest()[:20]
 
@@ -345,7 +361,7 @@ def check_noise(p: FE, fstop=100e6) -> dict:
 
 
 NOISE_GROUPS = [
-    ("input JFETs", [r"^j\.xj[ab]\d+\.j1", r"^r\.xj[ab]\d+\.rx$"]),
+    ("input JFETs", [r"^j\.xj[ab]\d+\.j1", r"^r\.xj[ab]\d+\.rx$", r"^qj[ab]\d+$"]),   # the last: bipolar inputs
     ("gate stoppers and source resistors", [r"^rgs[ab]\d+$", r"^rss[ab]\d+$"]),
     ("R_G", [r"^rg$"]),
     ("R_F", [r"^rf[ab]$"]),
@@ -397,7 +413,7 @@ def check_loop(p: FE, mode: str = "dm") -> dict:
                                                     f"IJb 0 fb DC 0 AC {sgn if inj == 'i' else 0}\nRFb fb sb {p.rf:g}")
         opn = blocks.opn("OPN_FE", **p.opn_kw) if p.opamp == "OPN" else ""
         dk = (f"* loop {p.name} {mode} {inj}\n{spice.OPTIONS}.options rshunt=1e12\n{spice.lib('jfets.lib')}"
-              f"{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}{opn}{blocks.COMMON}"
+              f"{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}{p.extra}{opn}{blocks.COMMON}"
               + ties("VA ina 0 DC 0\nRIA ina ga 1m rnl\nRIB ina gb 1m rnl\n", p) + text +
               ".control\n" + spice.WR + "ac dec 40 1k 2g\nwrdata loop.txt v(oa) v(fa) i(VJa)\n.endc\n.end\n")
         f = spice.run(f"fe/{p.name}/loop_{mode}_{inj}", dk)
@@ -460,7 +476,7 @@ def loop_out_deck(p: FE, mode: str, inj: str, control: str) -> str:
                                  f"IJ{x} 0 o{x} DC 0 AC {s if inj == 'i' else 0}")
     opn = blocks.opn("OPN_FE", **p.opn_kw) if p.opamp == "OPN" else ""
     return (f"* loop at op-amp output {p.name} {mode} {inj}\n{spice.OPTIONS}.options rshunt=1e12\n"
-            f"{spice.lib('jfets.lib')}{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}{opn}{blocks.COMMON}"
+            f"{spice.lib('jfets.lib')}{spice.lib('opamps.lib')}{spice.lib('bjts.lib')}{p.extra}{opn}{blocks.COMMON}"
             + ties("VA ina 0 DC 0\nRIA ina ga 1m rnl\nRIB ina gb 1m rnl\n", p) + text + control + ".end\n")
 
 

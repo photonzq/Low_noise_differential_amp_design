@@ -1,4 +1,4 @@
-"""Where the SR560 reproductions' input noise current comes from, and their input capacitance (Figure 14,
+"""Where the SR560 reproductions' input noise current comes from, and their input capacitance (Figure 17,
 Section 6.2): a check of the statement that, without the tail servo's share, their noise current at 1 MHz is the
 e_n w C of their input capacitance.  It is not: see (2).
 

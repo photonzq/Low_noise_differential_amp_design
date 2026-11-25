@@ -7,7 +7,7 @@
             ends into curves_zin.npz, then the part zin_net
   zin_net   the input admittance of the front ends with and without the input network of
             chain.INPUT_NET (fresh runs of both, in run folders of their own), and the numbers that
-            Section 4.4 and Figure 10 of the note quote; writes curves_zin_network.npz and
+            Section 4.4 and Figure 13 of the note quote; writes curves_zin_network.npz and
             zin_numbers.json and leaves curves_zin.npz as it is
   sources   H100 and L200 driven from 50 ohm, 1 k and 1 Meg with and without the input network
   noise     input-referred noise spectra with the groups of generators: H10, H100, L200 front ends
@@ -18,7 +18,7 @@ Input admittance (frontend.check_zin's bench: 1 A AC into input A; 'dm': input B
 1 milliohm, 'cm': B tied to A; a 1e12-ohm DC path):
     Z_in = v(ga) / 1 A,   Y_in = 1 / Z_in,   C_eff = Im(Y_in) / w   (w = 2 pi f)
     parallel resistance  R_par = 1 / Re(Y_in)   (negative where Re(Y_in) < 0: the smallest |R_par| among
-                         the negative values is the note's "minimum", Figure 10b, at the grid point
+                         the negative values is the note's "minimum", Figure 13b, at the grid point
                          and from a parabola through Re(Y_in) at the three grid points about it, in
                          log10 f: R_par = 1 / G_vertex); the series resistance Re(Z_in) and its
                          minimum are given as well
@@ -157,7 +157,7 @@ def zin_net():
                 r[f"{tag}_{mode}"] = admittance_numbers(z[mode]["f"], z[mode]["z"])
         for mode in ("dm", "cm"):
             r[f"bare_archived_{mode}"] = admittance_numbers(arch[f"{k}_{mode}_f"], arch[f"{k}_{mode}_z"])
-        # the archived source responses (Figure 10c)
+        # the archived source responses (Figure 13c)
         c_bare = r["bare_archived_dm"]["C_eff"]["1000"]
         s = {}
         for tag in ("bare", "network"):

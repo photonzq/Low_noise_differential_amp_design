@@ -3,7 +3,7 @@
 Each source node's DC current leaves through a current sink: an NPN with R_T to -15 V, whose base
 reference is adjusted once for each variant (frontend.sink_reference).  Its noise current enters the source node and reaches the input with
 the weight R_F / G per side (Eq. (9)): 5 ohm at a gain of 100 but 50 ohm at a gain of 10, where the
-sinks are the third-largest contributor, after R_G and the JFETs (Table 8 of the note).  The sink's
+sinks are the third-largest contributor, after R_G and the JFETs (Table 9 of the note).  The sink's
 noise current has three parts:
   - R_T's thermal noise, sqrt(4kT / R_T) = sqrt(4kT I / V_RT), lowered by a larger drop V_RT;
   - the base current's shot noise, sqrt(2q I_C / beta), which reaches the collector almost in full

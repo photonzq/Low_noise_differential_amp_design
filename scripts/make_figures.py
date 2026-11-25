@@ -34,7 +34,7 @@ import spice
 
 R = spice.RESULTS
 C = PS.COLORS
-# The JFETs' own input capacitance per input, N C_iss (Figures 1 and 10):
+# The JFETs' own input capacitance per input, N C_iss (Figures 1 and 13):
 #   H: two JFE2140 halves of 13 pF each (TI SLPS730B, p. 5, Sec. 6.5: C_iss at V_DS = 5 V)
 #   L: twelve JFE150 of 24 pF each (TI SLPS732B, p. 5, Table 6.5: C_iss at V_DS = 5 V)
 N_CISS = {"H": (2, 13.0), "L": (12, 24.0)}
@@ -270,7 +270,7 @@ def fig_loop_gain():
     """Three steps of the front end's compensation (H100): (a) without the cross-coupled
     capacitors, loop broken at R_F; (b) with them but without C_node, loop broken at the op amp's
     output; (c) the final values, loop broken at the op amp's output.  The crossover and phase
-    margin printed in each phase panel follow Table 6's convention, frontend._margins on the same
+    margin printed in each phase panel follow Table 7's convention, frontend._margins on the same
     archived curves: the first point of the sweep past each crossing of |T| = 1, with the phase
     unwrapped from 1 kHz (the crossing with the smallest margin is printed)."""
     d = np.load(R / "curves_loop.npz")
@@ -608,7 +608,7 @@ def fig_cmrr():
     fig, axs = plt.subplots(1, 3, figsize=(7.4, 3.0), constrained_layout=True, sharey=True)
     fs = np.logspace(0, 7, 200)
     sr_spec = np.where(fs < 1e3, 100, 100 - 20 * np.log10(fs / 1e3))
-    # NF 5307, gain 100 x1: Table 12's row, Fig. 46 of NF's data-sheet page read at the table's frequencies
+    # NF 5307, gain 100 x1: Table 13's row, Fig. 46 of NF's data-sheet page read at the table's frequencies
     # (numbers_s6_7.py, NF_CMRR_PLOT; checked against the image's pixels by nf5307_plot_check.py)
     nf = json.loads((R / "numbers_s6_7.json").read_text(encoding="utf-8"))["s6.4"]["NF 5307 plot, gain 100 (dB)"]["value"]
     nf_f, nf_c = [float(k) for k in nf], [float(v) for v in nf.values()]
@@ -724,6 +724,156 @@ def fig_large_signal():
     ax.legend(fontsize=PS.FONT_SIZE - 2, loc="upper right")
     PS.panel_label(ax, "d")
     return PS.export(fig, "fig_large_signal")
+
+
+def fig_bipolar_inputs():
+    """Section 3.5: the SSM2212 arrays against L's JFE150 array in the input-stage testbench (a, b), and the front
+    end B against L200 with a source resistance (c, d); bipolar_inputs.py."""
+    import bipolar_inputs as BI
+    t = np.load(R / "bipolar_inputs.npz")
+    d = np.load(R / "bipolar_fe.npz")
+    fig = plt.figure(figsize=(7.0, 6.2), constrained_layout=True)
+    gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 0.16])
+    axs = np.array([[fig.add_subplot(gs[r, c]) for c in range(2)] for r in range(2)])
+    lax = fig.add_subplot(gs[2, 0])            # panel (c)'s legend, under it
+    lax.axis("off")
+    band = dict(color=C["highlight"], alpha=PS.HIGHLIGHT_ALPHA * 2, linewidth=0, zorder=0)
+    arrays = (("SSM2212_12", C["cool_accent"], "-", "12 SSM2212, 5 mA"),
+              ("SSM2212_24", C["primary"], "-", "24 SSM2212, 2.5 mA"),
+              ("SSM2212_48", C["purple_accent"], "-", "48 SSM2212, 1.25 mA"),
+              ("SSM2212L_24", C["teal_accent"], PS.DASHED, "24 SSM2212 (LFCSP), 2.5 mA"))
+    # (a) e_n, (b) i_n of the arrays
+    for ax, row, scale in ((axs[0, 0], 0, 1e9), (axs[0, 1], 2, 1e12)):
+        f = t["f_SSM2212_24"]
+        lo = np.sqrt(np.clip(t["coef_SSM2212_24_fc30"][row], 0, None)) * scale
+        hi = np.sqrt(np.clip(t["coef_SSM2212_24_fc1k"][row], 0, None)) * scale
+        ax.fill_between(f, lo, hi, label="24 SSM2212: $f_c$ 30 Hz to 1 kHz", **band)
+        if row == 0:
+            ax.plot(t["f_JFE150_L"], np.sqrt(t["coef_JFE150_L"][0]) * 1e9, color=C["warm_accent"],
+                    label="L: 12 JFE150, 5 mA")
+        for key, col, ls, lab in arrays:
+            ax.plot(t[f"f_{key}"], np.sqrt(np.clip(t[f"coef_{key}"][row], 0, None)) * scale, color=col, ls=ls,
+                    label=lab)
+        _log_axes(ax)
+        ax.set_xlim(0.1, 1e7)
+        ax.set_xlabel("Frequency (Hz)")
+    axs[0, 0].set_ylim(0.1, 20)
+    axs[0, 0].set_ylabel(r"$e_n$, differential (nV/$\sqrt{\mathrm{Hz}}$)")
+    axs[0, 1].set_ylim(1, 1000)
+    axs[0, 1].set_ylabel(r"$i_n$ per input (pA/$\sqrt{\mathrm{Hz}}$)")
+    axs[0, 0].legend(fontsize=PS.FONT_SIZE - 1, loc="upper right")
+    # (c) noise figure against the source resistance, front ends B and L200
+    ax = axs[1, 0]
+    rs = np.logspace(-1, 4, 200)
+    f = d["f_L200"]
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+    styles = ((1.0, "-", "1 Hz"), (10.0, PS.DASHED, "10 Hz"), (1e3, (0, (5, 1.5, 1, 1.5)), "1 kHz"))
+    for f0, ls, fl in styles:
+        j = int(np.argmin(np.abs(np.log10(f) - np.log10(f0))))
+        if f0 == 1.0:
+            ax.fill_between(rs, BI.nf_db(d["coef_B_fc30"][:, j], rs), BI.nf_db(d["coef_B_fc1k"][:, j], rs), **band)
+        ax.plot(rs, BI.nf_db(d["coef_L200"][:, j], rs), color=C["warm_accent"], ls=ls)
+        ax.plot(rs, BI.nf_db(d["coef_B"][:, j], rs), color=C["primary"], ls=ls)
+    handles = ([Line2D([], [], color=C["warm_accent"], label="L"), Line2D([], [], color=C["primary"], label="B")]
+               + [Line2D([], [], color=C["text"], ls=ls, label=fl) for _, ls, fl in styles]
+               + [Patch(color=C["highlight"], alpha=PS.HIGHLIGHT_ALPHA * 2, linewidth=0,
+                        label="B at 1 Hz, $f_c$ 30 Hz to 1 kHz")])
+    lax.legend(handles=handles, loc="upper left", ncol=3, fontsize=PS.FONT_SIZE - 1, frameon=False,
+               borderaxespad=0.0, columnspacing=1.2)
+    ax.set_xscale("log")
+    ax.xaxis.set_major_formatter(LogFormatterMathtext())
+    ax.set_xlim(0.1, 1e4)
+    ax.set_ylim(0, 35)
+    ax.set_xlabel(r"Source resistance $R_S$ ($\Omega$)")
+    ax.set_ylabel("Noise figure, 290 K (dB)")
+    # (d) the source resistance below which B is the quieter
+    ax = axs[1, 1]
+    x0, x1, x2 = (BI.crossover(d[f"coef_{k}"], d["coef_L200"]) for k in ("B", "B_fc30", "B_fc1k"))
+    ax.fill_between(f, np.fmin(x1, x2), np.fmax(x1, x2), label="$f_c$ 30 Hz to 1 kHz", **band)
+    ax.plot(f, x0, color=C["primary"], label="B against L, $f_c$ 200 Hz")
+    _log_axes(ax)
+    ax.set_xlim(0.1, 1e7)
+    ax.set_ylim(1, 1000)
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel(r"Crossover source resistance ($\Omega$)")
+    ax.text(0.3, 3, "B quieter", color=C["text"], ha="left", va="center")
+    ax.text(0.3, 300, "L quieter", color=C["text"], ha="left", va="center")
+    ax.legend(fontsize=PS.FONT_SIZE - 1, loc="upper right")
+    for ax, lab in zip(axs.flat, "abcd"):
+        PS.panel_label(ax, lab)
+    return PS.export(fig, "fig_bipolar_inputs")
+
+
+def fig_bipolar_nf_map():
+    """Section 3.5: noise-figure maps of the bipolar front end B in the format of fig_nf_map (the SR560 data
+    sheet's contour levels and label positions, the source at 290 K), drawn from the two-port fits of
+    bipolar_fe.npz (bipolar_inputs.py: 15 runs from 0.1 ohm to 1 Mohm, reproduced within 4e-6 dB), on that range:
+    (a) B with the base-current 1/f corner of 200 Hz at 1 mA, (b) 30 Hz and (c) 1 kHz, the ends of the bracket;
+    (d) B minus L, both at the front-end level (L200 swept as B), with the contours of equal noise of the three."""
+    from matplotlib.colors import BoundaryNorm
+    from matplotlib.lines import Line2D
+    from matplotlib.ticker import LogLocator, NullFormatter
+    d = np.load(R / "bipolar_fe.npz")
+    ds = json.loads((R / "sr560_nf_datasheet.json").read_text(encoding="utf-8"))
+    levels = ds["levels_db"]
+    k_b, t0 = 1.380649e-23, 290.0
+    r = 10 ** np.linspace(-1, 6, 351)
+    f = d["f_B"]
+    sel = (f >= 1 - 1e-9) & (f <= 1e7 * (1 + 1e-9))
+    assert all(np.array_equal(d[f"f_{k}"], f) for k in ("L200", "B_fc30", "B_fc1k"))
+
+    def nf(key):
+        c = d[f"coef_{key}"][:, sel]
+        va2 = c[0][None, :] + r[:, None] * c[1][None, :] + r[:, None] ** 2 * c[2][None, :]
+        return 10 * np.log10(1 + va2 / (4 * k_b * t0 * r[:, None]))
+
+    dlev = [-25, -15, -10, -6, -3, -1, -0.3, -0.1, 0.1, 0.3, 1, 3, 6, 10, 15, 25]
+    norm = BoundaryNorm(dlev, PS.MUTED_CLASSIC_CMAP.N)
+    fig, axs = plt.subplots(2, 2, figsize=(7.0, 6.0), sharex=True, sharey=True, constrained_layout=True)
+    for ax in axs.flat:
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ax.set_xlim(1, 1e7)
+        ax.set_ylim(0.1, 1e6)
+        ax.xaxis.set_major_locator(LogLocator(base=100.0, numticks=10))
+        ax.xaxis.set_minor_locator(LogLocator(base=10.0, numticks=10))
+        ax.xaxis.set_minor_formatter(NullFormatter())
+        ax.yaxis.set_major_locator(LogLocator(base=10.0, numticks=10))
+        ax.yaxis.set_minor_formatter(NullFormatter())
+        ax.xaxis.set_major_formatter(LogFormatterMathtext())
+        ax.yaxis.set_major_formatter(LogFormatterMathtext())
+    maps = {}
+    for ax, key, title in ((axs[0, 0], "B", "B, corner 200 Hz at 1 mA"), (axs[0, 1], "B_fc30", "B, corner 30 Hz"),
+                           (axs[1, 0], "B_fc1k", "B, corner 1 kHz")):
+        cs = ax.contour(f[sel], r, nf(key), levels=levels, colors=C["primary"], linewidths=0.9)
+        maps[ax] = [(lv, seg) for lv, segs in zip(cs.levels, cs.allsegs) for seg in segs]
+        ax.set_title(title, fontsize=PS.FONT_SIZE)
+    ax = axs[1, 1]
+    im = ax.contourf(f[sel], r, nf("B") - nf("L200"), levels=dlev, cmap=PS.MUTED_CLASSIC_CMAP, norm=norm,
+                     extend="both")
+    for key, ls in (("B", "-"), ("B_fc30", PS.DASHED), ("B_fc1k", PS.DASHED)):
+        ax.contour(f[sel], r, nf(key) - nf("L200"), levels=[0.0], colors=C["text"], linewidths=1.0, linestyles=[ls])
+    ax.set_title("B minus L (front ends)", fontsize=PS.FONT_SIZE)
+    ax.legend(handles=[Line2D([], [], color=C["text"], lw=1.0, label="equal noise, 200 Hz"),
+                       Line2D([], [], color=C["text"], lw=1.0, ls=PS.DASHED, label="30 Hz and 1 kHz")],
+              loc="upper right", fontsize=PS.FONT_SIZE - 1.5, frameon=True, facecolor="white", edgecolor="none",
+              framealpha=1.0)
+    for ax in axs[1]:
+        ax.set_xlabel("Frequency (Hz)")
+    for ax in axs[:, 0]:
+        ax.set_ylabel(r"Source resistance at 290 K ($\Omega$)")
+    cb = fig.colorbar(im, ax=axs[1, 1], location="right", pad=0.01, ticks=dlev)
+    cb.set_label("Difference in noise figure (dB)")
+    cb.ax.tick_params(labelsize=PS.FONT_SIZE - 1.5)
+    cb.ax.set_yticklabels([f"{v:g}" for v in dlev])
+    for ax, lab in zip(axs.flat, "abcd"):
+        PS.panel_label(ax, lab)
+    fig.canvas.draw()
+    fig.set_layout_engine("none")
+    for ax, lines in maps.items():
+        _label_lines(ax, lines, C["primary"], y_max=10 ** 5.7, x_lo_more=(1e5,))
+    return PS.export(fig, "fig_bipolar_nf_map")
 
 
 FIGS = {k: v for k, v in globals().items() if k.startswith("fig_")}

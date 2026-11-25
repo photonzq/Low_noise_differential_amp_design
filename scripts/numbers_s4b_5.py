@@ -1,12 +1,12 @@
 """The derived numbers of Sections 4.4-5 of the note (input, chain, offsets and drift, power, the
-1/f trade-off, the simulation method, the vendor models and Table 7) that are not a direct readout
+1/f trade-off, the simulation method, the vendor models and Table 8) that are not a direct readout
 of one archived result: arithmetic, ratios, differences, unit conversions and single roundings of
 archived results, and the data-sheet constants they use (each cited where it is defined below).
 No simulation is run; only archived results in ../sim/results/ are read.
 
 Constants: k = 1.380649e-23 J/K, T = 300.15 K (ngspice's 27 C; spice.KT = kT).
 
-Input admittance (Section 4.4, Figure 10; zin_numbers.json, protection.json):
+Input admittance (Section 4.4, Figure 13; zin_numbers.json, protection.json):
     C_eff = Im(Y_in) / w of the bare front ends (input A driven, B grounded) at 1 k, 100 k, 300 k
             and 1 MHz; the range over 1 k - 300 kHz and the value at 1 MHz
     C_JFETs = N C_iss                                  H: 2 x 13 pF, L: 12 x 24 pF
@@ -18,11 +18,11 @@ Input admittance (Section 4.4, Figure 10; zin_numbers.json, protection.json):
     the H/L crossover against the source resistance R_s (noise_vs_source.json, the full chain at a
         total gain of 1000): R_x where e_H(R_s) = e_L(R_s), by linear interpolation of ln(e_H / e_L)
         in log10 R_s between the grid points where it changes sign (the method of numbers_s1_3.py)
-Protection (Section 4.4, Table 6d; protection.json): relative costs e_tot / e_FE - 1 of 10 and
+Protection (Section 4.4, Table 7d; protection.json): relative costs e_tot / e_FE - 1 of 10 and
     22 ohm, the noise-figure increases, H's current noise with leakage i_tot / i_RB - 1, the
     forward bias per diode |V_GS| / n of the bootstrapped clamp strings, the common-mode range.
 Chain (Section 4.5):
-    Figure 11's drawn setting  G = G_FE (10 a3)(10 a4)(5 a5)  with a3 = a4 = 1/2, a5 = 2/5
+    Figure 14's drawn setting  G = G_FE (10 a3)(10 a4)(5 a5)  with a3 = a4 = 1/2, a5 = 2/5
     S2's noise gain with four equal resistors  1 + R_f / R_g = 1 + 499/499
     S5 into 50 ohm through 49.9 ohm:  v_op = v_load (49.9 + 50) / 50,  i = v_op / 99.9 ohm
     the THS3091's i_n- R_F against the chain at a total gain of 1 (chain_noise.json, H_LN_1):
@@ -41,7 +41,7 @@ Offset and trim (Section 4.6; cmrr_mc.py, cmrr_mc.json, curves_noise.npz):
     offset at the input = V_out,dc,rms / G (cmrr_mc.json)
     trim: the input-referred shift of a current dI injected into one summing node is dI w, with the
         weight of Eq. (9) for a current entering the summing node,  w = 1/(N g_m) + R_F/G.  w is read
-        from the simulated noise of R_D, which enters the same node (Table 8's runs,
+        from the simulated noise of R_D, which enters the same node (Table 9's runs,
         curves_noise.npz, group 'drain-side R_D', both sides):
             e_RD = sqrt(2) w sqrt(4kT / R_D)   ->   w = e_RD / (sqrt(2) sqrt(4kT / R_D))
         at the lowest frequency of the runs, 0.1 Hz (w is flat to 0.1 % from 0.1 Hz to 1 MHz).
@@ -61,7 +61,7 @@ Power (Section 4.7; large_signal.json, sink_power.json, chain_extras.json):
         e' = sqrt(e^2 - e_op^2)
     capacitance ratio of JFE150 to JFE2140: 24 pF / 13 pF
 Method (Section 5.1): Monte Carlo trials per case; the THD grid of large_signal.json.
-Vendor models (Section 5.3, Table 7; model_defects.json, opamp_noise_check.json):
+Vendor models (Section 5.3, Table 8; model_defects.json, opamp_noise_check.json):
     model / data-sheet ratios (the LSK389B card's white noise with and without NLEV/GDSNOI against the
         LSK389 data sheet's 1.6 nV/rtHz at 1 kHz); the LTspice library record (version, date, SHA-256,
         change-log entry); HD3 in dBc = 20 log10(h3) and its excess over the data sheet's curve,
@@ -398,7 +398,7 @@ def trim(off: dict) -> None:
     w = {}
     for k in ("H100", "H10", "L200"):
         p = F.CASES[k]
-        rd = 600.0 if k.startswith("H") else 100.0          # R_D (Table 5)
+        rd = 600.0 if k.startswith("H") else 100.0          # R_D (Table 6)
         i_rd = math.sqrt(4 * KT / rd)
         f = z[f"{k}_f"]
         g = z[f"{k}_g_drain-side R_D"]

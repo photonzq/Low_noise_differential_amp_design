@@ -217,7 +217,7 @@
   "H: sqrt(2) x 0.9 / sqrt(2)": {
    "value": 0.9,
    "text": "0.90",
-   "source": "SLPS730B p. 1 (0.9 nV/rtHz, 5 mA); N = 2 (Table 5)"
+   "source": "SLPS730B p. 1 (0.9 nV/rtHz, 5 mA); N = 2 (Table 6)"
   },
   "L: sqrt(2) x 0.8 / sqrt(12)": {
    "value": 0.3265986323710905,
@@ -538,7 +538,7 @@
   "input headroom of H_HR: 20 log10(100/10) (dB)": {
    "value": 20.0,
    "text": "20",
-   "source": "front-end gains 100 and 10 (Table 5)"
+   "source": "front-end gains 100 and 10 (Table 6)"
   }
  },
  "s6.5": {
@@ -846,7 +846,7 @@
   "bootstrap R_BS C_BS (ms)": {
    "value": 3.4999999999999996,
    "text": "3.5",
-   "source": "Table 5: 3.5 kohm, 1 uF"
+   "source": "Table 6: 3.5 kohm, 1 uF"
   },
   "larger overloads: v_s,d (V), dV_GS at 10x (V), zero bias at (V; x full scale)": {
    "value": [
@@ -1147,7 +1147,7 @@
   }
  },
  "s6.2": {
-  "NF crossover at 10 Hz (Table 10 rows)": {
+  "NF crossover at 10 Hz (Table 11 rows)": {
    "value": [
     [
      10000.0,
@@ -1167,7 +1167,7 @@
    "text": "L better below, between 30000 and 100000 ohm",
    "source": "noise_vs_source.json, NF_H - NF_L changes sign"
   },
-  "NF crossover at 1000 Hz (Table 10 rows)": {
+  "NF crossover at 1000 Hz (Table 11 rows)": {
    "value": [
     [
      10000.0,
@@ -1187,7 +1187,7 @@
    "text": "L better below, between 10000 and 30000 ohm",
    "source": "noise_vs_source.json, NF_H - NF_L changes sign"
   },
-  "NF crossover at 1e+06 Hz (Table 10 rows)": {
+  "NF crossover at 1e+06 Hz (Table 11 rows)": {
    "value": [
     [
      300,
@@ -1207,7 +1207,7 @@
    "text": "L better below, between 300 and 1000 ohm",
    "source": "noise_vs_source.json, NF_H - NF_L changes sign"
   },
-  "NF crossover at 1e+07 Hz (Table 10 rows)": {
+  "NF crossover at 1e+07 Hz (Table 11 rows)": {
    "value": [
     [
      30,
@@ -1426,7 +1426,7 @@
    "source": "noise_vs_source.json nf_db"
   }
  },
- "s6.2 Figure 14": {
+ "s6.2 Figure 15": {
   "data sheet: largest residual of the tick calibration (pt)": {
    "value": 0.022516095196465358,
    "text": "0.02",
@@ -1484,7 +1484,7 @@
    "text": "0",
    "source": "nf_map.json archived_check"
   },
-  "simulated at 300.15 K against Table 10: largest difference (dB, bound)": {
+  "simulated at 300.15 K against Table 11: largest difference (dB, bound)": {
    "value": 1.580096832133615e-06,
    "text": "2e-06",
    "source": "nf_map.json table10_check"
@@ -2547,7 +2547,7 @@
    "source": "nf_map.json input_network"
   }
  },
- "s6.2 Figure 14j-l": {
+ "s6.2 Figure 15j-l": {
   "5113 plot: px per decade (f | R); largest residual of the grid calibration (px)": {
    "value": [
     99.99999999999993,

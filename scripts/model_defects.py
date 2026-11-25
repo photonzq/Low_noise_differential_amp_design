@@ -1,4 +1,4 @@
-"""Table 7 of the note (Section 5.3): every number of the table and of its explanatory paragraphs,
+"""Table 8 of the note (Section 5.3): every number of the table and of its explanatory paragraphs,
 computed from the archived results and from small runs of the cards and models as published.
 
 Inputs: ../sim/results/jfet_calibration.json (models.py: the cards' capacitances, g_m, the calibrated
@@ -307,7 +307,7 @@ def lsk389_nlev() -> dict:
 
 
 def jfe2325_flicker(cal: dict) -> dict:
-    """Not in Table 7: the JFE2325 card's 1/f (KF kept by models.py) against the data sheet's curve,
+    """Not in Table 8: the JFE2325 card's 1/f (KF kept by models.py) against the data sheet's curve,
     by Eq. (1) with the calibration's g_m and I_D (V_GS = 0); the simulated spectrum is in
     jfet_model_check.json ('JFE2325')."""
     from jfet_model_check import FIG_5_24
@@ -321,7 +321,7 @@ def jfe2325_flicker(cal: dict) -> dict:
     return dict(kf=kf, id=c["id"], gm=c["gm"], e_1f_10Hz_model=e10, e_10Hz_datasheet_fig=fig[10.0] * 1e-9,
                 e_white_datasheet_fig=fig[1e5] * 1e-9, one_over_f_power_ratio_10Hz=e10 ** 2 / p_ds,
                 src="SLPS816A Fig. 5-24, p. 9 (gate connected to ground), read by eye (jfet_model_check.FIG_5_24)",
-                remark="not in Table 7: the card's 1/f power at 10 Hz against the data sheet's curve")
+                remark="not in Table 8: the card's 1/f power at 10 Hz against the data sheet's curve")
 
 
 def ti_raw_param(part: str, key: str) -> str | None:
@@ -378,7 +378,7 @@ def opamp_rows(onc: dict) -> dict:
 
 
 def table_rows(j: dict, o: dict) -> list[dict]:
-    """Table 7 as rows: model value, data sheet, error (with the JSON keys they come from)."""
+    """Table 8 as rows: model value, data sheet, error (with the JSON keys they come from)."""
     n, p = 1e9, 1e12
     rows = [
         ("TI JFE2140 (SLPM355)", "1/f, KF", f"{j['JFE2140 1/f']['kf_card']:.2g}: {j['JFE2140 1/f']['e_10Hz_card_ngspice'] * n:.3f} nV/rtHz at 10 Hz "
@@ -442,7 +442,7 @@ def main():
     j = jfet_rows(cal)
     j["J310"] = j310(cal)
     j["LSK389"] = lsk389_nlev()
-    j["JFE2325 1/f (not in Table 7)"] = jfe2325_flicker(cal)
+    j["JFE2325 1/f (not in Table 8)"] = jfe2325_flicker(cal)
     o = opamp_rows(onc)
     lt = ltspice_record()
     lt["cards"] = {p: dict(kf=token(models.ltspice_raw(p), "kf"), nlev=token(models.ltspice_raw(p), "nlev"),

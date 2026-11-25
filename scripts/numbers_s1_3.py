@@ -194,10 +194,10 @@ def summary_and_section2(out: dict) -> None:
     db = {k: v["db_10M"] for k, v in ca.items()}
     h_x100 = [db[k] for k in db if k.startswith("H_LN_") and int(k.split("_")[-1]) >= 100]
     h_x10 = [db[k] for k in db if k.startswith("H_") and not (k.startswith("H_LN_") and int(k.split("_")[-1]) >= 100)]
-    put(out, "db_10M_H_x100", [min(h_x100), max(h_x100)], "chain_ac.json H_LN_100..50000.db_10M (Table 11)")
-    put(out, "db_10M_H_x10", [min(h_x10), max(h_x10)], "chain_ac.json H gains 1, 10, H_HR_100, 1000 .db_10M (Table 11)")
+    put(out, "db_10M_H_x100", [min(h_x100), max(h_x100)], "chain_ac.json H_LN_100..50000.db_10M (Table 12)")
+    put(out, "db_10M_H_x10", [min(h_x10), max(h_x10)], "chain_ac.json H gains 1, 10, H_HR_100, 1000 .db_10M (Table 12)")
     put(out, "db_10M_L", [min(v for k, v in db.items() if k.startswith("L_")), max(v for k, v in db.items() if k.startswith("L_"))],
-        "chain_ac.json L_*.db_10M (Table 11)")
+        "chain_ac.json L_*.db_10M (Table 12)")
     # (3) NF 5307
     put(out, "NF5307_plot_white_nV", [v * 1e9 for v in NF5307_PLOT], "numbers_s6_7.NF_EN_PLOT_G100 (manual Fig. 4.7)")
     put(out, "NF5307_plot_over_H_white", [NF5307_PLOT[0] / e_hw, NF5307_PLOT[1] / e_hw], "(3) 2.8 / 1.084, 3.1 / 1.084")
@@ -367,7 +367,7 @@ def section1_and_3(out: dict) -> None:
     put(out, "JFE150_x12_side_diff_nV_C_pF", [e150 / math.sqrt(N_L), math.sqrt(2) * e150 / math.sqrt(N_L), N_L * c150],
         "(9) 0.8/sqrt(12), sqrt(2) 0.8/sqrt(12), 12 x 24 pF")
     put(out, "FOM_10Hz_JFE150_IF3601", [e150_10 * math.sqrt(c150), e36_10 * math.sqrt(c36)], "(9) 1.8 sqrt(24), 0.60 sqrt(650)")
-    # model defects quoted in the summary (Table 7)
+    # model defects quoted in the summary (Table 8)
     md = load("model_defects.json")
     op, jf = md["opamp"], md["jfet"]
     put(out, "opamp_e10_ratio_THS4021_THS4031_THS3091", [op[p]["ratio_e_10"] for p in ("THS4021", "THS4031", "THS3091")],

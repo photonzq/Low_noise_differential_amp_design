@@ -1,5 +1,5 @@
 """The low-voltage alternative for the H front end's loop op amps (Section 4.3.1 of the note, the last
-row of Table 6b): an ADA4899 (unity-gain stable) on its own +/-5 V rails (the oa_rail field of
+row of Table 7b): an ADA4899 (unity-gain stable) on its own +/-5 V rails (the oa_rail field of
 frontend.FE), the summing node at V_ref = +3 V and the bootstrap at V_BS = 1.2 V; H at a gain of 100
 (R_F 500 ohm, R_G 10.1 ohm, two JFE2140 per side, LSBF862 cascodes, sinks to -15 V) otherwise as
 built.  ADI's model as published (no noise correction; its 1/f is unverified, Section 4.3.1).

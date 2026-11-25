@@ -24,6 +24,9 @@ refs/**/*.htm
 refs/**/*.jpg
 refs/**/*.jpeg
 refs/**/*.png
+# vendor SPICE models kept beside their data sheets (licensed for use, not redistributed)
+refs/**/*.lib
+refs/**/*.zip
 
 # Scratch output of overload_detail.py's child processes (the results are in overload_curves.npz)
 sim/results/_*

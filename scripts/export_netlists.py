@@ -5,9 +5,9 @@ once after writing (from its own folder) to check that it runs as written.
 
   sr560_front_end_x10.cir     the SR560's front end (Section 2), K102 at x10
   sr560_chain_gain1000.cir    the SR560 reproduction at a gain of 1000, low-noise mode
-  front_end_H100.cir          front end H at a gain of 100 (Figure 7), inputs driven directly
+  front_end_H100.cir          front end H at a gain of 100 (Figure 10), inputs driven directly
   front_end_H10.cir           front end H at a gain of 10
-  front_end_L200.cir          front end L (Figure 8)
+  front_end_L200.cir          front end L (Figure 11)
   chain_H_gain1000.cir        the complete chain with front end H, total gain 1000
   chain_L_gain1000.cir        the complete chain with front end L, total gain 1000
 
