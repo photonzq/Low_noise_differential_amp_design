@@ -1,4 +1,6 @@
-"""Derived numbers of Section 3.5 of the note (bipolar input stages and 1/f noise) and of its Table 5, computed
+"""Derived numbers of Section 3.5 of the note (bipolar input stages and 1/f noise) and of its Table 5, and of Section
+3.4's paragraph on the JFET models below 10 Hz (section34: the JFE150's and JFE2140's other data and Spinelli and
+Haberman's measurement against the models; L's 1 Hz noise with each JFE150 reading), computed
 from archived results and data-sheet constants only (no simulation).  Writes ../sim/results/numbers_s3_5.json and
 prints "quantity | value | source".
 
@@ -231,10 +233,46 @@ def section(out: dict) -> None:
         put(out, f"sources_{tag}", [[k, s[k]["peak_db"], s[k]["f_peak"] / 1e6] for k in s], "peak dB at MHz")
 
 
+# Section 3.4's paragraph on the JFET models below 10 Hz: the readings it sets against the models
+SPINELLI_FIG7 = {1.0: 3.2e-9, 10.0: 1.56e-9, 100.0: 1.07e-9, 1e3: 0.89e-9}
+# Spinelli and Haberman 2024, Fig. 7 (p. 5), the red curve: two JFE2140 per side at 7 mA, drains at 5 V (p. 5),
+# OPA211 op amps; read at 400 dpi against the plot's decades by eye
+JFE2140_FIG614 = dict(i2_1=4.2e-9, i2_10=1.71e-9, i5_1=8.0e-9, i5_10=2.2e-9, table_2ma_10=2.4e-9)
+# SLPS730B Fig. 6-14 (p. 8, V_DS = 10 V), read by eye: 2 mA at 1 and 10 Hz, 5 mA at 1 and 10 Hz; table (p. 5): 2.4 nV
+# at 10 Hz, 2 mA, 10 V
+
+
+def section34(out: dict) -> None:
+    cn = np.load(R / "curves_noise.npz")
+
+    def at(key, f0):
+        f = cn[key.split("_")[0] + "_f"]
+        return float(cn[key][int(np.argmin(np.abs(np.log10(f) - math.log10(f0))))])
+
+    h = [at("H100_g_input JFETs", f0) for f0 in SPINELLI_FIG7]
+    put(out, "s34_H100_jfets_nV", [v * 1e9 for v in h], "curves_noise.npz H100_g_input JFETs at 1, 10, 100 Hz, 1 kHz")
+    put(out, "s34_spinelli_fig7_nV", [v * 1e9 for v in SPINELLI_FIG7.values()], "their Fig. 7, read by eye")
+    put(out, "s34_H_model_over_spinelli", [a / b for a, b in zip(h, SPINELLI_FIG7.values())], "1, 10, 100 Hz, 1 kHz")
+    put(out, "s34_jfe2140_table_over_fig614_2mA_10Hz", JFE2140_FIG614["table_2ma_10"] / JFE2140_FIG614["i2_10"],
+        "2.4 / 1.71 nV at 10 Hz, 2 mA, 10 V")
+    put(out, "s34_jfe2140_fig614_5mA_nV", [JFE2140_FIG614["i5_1"] * 1e9, JFE2140_FIG614["i5_10"] * 1e9],
+        "1 and 10 Hz, 5 mA, 10 V (H's JFETs, two per side: the same per device)")
+    tot, jf = at("L200_total", 1.0), at("L200_g_input JFETs", 1.0)
+    alt = json.loads(json.dumps(out["jfe150_1Hz_L_array_nV"]["value"]))
+    put(out, "s34_L_total_1Hz_alternatives_nV",
+        [math.sqrt(tot ** 2 - jf ** 2 + (a * 1e-9) ** 2) * 1e9 for a in alt],
+        "sqrt(total^2 - JFETs^2 + JFETs'^2), L200 at 1 Hz, with the three JFE150 readings")
+    ch = json.loads((R / "chain_noise.json").read_text(encoding="utf-8"))["L_1000"]["en"]["1"]
+    put(out, "s34_L_chain1000_1Hz_alternatives_nV",
+        [ch * 1e9] + [math.sqrt(ch ** 2 - jf ** 2 + (a * 1e-9) ** 2) * 1e9 for a in alt[1:]],
+        "chain_noise.json L_1000 at 1 Hz, and with the JFETs' share replaced by the p-p and Fig. 6-9 readings")
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     out: dict = {}
     section(out)
+    section34(out)
     (R / "numbers_s3_5.json").write_text(json.dumps(out, indent=1), encoding="utf-8", newline="\n")
     w = max(len(k) for k, _, _ in ROWS)
     print(f"{'quantity':{w}s} | value | source")

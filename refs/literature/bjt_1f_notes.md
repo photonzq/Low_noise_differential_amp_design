@@ -388,6 +388,8 @@ Production status checked on 2026-11-24 on the vendors' product pages. [derived]
 
 ### Y(d). BJT against JFET below 100 Ω: implications and open questions
 
+**Superseded by simulation (25 November 2026).** The estimates of this part are hand calculations for 16 devices at 1 mA per side, the devices alone, before any simulation. Section 3.5 of the note simulates SSM2212 arrays at L's 60 mA per side, first alone and then as the complete front end B (24 per side at 2.5 mA), with the base-current 1/f corner bracketed from 30 Hz to 1 kHz: B is quieter than L below 23 Ω at 1 Hz, 42 Ω at 1 kHz and 46 Ω at 10–100 kHz (9–63 Ω at 1 Hz across the bracket), the base-current noise also flowing through $R_G/2$ (`scripts/bipolar_inputs.py`, `sim/results/numbers_s3_5.json`). Use those figures; the estimates below remain as the record of the first reasoning.
+
 **Model [derived].** Per side, $N$ BJTs at $I_C$ each, series source resistance $R_S$ per side, source thermal noise excluded:
 $$e_{amp}^2=\frac{4kTr_{bb'}+2kTr_e}{N}+N\,S_{IB,1}(f)\left(R_S+\frac{r_{bb'}}{N}\right)^2,\qquad S_{IB,1}(f)=2qI_B\left(1+\frac{f_{ci}}{f}\right),$$
 (Leach P6 Eqs. (38), (43)–(44) applied to $N$ devices: each device's base noise flows through $R_S$ and its own $r_{bb'}$), against the L side $e_{amp}^2=(e_w^2+K/f)/12$ with $e_w$ = 0.75 nV/√Hz per JFE150. Differential values are $\sqrt2$ times larger for both; the crossovers are unchanged.
