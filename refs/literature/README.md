@@ -85,6 +85,7 @@ For Section 3.5 of the note. Notes on each source, with page, equation and figur
 
 ## Cited but not downloaded
 
+- For Section 3.5, cited from their abstracts on IEEE Xplore (full texts closed; DOIs checked against Crossref on 2026-11-25): Plumb and Chenette, IEEE Trans. Electron Devices 10(5), 304–308 (1963), DOI 10.1109/T-ED.1963.15202; Jaeger and Brodersen, 17(2), 128–134 (1970), DOI 10.1109/T-ED.1970.16937; van der Ziel, Zhang and Pawlikiewicz, 33(9), 1371–1376 (1986), DOI 10.1109/T-ED.1986.22672; Pawlikiewicz and van der Ziel, 34(9), 2009–2012 (1987), DOI 10.1109/T-ED.1987.23188. Summaries in `bjt_1f_notes.md` (Q1, Q2, Q8).
 - Scandurra, Cannatà, Ciofi, AIP Advances 1, 022144 (2011), DOI 10.1063/1.3605716: open access, read from the publisher's HTML page; the PDF download was blocked by a JavaScript challenge.
 - TI JFE150/JFE2140 application notes SLPA018, SBOA563 and SBOA589: already present in `refs/datasheets/jfet/TI/` (not duplicated here).
 - Paywalled items read at abstract level only (Cannatà 2009, Levinzon 2000/2005/2008, Sampietro 1999, Ferrari 2002) and items not read (Radeka 1988, Neri 1991, Pallàs-Areny and Webster 1991, Hobbs): see `literature_notes.md`.
